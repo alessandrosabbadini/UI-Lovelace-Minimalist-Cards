@@ -84,6 +84,25 @@ const GREETINGS: Record<
   },
 };
 
+/** Original chip_weather_date emoji map */
+const WEATHER_EMOJI: Record<string, string> = {
+  "clear-night": "🌙",
+  cloudy: "☁️",
+  exceptional: "🌞",
+  fog: "🌫️",
+  hail: "⛈️",
+  lightning: "⚡",
+  "lightning-rainy": "⛈️",
+  partlycloudy: "⛅",
+  pouring: "🌧️",
+  rainy: "💧",
+  snowy: "❄️",
+  "snowy-rainy": "🌨️",
+  sunny: "☀️",
+  windy: "🌪️",
+  default: "🌡️",
+};
+
 function pillSchema(n: number) {
   return {
     type: "expandable" as const,
@@ -184,7 +203,7 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       computeHelper: (schema: { name?: string }) => {
         switch (schema.name) {
           case "ulm_weather":
-            return "Weather entity for the top temperature chip.";
+            return "Weather entity for the top chip (emoji + date).";
           case "ulm_language":
             return 'BCP-47 tag, e.g. "it" or "en-US".';
           case "nav_path":
@@ -339,10 +358,19 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
     const weatherId = this._config!.ulm_weather;
     const weather = weatherId ? this.hass!.states[weatherId] : undefined;
     const collapsed = this._isCollapsed();
-    const temp =
-      weather?.attributes.temperature !== undefined
-        ? `${weather.attributes.temperature}°`
-        : "—";
+
+    // Original chip_weather_date: emoji from weather state + short date
+    const locale =
+      this._config!.ulm_language || this.hass!.language || undefined;
+    const formattedDate = new Date().toLocaleDateString(locale, {
+      month: "short",
+      day: "numeric",
+    });
+    const emoji =
+      WEATHER_EMOJI[weather?.state || ""] || WEATHER_EMOJI.default;
+    const weatherLabel = weather
+      ? `${emoji} ${formattedDate}`
+      : `${WEATHER_EMOJI.default} ${formattedDate}`;
 
     return html`
       <div class="topbar">
@@ -362,8 +390,7 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
           ?disabled=${!weather}
           @click=${() => weatherId && this._moreInfo(weatherId)}
         >
-          <ha-icon icon="mdi:thermometer"></ha-icon>
-          <span>${temp}</span>
+          <span>${weatherLabel}</span>
         </button>
 
         <button
@@ -563,11 +590,16 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      font: inherit;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 0;
+      gap: 0;
+      /* Original chips template */
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 100%;
+      padding: 0 6px;
+      height: 36px;
+      border-radius: 18px;
+      width: auto;
     }
 
     .chip:disabled {
@@ -579,6 +611,7 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       width: 36px;
       height: 36px;
       border-radius: 50%;
+      padding: 0;
     }
 
     .chip.round ha-icon {
@@ -586,28 +619,32 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       pointer-events: none;
     }
 
+    /* Welcome topbar overrides chip width to 100px */
     .chip.weather {
-      min-width: 72px;
-      height: 36px;
-      border-radius: 999px;
-      padding: 0 14px;
+      width: 100px;
+      min-width: 100px;
+      padding: 0 6px;
+      white-space: nowrap;
     }
 
-    .chip.weather ha-icon {
-      --mdc-icon-size: 18px;
-      color: rgb(var(--color-red, 245, 68, 54));
+    .chip.weather span {
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 100%;
+      padding: 0 6px;
     }
 
     .greeting {
-      padding: 4px 16px 8px;
+      /* Original: margin-left 16px, padding-bottom 8px */
+      padding: 0 0 8px 16px;
       text-align: left;
       flex-shrink: 0;
     }
 
     .greeting .line {
-      font-weight: 700;
-      font-size: clamp(18px, 4.5vw, 24px);
-      line-height: 1.2;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 1.15;
       color: var(--primary-text-color);
     }
 
@@ -673,8 +710,9 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       color: var(--pill-color);
     }
 
+    /* Original card_scenes_pill_welcome name */
     .pill-name {
-      font-weight: 700;
+      font-weight: bold;
       font-size: 9.5px;
       line-height: 1.1;
       text-align: center;
@@ -682,7 +720,7 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      padding: 0 2px;
+      padding: 0 2px 7px;
     }
   `;
 }
