@@ -8,7 +8,10 @@ This fork is moving away from `custom:button-card` YAML templates toward native 
 - Old removed:
   - `custom_components/.../lovelace/ulm_templates/**` button-card templates
   - `custom_cards/**` community YAML cards
-- Themes under `lovelace/themefiles/` are still available
+- **Themes kept as original** under:
+  - `custom_components/ui_lovelace_minimalist/lovelace/themefiles/` (source)
+  - `themes/` (same files, HA-ready layout)
+  - `minimalist-desktop`, `minimalist-mobile`, `minimalist-mobile-tapbar`, `minimalist-ios-tapbar`
 
 ## Mapping (old → new)
 

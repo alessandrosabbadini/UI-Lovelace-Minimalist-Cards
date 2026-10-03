@@ -1,5 +1,5 @@
 ---
-minimalist-mobile:
+minimalist-desktop:
   # Journal
   state-icon-color: "rgb(var(--color-theme))"
   border-radius: "20px"
@@ -13,22 +13,8 @@ minimalist-mobile:
   ha-dialog-border-radius: "10px"
   # fix added border-lines in 2022.11
   ha-card-border-width: "0px"
-  card-mod-theme: "minimalist-mobile"
-  # Original Minimalist rule: hide the header/tapbar (display: none — not move it).
-  card-mod-root: |
-    .header {
-      display: none;
-    }
-    #view {
-      padding: 0 !important;
-      height: 100vh !important;
-    }
-  # Same original intent for HA 2026+ where .header became ha-top-app-bar-fixed
-  card-mod-top-app-bar-fixed-yaml: |
-    .: |
-      :host {
-        display: none;
-      }
+
+  card-mod-theme: "minimalist-desktop"
   card-mod-view-yaml: |
     "*:first-child$": |
       #columns .column > * {

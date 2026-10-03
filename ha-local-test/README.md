@@ -11,10 +11,28 @@ docker compose up -d
 
 Apri: http://localhost:8123
 
+## Tema Minimalist (originale)
+
+Temi in `config/themes/` (+ **card-mod** in `/local/card-mod.js`):
+
+| Tema | Effetto |
+| --- | --- |
+| `minimalist-desktop` | header/tab visibili (editing) |
+| `minimalist-mobile` | **nasconde header + tapbar** |
+| `minimalist-mobile-tapbar` | tapbar in basso |
+| `minimalist-ios-tapbar` | tapbar iOS in basso |
+
+Per nascondere la tapbar: Profilo → Tema → **minimalist-mobile**
+(o “Usa tema predefinito” — all’avvio è già `minimalist-mobile`).
+
+`card-mod` è caricato in `configuration.yaml` con `frontend.extra_module_url`
+(necessario perché le regole del tema nascondano l’header). Hard refresh
+dopo il restart.
+
 ## Prima volta
 
 1. Completa onboarding (crea un utente locale di test)
-2. Profilo → attiva **Modalità avanzata**
+2. Profilo → Tema → **minimalist-desktop** (e attiva **Modalità avanzata**)
 3. Impostazioni → Dashboard → ⋮ → Risorse → Aggiungi:
    - URL: `/local/ulm-editable-cards.js`
    - Tipo: **Modulo JavaScript**
