@@ -1,14 +1,9 @@
 /* Auto-generated custom card registry — do not edit by hand */
 import { createSimpleEntityCard } from "../../shared/simple-entity-card";
-import type { EditorField } from "../../shared/editor-base";
+import { textField, type HaFormSchema } from "../../shared/config-form";
 
-function extraFields(keys: string[]): EditorField[] {
-  return keys.map((key) => ({
-    type: "text" as const,
-    key,
-    label: key,
-    placeholder: "optional",
-  }));
+function extraSchema(keys: string[]): HaFormSchema[] {
+  return keys.map((key) => textField(key));
 }
 
 export const CUSTOM_CARD_DEFS = [
@@ -1010,6 +1005,6 @@ export const CUSTOM_CARDS = CUSTOM_CARD_DEFS.map((def) =>
     defaultIcon: def.defaultIcon,
     defaultColor: def.defaultColor,
     stubEntity: def.stubEntity,
-    extraFields: extraFields([...def.extraKeys]),
+    extraSchema: extraSchema([...def.extraKeys]),
   }),
 );

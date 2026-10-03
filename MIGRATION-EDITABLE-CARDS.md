@@ -40,6 +40,15 @@ This fork is moving away from `custom:button-card` YAML templates toward native 
 | `card_vacuum` | `custom:ulm-vacuum-card` |
 | `card_vertical_button` | `custom:ulm-vertical-button-card` |
 
+## Card editors (Home Assistant official API)
+
+All ULM editable cards use the built-in form editor via static `getConfigForm()`
+(selectors, expandable panels, `computeLabel` / `computeHelper`) — same pattern
+as the Welcome card and as documented at
+[Custom card](https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card/).
+
+Shared helpers live in `editable-cards/src/shared/config-form.ts`.
+
 ## Install new cards
 
 1. `cd editable-cards && npm install && npm run build`

@@ -2,7 +2,15 @@ import { LitElement, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { activeIconStyle, resolveThemeRgb } from "../../shared/colors";
-import { UlmEditorBase } from "../../shared/editor-base";
+import {
+  booleanField,
+  colorField,
+  entityField,
+  grid,
+  iconField,
+  labels,
+  textField,
+} from "../../shared/config-form";
 import { ulmCardStyles } from "../../shared/styles";
 import { openUlmPopup } from "../../popups/ulm-popup";
 import type {
@@ -27,8 +35,24 @@ export class UlmThermostatCard extends LitElement implements LovelaceCard {
   @property({ attribute: false }) public hass?: HomeAssistant;
   @state() private _config?: UlmThermostatCardConfig;
 
-  public static async getConfigElement() {
-    return document.createElement("ulm-thermostat-card-editor");
+  public static getConfigForm() {
+    return {
+      schema: [
+        entityField("entity", "climate"),
+        grid([textField("name"), iconField("icon")]),
+        colorField("color"),
+        booleanField("enable_controls"),
+        booleanField("enable_popup"),
+      ],
+      computeLabel: labels({
+        entity: "Entity",
+        name: "Name",
+        icon: "Icon",
+        color: "Color",
+        enable_controls: "Enable controls",
+        enable_popup: "Enable popup",
+      }),
+    };
   }
 
   public static getStubConfig(): Partial<UlmThermostatCardConfig> {
@@ -152,31 +176,4 @@ export class UlmThermostatCard extends LitElement implements LovelaceCard {
   };
 
   static styles = ulmCardStyles;
-}
-
-@customElement("ulm-thermostat-card-editor")
-export class UlmThermostatCardEditor extends UlmEditorBase<UlmThermostatCardConfig> {
-  protected render() {
-    return this.renderFields([
-      {
-        type: "text",
-        key: "entity",
-        label: "Entity",
-        placeholder: "climate.living_room",
-      },
-      { type: "text", key: "name", label: "Name (optional)" },
-      { type: "text", key: "icon", label: "Icon (optional)" },
-      { type: "color", key: "color", label: "Theme color" },
-      {
-        type: "toggle",
-        key: "enable_controls",
-        label: "Show temperature controls",
-      },
-      {
-        type: "toggle",
-        key: "enable_popup",
-        label: "Open ULM thermostat popup instead of more-info",
-      },
-    ]);
-  }
 }

@@ -2,7 +2,7 @@ import { LitElement, html, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { activeIconStyle } from "./colors";
-import { UlmEditorBase, type EditorField } from "./editor-base";
+import { simpleEntitySchema, type HaFormSchema } from "./config-form";
 import { ulmCardStyles } from "./styles";
 import type {
   HomeAssistant,
@@ -29,6 +29,7 @@ export interface SimpleCardDefinition {
   defaultIcon: string;
   defaultColor?: UlmThemeColor;
   stubEntity?: string;
+  entityDomain?: string | string[];
   isActive?: (state: HassEntity) => boolean;
   stateLabel?: (hass: HomeAssistant, state: HassEntity) => string;
   onIconTap?: (
@@ -36,7 +37,8 @@ export interface SimpleCardDefinition {
     config: SimpleEntityConfig,
     state: HassEntity,
   ) => void;
-  extraFields?: EditorField[];
+  /** Extra ha-form schema fields (official getConfigForm) */
+  extraSchema?: HaFormSchema[];
 }
 
 function isOnLike(state: HassEntity): boolean {
@@ -50,8 +52,12 @@ export function createSimpleEntityCard(def: SimpleCardDefinition) {
     @property({ attribute: false }) public hass?: HomeAssistant;
     @state() private _config?: SimpleEntityConfig;
 
-    public static async getConfigElement() {
-      return document.createElement(def.editorTag);
+    /** Official HA form editor — https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card/ */
+    public static getConfigForm() {
+      return simpleEntitySchema({
+        domain: def.entityDomain,
+        extra: def.extraSchema,
+      });
     }
 
     public static getStubConfig(): Partial<SimpleEntityConfig> {
@@ -151,40 +157,7 @@ export function createSimpleEntityCard(def: SimpleCardDefinition) {
     static styles = ulmCardStyles;
   }
 
-  class Editor extends UlmEditorBase<SimpleEntityConfig> {
-    protected render() {
-      return this.renderFields([
-        {
-          type: "text",
-          key: "entity",
-          label: "Entity",
-          placeholder: def.stubEntity || "sensor.demo",
-        },
-        {
-          type: "text",
-          key: "name",
-          label: "Name (optional)",
-          placeholder: "Leave empty for entity name",
-        },
-        {
-          type: "text",
-          key: "icon",
-          label: "Icon (optional)",
-          placeholder: def.defaultIcon,
-        },
-        { type: "color", key: "color", label: "Theme color" },
-        {
-          type: "toggle",
-          key: "force_background_color",
-          label: "Force colored background when active",
-        },
-        ...(def.extraFields || []),
-      ]);
-    }
-  }
-
   if (!customElements.get(def.tag)) customElements.define(def.tag, Card);
-  if (!customElements.get(def.editorTag)) customElements.define(def.editorTag, Editor);
 
-  return { Card, Editor, def };
+  return { Card, def };
 }

@@ -2,7 +2,16 @@ import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { activeIconStyle, resolveThemeRgb } from "../../shared/colors";
-import { UlmEditorBase } from "../../shared/editor-base";
+import {
+  booleanField,
+  colorField,
+  entityField,
+  expandable,
+  grid,
+  iconField,
+  labels,
+  textField,
+} from "../../shared/config-form";
 import { ulmCardStyles } from "../../shared/styles";
 import type {
   HomeAssistant,
@@ -31,8 +40,36 @@ export class UlmRoomCard extends LitElement implements LovelaceCard {
   @property({ attribute: false }) public hass?: HomeAssistant;
   @state() private _config?: UlmRoomCardConfig;
 
-  public static async getConfigElement() {
-    return document.createElement("ulm-room-card-editor");
+  public static getConfigForm() {
+    return {
+      schema: [
+        grid([textField("name"), iconField("icon")]),
+        entityField("entity", undefined, false),
+        colorField("color"),
+        textField("navigation_path"),
+        booleanField("label_use_temperature"),
+        booleanField("label_use_brightness"),
+        expandable("sub", "Sub entities", [
+          entityField("entity_1", undefined, false),
+          entityField("entity_2", undefined, false),
+          entityField("entity_3", undefined, false),
+          entityField("entity_4", undefined, false),
+        ]),
+      ],
+      computeLabel: labels({
+        name: "Name",
+        icon: "Icon",
+        entity: "Main entity",
+        color: "Color",
+        navigation_path: "Navigation path",
+        label_use_temperature: "Label = temperature",
+        label_use_brightness: "Label = brightness",
+        entity_1: "Entity 1",
+        entity_2: "Entity 2",
+        entity_3: "Entity 3",
+        entity_4: "Entity 4",
+      }),
+    };
   }
 
   public static getStubConfig(): Partial<UlmRoomCardConfig> {
@@ -211,43 +248,4 @@ export class UlmRoomCard extends LitElement implements LovelaceCard {
       }
     `,
   ];
-}
-
-@customElement("ulm-room-card-editor")
-export class UlmRoomCardEditor extends UlmEditorBase<UlmRoomCardConfig> {
-  protected render() {
-    return this.renderFields([
-      { type: "section", label: "Room" },
-      { type: "text", key: "name", label: "Name", placeholder: "Kitchen" },
-      { type: "text", key: "icon", label: "Icon", placeholder: "mdi:sofa" },
-      {
-        type: "text",
-        key: "entity",
-        label: "Main entity",
-        placeholder: "light.kitchen",
-      },
-      { type: "color", key: "color", label: "Color" },
-      {
-        type: "text",
-        key: "navigation_path",
-        label: "Navigation path (optional)",
-        placeholder: "/lovelace/kitchen",
-      },
-      {
-        type: "toggle",
-        key: "label_use_temperature",
-        label: "Label = temperature",
-      },
-      {
-        type: "toggle",
-        key: "label_use_brightness",
-        label: "Label = brightness",
-      },
-      { type: "section", label: "Sub entities (entity_1..4)" },
-      { type: "text", key: "entity_1", label: "Entity 1" },
-      { type: "text", key: "entity_2", label: "Entity 2" },
-      { type: "text", key: "entity_3", label: "Entity 3" },
-      { type: "text", key: "entity_4", label: "Entity 4" },
-    ]);
-  }
 }

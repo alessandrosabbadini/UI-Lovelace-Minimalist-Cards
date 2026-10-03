@@ -1,6 +1,5 @@
 import { CARD_VERSION } from "./const";
 import "./cards/light/ulm-light-card";
-import "./cards/light/ulm-light-card-editor";
 import "./cards/cover/ulm-cover-card";
 import "./cards/person/ulm-person-card";
 import "./cards/media/ulm-media-player-card";

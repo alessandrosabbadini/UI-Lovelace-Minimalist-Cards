@@ -41,10 +41,16 @@ export const ulmCardStyles = css`
     font-size: 14px;
   }
 
+  /* Matches original icon_info grid: 'i n' / 'i l', columns min-content auto */
   .row {
-    display: flex;
+    display: grid;
+    grid-template-columns: min-content auto;
+    grid-template-rows: min-content min-content;
+    grid-template-areas:
+      "icon name"
+      "icon label";
     align-items: center;
-    gap: 0;
+    column-gap: 0;
   }
 
   .icon-btn,
@@ -61,6 +67,7 @@ export const ulmCardStyles = css`
   }
 
   .icon-btn {
+    grid-area: icon;
     width: 42px;
     height: 42px;
     border-radius: 50%;
@@ -75,6 +82,7 @@ export const ulmCardStyles = css`
   }
 
   .icon-btn ha-icon {
+    /* Original icon_info size: 20px */
     --mdc-icon-size: 20px;
   }
 
@@ -109,31 +117,37 @@ export const ulmCardStyles = css`
     color: var(--primary-background-color, #fff);
   }
 
+  /* info-btn wraps name+label; original puts margin-left: 12px on each */
   .info-btn {
-    flex: 1;
+    grid-area: 1 / 2 / 3 / 3;
     min-width: 0;
-    padding: 6px;
-    margin-left: -6px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1px;
+    display: grid;
+    grid-template-rows: min-content min-content;
+    align-content: center;
+    padding: 0;
+    margin: 0;
   }
 
   .name {
-    font-weight: 700;
+    align-self: end;
+    justify-self: start;
+    font-weight: bold;
     font-size: 14px;
     line-height: 1.2;
+    margin-left: 12px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   .label {
+    align-self: start;
+    justify-self: start;
     font-size: 12px;
-    font-weight: 500;
-    opacity: 0.6;
+    font-weight: bolder;
+    opacity: 0.4;
     line-height: 1.2;
+    margin-left: 12px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

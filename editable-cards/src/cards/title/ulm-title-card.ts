@@ -1,6 +1,6 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import { UlmEditorBase } from "../../shared/editor-base";
+import { grid, labels, textField } from "../../shared/config-form";
 import type {
   HomeAssistant,
   LovelaceCard,
@@ -18,8 +18,14 @@ export class UlmTitleCard extends LitElement implements LovelaceCard {
   @property({ attribute: false }) public hass?: HomeAssistant;
   @state() private _config?: UlmTitleCardConfig;
 
-  public static async getConfigElement() {
-    return document.createElement("ulm-title-card-editor");
+  public static getConfigForm() {
+    return {
+      schema: [grid([textField("name"), textField("label")])],
+      computeLabel: labels({
+        name: "Title (name)",
+        label: "Subtitle (label)",
+      }),
+    };
   }
 
   public static getStubConfig(): Partial<UlmTitleCardConfig> {
@@ -68,24 +74,4 @@ export class UlmTitleCard extends LitElement implements LovelaceCard {
       opacity: 0.45;
     }
   `;
-}
-
-@customElement("ulm-title-card-editor")
-export class UlmTitleCardEditor extends UlmEditorBase<UlmTitleCardConfig> {
-  protected render() {
-    return this.renderFields([
-      {
-        type: "text",
-        key: "name",
-        label: "Title (name)",
-        placeholder: "Lights",
-      },
-      {
-        type: "text",
-        key: "label",
-        label: "Subtitle (label)",
-        placeholder: "Optional subtitle",
-      },
-    ]);
-  }
 }

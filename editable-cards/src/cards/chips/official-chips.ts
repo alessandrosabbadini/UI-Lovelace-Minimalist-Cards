@@ -1,6 +1,11 @@
 import { LitElement, html, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
-import { UlmEditorBase, type EditorField } from "../../shared/editor-base";
+import {
+  entityField,
+  iconField,
+  textField,
+  type HaFormSchema,
+} from "../../shared/config-form";
 import { ulmChipStyles } from "../../shared/chip-styles";
 import type {
   HomeAssistant,
@@ -13,7 +18,7 @@ interface ChipDef {
   type: string;
   name: string;
   description: string;
-  fields: EditorField[];
+  fields: HaFormSchema[];
   stub: Record<string, unknown>;
   renderLabel: (hass: HomeAssistant, config: Record<string, unknown>) => string;
   renderIcon?: (hass: HomeAssistant, config: Record<string, unknown>) => string;
@@ -58,9 +63,7 @@ const CHIP_DEFS: ChipDef[] = [
     type: "custom:ulm-chip-back-card",
     name: "ULM Chip Back",
     description: "Back navigation chip",
-    fields: [
-      { type: "text", key: "icon", label: "Icon", placeholder: "mdi:arrow-left" },
-    ],
+    fields: [iconField("icon")],
     stub: { icon: "mdi:arrow-left" },
     renderLabel: () => "",
     renderIcon: (_h, c) => String(c.icon || "mdi:arrow-left"),
@@ -72,14 +75,9 @@ const CHIP_DEFS: ChipDef[] = [
     name: "ULM Chip Navigate",
     description: "Navigate to a Lovelace path",
     fields: [
-      { type: "text", key: "icon", label: "Icon", placeholder: "mdi:page-next" },
-      {
-        type: "text",
-        key: "navigation_path",
-        label: "Navigation path",
-        placeholder: "/lovelace/home",
-      },
-      { type: "text", key: "label", label: "Label (optional)" },
+      iconField("icon"),
+      textField("navigation_path"),
+      textField("label"),
     ],
     stub: { icon: "mdi:page-next", navigation_path: "/lovelace/home" },
     renderLabel: (_h, c) => String(c.label || ""),
@@ -96,10 +94,7 @@ const CHIP_DEFS: ChipDef[] = [
     type: "custom:ulm-chip-icon-only-card",
     name: "ULM Chip Icon Only",
     description: "Chip with icon only",
-    fields: [
-      { type: "text", key: "entity", label: "Entity (optional)" },
-      { type: "text", key: "icon", label: "Icon", placeholder: "mdi:home" },
-    ],
+    fields: [entityField("entity", undefined, false), iconField("icon")],
     stub: { icon: "mdi:home" },
     renderLabel: () => "",
     renderIcon: (h, c) => {
@@ -115,10 +110,7 @@ const CHIP_DEFS: ChipDef[] = [
     type: "custom:ulm-chip-mdi-icon-only-card",
     name: "ULM Chip MDI Icon Only",
     description: "Chip with forced MDI icon",
-    fields: [
-      { type: "text", key: "icon", label: "MDI icon", placeholder: "mdi:home" },
-      { type: "text", key: "entity", label: "Entity (optional)" },
-    ],
+    fields: [iconField("icon"), entityField("entity", undefined, false)],
     stub: { icon: "mdi:home" },
     renderLabel: () => "",
     renderIcon: (_h, c) => String(c.icon || "mdi:home"),
@@ -131,10 +123,7 @@ const CHIP_DEFS: ChipDef[] = [
     type: "custom:ulm-chip-icon-state-card",
     name: "ULM Chip Icon State",
     description: "Icon + entity state",
-    fields: [
-      { type: "text", key: "entity", label: "Entity", placeholder: "sensor.demo" },
-      { type: "text", key: "icon", label: "Icon (optional)" },
-    ],
+    fields: [entityField("entity"), iconField("icon")],
     stub: { entity: "sensor.outside_temperature" },
     renderLabel: (h, c) => {
       const s = stateOf(h, c.entity);
@@ -155,15 +144,7 @@ const CHIP_DEFS: ChipDef[] = [
     type: "custom:ulm-chip-mdi-icon-state-card",
     name: "ULM Chip MDI Icon State",
     description: "Forced MDI icon + state",
-    fields: [
-      {
-        type: "text",
-        key: "entity",
-        label: "Entity",
-        placeholder: "sensor.outside_temperature",
-      },
-      { type: "text", key: "icon", label: "MDI icon", placeholder: "mdi:information" },
-    ],
+    fields: [entityField("entity"), iconField("icon")],
     stub: { entity: "sensor.outside_temperature", icon: "mdi:information" },
     renderLabel: (h, c) => stateOf(h, c.entity)?.state || "?",
     renderIcon: (_h, c) => String(c.icon || "mdi:information"),
@@ -177,9 +158,9 @@ const CHIP_DEFS: ChipDef[] = [
     name: "ULM Chip Icon Label",
     description: "Icon + custom label",
     fields: [
-      { type: "text", key: "icon", label: "Icon", placeholder: "mdi:tag" },
-      { type: "text", key: "label", label: "Label", placeholder: "Label" },
-      { type: "text", key: "entity", label: "Entity (optional)" },
+      iconField("icon"),
+      textField("label"),
+      entityField("entity", undefined, false),
     ],
     stub: { icon: "mdi:tag", label: "Label" },
     renderLabel: (_h, c) => String(c.label || ""),
@@ -194,9 +175,9 @@ const CHIP_DEFS: ChipDef[] = [
     name: "ULM Chip Icon Double State",
     description: "Icon + two entity states",
     fields: [
-      { type: "text", key: "entity_1", label: "Entity 1", placeholder: "sensor.outside_temperature" },
-      { type: "text", key: "entity_2", label: "Entity 2", placeholder: "sensor.outside_humidity" },
-      { type: "text", key: "icon", label: "Icon (optional)" },
+      entityField("entity_1"),
+      entityField("entity_2"),
+      iconField("icon"),
     ],
     stub: { entity_1: "sensor.outside_temperature", entity_2: "sensor.outside_humidity" },
     renderLabel: (h, c) => {
@@ -217,14 +198,7 @@ const CHIP_DEFS: ChipDef[] = [
     type: "custom:ulm-chip-alarm-card",
     name: "ULM Chip Alarm",
     description: "Alarm control panel chip",
-    fields: [
-      {
-        type: "text",
-        key: "entity",
-        label: "Alarm entity",
-        placeholder: "alarm_control_panel.security",
-      },
-    ],
+    fields: [entityField("entity", "alarm_control_panel")],
     stub: { entity: "alarm_control_panel.security" },
     renderLabel: (h, c) => stateOf(h, c.entity)?.state || "unknown",
     renderIcon: (h, c) => {
@@ -242,15 +216,7 @@ const CHIP_DEFS: ChipDef[] = [
     type: "custom:ulm-chip-power-consumption-card",
     name: "ULM Chip Power Consumption",
     description: "Power consumption chip",
-    fields: [
-      {
-        type: "text",
-        key: "entity",
-        label: "Power sensor",
-        placeholder: "sensor.power_consumption",
-      },
-      { type: "text", key: "icon", label: "Icon", placeholder: "mdi:flash" },
-    ],
+    fields: [entityField("entity"), iconField("icon")],
     stub: { entity: "sensor.power_consumption", icon: "mdi:flash" },
     renderLabel: (h, c) => {
       const s = stateOf(h, c.entity);
@@ -268,14 +234,7 @@ const CHIP_DEFS: ChipDef[] = [
     type: "custom:ulm-chip-presence-detection-card",
     name: "ULM Chip Presence",
     description: "Presence detection chip",
-    fields: [
-      {
-        type: "text",
-        key: "entity",
-        label: "Presence entity",
-        placeholder: "binary_sensor.movement_backyard",
-      },
-    ],
+    fields: [entityField("entity", "binary_sensor")],
     stub: { entity: "binary_sensor.movement_backyard" },
     renderLabel: (h, c) => {
       const s = stateOf(h, c.entity);
@@ -296,23 +255,9 @@ const CHIP_DEFS: ChipDef[] = [
     name: "ULM Chip Temperature",
     description: "Outside/inside temperature chip",
     fields: [
-      {
-        type: "text",
-        key: "ulm_chip_temperature_weather",
-        label: "Weather entity",
-        placeholder: "weather.home",
-      },
-      {
-        type: "text",
-        key: "ulm_chip_temperature_outside",
-        label: "Outside temp sensor",
-        placeholder: "sensor.outside_temp",
-      },
-      {
-        type: "text",
-        key: "ulm_chip_temperature_inside",
-        label: "Inside temp sensor (optional)",
-      },
+      entityField("ulm_chip_temperature_weather", "weather"),
+      entityField("ulm_chip_temperature_outside"),
+      entityField("ulm_chip_temperature_inside", undefined, false),
     ],
     stub: {
       ulm_chip_temperature_weather: "weather.demo_weather_north",
@@ -339,14 +284,7 @@ const CHIP_DEFS: ChipDef[] = [
     type: "custom:ulm-chip-weather-date-card",
     name: "ULM Chip Weather Date",
     description: "Weather condition + date chip",
-    fields: [
-      {
-        type: "text",
-        key: "entity",
-        label: "Weather entity",
-        placeholder: "weather.home",
-      },
-    ],
+    fields: [entityField("entity", "weather")],
     stub: { entity: "weather.demo_weather_north" },
     renderLabel: (h, c) => {
       const s = stateOf(h, c.entity);
@@ -368,9 +306,7 @@ const CHIP_DEFS: ChipDef[] = [
     type: "custom:ulm-chip-short-date-with-day-card",
     name: "ULM Chip Short Date",
     description: "Short date with weekday",
-    fields: [
-      { type: "text", key: "icon", label: "Icon", placeholder: "mdi:calendar" },
-    ],
+    fields: [iconField("icon")],
     stub: { icon: "mdi:calendar" },
     renderLabel: () =>
       new Date().toLocaleDateString(undefined, {
@@ -387,8 +323,8 @@ function createChipCard(def: ChipDef) {
     @property({ attribute: false }) public hass?: HomeAssistant;
     @state() private _config?: LovelaceCardConfig;
 
-    public static async getConfigElement() {
-      return document.createElement(`${def.tag}-editor`);
+    public static getConfigForm() {
+      return { schema: def.fields };
     }
 
     public static getStubConfig() {
@@ -424,14 +360,7 @@ function createChipCard(def: ChipDef) {
     static styles = ulmChipStyles;
   }
 
-  class Editor extends UlmEditorBase<LovelaceCardConfig> {
-    protected render() {
-      return this.renderFields(def.fields);
-    }
-  }
-
   if (!customElements.get(def.tag)) customElements.define(def.tag, Card);
-  if (!customElements.get(`${def.tag}-editor`)) customElements.define(`${def.tag}-editor`, Editor);
   return def;
 }
 

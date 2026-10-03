@@ -1,6 +1,11 @@
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import { UlmEditorBase } from "../../shared/editor-base";
+import {
+  booleanField,
+  entityField,
+  expandable,
+  labels,
+} from "../../shared/config-form";
 import type {
   HomeAssistant,
   LovelaceCard,
@@ -32,8 +37,25 @@ export class UlmChipsCard extends LitElement implements LovelaceCard {
   @property({ attribute: false }) public hass?: HomeAssistant;
   @state() private _config?: UlmChipsCardConfig;
 
-  public static async getConfigElement() {
-    return document.createElement("ulm-chips-card-editor");
+  public static getConfigForm() {
+    return {
+      schema: [
+        booleanField("show_back"),
+        expandable("chips", "Chips", [
+          entityField("chip_1_entity", undefined, false),
+          entityField("chip_2_entity", undefined, false),
+          entityField("chip_3_entity", undefined, false),
+          entityField("chip_4_entity", undefined, false),
+        ]),
+      ],
+      computeLabel: labels({
+        show_back: "Show back chip",
+        chip_1_entity: "Chip 1 entity",
+        chip_2_entity: "Chip 2 entity",
+        chip_3_entity: "Chip 3 entity",
+        chip_4_entity: "Chip 4 entity",
+      }),
+    };
   }
 
   public static getStubConfig(): Partial<UlmChipsCardConfig> {
@@ -172,22 +194,4 @@ export class UlmChipsCard extends LitElement implements LovelaceCard {
       flex: 1;
     }
   `;
-}
-
-@customElement("ulm-chips-card-editor")
-export class UlmChipsCardEditor extends UlmEditorBase<UlmChipsCardConfig> {
-  protected render() {
-    return this.renderFields([
-      { type: "toggle", key: "show_back", label: "Show back chip" },
-      {
-        type: "text",
-        key: "chip_1_entity",
-        label: "Chip 1 entity",
-        placeholder: "sensor.temperature",
-      },
-      { type: "text", key: "chip_2_entity", label: "Chip 2 entity (optional)" },
-      { type: "text", key: "chip_3_entity", label: "Chip 3 entity (optional)" },
-      { type: "text", key: "chip_4_entity", label: "Chip 4 entity (optional)" },
-    ]);
-  }
 }

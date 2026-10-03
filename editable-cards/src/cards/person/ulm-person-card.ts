@@ -2,7 +2,15 @@ import { LitElement, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { resolveThemeRgb } from "../../shared/colors";
-import { UlmEditorBase } from "../../shared/editor-base";
+import {
+  booleanField,
+  entityField,
+  expandable,
+  grid,
+  iconField,
+  labels,
+  textField,
+} from "../../shared/config-form";
 import { ulmCardStyles } from "../../shared/styles";
 import type {
   HomeAssistant,
@@ -26,8 +34,28 @@ export class UlmPersonCard extends LitElement implements LovelaceCard {
   @property({ attribute: false }) public hass?: HomeAssistant;
   @state() private _config?: UlmPersonCardConfig;
 
-  public static async getConfigElement() {
-    return document.createElement("ulm-person-card-editor");
+  public static getConfigForm() {
+    return {
+      schema: [
+        entityField("entity", "person"),
+        grid([textField("name"), iconField("icon")]),
+        booleanField("use_entity_picture"),
+        expandable("extras", "Extras", [
+          entityField("battery_entity", undefined, false),
+          entityField("eta_entity", undefined, false),
+          entityField("address_entity", undefined, false),
+        ]),
+      ],
+      computeLabel: labels({
+        entity: "Person entity",
+        name: "Name",
+        icon: "Icon",
+        use_entity_picture: "Use entity picture",
+        battery_entity: "Battery sensor",
+        eta_entity: "ETA sensor",
+        address_entity: "Address sensor",
+      }),
+    };
   }
 
   public static getStubConfig(): Partial<UlmPersonCardConfig> {
@@ -164,47 +192,4 @@ export class UlmPersonCard extends LitElement implements LovelaceCard {
   };
 
   static styles = ulmCardStyles;
-}
-
-@customElement("ulm-person-card-editor")
-export class UlmPersonCardEditor extends UlmEditorBase<UlmPersonCardConfig> {
-  protected render() {
-    return this.renderFields([
-      { type: "section", label: "Entity" },
-      {
-        type: "text",
-        key: "entity",
-        label: "Person entity — ulm_card_person_entity",
-        placeholder: "person.alex",
-      },
-      { type: "text", key: "name", label: "Name (optional)" },
-      {
-        type: "text",
-        key: "icon",
-        label: "Icon — ulm_card_person_icon",
-        placeholder: "mdi:face-man",
-      },
-      {
-        type: "toggle",
-        key: "use_entity_picture",
-        label: "Use entity picture — ulm_card_person_use_entity_picture",
-      },
-      { type: "section", label: "Extras" },
-      {
-        type: "text",
-        key: "battery_entity",
-        label: "Battery sensor — ulm_card_person_battery",
-      },
-      {
-        type: "text",
-        key: "eta_entity",
-        label: "ETA sensor — ulm_card_person_eta",
-      },
-      {
-        type: "text",
-        key: "address_entity",
-        label: "Address sensor — ulm_address",
-      },
-    ]);
-  }
 }

@@ -1,3 +1,4 @@
+import { textField } from "../shared/config-form";
 import { createSimpleEntityCard } from "../shared/simple-entity-card";
 import type { HassEntity, HomeAssistant } from "../types";
 
@@ -144,14 +145,7 @@ export const SIMPLE_CARDS = [
     stubEntity: "sensor.outside_temperature",
     isActive: () => true,
     stateLabel: () => "Navigate",
-    extraFields: [
-      {
-        type: "text",
-        key: "navigation_path",
-        label: "Navigation path",
-        placeholder: "/lovelace/home",
-      },
-    ],
+    extraSchema: [textField("navigation_path")],
     onIconTap: (_hass, config) => {
       const path = String(
         (config as { navigation_path?: string }).navigation_path || "",

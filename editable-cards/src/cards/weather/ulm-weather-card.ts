@@ -1,8 +1,15 @@
 import { LitElement, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
-import { activeIconStyle, resolveThemeRgb } from "../../shared/colors";
-import { UlmEditorBase } from "../../shared/editor-base";
+import { resolveThemeRgb } from "../../shared/colors";
+import {
+  colorField,
+  entityField,
+  grid,
+  iconField,
+  labels,
+  textField,
+} from "../../shared/config-form";
 import { ulmCardStyles } from "../../shared/styles";
 import type {
   HomeAssistant,
@@ -42,8 +49,20 @@ export class UlmWeatherCard extends LitElement implements LovelaceCard {
   @property({ attribute: false }) public hass?: HomeAssistant;
   @state() private _config?: UlmWeatherCardConfig;
 
-  public static async getConfigElement() {
-    return document.createElement("ulm-weather-card-editor");
+  public static getConfigForm() {
+    return {
+      schema: [
+        entityField("entity", "weather"),
+        grid([textField("name"), iconField("icon")]),
+        colorField("color"),
+      ],
+      computeLabel: labels({
+        entity: "Weather entity",
+        name: "Name",
+        icon: "Icon",
+        color: "Color",
+      }),
+    };
   }
 
   public static getStubConfig(): Partial<UlmWeatherCardConfig> {
@@ -116,21 +135,4 @@ export class UlmWeatherCard extends LitElement implements LovelaceCard {
   };
 
   static styles = ulmCardStyles;
-}
-
-@customElement("ulm-weather-card-editor")
-export class UlmWeatherCardEditor extends UlmEditorBase<UlmWeatherCardConfig> {
-  protected render() {
-    return this.renderFields([
-      {
-        type: "text",
-        key: "entity",
-        label: "Weather entity",
-        placeholder: "weather.home",
-      },
-      { type: "text", key: "name", label: "Name (optional)" },
-      { type: "text", key: "icon", label: "Icon (optional)" },
-      { type: "color", key: "color", label: "Theme color" },
-    ]);
-  }
 }

@@ -2,6 +2,18 @@ import { LitElement, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { activeIconStyle, resolveThemeRgb } from "../../shared/colors";
+import {
+  booleanField,
+  colorField,
+  entityField,
+  expandable,
+  grid,
+  helpers,
+  iconField,
+  labels,
+  numberField,
+  textField,
+} from "../../shared/config-form";
 import { ulmCardStyles } from "../../shared/styles";
 import { openUlmPopup } from "../../popups/ulm-popup";
 import type {
@@ -42,9 +54,64 @@ export class UlmLightCard extends LitElement implements LovelaceCard {
   @property({ attribute: false }) public hass?: HomeAssistant;
   @state() private _config?: UlmLightCardConfig;
 
-  public static async getConfigElement() {
-    await import("./ulm-light-card-editor");
-    return document.createElement("ulm-light-card-editor");
+  public static getConfigForm() {
+    return {
+      schema: [
+        entityField("entity", "light"),
+        grid([textField("name"), iconField("icon")]),
+        colorField("color"),
+        expandable("layout", "Layout", [
+          booleanField("enable_slider"),
+          grid([
+            numberField("enable_slider_min"),
+            numberField("enable_slider_max"),
+          ]),
+          booleanField("enable_collapse"),
+          booleanField("enable_horizontal"),
+          booleanField("enable_horizontal_wide"),
+        ]),
+        expandable("colors_popup", "Colors & popup", [
+          booleanField("enable_color"),
+          booleanField("force_background_color"),
+          booleanField("enable_popup"),
+          booleanField("enable_popup_tap"),
+          textField("color_palette"),
+        ]),
+        expandable("presets", "Preset buttons", [
+          booleanField("enable_buttons"),
+          grid([
+            numberField("brightness_low"),
+            numberField("brightness_medium"),
+            numberField("brightness_high"),
+          ]),
+        ]),
+      ],
+      computeLabel: labels({
+        entity: "Entity",
+        name: "Name (ulm_card_light_name)",
+        icon: "Icon (ulm_card_light_icon)",
+        color: "Color (ulm_card_light_color)",
+        enable_slider: "Enable slider",
+        enable_slider_min: "Slider min",
+        enable_slider_max: "Slider max",
+        enable_collapse: "Collapse when off",
+        enable_horizontal: "Horizontal layout",
+        enable_horizontal_wide: "Wider slider",
+        enable_color: "Use light RGB",
+        force_background_color: "Force colored background",
+        enable_popup: "Enable popup",
+        enable_popup_tap: "Popup on icon tap",
+        color_palette: "Color palette entity",
+        enable_buttons: "Enable brightness buttons",
+        brightness_low: "Low %",
+        brightness_medium: "Medium %",
+        brightness_high: "High %",
+      }),
+      computeHelper: helpers({
+        entity: "Light entity to control.",
+        color_palette: "Optional input_select for a color palette.",
+      }),
+    };
   }
 
   public static getStubConfig(): Partial<UlmLightCardConfig> {

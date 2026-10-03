@@ -2,7 +2,17 @@ import { LitElement, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { activeIconStyle, resolveThemeRgb } from "../../shared/colors";
-import { UlmEditorBase } from "../../shared/editor-base";
+import {
+  booleanField,
+  colorField,
+  entityField,
+  expandable,
+  grid,
+  iconField,
+  labels,
+  numberField,
+  textField,
+} from "../../shared/config-form";
 import { ulmCardStyles } from "../../shared/styles";
 import { openUlmPopup } from "../../popups/ulm-popup";
 import type {
@@ -38,8 +48,47 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
   @property({ attribute: false }) public hass?: HomeAssistant;
   @state() private _config?: UlmCoverCardConfig;
 
-  public static async getConfigElement() {
-    return document.createElement("ulm-cover-card-editor");
+  public static getConfigForm() {
+    return {
+      schema: [
+        entityField("entity", "cover"),
+        grid([textField("name"), iconField("icon")]),
+        colorField("color"),
+        expandable("controls", "Controls", [
+          booleanField("enable_controls"),
+          booleanField("enable_slider"),
+          booleanField("enable_horizontal"),
+          booleanField("invert_percent"),
+          booleanField("display_left_right"),
+          booleanField("enable_tilt"),
+          booleanField("garage_large"),
+          booleanField("enable_popup"),
+          booleanField("force_background_color"),
+          booleanField("show_last_changed"),
+          numberField("favorite_percentage"),
+          grid([numberField("slider_min"), numberField("slider_max")]),
+        ]),
+      ],
+      computeLabel: labels({
+        entity: "Entity",
+        name: "Name",
+        icon: "Icon",
+        color: "Color",
+        enable_controls: "Enable controls",
+        enable_slider: "Enable slider",
+        enable_horizontal: "Horizontal layout",
+        invert_percent: "Invert percent",
+        display_left_right: "Left/right buttons",
+        enable_tilt: "Tilt controls",
+        garage_large: "Garage large icon",
+        enable_popup: "Enable popup",
+        force_background_color: "Force colored background",
+        show_last_changed: "Show last changed",
+        favorite_percentage: "Favorite %",
+        slider_min: "Slider min",
+        slider_max: "Slider max",
+      }),
+    };
   }
 
   public static getStubConfig(): Partial<UlmCoverCardConfig> {
@@ -292,92 +341,4 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
   };
 
   static styles = ulmCardStyles;
-}
-
-@customElement("ulm-cover-card-editor")
-export class UlmCoverCardEditor extends UlmEditorBase<UlmCoverCardConfig> {
-  protected render() {
-    return this.renderFields([
-      { type: "section", label: "Entity" },
-      {
-        type: "text",
-        key: "entity",
-        label: "Entity",
-        placeholder: "cover.living_room",
-      },
-      {
-        type: "text",
-        key: "name",
-        label: "Name — ulm_card_cover_name",
-      },
-      {
-        type: "text",
-        key: "icon",
-        label: "Icon — ulm_card_cover_icon",
-      },
-      { type: "color", key: "color", label: "Color — ulm_card_cover_color" },
-      { type: "section", label: "Controls" },
-      {
-        type: "toggle",
-        key: "enable_controls",
-        label: "Controls — ulm_card_cover_enable_controls",
-      },
-      {
-        type: "toggle",
-        key: "enable_slider",
-        label: "Slider — ulm_card_cover_enable_slider",
-      },
-      {
-        type: "toggle",
-        key: "enable_horizontal",
-        label: "Horizontal — ulm_card_cover_enable_horizontal",
-      },
-      {
-        type: "toggle",
-        key: "invert_percent",
-        label: "Invert percent — ulm_card_invert_percent",
-      },
-      {
-        type: "toggle",
-        key: "display_left_right",
-        label: "Left/right buttons — ulm_card_cover_display_left_right",
-      },
-      {
-        type: "toggle",
-        key: "enable_tilt",
-        label: "Tilt controls — ulm_card_cover_enable_tilt",
-      },
-      {
-        type: "toggle",
-        key: "garage_large",
-        label: "Garage large icon — ulm_card_cover_garage_large",
-      },
-      {
-        type: "number",
-        key: "favorite_percentage",
-        label: "Favorite % — ulm_card_cover_favorite_percentage",
-      },
-      {
-        type: "number",
-        key: "slider_min",
-        label: "Slider min — ulm_card_cover_slider_min",
-      },
-      {
-        type: "number",
-        key: "slider_max",
-        label: "Slider max — ulm_card_cover_slider_max",
-      },
-      { type: "section", label: "Style & popup" },
-      {
-        type: "toggle",
-        key: "force_background_color",
-        label: "Force background — ulm_card_cover_force_background_color",
-      },
-      {
-        type: "toggle",
-        key: "enable_popup",
-        label: "Popup — ulm_card_cover_enable_popup",
-      },
-    ]);
-  }
 }
