@@ -1,0 +1,88 @@
+---
+ci:
+  autofix_commit_msg: |
+    [pre-commit.ci] auto fixes from pre-commit.com hooks
+    for more information, see https://pre-commit.ci
+  autofix_prs: true
+  autoupdate_branch: "release"
+  autoupdate_commit_msg: "[pre-commit.ci] pre-commit autoupdate"
+  autoupdate_schedule: "weekly"
+  skip: []
+  submodules: false
+
+repos:
+  - repo: "https://github.com/pre-commit/pre-commit-hooks"
+    rev: "v6.0.0"
+    hooks:
+      - id: "check-executables-have-shebangs"
+      - id: "check-json"
+      - id: "check-merge-conflict"
+      - id: "check-yaml"
+        args: ["--unsafe"]
+      - id: "detect-private-key"
+      - id: "no-commit-to-branch"
+      - id: "requirements-txt-fixer"
+      - id: "debug-statements"
+      - id: "end-of-file-fixer"
+        exclude: "^custom_componenents/ui_lovelace_minimalist/cards/"
+      - id: "trailing-whitespace"
+        exclude: "^custom_componenents/ui_lovelace_minimalist/cards/"
+      - id: "mixed-line-ending"
+
+  - repo: "https://github.com/adrienverge/yamllint.git"
+    rev: "v1.37.1"
+    hooks:
+      - id: "yamllint"
+        args: ["--format", "parsable", "--strict"]
+        # exclude: ".pre-commit-config.yaml"
+        exclude: |
+          (?x)^(
+              .pre-commit-config.yaml
+          )$
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.47.0
+    hooks:
+      - id: markdownlint
+        args: ["--fix"]
+
+  - repo: "https://github.com/jumanjihouse/pre-commit-hook-yamlfmt"
+    rev: "0.2.3"
+    hooks:
+      - id: "yamlfmt"
+        args:
+          [
+            "--mapping",
+            "2",
+            "--sequence",
+            "4",
+            "--offset",
+            "2",
+            "--preserve-quotes",
+          ]
+        exclude: ".*"
+
+  - repo: "https://github.com/mattlqx/pre-commit-search-and-replace"
+    rev: "v1.1.9"
+    hooks:
+      - id: "search-and-replace"
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: "v0.14.11"
+    hooks:
+      # 1. The Linter (Replaces Flake8, Isort, Pyupgrade, Bandit)
+      - id: ruff
+        args: ["--fix"]
+      # 2. The Formatter (Replaces Black)
+      - id: ruff-format
+
+  - repo: https://github.com/codespell-project/codespell.git
+    rev: "v2.4.1"
+    hooks:
+      - id: codespell
+        files: "(.*.md|translations/en.json)"
+        name: codespell
+        description: Checks for common misspellings in text files.
+        entry: codespell
+        language: python
+        types: [text]

@@ -1,0 +1,53 @@
+---
+name: "CodeQL Analysis"
+
+on:
+  schedule:
+    - cron: "40 8 * * 0"  # Runs every Sunday at 08:40 UTC
+
+jobs:
+  analyze:
+    name: "Analyze (${{ matrix.language }})"
+    runs-on: "ubuntu-latest"
+    permissions:
+      actions: "read"
+      contents: "read"
+      security-events: "write"
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # Combined JS/TS for better coverage; removed autobuild for interpreted languages
+        language: ["javascript-typescript", "python"]
+
+    steps:
+      - name: "⤵️ Checkout repository"
+        uses: "actions/checkout@v6"
+
+      - name: "⚙️ Initialize CodeQL"
+        uses: "github/codeql-action/init@v4"  # Upgraded to v3
+        with:
+          languages: "${{ matrix.language }}"
+          # 'security-extended' adds more depth than the default suite
+          queries: "security-extended,security-and-quality"
+
+      # For Javascript and Python, Autobuild is generally unnecessary.
+      # If you add Java or C++, keep this step.
+      # - name: "Autobuild"
+      #   uses: "github/codeql-action/autobuild@v3"
+
+      - name: "🔍 Perform CodeQL Analysis"
+        uses: "github/codeql-action/analyze@v4"
+        with:
+          category: "/language:${{ matrix.language }}"
+# For most projects, this workflow file will not need changing; you simply need
+# to commit it to your repository.
+#
+# You may wish to alter this file to override the set of languages analyzed,
+# or to provide custom queries or build logic.
+#
+# ******** NOTE ********
+# We have attempted to detect the languages in your repository. Please check
+# the `language` matrix defined below to confirm you have the correct set of
+# supported CodeQL languages.
+#

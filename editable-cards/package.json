@@ -1,0 +1,19 @@
+{
+  "name": "ulm-editable-cards",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "description": "UI-editable Lovelace cards inspired by UI Lovelace Minimalist",
+  "scripts": {
+    "build": "vite build",
+    "watch": "vite build --watch",
+    "dev": "vite build --watch"
+  },
+  "dependencies": {
+    "lit": "^3.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2",
+    "vite": "^6.2.2"
+  }
+}

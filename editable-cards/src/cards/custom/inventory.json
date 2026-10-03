@@ -1,0 +1,1734 @@
+[
+  {
+    "dir": "custom_card_afvalophaling",
+    "tag": "ulm-custom-card-afvalophaling-card",
+    "type": "custom:ulm-custom-card-afvalophaling-card",
+    "name": "ULM Custom afvalophaling",
+    "author": "AndyVRD - 2021",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_card_datum_gft",
+      "ulm_card_datum_glas",
+      "ulm_card_datum_papier",
+      "ulm_card_datum_pmd",
+      "ulm_card_datum_rest",
+      "ulm_card_ophaling_morgen",
+      "ulm_card_ophaling_vandaag",
+      "ulm_language_variables",
+      "ulm_ophaling",
+      "ulm_volgende_ophaling"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "card_afvalophaling.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_alarm_time",
+    "tag": "ulm-custom-card-alarm-time-card",
+    "type": "custom:ulm-custom-card-alarm-time-card",
+    "name": "ULM Custom alarm time",
+    "author": "benbur - 2023",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_card_alarm_time_collapse",
+      "ulm_card_alarm_time_color",
+      "ulm_card_alarm_time_datetime",
+      "ulm_card_alarm_time_force_background_color",
+      "ulm_card_alarm_time_horizontal",
+      "ulm_card_alarm_time_icon",
+      "ulm_card_alarm_time_name",
+      "ulm_card_alarm_time_step"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "card_alarm_time.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_apexcharts",
+    "tag": "ulm-custom-card-apexcharts-card",
+    "type": "custom:ulm-custom-card-apexcharts-card",
+    "name": "ULM Custom apexcharts",
+    "author": "AndyVRD - 2022",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_card_generic_swap_icon",
+      "ulm_card_generic_swap_name"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "apexcharts.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_bar_card",
+    "tag": "ulm-custom-card-bar-card-card",
+    "type": "custom:ulm-custom-card-bar-card-card",
+    "name": "ULM Custom bar card",
+    "author": "rphlwnk - 2021 Version: 1.0.0",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_card_generic_icon",
+      "ulm_card_generic_name",
+      "ulm_custom_card_bar_card_color",
+      "ulm_custom_card_bar_card_icon",
+      "ulm_custom_card_bar_card_icon_color",
+      "ulm_custom_card_bar_card_indicator",
+      "ulm_custom_card_bar_card_max",
+      "ulm_custom_card_bar_card_min",
+      "ulm_custom_card_bar_card_name",
+      "ulm_custom_card_bar_card_show_icon",
+      "ulm_custom_card_bar_card_value"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_bar_card.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_camera",
+    "tag": "ulm-custom-card-camera-card",
+    "type": "custom:ulm-custom-card-camera-card",
+    "name": "ULM Custom camera",
+    "author": "Eltarius, from the script of [Clemalex](https://forum.hacf.fr/t/dashboard-minimalist/5507/183?u=clemalex) - 2022",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_custom_card_camera_aspect_ratio",
+      "ulm_custom_card_camera_label",
+      "ulm_custom_card_camera_name",
+      "ulm_custom_card_camera_title"
+    ],
+    "entityHints": [
+      "ulm_custom_card_camera_aspect_ratio",
+      "ulm_custom_card_camera_label",
+      "ulm_custom_card_camera_name",
+      "ulm_custom_card_camera_title"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_camera.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_chromecast",
+    "tag": "ulm-custom-card-chromecast-card",
+    "type": "custom:ulm-custom-card-chromecast-card",
+    "name": "ULM Custom chromecast",
+    "author": "",
+    "version": "",
+    "vars": [
+      "ulm_card_media_player_with_controls_entity",
+      "ulm_card_media_player_with_controls_name",
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [
+      "ulm_card_media_player_with_controls_entity",
+      "ulm_card_media_player_with_controls_name"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_chromecast.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_damix48_power_details",
+    "tag": "ulm-custom-card-damix48-power-details-card",
+    "type": "custom:ulm-custom-card-damix48-power-details-card",
+    "name": "ULM Custom damix48 power details",
+    "author": "Damix48",
+    "version": "0.1.1",
+    "vars": [
+      "ulm_card_generic_swap_name",
+      "ulm_card_power_details_24hour",
+      "ulm_card_power_details_entity",
+      "ulm_card_power_details_height",
+      "ulm_card_power_details_hours",
+      "ulm_card_power_details_name",
+      "ulm_card_power_details_thresholds",
+      "ulm_custom_card_damix48_power_details_hour",
+      "ulm_custom_card_damix48_power_details_hours",
+      "ulm_custom_card_damix48_power_details_in_the_last",
+      "ulm_custom_card_damix48_power_details_in_the_lasts",
+      "ulm_custom_card_damix48_power_details_language_variables"
+    ],
+    "entityHints": [
+      "ulm_card_power_details_entity"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_damix48_power_details.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_device_tracker",
+    "tag": "ulm-custom-card-device-tracker-card",
+    "type": "custom:ulm-custom-card-device-tracker-card",
+    "name": "ULM Custom device tracker",
+    "author": "",
+    "version": "",
+    "vars": [
+      "ulm_custom_card_device_tracker_icon",
+      "ulm_custom_card_device_tracker_tracker_1_entity",
+      "ulm_custom_card_device_tracker_tracker_1_type",
+      "ulm_custom_card_device_tracker_tracker_2_entity",
+      "ulm_custom_card_device_tracker_tracker_2_type",
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [
+      "ulm_custom_card_device_tracker_tracker_1_entity",
+      "ulm_custom_card_device_tracker_tracker_2_entity"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_device_tracker.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_drealine_roomview",
+    "tag": "ulm-custom-card-drealine-roomview-card",
+    "type": "custom:ulm-custom-card-drealine-roomview-card",
+    "name": "ULM Custom drealine roomview",
+    "author": "Drealine - 2022",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_actions_card",
+      "ulm_card_tap_action",
+      "ulm_card_tap_navigate_path",
+      "ulm_input_select",
+      "ulm_input_select_option"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_drealine_roomview.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_eraycetinay_elapsed_time",
+    "tag": "ulm-custom-card-eraycetinay-elapsed-time-card",
+    "type": "custom:ulm-custom-card-eraycetinay-elapsed-time-card",
+    "name": "ULM Custom eraycetinay elapsed time",
+    "author": "eraycetinay - 2022",
+    "version": "0.0.1",
+    "vars": [
+      "ulm_custom_card_eraycetinay_elapsed_time_ago",
+      "ulm_custom_card_eraycetinay_elapsed_time_day",
+      "ulm_custom_card_eraycetinay_elapsed_time_days",
+      "ulm_custom_card_eraycetinay_elapsed_time_hour",
+      "ulm_custom_card_eraycetinay_elapsed_time_hours",
+      "ulm_custom_card_eraycetinay_elapsed_time_justnow",
+      "ulm_custom_card_eraycetinay_elapsed_time_language_variables",
+      "ulm_custom_card_eraycetinay_elapsed_time_minute",
+      "ulm_custom_card_eraycetinay_elapsed_time_minutes"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_eraycetinay_elapsed_time.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_eraycetinay_lock",
+    "tag": "ulm-custom-card-eraycetinay-lock-card",
+    "type": "custom:ulm-custom-card-eraycetinay-lock-card",
+    "name": "ULM Custom eraycetinay lock",
+    "author": "eraycetinay - 2022",
+    "version": "0.0.3",
+    "vars": [
+      "ulm_custom_card_eraycetinay_lock_battery_is_at",
+      "ulm_custom_card_eraycetinay_lock_battery_is_low",
+      "ulm_custom_card_eraycetinay_lock_battery_level",
+      "ulm_custom_card_eraycetinay_lock_battery_sensor_binary",
+      "ulm_custom_card_eraycetinay_lock_battery_sensor_binary_low_state",
+      "ulm_custom_card_eraycetinay_lock_battery_warning",
+      "ulm_custom_card_eraycetinay_lock_battery_warning_low",
+      "ulm_custom_card_eraycetinay_lock_door_open",
+      "ulm_custom_card_eraycetinay_lock_jammed",
+      "ulm_custom_card_eraycetinay_lock_locked",
+      "ulm_custom_card_eraycetinay_lock_locked_and_opened",
+      "ulm_custom_card_eraycetinay_lock_locking",
+      "ulm_custom_card_eraycetinay_lock_only_open",
+      "ulm_custom_card_eraycetinay_lock_tap_control",
+      "ulm_custom_card_eraycetinay_lock_unavailable",
+      "ulm_custom_card_eraycetinay_lock_unlocked",
+      "ulm_custom_card_eraycetinay_lock_unlocking",
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [
+      "ulm_custom_card_eraycetinay_lock_battery_is_at",
+      "ulm_custom_card_eraycetinay_lock_battery_is_low",
+      "ulm_custom_card_eraycetinay_lock_battery_level",
+      "ulm_custom_card_eraycetinay_lock_battery_sensor_binary",
+      "ulm_custom_card_eraycetinay_lock_battery_sensor_binary_low_state",
+      "ulm_custom_card_eraycetinay_lock_battery_warning",
+      "ulm_custom_card_eraycetinay_lock_battery_warning_low",
+      "ulm_custom_card_eraycetinay_lock_door_open"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_eraycetinay_lock.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_esh_room",
+    "tag": "ulm-custom-card-esh-room-card",
+    "type": "custom:ulm-custom-card-esh-room-card",
+    "name": "ULM Custom esh room",
+    "author": "",
+    "version": "2.2.1",
+    "vars": [
+      "ulm_actions_card",
+      "ulm_card_cover_popup",
+      "ulm_card_dynamic_color",
+      "ulm_card_esh_room_cover_icon_closed",
+      "ulm_card_esh_room_cover_icon_closing",
+      "ulm_card_esh_room_cover_icon_open",
+      "ulm_card_esh_room_cover_icon_opening",
+      "ulm_card_esh_room_light_icon_off",
+      "ulm_card_esh_room_light_icon_on",
+      "ulm_card_light_enable_popup",
+      "ulm_card_thermostat_enable_popup",
+      "ulm_custom_actions",
+      "ulm_custom_card_esh_room_climate_entity",
+      "ulm_custom_card_esh_room_cover_entity",
+      "ulm_custom_card_esh_room_light_entity",
+      "ulm_custom_popup",
+      "ulm_popup_cover_entity",
+      "ulm_popup_light_entity",
+      "ulm_popup_thermostat_entity",
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [
+      "ulm_card_cover_popup",
+      "ulm_card_esh_room_cover_icon_closed",
+      "ulm_card_esh_room_cover_icon_closing",
+      "ulm_card_esh_room_cover_icon_open",
+      "ulm_card_esh_room_cover_icon_opening",
+      "ulm_card_esh_room_light_icon_off",
+      "ulm_card_esh_room_light_icon_on",
+      "ulm_card_light_enable_popup"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_esh_room.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_esh_welcome",
+    "tag": "ulm-custom-card-esh-welcome-card",
+    "type": "custom:ulm-custom-card-esh-welcome-card",
+    "name": "ULM Custom esh welcome",
+    "author": "Everything Smart Home - 2022",
+    "version": "1.1.0",
+    "vars": [
+      "ulm_afternoon",
+      "ulm_card_esh_welcome_collapse",
+      "ulm_chip_mdi_icon_only_icon",
+      "ulm_evening",
+      "ulm_hello",
+      "ulm_language_variables",
+      "ulm_morning",
+      "ulm_weather"
+    ],
+    "entityHints": [
+      "ulm_weather"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_esh_welcome.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_haven_washer",
+    "tag": "ulm-custom-card-haven-washer-card",
+    "type": "custom:ulm-custom-card-haven-washer-card",
+    "name": "ULM Custom haven washer",
+    "author": "Cruguah - 2023",
+    "version": "1.0.3",
+    "vars": [
+      "ulm_custom_card_washer_delayed_start",
+      "ulm_custom_card_washer_delayed_starttime",
+      "ulm_custom_card_washer_job_progress",
+      "ulm_custom_card_washer_job_state",
+      "ulm_custom_card_washer_job_states",
+      "ulm_custom_card_washer_label_configuring",
+      "ulm_custom_card_washer_label_idle",
+      "ulm_custom_card_washer_label_running",
+      "ulm_custom_card_washer_machine_state",
+      "ulm_custom_card_washer_machine_stop_state",
+      "ulm_custom_card_washer_pause_action",
+      "ulm_custom_card_washer_power",
+      "ulm_custom_card_washer_remote_control",
+      "ulm_custom_card_washer_start_action",
+      "ulm_custom_card_washer_stop_action",
+      "ulm_language_variables",
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_haven_washer.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_heat_pump",
+    "tag": "ulm-custom-card-heat-pump-card",
+    "type": "custom:ulm-custom-card-heat-pump-card",
+    "name": "ULM Custom heat pump",
+    "author": "Kam - 2022",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_heat_pump.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_homeassistant_updates",
+    "tag": "ulm-custom-card-homeassistant-updates-card",
+    "type": "custom:ulm-custom-card-homeassistant-updates-card",
+    "name": "ULM Custom homeassistant updates",
+    "author": "AndyVRD - 2021",
+    "version": "1.0.2",
+    "vars": [
+      "ulm_card_homeassistant_core",
+      "ulm_card_homeassistant_entity",
+      "ulm_card_homeassistant_os",
+      "ulm_card_homeassistant_supervisor",
+      "ulm_language_variables",
+      "ulm_no_updates_available",
+      "ulm_updates_available"
+    ],
+    "entityHints": [
+      "ulm_card_homeassistant_entity",
+      "ulm_no_updates_available",
+      "ulm_updates_available"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_homeassistant_updates.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_httpedo13_sun",
+    "tag": "ulm-custom-card-httpedo13-sun-card",
+    "type": "custom:ulm-custom-card-httpedo13-sun-card",
+    "name": "ULM Custom httpedo13 sun",
+    "author": "httpedo13 - 2021",
+    "version": "1.0.0",
+    "vars": [],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_httpedo13_sun.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_httpedo13_thermostat",
+    "tag": "ulm-custom-card-httpedo13-thermostat-card",
+    "type": "custom:ulm-custom-card-httpedo13-thermostat-card",
+    "name": "ULM Custom httpedo13 thermostat",
+    "author": "httpedo13 - 2021",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_httpedo13_thermostat.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_iAbadia_battery_chip",
+    "tag": "ulm-custom-card-iAbadia-battery-chip-card",
+    "type": "custom:ulm-custom-card-iAbadia-battery-chip-card",
+    "name": "ULM Custom iAbadia battery chip",
+    "author": "Iñaki Abadia - 2024",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_custom_card_iAbadia_battery_chip_danger",
+      "ulm_custom_card_iAbadia_battery_chip_entity",
+      "ulm_custom_card_iAbadia_battery_chip_icon",
+      "ulm_custom_card_iAbadia_battery_chip_warning"
+    ],
+    "entityHints": [
+      "ulm_custom_card_iAbadia_battery_chip_entity"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_iAbadia_battery_chip.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_imswel_medias",
+    "tag": "ulm-custom-card-imswel-medias-card",
+    "type": "custom:ulm-custom-card-imswel-medias-card",
+    "name": "ULM Custom imswel medias",
+    "author": "imswel - 2023",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_custom_card_imswel_in_theaters",
+      "ulm_custom_card_imswel_locale",
+      "ulm_custom_card_imswel_medias_index",
+      "ulm_custom_card_imswel_medias_platform",
+      "ulm_custom_card_imswel_recentlyadded",
+      "ulm_custom_card_imswel_today",
+      "ulm_custom_card_imswel_tommorow",
+      "ulm_custom_card_imswel_weekday",
+      "ulm_translation_engine",
+      "ulm_translation_unavailable"
+    ],
+    "entityHints": [
+      "ulm_custom_card_imswel_medias_index",
+      "ulm_custom_card_imswel_medias_platform"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_imswel_medias.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_imswel_person",
+    "tag": "ulm-custom-card-imswel-person-card",
+    "type": "custom:ulm-custom-card-imswel-person-card",
+    "name": "ULM Custom imswel person",
+    "author": "imswel - 2022",
+    "version": "1.0.2",
+    "vars": [
+      "ulm_card_imswel_person_entity",
+      "ulm_card_imswel_person_findmy_script",
+      "ulm_card_imswel_person_gps_tracker",
+      "ulm_card_imswel_person_use_entity_picture",
+      "ulm_card_imswel_person_wifi_tracker",
+      "ulm_custom_card_imswel_person_findmy",
+      "ulm_custom_card_imswel_person_home",
+      "ulm_custom_card_imswel_person_language_variables",
+      "ulm_custom_card_imswel_person_not_home",
+      "ulm_translation_engine",
+      "ulm_translation_unavailable"
+    ],
+    "entityHints": [
+      "ulm_card_imswel_person_entity",
+      "ulm_card_imswel_person_findmy_script",
+      "ulm_card_imswel_person_gps_tracker",
+      "ulm_card_imswel_person_use_entity_picture",
+      "ulm_card_imswel_person_wifi_tracker",
+      "ulm_custom_card_imswel_person_findmy",
+      "ulm_custom_card_imswel_person_home",
+      "ulm_custom_card_imswel_person_language_variables"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_imswel_person.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_input_datetime",
+    "tag": "ulm-custom-card-input-datetime-card",
+    "type": "custom:ulm-custom-card-input-datetime-card",
+    "name": "ULM Custom input datetime",
+    "author": "sildehoop - 2022",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_card_input_datetime_name",
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "card_input_datetime.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_input_number",
+    "tag": "ulm-custom-card-input-number-card",
+    "type": "custom:ulm-custom-card-input-number-card",
+    "name": "ULM Custom input number",
+    "author": "sildehoop - 2021",
+    "version": "1.1.0",
+    "vars": [
+      "ulm_card_input_number_name",
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "card_input_number.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_irmajavi_entities",
+    "tag": "ulm-custom-card-irmajavi-entities-card",
+    "type": "custom:ulm-custom-card-irmajavi-entities-card",
+    "name": "ULM Custom irmajavi entities",
+    "author": "irmajavi - 2022",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_custom_card_irmajavi_entities",
+      "ulm_custom_card_irmajavi_entities_entity_1",
+      "ulm_custom_card_irmajavi_entities_entity_2",
+      "ulm_custom_card_irmajavi_entities_entity_3",
+      "ulm_custom_card_irmajavi_entities_entity_4",
+      "ulm_custom_card_irmajavi_entities_icon",
+      "ulm_custom_card_irmajavi_entities_name",
+      "ulm_custom_card_irmajavi_entities_name_1",
+      "ulm_custom_card_irmajavi_entities_name_2",
+      "ulm_custom_card_irmajavi_entities_name_3",
+      "ulm_custom_card_irmajavi_entities_name_4",
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [
+      "ulm_custom_card_irmajavi_entities_entity_1",
+      "ulm_custom_card_irmajavi_entities_entity_2",
+      "ulm_custom_card_irmajavi_entities_entity_3",
+      "ulm_custom_card_irmajavi_entities_entity_4"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_irmajavi_entities.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_irmajavi_speedtest",
+    "tag": "ulm-custom-card-irmajavi-speedtest-card",
+    "type": "custom:ulm-custom-card-irmajavi-speedtest-card",
+    "name": "ULM Custom irmajavi speedtest",
+    "author": "irmajavi - 2022",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_custom_card_irmajavi_speedtest_color",
+      "ulm_custom_card_irmajavi_speedtest_download",
+      "ulm_custom_card_irmajavi_speedtest_download_speed_entity",
+      "ulm_custom_card_irmajavi_speedtest_language_variables",
+      "ulm_custom_card_irmajavi_speedtest_ping_entity",
+      "ulm_custom_card_irmajavi_speedtest_router_model",
+      "ulm_custom_card_irmajavi_speedtest_router_name",
+      "ulm_custom_card_irmajavi_speedtest_speedtest",
+      "ulm_custom_card_irmajavi_speedtest_upload",
+      "ulm_custom_card_irmajavi_speedtest_upload_speed_entity"
+    ],
+    "entityHints": [
+      "ulm_custom_card_irmajavi_speedtest_download_speed_entity",
+      "ulm_custom_card_irmajavi_speedtest_ping_entity",
+      "ulm_custom_card_irmajavi_speedtest_upload_speed_entity"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_irmajavi_speedtest.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_irmajavi_weather",
+    "tag": "ulm-custom-card-irmajavi-weather-card",
+    "type": "custom:ulm-custom-card-irmajavi-weather-card",
+    "name": "ULM Custom irmajavi weather",
+    "author": "irmajavi - 2022",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_custom_card_irmajavi_weather",
+      "ulm_custom_card_irmajavi_weather_date",
+      "ulm_custom_card_irmajavi_weather_entity_1",
+      "ulm_custom_card_irmajavi_weather_entity_2",
+      "ulm_custom_card_irmajavi_weather_entity_3",
+      "ulm_custom_card_irmajavi_weather_entity_4",
+      "ulm_custom_card_irmajavi_weather_name_1",
+      "ulm_custom_card_irmajavi_weather_name_2",
+      "ulm_custom_card_irmajavi_weather_name_3",
+      "ulm_custom_card_irmajavi_weather_name_4",
+      "ulm_custom_card_irmajavi_weather_temperature_outside"
+    ],
+    "entityHints": [
+      "ulm_custom_card_irmajavi_weather",
+      "ulm_custom_card_irmajavi_weather_date",
+      "ulm_custom_card_irmajavi_weather_entity_1",
+      "ulm_custom_card_irmajavi_weather_entity_2",
+      "ulm_custom_card_irmajavi_weather_entity_3",
+      "ulm_custom_card_irmajavi_weather_entity_4",
+      "ulm_custom_card_irmajavi_weather_name_1",
+      "ulm_custom_card_irmajavi_weather_name_2"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_irmajavi_weather.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_light_colorpick",
+    "tag": "ulm-custom-card-light-colorpick-card",
+    "type": "custom:ulm-custom-card-light-colorpick-card",
+    "name": "ULM Custom light colorpick",
+    "author": "13robin37 - 2021",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_card_light_colorpick_name",
+      "ulm_card_light_colorpick_transition",
+      "ulm_card_light_slider_horizontal_name",
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [
+      "ulm_card_light_colorpick_name",
+      "ulm_card_light_colorpick_transition",
+      "ulm_card_light_slider_horizontal_name"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "card_light_colorpick.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_media_player_sonos",
+    "tag": "ulm-custom-card-media-player-sonos-card",
+    "type": "custom:ulm-custom-card-media-player-sonos-card",
+    "name": "ULM Custom media player sonos",
+    "author": "",
+    "version": "",
+    "vars": [
+      "ulm_card_media_player_with_controls_entity",
+      "ulm_card_media_player_with_controls_name",
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [
+      "ulm_card_media_player_with_controls_entity",
+      "ulm_card_media_player_with_controls_name"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_media_player_sonos.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_more_power_outlet",
+    "tag": "ulm-custom-card-more-power-outlet-card",
+    "type": "custom:ulm-custom-card-more-power-outlet-card",
+    "name": "ULM Custom more power outlet",
+    "author": "Wranglatang - 2022 Version 1.0.0",
+    "version": "",
+    "vars": [
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_more_power_outlet.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_mpse_gauge",
+    "tag": "ulm-custom-card-mpse-gauge-card",
+    "type": "custom:ulm-custom-card-mpse-gauge-card",
+    "name": "ULM Custom mpse gauge",
+    "author": "mpse",
+    "version": "0.1.0",
+    "vars": [
+      "ulm_card_mpse_gauge_max",
+      "ulm_card_mpse_gauge_min"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_mpse_gauge.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_mpse_printer",
+    "tag": "ulm-custom-card-mpse-printer-card",
+    "type": "custom:ulm-custom-card-mpse-printer-card",
+    "name": "ULM Custom mpse printer",
+    "author": "mpse (based on clemalex post)",
+    "version": "0.3.0",
+    "vars": [
+      "ulm_card_printer_black_name",
+      "ulm_card_printer_cyan_name",
+      "ulm_card_printer_magenta_name",
+      "ulm_card_printer_name",
+      "ulm_card_printer_yellow_name"
+    ],
+    "entityHints": [
+      "ulm_card_printer_black_name",
+      "ulm_card_printer_cyan_name",
+      "ulm_card_printer_magenta_name",
+      "ulm_card_printer_name",
+      "ulm_card_printer_yellow_name"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_mpse_printer.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_mpse_thermostat",
+    "tag": "ulm-custom-card-mpse-thermostat-card",
+    "type": "custom:ulm-custom-card-mpse-thermostat-card",
+    "name": "ULM Custom mpse thermostat",
+    "author": "mpse",
+    "version": "0.1.0",
+    "vars": [
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_mpse_thermostat.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_mpse_wifisignal",
+    "tag": "ulm-custom-card-mpse-wifisignal-card",
+    "type": "custom:ulm-custom-card-mpse-wifisignal-card",
+    "name": "ULM Custom mpse wifisignal",
+    "author": "mpse",
+    "version": "0.2.0",
+    "vars": [],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_mpse_wifisignal.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_nas",
+    "tag": "ulm-custom-card-nas-card",
+    "type": "custom:ulm-custom-card-nas-card",
+    "name": "ULM Custom nas",
+    "author": "tben - 2021",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_custom_card_nas_sensor",
+      "ulm_custom_card_nas_text",
+      "ulm_custom_card_nas_unit"
+    ],
+    "entityHints": [
+      "ulm_custom_card_nas_sensor",
+      "ulm_custom_card_nas_text",
+      "ulm_custom_card_nas_unit"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_nas.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_neekster_update",
+    "tag": "ulm-custom-card-neekster-update-card",
+    "type": "custom:ulm-custom-card-neekster-update-card",
+    "name": "ULM Custom neekster update",
+    "author": "Neekster - 2022",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_card_neekster_update_collapsible",
+      "ulm_card_neekster_update_enable_controls",
+      "ulm_card_neekster_update_horizontal",
+      "ulm_card_neekster_update_icon",
+      "ulm_card_neekster_update_narrow_buttons",
+      "ulm_language_variables"
+    ],
+    "entityHints": [
+      "ulm_card_neekster_update_collapsible",
+      "ulm_card_neekster_update_enable_controls",
+      "ulm_card_neekster_update_horizontal",
+      "ulm_card_neekster_update_icon",
+      "ulm_card_neekster_update_narrow_buttons"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_neekster_update.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_nik_clock",
+    "tag": "ulm-custom-card-nik-clock-card",
+    "type": "custom:ulm-custom-card-nik-clock-card",
+    "name": "ULM Custom nik clock",
+    "author": "Nik - 2022 Version: 1.0.0",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_custom_card_nik_clock_switch",
+      "ulm_custom_card_nik_clock_switch_enable",
+      "ulm_language"
+    ],
+    "entityHints": [
+      "ulm_custom_card_nik_clock_switch",
+      "ulm_custom_card_nik_clock_switch_enable"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_nik_clock.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_nik_door",
+    "tag": "ulm-custom-card-nik-door-card",
+    "type": "custom:ulm-custom-card-nik-door-card",
+    "name": "ULM Custom nik door",
+    "author": "Nik - 2022 Version: 2.0.0",
+    "version": "2.0.0",
+    "vars": [
+      "ulm_custom_card_entity_1_lock",
+      "ulm_custom_card_entity_1_lock_battery",
+      "ulm_custom_card_entity_1_name",
+      "ulm_language_variables"
+    ],
+    "entityHints": [
+      "ulm_custom_card_entity_1_lock",
+      "ulm_custom_card_entity_1_lock_battery",
+      "ulm_custom_card_entity_1_name"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_nik_door.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_nik_nas",
+    "tag": "ulm-custom-card-nik-nas-card",
+    "type": "custom:ulm-custom-card-nik-nas-card",
+    "name": "ULM Custom nik nas",
+    "author": "Nik - 2022",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_card_generic_swap_icon",
+      "ulm_card_generic_swap_name",
+      "ulm_card_input_boolean_icon",
+      "ulm_card_input_boolean_name",
+      "ulm_translation_engine",
+      "ulm_translation_status"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_nik_nas.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_nik_tablet",
+    "tag": "ulm-custom-card-nik-tablet-card",
+    "type": "custom:ulm-custom-card-nik-tablet-card",
+    "name": "ULM Custom nik tablet",
+    "author": "Nik - 2022",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_card_generic_name",
+      "ulm_card_input_boolean_icon",
+      "ulm_card_input_boolean_name",
+      "ulm_custom_bar_card_nik_tablet_card_entity",
+      "ulm_custom_bar_card_nik_tablet_card_indicator",
+      "ulm_custom_bar_card_nik_tablet_card_name",
+      "ulm_custom_bar_card_nik_tablet_card_value",
+      "ulm_custom_card_nik_tablet_battery",
+      "ulm_custom_card_nik_tablet_battery_name",
+      "ulm_custom_card_nik_tablet_button1",
+      "ulm_custom_card_nik_tablet_button2",
+      "ulm_custom_card_nik_tablet_button3",
+      "ulm_custom_card_nik_tablet_main",
+      "ulm_custom_card_nik_tablet_maintenance",
+      "ulm_custom_card_nik_tablet_name",
+      "ulm_custom_card_nik_tablet_par1",
+      "ulm_custom_card_nik_tablet_par1_name",
+      "ulm_custom_card_nik_tablet_par2",
+      "ulm_custom_card_nik_tablet_par2_name",
+      "ulm_custom_card_nik_tablet_par3",
+      "ulm_custom_card_nik_tablet_par3_name",
+      "ulm_custom_card_nik_tablet_reload",
+      "ulm_custom_card_nik_tablet_restart",
+      "ulm_language_variables"
+    ],
+    "entityHints": [
+      "ulm_custom_bar_card_nik_tablet_card_entity"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_nik_tablet.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_paddy_dwd_pollen",
+    "tag": "ulm-custom-card-paddy-dwd-pollen-card",
+    "type": "custom:ulm-custom-card-paddy-dwd-pollen-card",
+    "name": "ULM Custom paddy dwd pollen",
+    "author": "Paddy0174 - 2021",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_card_generic_swap_icon",
+      "ulm_card_generic_swap_name",
+      "ulm_custom_card_paddy_dwd_pollen_1",
+      "ulm_custom_card_paddy_dwd_pollen_2",
+      "ulm_custom_card_paddy_dwd_pollen_3",
+      "ulm_custom_card_paddy_dwd_pollen_4",
+      "ulm_custom_card_paddy_dwd_pollen_5",
+      "ulm_custom_card_paddy_dwd_pollen_6",
+      "ulm_custom_card_paddy_dwd_pollen_icon",
+      "ulm_custom_card_paddy_dwd_pollen_language_variables",
+      "ulm_custom_card_paddy_dwd_pollen_name",
+      "ulm_custom_card_paddy_dwd_pollen_none"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_paddy_dwd_pollen.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_paddy_waste_collection",
+    "tag": "ulm-custom-card-paddy-waste-collection-card",
+    "type": "custom:ulm-custom-card-paddy-waste-collection-card",
+    "name": "ULM Custom paddy waste collection",
+    "author": "Paddy0174 - 2021",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_card_generic_swap_icon",
+      "ulm_card_generic_swap_name"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_paddy_waste_collection.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_paddy_welcome",
+    "tag": "ulm-custom-card-paddy-welcome-card",
+    "type": "custom:ulm-custom-card-paddy-welcome-card",
+    "name": "ULM Custom paddy welcome",
+    "author": "Paddy0174 - 2021",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_afternoon",
+      "ulm_custom_card_paddy_welcome_news_entities",
+      "ulm_custom_card_paddy_welcome_time",
+      "ulm_custom_card_paddy_welcome_weather_provider",
+      "ulm_evening",
+      "ulm_hello",
+      "ulm_language_variables",
+      "ulm_morning"
+    ],
+    "entityHints": [
+      "ulm_custom_card_paddy_welcome_weather_provider"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_paddy_welcome.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_person_chip",
+    "tag": "ulm-custom-card-person-chip-card",
+    "type": "custom:ulm-custom-card-person-chip-card",
+    "name": "ULM Custom person chip",
+    "author": "tmatheussen - 2022",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_custom_card_person_chip_entity",
+      "ulm_translation_engine"
+    ],
+    "entityHints": [
+      "ulm_custom_card_person_chip_entity"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_person_chip.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_person_info",
+    "tag": "ulm-custom-card-person-info-card",
+    "type": "custom:ulm-custom-card-person-info-card",
+    "name": "ULM Custom person info",
+    "author": "Jordan Janzen <@jordandrako>",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_address",
+      "ulm_address_locality",
+      "ulm_card_person_battery_entity",
+      "ulm_card_person_battery_state_entity",
+      "ulm_card_person_commute_entity",
+      "ulm_card_person_commute_icon",
+      "ulm_card_person_cummute_icon",
+      "ulm_card_person_driving_entity",
+      "ulm_card_person_entity",
+      "ulm_card_person_use_entity_picture",
+      "ulm_card_person_zone1",
+      "ulm_card_person_zone2",
+      "ulm_multiline",
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [
+      "ulm_card_person_battery_entity",
+      "ulm_card_person_battery_state_entity",
+      "ulm_card_person_commute_entity",
+      "ulm_card_person_commute_icon",
+      "ulm_card_person_cummute_icon",
+      "ulm_card_person_driving_entity",
+      "ulm_card_person_entity",
+      "ulm_card_person_use_entity_picture"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_person_info.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_person_info_small",
+    "tag": "ulm-custom-card-person-info-small-card",
+    "type": "custom:ulm-custom-card-person-info-small-card",
+    "name": "ULM Custom person info small",
+    "author": "Imaginelenses <@imaginelenses>",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_address",
+      "ulm_address_locality",
+      "ulm_card_battery_battery_level_danger",
+      "ulm_card_battery_battery_level_warning",
+      "ulm_card_battery_color_battery_level_danger",
+      "ulm_card_battery_color_battery_level_ok",
+      "ulm_card_battery_color_battery_level_warning",
+      "ulm_card_person_battery_entity",
+      "ulm_card_person_battery_state_entity",
+      "ulm_card_person_driving_entity",
+      "ulm_card_person_entity",
+      "ulm_card_person_icon",
+      "ulm_card_person_use_entity_picture",
+      "ulm_card_person_zone1",
+      "ulm_card_person_zone2",
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [
+      "ulm_card_person_battery_entity",
+      "ulm_card_person_battery_state_entity",
+      "ulm_card_person_driving_entity",
+      "ulm_card_person_entity",
+      "ulm_card_person_icon",
+      "ulm_card_person_use_entity_picture",
+      "ulm_card_person_zone1",
+      "ulm_card_person_zone2"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_person_info_small.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_playstation",
+    "tag": "ulm-custom-card-playstation-card",
+    "type": "custom:ulm-custom-card-playstation-card",
+    "name": "ULM Custom playstation",
+    "author": "",
+    "version": "",
+    "vars": [
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_playstation.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_qubino",
+    "tag": "ulm-custom-card-qubino-card",
+    "type": "custom:ulm-custom-card-qubino-card",
+    "name": "ULM Custom qubino",
+    "author": "tben - 2021",
+    "version": "1.0.0",
+    "vars": [],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_qubino.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_ristou_person",
+    "tag": "ulm-custom-card-ristou-person-card",
+    "type": "custom:ulm-custom-card-ristou-person-card",
+    "name": "ULM Custom ristou person",
+    "author": "Ristou - 2022",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_actions_card",
+      "ulm_custom_card_ristou_camera_entity_dark",
+      "ulm_custom_card_ristou_camera_entity_light",
+      "ulm_custom_card_ristou_find_device_script",
+      "ulm_custom_card_ristou_icon",
+      "ulm_custom_card_ristou_map_aspect_ratio",
+      "ulm_custom_card_ristou_map_default_zoom",
+      "ulm_custom_card_ristou_map_enable",
+      "ulm_custom_card_ristou_map_hours_to_show",
+      "ulm_custom_card_ristou_name",
+      "ulm_custom_card_ristou_person_driving",
+      "ulm_custom_card_ristou_person_driving_entity",
+      "ulm_custom_card_ristou_person_language_variables",
+      "ulm_custom_card_ristou_person_language_variables1",
+      "ulm_custom_card_ristou_use_badge",
+      "ulm_custom_card_ristou_use_entity_picture",
+      "ulm_custom_card_ristou_zones",
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [
+      "ulm_custom_card_ristou_camera_entity_dark",
+      "ulm_custom_card_ristou_camera_entity_light",
+      "ulm_custom_card_ristou_person_driving",
+      "ulm_custom_card_ristou_person_driving_entity",
+      "ulm_custom_card_ristou_person_language_variables",
+      "ulm_custom_card_ristou_person_language_variables1",
+      "ulm_custom_card_ristou_use_entity_picture"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_ristou_person.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_saxel_fan",
+    "tag": "ulm-custom-card-saxel-fan-card",
+    "type": "custom:ulm-custom-card-saxel-fan-card",
+    "name": "ULM Custom saxel fan",
+    "author": "saxel - 2021",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_button_icon",
+      "ulm_button_service",
+      "ulm_card_fan_horizontal",
+      "ulm_card_fan_hum_attribute",
+      "ulm_card_fan_temp_attribute",
+      "ulm_language_variables",
+      "ulm_off",
+      "ulm_on",
+      "ulm_show_button",
+      "ulm_translation_engine",
+      "ulm_unavailable"
+    ],
+    "entityHints": [
+      "ulm_card_fan_horizontal",
+      "ulm_card_fan_hum_attribute",
+      "ulm_card_fan_temp_attribute"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_saxel_fan.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_scenes",
+    "tag": "ulm-custom-card-scenes-card",
+    "type": "custom:ulm-custom-card-scenes-card",
+    "name": "ULM Custom scenes",
+    "author": "sildehoop - 2021",
+    "version": "1.2.0",
+    "vars": [],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "card_scenes.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_schumijo_car",
+    "tag": "ulm-custom-card-schumijo-car-card",
+    "type": "custom:ulm-custom-card-schumijo-car-card",
+    "name": "ULM Custom schumijo car",
+    "author": "schumijo - 2021",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_card_schumijo_car_energy_level",
+      "ulm_card_schumijo_car_lock",
+      "ulm_card_schumijo_car_name",
+      "ulm_card_schumijo_car_range",
+      "ulm_card_schumijo_car_tracker",
+      "ulm_custom_card_schumijo_ca_popup",
+      "ulm_custom_card_schumijo_car_default_name",
+      "ulm_custom_card_schumijo_car_energy_level",
+      "ulm_custom_card_schumijo_car_language_variables",
+      "ulm_custom_card_schumijo_car_range"
+    ],
+    "entityHints": [
+      "ulm_card_schumijo_car_lock"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_schumijo_car.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_schumijo_flower",
+    "tag": "ulm-custom-card-schumijo-flower-card",
+    "type": "custom:ulm-custom-card-schumijo-flower-card",
+    "name": "ULM Custom schumijo flower",
+    "author": "schumijo - 2021",
+    "version": "2.0.0",
+    "vars": [
+      "ulm_card_flower_entity",
+      "ulm_card_flower_name",
+      "ulm_card_flower_show_bars",
+      "ulm_card_flower_species",
+      "ulm_custom_card_schumijo_flower_correct",
+      "ulm_custom_card_schumijo_flower_language_variables",
+      "ulm_custom_card_schumijo_flower_problem"
+    ],
+    "entityHints": [
+      "ulm_card_flower_entity"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_schumijo_flower.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_senoro_win",
+    "tag": "ulm-custom-card-senoro-win-card",
+    "type": "custom:ulm-custom-card-senoro-win-card",
+    "name": "ULM Custom senoro win",
+    "author": "T1ppes - 2026",
+    "version": "",
+    "vars": [
+      "ulm_custom_card_senoro_win_battery_is_at",
+      "ulm_custom_card_senoro_win_battery_level",
+      "ulm_custom_card_senoro_win_battery_warning",
+      "ulm_custom_card_senoro_win_battery_warning_low",
+      "ulm_custom_card_senoro_win_closed",
+      "ulm_custom_card_senoro_win_color",
+      "ulm_custom_card_senoro_win_entity",
+      "ulm_custom_card_senoro_win_force_background_color",
+      "ulm_custom_card_senoro_win_handle",
+      "ulm_custom_card_senoro_win_icon",
+      "ulm_custom_card_senoro_win_language_variables",
+      "ulm_custom_card_senoro_win_locked",
+      "ulm_custom_card_senoro_win_manipulated",
+      "ulm_custom_card_senoro_win_name",
+      "ulm_custom_card_senoro_win_open",
+      "ulm_custom_card_senoro_win_tilted",
+      "ulm_language_variables",
+      "ulm_show_last_changed",
+      "ulm_unavailable"
+    ],
+    "entityHints": [
+      "ulm_custom_card_senoro_win_entity",
+      "ulm_custom_card_senoro_win_locked"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_senoro_win.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_sisimomo_printer",
+    "tag": "ulm-custom-card-sisimomo-printer-card",
+    "type": "custom:ulm-custom-card-sisimomo-printer-card",
+    "name": "ULM Custom sisimomo printer",
+    "author": "[Sisimomo](https://github.com/sisimomo) (based on [hiddevanbrussel pictures](https://community.home-assistant.io/t/lovelace-ui-minimalist/322687/203))",
+    "version": "0.1.0",
+    "vars": [
+      "ulm_idle",
+      "ulm_language_variables",
+      "ulm_translation_engine",
+      "ulm_translation_unavailable"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_sisimomo_printer.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_speedtest_shogun160",
+    "tag": "ulm-custom-card-speedtest-shogun160-card",
+    "type": "custom:ulm-custom-card-speedtest-shogun160-card",
+    "name": "ULM Custom speedtest shogun160",
+    "author": "",
+    "version": "",
+    "vars": [
+      "ulm_custom_card_speedtest_download_speed_color",
+      "ulm_custom_card_speedtest_download_speed_entity",
+      "ulm_custom_card_speedtest_download_speed_max",
+      "ulm_custom_card_speedtest_ping_color",
+      "ulm_custom_card_speedtest_ping_entity",
+      "ulm_custom_card_speedtest_ping_max",
+      "ulm_custom_card_speedtest_round",
+      "ulm_custom_card_speedtest_upload_speed_color",
+      "ulm_custom_card_speedtest_upload_speed_entity",
+      "ulm_custom_card_speedtest_upload_speed_max"
+    ],
+    "entityHints": [
+      "ulm_custom_card_speedtest_download_speed_entity",
+      "ulm_custom_card_speedtest_ping_entity",
+      "ulm_custom_card_speedtest_upload_speed_entity"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_speedtest_shogun160.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_tpx01_aircondition",
+    "tag": "ulm-custom-card-tpx01-aircondition-card",
+    "type": "custom:ulm-custom-card-tpx01-aircondition-card",
+    "name": "ULM Custom tpx01 aircondition",
+    "author": "tpx01 - 2021",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_tpx01_aircondition.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_vncntdev_device_tracer",
+    "tag": "ulm-custom-card-vncntdev-device-tracer-card",
+    "type": "custom:ulm-custom-card-vncntdev-device-tracer-card",
+    "name": "ULM Custom vncntdev device tracer",
+    "author": "vncnt.dev - 2021",
+    "version": "1.0.0",
+    "vars": [],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "vncntdev_card_device_tracer.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_water_heater",
+    "tag": "ulm-custom-card-water-heater-card",
+    "type": "custom:ulm-custom-card-water-heater-card",
+    "name": "ULM Custom water heater",
+    "author": "tben - 2021",
+    "version": "1.0.0",
+    "vars": [],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_water_heater.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_wilbiev_subtitle",
+    "tag": "ulm-custom-card-wilbiev-subtitle-card",
+    "type": "custom:ulm-custom-card-wilbiev-subtitle-card",
+    "name": "ULM Custom wilbiev subtitle",
+    "author": "wilbiev - 2023",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_custom_card_wilbiev_subtitle_name",
+      "ulm_custom_card_wilbiev_title_name"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_wilbiev_subtitle.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_wilbiev_title",
+    "tag": "ulm-custom-card-wilbiev-title-card",
+    "type": "custom:ulm-custom-card-wilbiev-title-card",
+    "name": "ULM Custom wilbiev title",
+    "author": "wilbiev - 2023",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_custom_card_wilbiev_title_name",
+      "ulm_custom_card_wilbiev_title_nav"
+    ],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_wilbiev_title.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_wsly_pollen",
+    "tag": "ulm-custom-card-wsly-pollen-card",
+    "type": "custom:ulm-custom-card-wsly-pollen-card",
+    "name": "ULM Custom wsly pollen",
+    "author": "wsly - 05/2022",
+    "version": "1.0.1",
+    "vars": [],
+    "entityHints": [],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_wsly_pollen.yaml"
+    ]
+  },
+  {
+    "dir": "custom_card_yagrasdemonde_lights_count",
+    "tag": "ulm-custom-card-yagrasdemonde-lights-count-card",
+    "type": "custom:ulm-custom-card-yagrasdemonde-lights-count-card",
+    "name": "ULM Custom yagrasdemonde lights count",
+    "author": "yagrasdemonde - 04/2022",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_custom_card_yagrasdemonde_lights_count_color",
+      "ulm_custom_card_yagrasdemonde_lights_count_cover_0",
+      "ulm_custom_card_yagrasdemonde_lights_count_cover_1",
+      "ulm_custom_card_yagrasdemonde_lights_count_cover_many",
+      "ulm_custom_card_yagrasdemonde_lights_count_force_background_color",
+      "ulm_custom_card_yagrasdemonde_lights_count_icon_off",
+      "ulm_custom_card_yagrasdemonde_lights_count_icon_on",
+      "ulm_custom_card_yagrasdemonde_lights_count_language_variables",
+      "ulm_custom_card_yagrasdemonde_lights_count_light_0",
+      "ulm_custom_card_yagrasdemonde_lights_count_light_1",
+      "ulm_custom_card_yagrasdemonde_lights_count_light_many",
+      "ulm_custom_card_yagrasdemonde_lights_count_type",
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [
+      "ulm_custom_card_yagrasdemonde_lights_count_color",
+      "ulm_custom_card_yagrasdemonde_lights_count_cover_0",
+      "ulm_custom_card_yagrasdemonde_lights_count_cover_1",
+      "ulm_custom_card_yagrasdemonde_lights_count_cover_many",
+      "ulm_custom_card_yagrasdemonde_lights_count_force_background_color",
+      "ulm_custom_card_yagrasdemonde_lights_count_icon_off",
+      "ulm_custom_card_yagrasdemonde_lights_count_icon_on",
+      "ulm_custom_card_yagrasdemonde_lights_count_language_variables"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_card_yagrasdemonde_lights_count.yaml"
+    ]
+  },
+  {
+    "dir": "custom_chip_group_counter",
+    "tag": "ulm-custom-chip-group-counter-card",
+    "type": "custom:ulm-custom-chip-group-counter-card",
+    "name": "ULM Custom Chip group counter",
+    "author": "Albin Médoc - 2023",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_custom_chip_group_counter_color",
+      "ulm_custom_chip_group_counter_count_state",
+      "ulm_custom_chip_group_counter_entities_active",
+      "ulm_custom_chip_group_counter_hide_if_zero",
+      "ulm_custom_chip_group_counter_icon_multiple",
+      "ulm_custom_chip_group_counter_icon_one",
+      "ulm_custom_chip_group_counter_icon_zero",
+      "ulm_custom_chip_group_counter_type"
+    ],
+    "entityHints": [],
+    "isChip": true,
+    "defaultIcon": "mdi:circle-small",
+    "yamlFiles": [
+      "custom_chip_group_counter.yaml"
+    ]
+  },
+  {
+    "dir": "custom_chip_moon",
+    "tag": "ulm-custom-chip-moon-card",
+    "type": "custom:ulm-custom-chip-moon-card",
+    "name": "ULM Custom Chip moon",
+    "author": "JStaegerino - 2025",
+    "version": "",
+    "vars": [],
+    "entityHints": [],
+    "isChip": true,
+    "defaultIcon": "mdi:circle-small",
+    "yamlFiles": [
+      "custom_chip_moon.yaml"
+    ]
+  },
+  {
+    "dir": "custom_chip_myenedis",
+    "tag": "ulm-custom-chip-myenedis-card",
+    "type": "custom:ulm-custom-chip-myenedis-card",
+    "name": "ULM Custom Chip myenedis",
+    "author": "acesyde - 2021",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_chip_separate_hp_hc",
+      "ulm_chip_unit_of_measurement"
+    ],
+    "entityHints": [],
+    "isChip": true,
+    "defaultIcon": "mdi:circle-small",
+    "yamlFiles": [
+      "custom_chip_myenedis.yaml"
+    ]
+  },
+  {
+    "dir": "custom_chip_simple_temp",
+    "tag": "ulm-custom-chip-simple-temp-card",
+    "type": "custom:ulm-custom-chip-simple-temp-card",
+    "name": "ULM Custom Chip simple temp",
+    "author": "JStaegerino - 2025",
+    "version": "",
+    "vars": [
+      "ulm_language"
+    ],
+    "entityHints": [],
+    "isChip": true,
+    "defaultIcon": "mdi:circle-small",
+    "yamlFiles": [
+      "custom_chip_simple_temp.yaml"
+    ]
+  },
+  {
+    "dir": "custom_chip_tesla_temperature",
+    "tag": "ulm-custom-chip-tesla-temperature-card",
+    "type": "custom:ulm-custom-chip-tesla-temperature-card",
+    "name": "ULM Custom Chip tesla temperature",
+    "author": "",
+    "version": "",
+    "vars": [
+      "ulm_card_enable_popup",
+      "ulm_chip_hvac",
+      "ulm_translation_engine"
+    ],
+    "entityHints": [],
+    "isChip": true,
+    "defaultIcon": "mdi:circle-small",
+    "yamlFiles": [
+      "custom_chip_tesla_temperature.yaml"
+    ]
+  },
+  {
+    "dir": "custom_chip_update",
+    "tag": "ulm-custom-chip-update-card",
+    "type": "custom:ulm-custom-chip-update-card",
+    "name": "ULM Custom Chip update",
+    "author": "JeffConrad18 - 2022",
+    "version": "1.0",
+    "vars": [
+      "ulm_chip_update_path",
+      "ulm_language_variables",
+      "ulm_no_updates_available",
+      "ulm_updates_available"
+    ],
+    "entityHints": [
+      "ulm_chip_update_path",
+      "ulm_no_updates_available",
+      "ulm_updates_available"
+    ],
+    "isChip": true,
+    "defaultIcon": "mdi:circle-small",
+    "yamlFiles": [
+      "custom_chip_update.yaml"
+    ]
+  },
+  {
+    "dir": "custom_chip_vlape_garage",
+    "tag": "ulm-custom-chip-vlape-garage-card",
+    "type": "custom:ulm-custom-chip-vlape-garage-card",
+    "name": "ULM Custom Chip vlape garage",
+    "author": "Vincent Lape - 2023",
+    "version": "1.0.0",
+    "vars": [
+      "ulm_translation_engine",
+      "ulm_translation_state"
+    ],
+    "entityHints": [],
+    "isChip": true,
+    "defaultIcon": "mdi:circle-small",
+    "yamlFiles": [
+      "custom_chip_vlape_garage.yaml"
+    ]
+  },
+  {
+    "dir": "custom_template_shogun160_battery_info",
+    "tag": "ulm-custom-template-shogun160-battery-info-card",
+    "type": "custom:ulm-custom-template-shogun160-battery-info-card",
+    "name": "ULM Custom Template shogun160 battery info",
+    "author": "",
+    "version": "",
+    "vars": [
+      "ulm_battery_entity"
+    ],
+    "entityHints": [
+      "ulm_battery_entity"
+    ],
+    "isChip": false,
+    "defaultIcon": "mdi:puzzle",
+    "yamlFiles": [
+      "custom_template_shogun160_battery_info.yaml"
+    ]
+  }
+]
