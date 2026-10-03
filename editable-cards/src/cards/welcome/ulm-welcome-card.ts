@@ -291,14 +291,13 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
     return this._isCollapsed() ? 2 : 4;
   }
 
-  /** Sections view — fewer rows when collapsed so the grid slot shrinks */
+  /**
+   * Sections view — omit `rows` so HA ignores the row grid and sizes
+   * to content (avoids empty space under the card).
+   */
   public getGridOptions() {
-    const collapsed = this._isCollapsed();
     return {
       columns: 12 as const,
-      rows: collapsed ? 2 : 4,
-      min_rows: collapsed ? 2 : 3,
-      max_rows: 6,
       min_columns: 6,
     };
   }
@@ -489,20 +488,20 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
     this.updateComplete.then(() => this._applyLayoutSize());
   };
 
-  /** Shrink/expand the sections-grid slot (HA uses --row-size on the host/wrapper) */
+  /** After collapse/expand, drop forced row spans so auto height reflows */
   private _applyLayoutSize() {
-    const rows = this._isCollapsed() ? 2 : 4;
-    this.style.setProperty("--row-size", String(rows));
     this.style.height = "auto";
     this.style.alignSelf = "start";
+    this.style.removeProperty("--row-size");
 
     // hui-card wrapper is the actual grid item in sections view
     let el: HTMLElement | null = this.parentElement;
     for (let i = 0; i < 4 && el; i++) {
-      el.style.setProperty("--row-size", String(rows));
+      el.style.height = "auto";
       el.style.alignSelf = "start";
+      el.style.removeProperty("--row-size");
+      el.style.removeProperty("grid-row-end");
       if (el.tagName.includes("HUI-CARD") || el.classList.contains("card")) {
-        el.style.gridRowEnd = `span ${rows}`;
         break;
       }
       el = el.parentElement;
@@ -549,34 +548,40 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
   static styles = css`
     :host {
       display: block;
-      /* Shrink to content inside section grid cells */
+      width: 100%;
       height: auto !important;
       align-self: start;
+      margin: 0;
+      padding: 0;
       background: transparent;
+      box-sizing: border-box;
     }
 
     ha-card.ulm-welcome {
       height: auto;
+      width: 100%;
       box-sizing: border-box;
       border-radius: var(--border-radius, 20px);
       box-shadow: var(--box-shadow, 0px 2px 4px 0px rgba(0, 0, 0, 0.16));
       border: none;
+      /* Original card padding — no extra HA card padding */
       padding: 10px;
+      margin: 0;
       background: var(--card-background-color, #fafafa);
       overflow: hidden;
-      display: block;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
       transition: none;
-    }
-
-    ha-card.ulm-welcome.collapsed {
-      padding-bottom: 10px;
+      --ha-card-border-width: 0px;
+      --ha-card-padding: 0px;
     }
 
     .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 4px 8px 4px;
+      padding: 4px;
       gap: 8px;
       flex-shrink: 0;
     }
@@ -635,7 +640,8 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
     }
 
     .greeting {
-      /* Original: margin-left 16px, padding-bottom 8px */
+      /* Original item2: margin-left 16px, padding-bottom 8px */
+      margin: 0;
       padding: 0 0 8px 16px;
       text-align: left;
       flex-shrink: 0;
@@ -652,9 +658,11 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       display: flex;
       justify-content: space-evenly;
       align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 8px 4px 12px;
+      flex-wrap: nowrap;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      flex-shrink: 0;
     }
 
     .pills .empty {
@@ -665,10 +673,12 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       padding: 16px;
     }
 
+    /* card_scenes_pill_welcome — width 52px, height 84px, row-gap 12px */
     .pill {
-      width: min(52px, 18%);
-      min-width: 44px;
+      width: 52px;
+      min-width: 52px;
       height: 84px;
+      box-sizing: border-box;
       border: 0;
       border-radius: 50px;
       background: var(--card-background-color, #fff);
@@ -678,7 +688,7 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       align-items: center;
       justify-content: flex-start;
       gap: 12px;
-      padding: 5px 5px 7px;
+      padding: 5px;
       cursor: pointer;
       color: inherit;
       font: inherit;
@@ -710,7 +720,10 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       color: var(--pill-color);
     }
 
-    /* Original card_scenes_pill_welcome name */
+    /*
+     * Original name styles + item2 card:
+     * padding-bottom 7px, padding 0 5px 5px, margin-top -5px
+     */
     .pill-name {
       font-weight: bold;
       font-size: 9.5px;
@@ -720,7 +733,9 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      padding: 0 2px 7px;
+      margin-top: -5px;
+      padding: 0 5px 7px;
+      box-sizing: border-box;
     }
   `;
 }

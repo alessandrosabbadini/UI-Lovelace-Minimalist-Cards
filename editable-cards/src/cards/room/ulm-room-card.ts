@@ -265,11 +265,14 @@ export class UlmRoomCard extends LitElement implements LovelaceCard {
   }
 
   public getGridOptions() {
-    // Square card — height from aspect-ratio, not section rows
+    // Square-ish section cell; card fills it so bottom gap matches neighbors
     return {
       columns: 4,
+      rows: 4,
       min_columns: 3,
+      min_rows: 3,
       max_columns: 6,
+      max_rows: 6,
     };
   }
 
@@ -544,16 +547,15 @@ export class UlmRoomCard extends LitElement implements LovelaceCard {
     :host {
       display: block;
       width: 100%;
-      height: auto !important;
-      align-self: start;
+      height: 100%;
       box-sizing: border-box;
     }
 
-    /* styles.card from card_room.yaml */
+    /* styles.card from card_room.yaml — fill section cell (no empty gap below) */
     ha-card.ulm-room {
       position: relative;
       width: 100%;
-      aspect-ratio: 1 / 1;
+      height: 100%;
       box-sizing: border-box;
       border-radius: 20px;
       box-shadow: var(--box-shadow, 0px 2px 4px 0px rgba(0, 0, 0, 0.16));
@@ -565,6 +567,9 @@ export class UlmRoomCard extends LitElement implements LovelaceCard {
       cursor: pointer;
       display: grid;
       justify-items: center;
+      --ha-card-border-width: 0px;
+      /* For cqmin sizing so circles stay round when the cell isn't square */
+      container-type: size;
     }
 
     /*
@@ -637,8 +642,9 @@ export class UlmRoomCard extends LitElement implements LovelaceCard {
     }
 
     /*
-     * styles.img_cell — absolute over the whole card (not the grid cell).
-     * This is what creates the large circle clipped at bottom-left.
+     * styles.img_cell — absolute over the whole card.
+     * Offsets match YAML (%, relative to the card). Size uses cqmin so the
+     * circle stays round when the section cell is resized non-square.
      */
     .room-icon {
       position: absolute;
@@ -647,10 +653,9 @@ export class UlmRoomCard extends LitElement implements LovelaceCard {
       transform: translate(-50%, -50%);
       margin-top: 25%;
       margin-left: -25%;
-      width: 75%;
-      height: 75%;
-      max-width: none;
-      max-height: none;
+      width: 75cqmin;
+      height: 75cqmin;
+      aspect-ratio: 1 / 1;
       border: 0;
       border-radius: 50%;
       padding: 0;
@@ -659,9 +664,19 @@ export class UlmRoomCard extends LitElement implements LovelaceCard {
       cursor: pointer;
       z-index: 1;
       box-sizing: border-box;
+      flex-shrink: 0;
     }
 
-    /* size: 45% on card_room → icon ≈ 45% of card ≈ 60% of 75% circle */
+    @supports not (width: 1cqmin) {
+      .room-icon {
+        width: min(75%, 75vh);
+        height: auto;
+        aspect-ratio: 1 / 1;
+        max-height: 75%;
+      }
+    }
+
+    /* size: 45% on card_room → icon ≈ 60% of the circle */
     .room-icon ha-icon {
       width: 60%;
       height: 60%;
@@ -699,30 +714,54 @@ export class UlmRoomCard extends LitElement implements LovelaceCard {
     }
 
     /*
-     * custom_fields i1–i4 styling + widget_icon_room
-     * outer: width/height 80%, border-radius 50%, display grid
+     * custom_fields i1–i4 + widget_icon_room
+     * Original: 80% of each grid cell. On a square card that is
+     * 80%/4 = 20% (full) or 80%/3 ≈ 26.7% (three/minimal) of the card.
+     * Size from cqmin so chips stay perfectly round when the cell isn't square.
      */
     .chip {
       border: 0;
       border-radius: 50%;
-      width: 80%;
-      height: 80%;
+      aspect-ratio: 1 / 1;
+      width: 20cqmin;
+      height: 20cqmin;
       place-self: center;
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 0;
+      margin: 0;
       line-height: 0;
       cursor: pointer;
       box-shadow: none;
       z-index: 2;
       box-sizing: border-box;
+      flex-shrink: 0;
     }
 
-    /* widget_icon_room: size 15px, icon width/height 50% */
+    ha-card.ulm-room.layout-three .chip,
+    ha-card.ulm-room.layout-minimal .chip {
+      width: calc(80cqmin / 3);
+      height: calc(80cqmin / 3);
+    }
+
+    @supports not (width: 1cqmin) {
+      .chip {
+        width: 80%;
+        height: auto;
+        max-height: 80%;
+        aspect-ratio: 1 / 1;
+      }
+    }
+
+    /* widget_icon_room: icon 50% of chip, centered */
     .chip ha-icon {
       width: 50%;
       height: 50%;
       --mdc-icon-size: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       line-height: 0;
       pointer-events: none;
     }
