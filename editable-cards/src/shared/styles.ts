@@ -22,9 +22,15 @@ export const ulmCardStyles = css`
 
   :host {
     display: block;
+    height: 100%;
+    box-sizing: border-box;
   }
 
   ha-card.ulm-card {
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     border-radius: var(--ulm-radius);
     box-shadow: var(--ulm-shadow);
     border: none;
@@ -33,6 +39,11 @@ export const ulmCardStyles = css`
     background: var(--card-background-color, #fafafa);
     color: var(--primary-text-color);
     transition: background-color 0.2s ease;
+  }
+
+  ha-card.ulm-card > .stack {
+    flex: 1;
+    min-height: 0;
   }
 
   .warning {
@@ -170,7 +181,8 @@ export const ulmCardStyles = css`
   }
 
   .stack.horizontal .slider-wrap,
-  .stack.horizontal .widgets {
+  .stack.horizontal .widgets,
+  .stack.horizontal .controls {
     flex: 1;
   }
 

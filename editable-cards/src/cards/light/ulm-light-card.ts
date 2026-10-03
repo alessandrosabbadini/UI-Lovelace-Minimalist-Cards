@@ -173,11 +173,32 @@ export class UlmLightCard extends LitElement implements LovelaceCard {
   }
 
   public getCardSize(): number {
+    return this._contentRows();
+  }
+
+  /** Sections view — declare size so HA enables full resize without warning */
+  public getGridOptions() {
+    const rows = this._contentRows();
+    const horizontal = !!this._config?.enable_horizontal;
+    return {
+      columns: horizontal ? 12 : 6,
+      rows,
+      min_rows: 1,
+      min_columns: horizontal ? 6 : 3,
+      max_columns: 12,
+    };
+  }
+
+  private _contentRows(): number {
     if (!this._config) return 1;
-    let size = 1;
-    if (this._config.enable_slider && !this._config.enable_horizontal) size += 1;
-    if (this._config.enable_buttons && !this._config.enable_horizontal) size += 1;
-    return size;
+    const stateObj = this.hass?.states[this._config.entity];
+    const on = stateObj?.state === "on";
+    if (this._config.enable_collapse && !on) return 1;
+    if (this._config.enable_horizontal) return 1;
+    let rows = 1;
+    if (this._config.enable_slider) rows += 1;
+    if (this._config.enable_buttons) rows += 1;
+    return rows;
   }
 
   protected render() {

@@ -8,6 +8,7 @@ import {
   entityField,
   expandable,
   grid,
+  helpers,
   iconField,
   labels,
   numberField,
@@ -21,6 +22,34 @@ import type {
   LovelaceCardConfig,
   UlmThemeColor,
 } from "../../types";
+
+const COVER_ICONS_OPEN: Record<string, string> = {
+  awning: "mdi:window-open",
+  blind: "mdi:blinds-open",
+  curtain: "mdi:curtains",
+  damper: "mdi:circle-outline",
+  door: "mdi:door-open",
+  garage: "mdi:garage-open",
+  gate: "mdi:gate-open",
+  shade: "mdi:roller-shade",
+  shutter: "mdi:window-shutter-open",
+  window: "mdi:window-open",
+};
+
+const COVER_ICONS_CLOSED: Record<string, string> = {
+  awning: "mdi:window-closed",
+  blind: "mdi:blinds",
+  curtain: "mdi:curtains-closed",
+  damper: "mdi:circle-slice-8",
+  door: "mdi:door-closed",
+  garage: "mdi:garage",
+  gate: "mdi:gate",
+  shade: "mdi:roller-shade-closed",
+  shutter: "mdi:window-shutter",
+  window: "mdi:window-closed",
+};
+
+const OPENISH = new Set(["open", "opening", "closing"]);
 
 export interface UlmCoverCardConfig extends LovelaceCardConfig {
   type: "custom:ulm-cover-card";
@@ -71,9 +100,9 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
       ],
       computeLabel: labels({
         entity: "Entity",
-        name: "Name",
-        icon: "Icon",
-        color: "Color",
+        name: "Name (ulm_card_cover_name)",
+        icon: "Icon (ulm_card_cover_icon)",
+        color: "Color (ulm_card_cover_color)",
         enable_controls: "Enable controls",
         enable_slider: "Enable slider",
         enable_horizontal: "Horizontal layout",
@@ -87,6 +116,12 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
         favorite_percentage: "Favorite %",
         slider_min: "Slider min",
         slider_max: "Slider max",
+      }),
+      computeHelper: helpers({
+        entity: "Cover entity to control.",
+        enable_horizontal:
+          "Place controls/slider beside the icon row when enabled.",
+        favorite_percentage: "Optional preset position button (0–100).",
       }),
     };
   }
@@ -103,9 +138,10 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
   public setConfig(config: UlmCoverCardConfig): void {
     if (!config.entity) throw new Error("Please define an entity");
     const c = config as UlmCoverCardConfig & Record<string, unknown>;
+    const favorite =
+      config.favorite_percentage ??
+      (c.ulm_card_cover_favorite_percentage as number | undefined);
     this._config = {
-      slider_min: 0,
-      slider_max: 100,
       ...config,
       name: config.name ?? (c.ulm_card_cover_name as string | undefined),
       icon: config.icon || (c.ulm_card_cover_icon as string | undefined),
@@ -130,7 +166,9 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
           c.ulm_card_cover_force_background_color,
       ),
       invert_percent: Boolean(
-        config.invert_percent ?? c.ulm_card_invert_percent,
+        config.invert_percent ??
+          c.ulm_card_invert_percent ??
+          c.ulm_card_cover_invert_percent,
       ),
       display_left_right: Boolean(
         config.display_left_right ?? c.ulm_card_cover_display_left_right,
@@ -141,6 +179,19 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
       garage_large: Boolean(
         config.garage_large ?? c.ulm_card_cover_garage_large,
       ),
+      show_last_changed: Boolean(
+        config.show_last_changed ?? c.ulm_card_cover_show_last_changed,
+      ),
+      favorite_percentage:
+        favorite === null || favorite === undefined || favorite === false
+          ? undefined
+          : Number(favorite),
+      slider_min: Number(
+        config.slider_min ?? c.ulm_card_cover_slider_min ?? 0,
+      ),
+      slider_max: Number(
+        config.slider_max ?? c.ulm_card_cover_slider_max ?? 100,
+      ),
       type: "custom:ulm-cover-card",
     };
   }
@@ -149,7 +200,8 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
     let n = 1;
     if (this._config?.enable_controls) n++;
     if (this._config?.enable_slider) n++;
-    return this._config?.enable_horizontal ? 1 : n;
+    if (this._config?.enable_tilt) n++;
+    return this._config?.enable_horizontal ? Math.max(1, n - 1) : n;
   }
 
   protected render() {
@@ -161,13 +213,20 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
       >`;
     }
 
-    const openish = ["open", "opening", "closing"].includes(stateObj.state);
+    const invert = !!this._config.invert_percent;
     const position = Number(stateObj.attributes.current_position);
-    const displayPos = Number.isNaN(position)
-      ? undefined
-      : this._config.invert_percent
+    const hasPosition = !Number.isNaN(position);
+    const displayPos = hasPosition
+      ? invert
         ? 100 - position
-        : position;
+        : position
+      : undefined;
+
+    // Original: active when state != "closed" (invert uses position == 100 as inactive)
+    const active = invert
+      ? !(hasPosition && position === 100)
+      : stateObj.state !== "closed";
+
     const color = this._config.color || "blue";
     const rgb = resolveThemeRgb(this, color);
     const name =
@@ -175,20 +234,17 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
       stateObj.attributes.friendly_name ||
       stateObj.entity_id;
     const deviceClass = String(stateObj.attributes.device_class || "");
-    const icon =
-      this._config.icon ||
-      stateObj.attributes.icon ||
-      (deviceClass === "garage"
-        ? this._config.garage_large
-          ? "mdi:garage-open"
-          : "mdi:garage"
-        : openish
-          ? "mdi:window-shutter-open"
-          : "mdi:window-shutter");
+    const icon = this._coverIcon(stateObj.state, deviceClass, stateObj);
 
-    const iconStyle = activeIconStyle(this, openish, color);
+    const iconStyle = activeIconStyle(this, active, color);
+    const forceBg = !!this._config.force_background_color && active;
     const showControls = !!this._config.enable_controls;
     const showSlider = !!this._config.enable_slider;
+    const showTilt = !!this._config.enable_tilt;
+    const hasFavorite =
+      this._config.favorite_percentage != null &&
+      !Number.isNaN(Number(this._config.favorite_percentage));
+
     const stackClass = [
       "stack",
       this._config.enable_horizontal ? "horizontal" : "",
@@ -196,14 +252,19 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
       .filter(Boolean)
       .join(" ");
 
+    const closeIcon = this._closeControlIcon(deviceClass);
+    const openIcon = this._openControlIcon(deviceClass);
+
+    const label = this._label(stateObj, displayPos, hasPosition, invert);
+
     return html`
       <ha-card
         class="ulm-card"
         style=${styleMap({
-          backgroundColor:
-            openish && this._config.force_background_color
-              ? `rgba(${rgb}, var(--opacity-bg, 1))`
-              : undefined,
+          backgroundColor: forceBg
+            ? `rgba(${rgb}, var(--opacity-bg, 1))`
+            : undefined,
+          color: forceBg ? "rgb(250,250,250)" : undefined,
         })}
       >
         <div class=${stackClass}>
@@ -217,58 +278,46 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
             </button>
             <button class="info-btn" @click=${this._nameTap}>
               <div class="name">${name}</div>
-              <div class="label">
-                ${this._capitalize(stateObj.state)}${displayPos !== undefined
-                  ? ` · ${displayPos}%`
-                  : ""}
-              </div>
+              <div class="label">${label}</div>
             </button>
           </div>
 
           ${showControls
             ? html`<div
-                class="controls ${this._config.display_left_right ||
-                this._config.enable_tilt ||
-                this._config.favorite_percentage != null
-                  ? "four"
-                  : ""}"
+                class="controls ${hasFavorite ? "four" : ""}"
               >
-                ${this._config.display_left_right
-                  ? html`<button class="widget-btn" @click=${() => this._call("open_cover")}>
-                        <ha-icon icon="mdi:arrow-left"></ha-icon>
-                      </button>`
-                  : nothing}
-                <button class="widget-btn" @click=${() => this._call("open_cover")}>
-                  <ha-icon icon="mdi:arrow-up"></ha-icon>
+                <button
+                  class="widget-btn"
+                  style=${styleMap(this._widgetStyle(forceBg, color, rgb))}
+                  @click=${() => this._call("close_cover")}
+                >
+                  <ha-icon icon=${closeIcon}></ha-icon>
                 </button>
-                <button class="widget-btn" @click=${() => this._call("stop_cover")}>
-                  <ha-icon icon="mdi:pause"></ha-icon>
+                <button
+                  class="widget-btn"
+                  style=${styleMap(this._widgetStyle(forceBg, color, rgb))}
+                  @click=${() => this._call("stop_cover")}
+                >
+                  <ha-icon icon="mdi:stop"></ha-icon>
                 </button>
-                <button class="widget-btn" @click=${() => this._call("close_cover")}>
-                  <ha-icon icon="mdi:arrow-down"></ha-icon>
+                <button
+                  class="widget-btn"
+                  style=${styleMap(this._widgetStyle(forceBg, color, rgb))}
+                  @click=${() => this._call("open_cover")}
+                >
+                  <ha-icon icon=${openIcon}></ha-icon>
                 </button>
-                ${this._config.favorite_percentage != null
+                ${hasFavorite
                   ? html`<button
                       class="widget-btn"
+                      style=${styleMap(this._widgetStyle(forceBg, color, rgb))}
                       @click=${() =>
-                        this._setPosition(Number(this._config!.favorite_percentage))}
+                        this._setPosition(
+                          Number(this._config!.favorite_percentage),
+                        )}
                     >
                       <ha-icon icon="mdi:star"></ha-icon>
                     </button>`
-                  : nothing}
-                ${this._config.enable_tilt
-                  ? html`<button
-                        class="widget-btn"
-                        @click=${() => this._call("open_cover_tilt")}
-                      >
-                        <ha-icon icon="mdi:valve-open"></ha-icon>
-                      </button>
-                      <button
-                        class="widget-btn"
-                        @click=${() => this._call("close_cover_tilt")}
-                      >
-                        <ha-icon icon="mdi:valve-closed"></ha-icon>
-                      </button>`
                   : nothing}
               </div>`
             : nothing}
@@ -277,14 +326,22 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
             ? html`<div
                 class="slider-wrap"
                 style=${styleMap({
-                  background: openish ? `rgba(${rgb}, 0.2)` : undefined,
+                  background: active
+                    ? forceBg
+                      ? `rgba(${rgb}, 0.3)`
+                      : `rgba(${rgb}, 0.1)`
+                    : undefined,
                 })}
               >
                 <div
                   class="slider-fill"
                   style=${styleMap({
-                    width: `${displayPos ?? 0}%`,
-                    background: `rgba(${rgb}, 1)`,
+                    width: `${displayPos ?? (active ? 100 : 0)}%`,
+                    background: active
+                      ? forceBg
+                        ? "rgb(250,250,250)"
+                        : `rgba(${rgb}, 0.8)`
+                      : "transparent",
                   })}
                 ></div>
                 <input
@@ -296,9 +353,139 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
                 />
               </div>`
             : nothing}
+
+          ${showTilt
+            ? html`<div class="controls">
+                <button
+                  class="widget-btn"
+                  style=${styleMap(this._widgetStyle(forceBg, color, rgb))}
+                  @click=${() => this._call("close_cover_tilt")}
+                >
+                  <ha-icon icon="mdi:arrow-bottom-left"></ha-icon>
+                </button>
+                <button
+                  class="widget-btn"
+                  style=${styleMap(this._widgetStyle(forceBg, color, rgb))}
+                  @click=${() => this._call("stop_cover_tilt")}
+                >
+                  <ha-icon icon="mdi:stop"></ha-icon>
+                </button>
+                <button
+                  class="widget-btn"
+                  style=${styleMap(this._widgetStyle(forceBg, color, rgb))}
+                  @click=${() => this._call("open_cover_tilt")}
+                >
+                  <ha-icon icon="mdi:arrow-top-right"></ha-icon>
+                </button>
+              </div>`
+            : nothing}
         </div>
       </ha-card>
     `;
+  }
+
+  private _widgetStyle(
+    forceBg: boolean,
+    _color: UlmThemeColor,
+    rgb: string,
+  ): Record<string, string> {
+    if (!forceBg) return {};
+    return {
+      backgroundColor: "rgb(250,250,250)",
+      color: `rgba(${rgb}, 1)`,
+    };
+  }
+
+  private _coverIcon(
+    state: string,
+    deviceClass: string,
+    stateObj: { attributes: Record<string, unknown> },
+  ): string {
+    if (this._config?.icon) return this._config.icon;
+    if (stateObj.attributes.icon) return String(stateObj.attributes.icon);
+
+    const open = OPENISH.has(state);
+    if (deviceClass === "garage" && this._config?.garage_large) {
+      return open ? "mdi:garage-open-variant" : "mdi:garage-variant";
+    }
+    const map = open ? COVER_ICONS_OPEN : COVER_ICONS_CLOSED;
+    return map[deviceClass] || "mdi:help-circle";
+  }
+
+  private _horizontalDevice(deviceClass: string): boolean {
+    return (
+      deviceClass === "curtain" ||
+      deviceClass === "gate" ||
+      deviceClass === "awning"
+    );
+  }
+
+  private _closeControlIcon(deviceClass: string): string {
+    if (this._config?.display_left_right) return "mdi:arrow-left";
+    if (this._horizontalDevice(deviceClass))
+      return "mdi:arrow-collapse-horizontal";
+    return "mdi:arrow-down";
+  }
+
+  private _openControlIcon(deviceClass: string): string {
+    if (this._config?.display_left_right) return "mdi:arrow-right";
+    if (this._horizontalDevice(deviceClass))
+      return "mdi:arrow-expand-horizontal";
+    return "mdi:arrow-up";
+  }
+
+  private _label(
+    stateObj: {
+      state: string;
+      last_changed?: string;
+      attributes: Record<string, unknown>;
+    },
+    displayPos: number | undefined,
+    hasPosition: boolean,
+    invert: boolean,
+  ): string {
+    if (this._config?.show_last_changed && stateObj.last_changed) {
+      return this._relativeTime(stateObj.last_changed);
+    }
+
+    const state = stateObj.state;
+    const stateLabel = this._capitalize(state);
+
+    if (invert && hasPosition) {
+      // Original: show inverted state words + % only when position == 0
+      const invertWords: Record<string, string> = {
+        closed: "Open",
+        closing: "Opening",
+        open: "Closed",
+        opening: "Closing",
+      };
+      const word = invertWords[state] || stateLabel;
+      if (Number(stateObj.attributes.current_position) === 0) {
+        return `${word} • ${displayPos}%`;
+      }
+      return word;
+    }
+
+    if (
+      ["unknown", "unavailable", "closed"].includes(state) ||
+      !hasPosition
+    ) {
+      return stateLabel;
+    }
+
+    return `${stateLabel} • ${displayPos}%`;
+  }
+
+  private _relativeTime(iso: string): string {
+    const then = new Date(iso).getTime();
+    if (Number.isNaN(then)) return "";
+    const sec = Math.max(0, Math.round((Date.now() - then) / 1000));
+    if (sec < 60) return `${sec}s`;
+    const min = Math.round(sec / 60);
+    if (min < 60) return `${min}m`;
+    const hr = Math.round(min / 60);
+    if (hr < 48) return `${hr}h`;
+    return `${Math.round(hr / 24)}d`;
   }
 
   private _capitalize(s: string) {

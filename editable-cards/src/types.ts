@@ -46,10 +46,21 @@ export type UlmThemeColor =
   | "purple"
   | "grey";
 
+/** Sections view grid sizing (HA 2024.11+) */
+export interface LovelaceGridOptions {
+  columns?: number | "full";
+  rows?: number | "auto";
+  min_columns?: number;
+  max_columns?: number;
+  min_rows?: number;
+  max_rows?: number;
+}
+
 export interface LovelaceCard extends HTMLElement {
   hass?: HomeAssistant;
   setConfig(config: LovelaceCardConfig): void;
   getCardSize?(): number | Promise<number>;
+  getGridOptions?(): LovelaceGridOptions;
 }
 
 declare global {
