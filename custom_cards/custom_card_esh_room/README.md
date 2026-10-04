@@ -1,84 +1,69 @@
 ---
-title: esh room
+title: Custom Card Room
 hide:
   - toc
 ---
 
-# esh room
+# Custom Card "Room"
 
-Editable Home Assistant card port of the Minimalist custom card `custom_card_esh_room`.
-
+Lit port of Minimalist `card_esh_room` — rectangular alternative to the official room card, including cover support.
 
 ## New card type
 
 ```yaml
 type: custom:ulm-custom-card-esh-room-card
-entity: <main_entity>
-name: Optional name
-icon: mdi:icon
-color: blue
-force_background_color: false
-# Extra fields mapped from original variables (optional strings):
-ulm_card_cover_popup: # optional
-ulm_card_esh_room_cover_icon_closed: # optional
-ulm_card_esh_room_cover_icon_closing: # optional
-ulm_card_esh_room_cover_icon_open: # optional
-ulm_card_esh_room_cover_icon_opening: # optional
-ulm_card_esh_room_light_icon_off: # optional
-ulm_card_esh_room_light_icon_on: # optional
-ulm_card_light_enable_popup: # optional
+entity: light.bed_light
+name: Bathroom
+icon: mdi:bathtub
+tap_action: navigate
+navigation_path: bathroom
+light_entity: light.bed_light
+climate_entity: climate.hvac
+# cover_entity: cover.hall_window   # with light: cover wins over climate in the grid
+dynamic_color: false
+enable_light_popup: false
+enable_thermostat_popup: false
+enable_cover_popup: false
+# label: "22 °C"                   # static override
+# temperature_entity: sensor.outside_temperature
+# humidity_entity: sensor.outside_humidity
 ```
 
-## UI editor
+## Grid (from original YAML)
 
-Add the card from the Lovelace picker: **ULM Custom esh room**.
+| Config | Areas |
+| --- | --- |
+| light + cover | `i light` / `n cover` / `l cover` |
+| light + climate | `i light` / `n climate` / `l climate` |
+| light only | `i light` / `n n` / `l l` |
+| climate only | `i .` / `n climate` / `l climate` |
+| cover only | `i cover` / `n n` / `l l` |
+
+If light + cover + climate are all set, **cover takes priority** over climate (same as YAML).
+
+## Label
+
+1. `label` static string if set (emoji OK).
+2. Else `temperature_entity` + `humidity_entity` → `🌡️ … 💧 …` (docs customization).
+3. Else original brightness `%` from light (or entity) when on, otherwise state.
+
+Button-card JS templates in `label:` are **not** evaluated in Lit — use the options above.
 
 ## Variables
 
-| Variable | Required | Notes |
-| --- | --- | --- |
-| entity | yes | Main entity shown on the card |
-| name | no | Override friendly name |
-| icon | no | Override icon (default `mdi:puzzle`) |
-| color | no | Theme color: yellow/blue/green/red/pink/purple/grey |
-| force_background_color | no | Colored background when active |
-| ulm_actions_card | no | Ported optional field from original YAML |
-| ulm_card_cover_popup | no | Ported optional field from original YAML |
-| ulm_card_dynamic_color | no | Ported optional field from original YAML |
-| ulm_card_esh_room_cover_icon_closed | no | Ported optional field from original YAML |
-| ulm_card_esh_room_cover_icon_closing | no | Ported optional field from original YAML |
-| ulm_card_esh_room_cover_icon_open | no | Ported optional field from original YAML |
-| ulm_card_esh_room_cover_icon_opening | no | Ported optional field from original YAML |
-| ulm_card_esh_room_light_icon_off | no | Ported optional field from original YAML |
-| ulm_card_esh_room_light_icon_on | no | Ported optional field from original YAML |
-| ulm_card_light_enable_popup | no | Ported optional field from original YAML |
-| ulm_card_thermostat_enable_popup | no | Ported optional field from original YAML |
-| ulm_custom_actions | no | Ported optional field from original YAML |
-| ulm_custom_card_esh_room_climate_entity | no | Ported optional field from original YAML |
-| ulm_custom_card_esh_room_cover_entity | no | Ported optional field from original YAML |
-| ulm_custom_card_esh_room_light_entity | no | Ported optional field from original YAML |
-| ulm_custom_popup | no | Ported optional field from original YAML |
-| ulm_popup_cover_entity | no | Ported optional field from original YAML |
-| ulm_popup_light_entity | no | Ported optional field from original YAML |
-| ulm_popup_thermostat_entity | no | Ported optional field from original YAML |
-| ulm_translation_engine | no | Ported optional field from original YAML |
-| ulm_translation_state | no | Ported optional field from original YAML |
+| Variable | Maps from |
+| --- | --- |
+| entity / name / icon / label / tap_action / navigation_path | card fields |
+| light_entity | `ulm_custom_card_esh_room_light_entity` |
+| climate_entity | `ulm_custom_card_esh_room_climate_entity` |
+| cover_entity | `ulm_custom_card_esh_room_cover_entity` |
+| light_icon_on / off | `ulm_card_esh_room_light_icon_*` |
+| cover_icon_* | `ulm_card_esh_room_cover_icon_*` |
+| dynamic_color | `ulm_card_dynamic_color` |
+| enable_light_popup | `ulm_card_light_enable_popup` |
+| enable_thermostat_popup | `ulm_card_thermostat_enable_popup` |
+| enable_cover_popup | `ulm_card_cover_popup` |
 
 ## Legacy YAML
 
-Original button-card templates remain in this folder for reference:
-- `custom_card_esh_room.yaml`
-
-## Migration
-
-Old:
-```yaml
-type: custom:button-card
-template: custom_card_esh_room
-```
-
-New:
-```yaml
-type: custom:ulm-custom-card-esh-room-card
-entity: entity.example
-```
+- `custom_card_esh_room.yaml` (`card_esh_room`)
