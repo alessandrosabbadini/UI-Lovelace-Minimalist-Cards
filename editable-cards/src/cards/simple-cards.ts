@@ -155,28 +155,7 @@ export const SIMPLE_CARDS = [
       window.dispatchEvent(new Event("location-changed"));
     },
   }),
-  // Fan is a specialized card: editable-cards/src/cards/fan/ulm-fan-card.ts
-  createSimpleEntityCard({
-    tag: "ulm-vacuum-card",
-    editorTag: "ulm-vacuum-card-editor",
-    type: "custom:ulm-vacuum-card",
-    name: "ULM Vacuum",
-    description: "Vacuum card",
-    defaultIcon: "mdi:robot-vacuum",
-    defaultColor: "blue",
-    stubEntity: "vacuum.demo_vacuum_0_ground_floor",
-    isActive: (s) => ["cleaning", "returning", "on"].includes(s.state),
-    onIconTap: (hass, config, state) => {
-      if (["cleaning", "returning"].includes(state.state)) {
-        hass.callService("vacuum", "return_to_base", {
-          entity_id: config.entity,
-        });
-      } else {
-        hass.callService("vacuum", "start", { entity_id: config.entity });
-      }
-    },
-    stateLabel: formatState,
-  }),
+  // Fan / Vacuum are specialized cards under editable-cards/src/cards/
   createSimpleEntityCard({
     tag: "ulm-vertical-button-card",
     editorTag: "ulm-vertical-button-card-editor",

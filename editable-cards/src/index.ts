@@ -5,6 +5,7 @@ import "./cards/person/ulm-person-card";
 import "./cards/media/ulm-media-player-card";
 import "./cards/thermostat/ulm-thermostat-card";
 import "./cards/fan/ulm-fan-card";
+import "./cards/vacuum/ulm-vacuum-card";
 import "./cards/weather/ulm-weather-card";
 import "./cards/room/ulm-room-card";
 import "./cards/chips/ulm-chips-card";
@@ -69,6 +70,11 @@ const SPECIALIZED = [
     type: "ulm-fan-card",
     name: "ULM Fan",
     description: "Fan card with speed slider and oscillation",
+  },
+  {
+    type: "ulm-vacuum-card",
+    name: "ULM Vacuum",
+    description: "Vacuum card with map camera and room script",
   },
   {
     type: "ulm-weather-card",

@@ -6,7 +6,6 @@ import {
   booleanField,
   colorField,
   entityField,
-  expandable,
   grid,
   helpers,
   iconField,
@@ -57,33 +56,28 @@ export class UlmLightCard extends LitElement implements LovelaceCard {
   public static getConfigForm() {
     return {
       schema: [
+        // Top-level fields so HA always persists them (expandables can drop values)
         entityField("entity", "light"),
         grid([textField("name"), iconField("icon")]),
         colorField("color"),
-        expandable("layout", "Layout", [
-          booleanField("enable_slider"),
-          grid([
-            numberField("enable_slider_min"),
-            numberField("enable_slider_max"),
-          ]),
-          booleanField("enable_collapse"),
-          booleanField("enable_horizontal"),
-          booleanField("enable_horizontal_wide"),
+        booleanField("enable_slider"),
+        grid([
+          numberField("enable_slider_min"),
+          numberField("enable_slider_max"),
         ]),
-        expandable("colors_popup", "Colors & popup", [
-          booleanField("enable_color"),
-          booleanField("force_background_color"),
-          booleanField("enable_popup"),
-          booleanField("enable_popup_tap"),
-          textField("color_palette"),
-        ]),
-        expandable("presets", "Preset buttons", [
-          booleanField("enable_buttons"),
-          grid([
-            numberField("brightness_low"),
-            numberField("brightness_medium"),
-            numberField("brightness_high"),
-          ]),
+        booleanField("enable_collapse"),
+        booleanField("enable_horizontal"),
+        booleanField("enable_horizontal_wide"),
+        booleanField("enable_color"),
+        booleanField("force_background_color"),
+        booleanField("enable_popup"),
+        booleanField("enable_popup_tap"),
+        textField("color_palette"),
+        booleanField("enable_buttons"),
+        grid([
+          numberField("brightness_low"),
+          numberField("brightness_medium"),
+          numberField("brightness_high"),
         ]),
       ],
       computeLabel: labels({
@@ -91,25 +85,38 @@ export class UlmLightCard extends LitElement implements LovelaceCard {
         name: "Name (ulm_card_light_name)",
         icon: "Icon (ulm_card_light_icon)",
         color: "Color (ulm_card_light_color)",
-        enable_slider: "Enable slider",
+        enable_slider: "Enable slider (ulm_card_light_enable_slider)",
         enable_slider_min: "Slider min",
         enable_slider_max: "Slider max",
-        enable_collapse: "Collapse when off",
-        enable_horizontal: "Horizontal layout",
-        enable_horizontal_wide: "Wider slider",
-        enable_color: "Use light RGB",
-        force_background_color: "Force colored background",
-        enable_popup: "Enable popup",
-        enable_popup_tap: "Popup on icon tap",
+        enable_collapse: "Collapse when off (ulm_card_light_enable_collapse)",
+        enable_horizontal:
+          "Horizontal layout (ulm_card_light_enable_horizontal)",
+        enable_horizontal_wide:
+          "Wider slider (ulm_card_light_enable_horizontal_wide)",
+        enable_color: "Use light RGB (ulm_card_light_enable_color)",
+        force_background_color:
+          "Force colored background (ulm_card_light_force_background_color)",
+        enable_popup: "Enable popup (ulm_card_light_enable_popup)",
+        enable_popup_tap: "Popup on icon tap (ulm_card_light_enable_popup_tap)",
         color_palette: "Color palette entity",
-        enable_buttons: "Enable brightness buttons",
+        enable_buttons:
+          "Enable brightness buttons (ulm_card_light_enable_buttons)",
         brightness_low: "Low %",
         brightness_medium: "Medium %",
         brightness_high: "High %",
       }),
       computeHelper: helpers({
         entity: "Light entity to control.",
+        enable_slider: "Show a brightness slider under the name row.",
+        enable_collapse: "Hide slider and preset buttons when the light is off.",
+        enable_horizontal: "Put name and slider on one row.",
+        enable_color: "Tint icon/slider from the light RGB color when on.",
+        force_background_color:
+          "Use light/theme color as the card background when on.",
+        enable_popup: "Open the ULM light popup from the name (and icon).",
+        enable_popup_tap: "Open the popup on icon tap instead of toggling.",
         color_palette: "Optional input_select for a color palette.",
+        enable_buttons: "Show low / medium / high brightness preset buttons.",
       }),
     };
   }
@@ -126,12 +133,18 @@ export class UlmLightCard extends LitElement implements LovelaceCard {
   public setConfig(config: UlmLightCardConfig): void {
     if (!config.entity) throw new Error("Please define an entity");
     const c = config as UlmLightCardConfig & Record<string, unknown>;
+    // Nested leftovers from older expandable form
+    const layout = (c.layout || {}) as Record<string, unknown>;
+    const colorsPopup = (c.colors_popup || {}) as Record<string, unknown>;
+    const presets = (c.presets || {}) as Record<string, unknown>;
+
+    const num = (v: unknown, fallback: number): number => {
+      if (v == null || v === false || v === "") return fallback;
+      const n = Number(v);
+      return Number.isNaN(n) ? fallback : n;
+    };
+
     this._config = {
-      enable_slider_min: 0,
-      enable_slider_max: 100,
-      brightness_low: 1,
-      brightness_medium: 50,
-      brightness_high: 100,
       ...config,
       name: config.name ?? (c.ulm_card_light_name as string | undefined),
       icon: config.icon ?? (c.ulm_card_light_icon as string | undefined),
@@ -140,34 +153,73 @@ export class UlmLightCard extends LitElement implements LovelaceCard {
         (c.ulm_card_light_color as UlmThemeColor) ||
         "yellow",
       enable_slider: Boolean(
-        config.enable_slider ?? c.ulm_card_light_enable_slider,
+        config.enable_slider ??
+          layout.enable_slider ??
+          c.ulm_card_light_enable_slider,
+      ),
+      enable_slider_min: num(
+        config.enable_slider_min ?? layout.enable_slider_min,
+        0,
+      ),
+      enable_slider_max: num(
+        config.enable_slider_max ?? layout.enable_slider_max,
+        100,
       ),
       enable_collapse: Boolean(
-        config.enable_collapse ?? c.ulm_card_light_enable_collapse,
+        config.enable_collapse ??
+          layout.enable_collapse ??
+          c.ulm_card_light_enable_collapse,
       ),
       enable_horizontal: Boolean(
-        config.enable_horizontal ?? c.ulm_card_light_enable_horizontal,
+        config.enable_horizontal ??
+          layout.enable_horizontal ??
+          c.ulm_card_light_enable_horizontal,
       ),
       enable_horizontal_wide: Boolean(
         config.enable_horizontal_wide ??
+          layout.enable_horizontal_wide ??
           c.ulm_card_light_enable_horizontal_wide,
       ),
       enable_color: Boolean(
-        config.enable_color ?? c.ulm_card_light_enable_color,
+        config.enable_color ??
+          colorsPopup.enable_color ??
+          c.ulm_card_light_enable_color,
       ),
       force_background_color: Boolean(
         config.force_background_color ??
+          colorsPopup.force_background_color ??
           c.ulm_card_light_force_background_color,
       ),
       enable_buttons: Boolean(
-        config.enable_buttons ?? c.ulm_card_light_enable_buttons,
+        config.enable_buttons ??
+          presets.enable_buttons ??
+          c.ulm_card_light_enable_buttons,
+      ),
+      brightness_low: num(
+        config.brightness_low ?? presets.brightness_low,
+        1,
+      ),
+      brightness_medium: num(
+        config.brightness_medium ?? presets.brightness_medium,
+        50,
+      ),
+      brightness_high: num(
+        config.brightness_high ?? presets.brightness_high,
+        100,
       ),
       enable_popup: Boolean(
-        config.enable_popup ?? c.ulm_card_light_enable_popup,
+        config.enable_popup ??
+          colorsPopup.enable_popup ??
+          c.ulm_card_light_enable_popup,
       ),
       enable_popup_tap: Boolean(
-        config.enable_popup_tap ?? c.ulm_card_light_enable_popup_tap,
+        config.enable_popup_tap ??
+          colorsPopup.enable_popup_tap ??
+          c.ulm_card_light_enable_popup_tap,
       ),
+      color_palette:
+        config.color_palette ??
+        (colorsPopup.color_palette as string | undefined),
       type: "custom:ulm-light-card",
     };
   }
