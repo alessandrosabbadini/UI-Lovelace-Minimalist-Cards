@@ -13,6 +13,8 @@ export const ulmTokens = css`
     --ulm-color-pink: var(--color-pink, 233, 30, 99);
     --ulm-color-purple: var(--color-purple, 102, 31, 255);
     --ulm-color-grey: var(--color-grey, 187, 187, 187);
+    /* Matches themes' light-mode color-background-yellow (subtle, not accent yellow) */
+    --ulm-color-bg-yellow: var(--color-background-yellow, 250, 250, 250);
     --ulm-opacity-bg: var(--opacity-bg, 1);
   }
 `;

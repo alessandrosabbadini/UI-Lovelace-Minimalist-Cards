@@ -9,6 +9,8 @@ export interface HomeAssistant {
   ) => Promise<unknown>;
   formatEntityState?: (stateObj: HassEntity) => string;
   user?: { id?: string; name?: string; is_admin?: boolean };
+  themes?: { darkMode?: boolean; theme?: string };
+  config?: { unit_system?: { temperature?: string } };
 }
 
 export interface HassEntity {

@@ -515,12 +515,22 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
 
   protected firstUpdated() {
     this._applyLayoutSize();
+    this._syncDarkAttr();
   }
 
   protected updated(changed: Map<string, unknown>) {
     if (changed.has("_localCollapsed")) {
       this._applyLayoutSize();
     }
+    if (changed.has("hass")) {
+      this._syncDarkAttr();
+    }
+  }
+
+  /** Original chips/pills use a stronger shadow when hass.themes.darkMode */
+  private _syncDarkAttr() {
+    if (this.hass?.themes?.darkMode) this.setAttribute("dark", "");
+    else this.removeAttribute("dark");
   }
 
   private _navigate(path: string) {
@@ -591,6 +601,7 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       cursor: pointer;
       color: rgba(var(--color-theme, 51, 51, 51), 0.9);
       background: var(--card-background-color, #fff);
+      /* chips.yaml — light: var(--box-shadow); dark: hard shadow */
       box-shadow: var(--box-shadow, 0px 2px 4px 0px rgba(0, 0, 0, 0.16));
       display: inline-flex;
       align-items: center;
@@ -605,6 +616,10 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       height: 36px;
       border-radius: 18px;
       width: auto;
+    }
+
+    :host([dark]) .chip {
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.8);
     }
 
     .chip:disabled {
@@ -695,6 +710,10 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       overflow: hidden;
       -webkit-tap-highlight-color: transparent;
       transition: none;
+    }
+
+    :host([dark]) .pill {
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.8);
     }
 
     .pill:hover,
