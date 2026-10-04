@@ -45,22 +45,7 @@ export const SIMPLE_CARDS = [
     isActive: (s) => s.state === "on",
     stateLabel: formatState,
   }),
-  createSimpleEntityCard({
-    tag: "ulm-battery-card",
-    editorTag: "ulm-battery-card-editor",
-    type: "custom:ulm-battery-card",
-    name: "ULM Battery",
-    description: "Battery level card",
-    defaultIcon: "mdi:battery",
-    defaultColor: "green",
-    stubEntity: "sensor.outside_temperature_battery",
-    isActive: (s) => Number(s.state) < 20,
-    stateLabel: (hass, s) => {
-      const value =
-        s.attributes.battery_level ?? s.attributes.battery ?? s.state;
-      return `${value}%`;
-    },
-  }),
+  // Battery is specialized: editable-cards/src/cards/battery/ulm-battery-card.ts
   createSimpleEntityCard({
     tag: "ulm-generic-card",
     editorTag: "ulm-generic-card-editor",

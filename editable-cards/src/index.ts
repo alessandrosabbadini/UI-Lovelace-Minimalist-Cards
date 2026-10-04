@@ -8,6 +8,7 @@ import "./cards/fan/ulm-fan-card";
 import "./cards/vacuum/ulm-vacuum-card";
 import "./cards/weather/ulm-weather-card";
 import "./cards/weather/ulm-weather-ulm-card";
+import "./cards/battery/ulm-battery-card";
 import "./cards/room/ulm-room-card";
 import "./cards/chips/ulm-chips-card";
 import "./cards/title/ulm-title-card";
@@ -86,6 +87,11 @@ const SPECIALIZED = [
     type: "ulm-weather-ulm-card",
     name: "ULM Weather ULM",
     description: "Native weather card with humidity/temp chips",
+  },
+  {
+    type: "ulm-battery-card",
+    name: "ULM Battery",
+    description: "Battery level with charging icon and thresholds",
   },
   {
     type: "ulm-room-card",

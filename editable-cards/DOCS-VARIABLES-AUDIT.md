@@ -24,6 +24,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | weather | yes | native simple-weather style (no dependency) |
 | weather_ulm | yes | humidity/temp chips + popup |
 | title | yes | name + label; transparent layout |
+| battery | yes | attribute, charging, thresholds, colors |
 
 ## Sources
 
