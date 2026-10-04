@@ -27,6 +27,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | battery | yes | attribute, charging, thresholds, colors |
 | binary_sensor | yes | color, last_changed, force background |
 | binary_sensor_alert | yes | + alert badge, invert_state |
+| navigate | yes | path, title, icon, color |
 
 ## Sources
 

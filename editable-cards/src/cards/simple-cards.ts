@@ -1,18 +1,5 @@
-import { textField } from "../shared/config-form";
 import { createSimpleEntityCard } from "../shared/simple-entity-card";
 import type { HassEntity, HomeAssistant } from "../types";
-
-function domainServiceToggle(
-  domain: string,
-): (
-  hass: HomeAssistant,
-  config: { entity: string },
-  _state: HassEntity,
-) => void {
-  return (hass, config) => {
-    hass.callService(domain, "toggle", { entity_id: config.entity });
-  };
-}
 
 function formatState(hass: HomeAssistant, state: HassEntity): string {
   if (hass.formatEntityState) return hass.formatEntityState(state);
@@ -96,27 +83,7 @@ export const SIMPLE_CARDS = [
     },
     stateLabel: formatState,
   }),
-  createSimpleEntityCard({
-    tag: "ulm-navigate-card",
-    editorTag: "ulm-navigate-card-editor",
-    type: "custom:ulm-navigate-card",
-    name: "ULM Navigate",
-    description: "Navigation shortcut card",
-    defaultIcon: "mdi:page-next",
-    defaultColor: "blue",
-    stubEntity: "sensor.outside_temperature",
-    isActive: () => true,
-    stateLabel: () => "Navigate",
-    extraSchema: [textField("navigation_path")],
-    onIconTap: (_hass, config) => {
-      const path = String(
-        (config as { navigation_path?: string }).navigation_path || "",
-      );
-      if (!path) return;
-      history.pushState(null, "", path);
-      window.dispatchEvent(new Event("location-changed"));
-    },
-  }),
+  // Navigate specialized: editable-cards/src/cards/navigate/ulm-navigate-card.ts
   // Fan / Vacuum are specialized cards under editable-cards/src/cards/
   createSimpleEntityCard({
     tag: "ulm-vertical-button-card",
