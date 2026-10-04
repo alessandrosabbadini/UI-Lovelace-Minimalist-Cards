@@ -15,6 +15,7 @@ import "./cards/navigate/ulm-navigate-card";
 import "./cards/power-outlet/ulm-power-outlet-card";
 import "./cards/generic/ulm-generic-card";
 import "./cards/generic/ulm-generic-swap-card";
+import "./cards/input-boolean/ulm-input-boolean-card";
 import "./cards/room/ulm-room-card";
 import "./cards/chips/ulm-chips-card";
 import "./cards/title/ulm-title-card";
@@ -128,6 +129,11 @@ const SPECIALIZED = [
     type: "ulm-generic-swap-card",
     name: "ULM Generic Swap",
     description: "Generic card (name primary, state secondary)",
+  },
+  {
+    type: "ulm-input-boolean-card",
+    name: "ULM Input Boolean",
+    description: "Toggle input_boolean / switch card",
   },
   {
     type: "ulm-room-card",

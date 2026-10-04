@@ -8,24 +8,7 @@ function formatState(hass: HomeAssistant, state: HassEntity): string {
 }
 
 export const SIMPLE_CARDS = [
-  // Binary / Battery / Generic(+Swap) / Navigate / Power Outlet → specialized
-  createSimpleEntityCard({
-    tag: "ulm-input-boolean-card",
-    editorTag: "ulm-input-boolean-card-editor",
-    type: "custom:ulm-input-boolean-card",
-    name: "ULM Input Boolean",
-    description: "Toggle input_boolean / switch card",
-    defaultIcon: "mdi:toggle-switch",
-    defaultColor: "blue",
-    stubEntity: "switch.decorative_lights",
-    isActive: (s) => s.state === "on",
-    onIconTap: (hass, config) => {
-      const domain = config.entity.split(".")[0];
-      hass.callService(domain, "toggle", { entity_id: config.entity });
-    },
-    stateLabel: formatState,
-  }),
-  // Power Outlet specialized: editable-cards/src/cards/power-outlet/
+  // Binary / Battery / Generic(+Swap) / Navigate / Power Outlet / Input Boolean
   createSimpleEntityCard({
     tag: "ulm-script-card",
     editorTag: "ulm-script-card-editor",

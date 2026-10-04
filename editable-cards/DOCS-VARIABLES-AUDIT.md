@@ -31,6 +31,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | power_outlet | yes | consumption sensor, color, force bg, popup |
 | generic | yes | state primary / name secondary; force bg |
 | generic_swap | yes | name primary / state secondary; force bg |
+| input_boolean | yes | toggle, color, force bg |
 
 ## Sources
 
