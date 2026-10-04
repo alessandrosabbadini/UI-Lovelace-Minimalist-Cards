@@ -10,6 +10,7 @@ import "./cards/weather/ulm-weather-card";
 import "./cards/weather/ulm-weather-ulm-card";
 import "./cards/battery/ulm-battery-card";
 import "./cards/binary-sensor/ulm-binary-sensor-card";
+import "./cards/binary-sensor/ulm-binary-sensor-alert-card";
 import "./cards/room/ulm-room-card";
 import "./cards/chips/ulm-chips-card";
 import "./cards/title/ulm-title-card";
@@ -98,6 +99,11 @@ const SPECIALIZED = [
     type: "ulm-binary-sensor-card",
     name: "ULM Binary Sensor",
     description: "Binary sensor with color and last-changed options",
+  },
+  {
+    type: "ulm-binary-sensor-alert-card",
+    name: "ULM Binary Sensor Alert",
+    description: "Binary sensor with alert badge when on/unavailable",
   },
   {
     type: "ulm-room-card",

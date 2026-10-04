@@ -21,20 +21,8 @@ function formatState(hass: HomeAssistant, state: HassEntity): string {
 }
 
 export const SIMPLE_CARDS = [
-  // Binary Sensor is specialized: editable-cards/src/cards/binary-sensor/
-  createSimpleEntityCard({
-    tag: "ulm-binary-sensor-alert-card",
-    editorTag: "ulm-binary-sensor-alert-card-editor",
-    type: "custom:ulm-binary-sensor-alert-card",
-    name: "ULM Binary Sensor Alert",
-    description: "Alert-styled binary sensor card",
-    defaultIcon: "mdi:alert",
-    defaultColor: "red",
-    stubEntity: "binary_sensor.movement_backyard",
-    isActive: (s) => s.state === "on",
-    stateLabel: formatState,
-  }),
-  // Battery is specialized: editable-cards/src/cards/battery/ulm-battery-card.ts
+  // Binary Sensor (+ Alert) specialized: editable-cards/src/cards/binary-sensor/
+  // Battery specialized: editable-cards/src/cards/battery/ulm-battery-card.ts
   createSimpleEntityCard({
     tag: "ulm-generic-card",
     editorTag: "ulm-generic-card-editor",

@@ -26,6 +26,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | title | yes | name + label; transparent layout |
 | battery | yes | attribute, charging, thresholds, colors |
 | binary_sensor | yes | color, last_changed, force background |
+| binary_sensor_alert | yes | + alert badge, invert_state |
 
 ## Sources
 
