@@ -38,6 +38,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | custom afvalophaling | yes | multi-entity waste schedule (specialized) |
 | custom alarm_time | yes | toggle + datetime +/- step, collapse/horizontal |
 | custom apexcharts | yes | 3 entity rows + nested HACS apexcharts-card |
+| custom bar_card | yes | card_generic header + nested HACS bar-card |
 
 ## Sources
 

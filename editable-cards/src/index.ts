@@ -25,6 +25,7 @@ import "./cards/welcome/ulm-welcome-card";
 import "./cards/custom/afvalophaling/ulm-custom-card-afvalophaling-card";
 import "./cards/custom/alarm-time/ulm-custom-card-alarm-time-card";
 import "./cards/custom/apexcharts/ulm-custom-card-apexcharts-card";
+import "./cards/custom/bar-card/ulm-custom-card-bar-card-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -206,6 +207,11 @@ const SPECIALIZED = [
     name: "ULM Custom apexcharts",
     description:
       "Three entities + apexcharts-card (line/scatter/pie/donut/radialBar)",
+  },
+  {
+    type: "ulm-custom-card-bar-card-card",
+    name: "ULM Custom bar card",
+    description: "Generic header + HACS bar-card progress bar",
   },
 ] as const;
 
