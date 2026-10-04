@@ -25,6 +25,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | weather_ulm | yes | humidity/temp chips + popup |
 | title | yes | name + label; transparent layout |
 | battery | yes | attribute, charging, thresholds, colors |
+| binary_sensor | yes | color, last_changed, force background |
 
 ## Sources
 
