@@ -36,11 +36,19 @@ export function activeIconStyle(
   color: UlmThemeColor,
   rgbColor?: [number, number, number] | null,
   useEntityColor = false,
+  /** Solid colored card background — icon must flip to light for contrast */
+  forceBackground = false,
 ): Record<string, string> {
   if (!active) {
     return {
       color: "rgba(var(--color-theme, 51, 51, 51), 0.2)",
       backgroundColor: "rgba(var(--color-theme, 51, 51, 51), 0.05)",
+    };
+  }
+  if (forceBackground) {
+    return {
+      color: "rgb(250, 250, 250)",
+      backgroundColor: "rgba(250, 250, 250, 0.2)",
     };
   }
   const rgb =

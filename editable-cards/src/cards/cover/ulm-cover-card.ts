@@ -277,8 +277,15 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
     const deviceClass = String(stateObj.attributes.device_class || "");
     const icon = this._coverIcon(stateObj.state, deviceClass, stateObj);
 
-    const iconStyle = activeIconStyle(this, active, color);
     const forceBg = !!this._config.force_background_color && active;
+    const iconStyle = activeIconStyle(
+      this,
+      active,
+      color,
+      null,
+      false,
+      forceBg,
+    );
     const showControls = !!this._config.enable_controls;
     const showSlider = !!this._config.enable_slider;
     const showTilt = !!this._config.enable_tilt;

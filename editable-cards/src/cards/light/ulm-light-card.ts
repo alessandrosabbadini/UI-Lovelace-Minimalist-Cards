@@ -284,6 +284,7 @@ export class UlmLightCard extends LitElement implements LovelaceCard {
       color,
       entityRgb,
       this._config.enable_color,
+      !!(on && this._config.force_background_color),
     );
 
     const showSlider =

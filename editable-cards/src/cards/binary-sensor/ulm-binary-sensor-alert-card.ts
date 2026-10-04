@@ -165,7 +165,15 @@ export class UlmBinarySensorAlertCard
     const active = isActive(stateObj.state);
     const color = (this._config.color || "blue") as UlmThemeColor;
     const rgb = resolveThemeRgb(this, color);
-    const iconStyle = activeIconStyle(this, active, color);
+    const forceBg = !!this._config.force_background_color && active;
+    const iconStyle = activeIconStyle(
+      this,
+      active,
+      color,
+      null,
+      false,
+      forceBg,
+    );
     const name =
       this._config.name ||
       stateObj.attributes.friendly_name ||
@@ -175,7 +183,6 @@ export class UlmBinarySensorAlertCard
       (stateObj.attributes.icon as string | undefined) ||
       "mdi:alert";
     const label = this._label(stateObj);
-    const forceBg = !!this._config.force_background_color && active;
     const showAlert = this._showAlert(stateObj);
     const cardStyle = forceBg
       ? {

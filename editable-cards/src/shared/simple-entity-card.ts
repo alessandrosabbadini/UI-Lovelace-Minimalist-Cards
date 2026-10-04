@@ -1,7 +1,7 @@
 import { LitElement, html, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
-import { activeIconStyle } from "./colors";
+import { activeIconStyle, resolveThemeRgb } from "./colors";
 import { simpleEntitySchema, type HaFormSchema } from "./config-form";
 import { ulmCardStyles } from "./styles";
 import type {
@@ -103,16 +103,25 @@ export function createSimpleEntityCard(def: SimpleCardDefinition) {
       const label = def.stateLabel
         ? def.stateLabel(this.hass, stateObj)
         : stateObj.state;
-      const iconStyle = activeIconStyle(this, active, color);
-      const cardStyle = {
-        backgroundColor:
-          active && this._config.force_background_color
-            ? iconStyle.backgroundColor
-            : undefined,
-      };
+      const forceBg = !!(active && this._config.force_background_color);
+      const iconStyle = activeIconStyle(
+        this,
+        active,
+        color,
+        null,
+        false,
+        forceBg,
+      );
+      const rgb = resolveThemeRgb(this, color);
+      const cardBg = forceBg
+        ? {
+            backgroundColor: `rgba(${rgb}, var(--opacity-bg, 1))`,
+          }
+        : {};
+      const textStyle = forceBg ? { color: "rgb(250, 250, 250)" } : {};
 
       return html`
-        <ha-card class="ulm-card" style=${styleMap(cardStyle)}>
+        <ha-card class="ulm-card" style=${styleMap(cardBg)}>
           <div class="row">
             <button
               class="icon-btn"
@@ -122,8 +131,8 @@ export function createSimpleEntityCard(def: SimpleCardDefinition) {
               <ha-icon .icon=${icon}></ha-icon>
             </button>
             <button class="info-btn" @click=${this._moreInfo}>
-              <div class="name">${name}</div>
-              <div class="label">${label}</div>
+              <div class="name" style=${styleMap(textStyle)}>${name}</div>
+              <div class="label" style=${styleMap(textStyle)}>${label}</div>
             </button>
           </div>
         </ha-card>

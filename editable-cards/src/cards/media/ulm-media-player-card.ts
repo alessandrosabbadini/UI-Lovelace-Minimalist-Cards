@@ -383,7 +383,7 @@ export class UlmMediaPlayerCard extends LitElement implements LovelaceCard {
     const hasVol = !Number.isNaN(vol);
     const volPct = hasVol ? Math.round(Math.min(1, Math.max(0, vol)) * 100) : 0;
 
-    const iconStyle = this._iconStyle(active, !!art, rgb);
+    const iconStyle = this._iconStyle(active, !!art, forceBg, rgb);
     const textStyle = this._textStyle(!!art, forceBg);
     const widgetStyle = this._widgetStyle(active, !!art, forceBg, rgb);
 
@@ -543,12 +543,19 @@ export class UlmMediaPlayerCard extends LitElement implements LovelaceCard {
   private _iconStyle(
     active: boolean,
     art: boolean,
+    forceBg: boolean,
     rgb: string,
   ): Record<string, string> {
     if (art) {
       return {
         color: "white",
         backgroundColor: "rgba(0, 0, 0, 0.2)",
+      };
+    }
+    if (forceBg && active) {
+      return {
+        color: "rgb(250, 250, 250)",
+        backgroundColor: "rgba(250, 250, 250, 0.2)",
       };
     }
     if (active) {

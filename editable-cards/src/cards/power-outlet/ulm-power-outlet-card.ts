@@ -1,5 +1,5 @@
 /**
- * Faithful Lit port of card_binary_sensor.yaml (icon_more_info_new).
+ * Faithful Lit port of card_power_outlet.yaml (icon_more_info_new + consumption).
  */
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
@@ -15,6 +15,7 @@ import {
   labels,
   textField,
 } from "../../shared/config-form";
+import { openUlmPopup } from "../../popups/ulm-popup";
 import { ulmCardStyles } from "../../shared/styles";
 import type {
   HomeAssistant,
@@ -24,14 +25,15 @@ import type {
   UlmThemeColor,
 } from "../../types";
 
-export interface UlmBinarySensorCardConfig extends LovelaceCardConfig {
-  type: "custom:ulm-binary-sensor-card";
+export interface UlmPowerOutletCardConfig extends LovelaceCardConfig {
+  type: "custom:ulm-power-outlet-card";
   entity: string;
   name?: string;
   icon?: string;
   color?: UlmThemeColor;
-  show_last_changed?: boolean;
+  consumption_sensor?: string;
   force_background_color?: boolean;
+  enable_popup?: boolean;
 }
 
 const INACTIVE = new Set([
@@ -53,52 +55,55 @@ function isActive(state: string): boolean {
   return true;
 }
 
-@customElement("ulm-binary-sensor-card")
-export class UlmBinarySensorCard extends LitElement implements LovelaceCard {
+@customElement("ulm-power-outlet-card")
+export class UlmPowerOutletCard extends LitElement implements LovelaceCard {
   @property({ attribute: false }) public hass?: HomeAssistant;
-  @state() private _config?: UlmBinarySensorCardConfig;
+  @state() private _config?: UlmPowerOutletCardConfig;
 
   public static getConfigForm() {
     return {
       schema: [
-        entityField("entity", "binary_sensor"),
+        entityField("entity", ["switch", "input_boolean", "light"]),
         textField("name"),
         iconField("icon"),
         colorField("color"),
-        booleanField("show_last_changed"),
+        entityField("consumption_sensor", "sensor", false),
         booleanField("force_background_color"),
+        booleanField("enable_popup"),
       ],
       computeLabel: labels({
-        entity: "Binary sensor",
-        name: "Name (ulm_card_binary_sensor_name)",
-        icon: "Icon (ulm_card_binary_sensor_icon)",
-        color: "Color (ulm_card_binary_sensor_color)",
-        show_last_changed: "Show last changed",
-        force_background_color: "Force background color when active",
+        entity: "Outlet / switch entity",
+        name: "Name (ulm_card_power_outlet_name)",
+        icon: "Icon (ulm_card_power_outlet_icon)",
+        color: "Color (ulm_card_power_outlet_color)",
+        consumption_sensor:
+          "Consumption sensor (ulm_card_power_outlet_consumption_sensor)",
+        force_background_color: "Force background color when on",
+        enable_popup: "Enable popup (ulm_outlet_power_enable_popup)",
       }),
       computeHelper: helpers({
-        show_last_changed:
-          "Replaces the state label with a relative last-changed time.",
-        force_background_color:
-          "Tints the card with the selected color while active.",
+        consumption_sensor:
+          "When the outlet is on, shows state • {value}W from this sensor.",
+        enable_popup: "Opens the ULM power outlet popup on tap.",
       }),
     };
   }
 
-  public static getStubConfig(): Partial<UlmBinarySensorCardConfig> {
+  public static getStubConfig(): Partial<UlmPowerOutletCardConfig> {
     return {
-      entity: "binary_sensor.basement_floor_wet",
-      color: "blue",
-      show_last_changed: false,
+      entity: "switch.ac",
+      color: "yellow",
+      consumption_sensor: "sensor.power_consumption",
       force_background_color: false,
+      enable_popup: false,
     };
   }
 
-  public setConfig(config: UlmBinarySensorCardConfig): void {
-    const c = config as UlmBinarySensorCardConfig & Record<string, unknown>;
+  public setConfig(config: UlmPowerOutletCardConfig): void {
+    const c = config as UlmPowerOutletCardConfig & Record<string, unknown>;
     const entity =
       config.entity ||
-      (c.ulm_card_binary_sensor_entity as string | undefined);
+      (c.ulm_card_power_outlet_entity as string | undefined);
     if (!entity) throw new Error("Please define an entity");
 
     this._config = {
@@ -106,25 +111,25 @@ export class UlmBinarySensorCard extends LitElement implements LovelaceCard {
       entity,
       name:
         config.name ??
-        (c.ulm_card_binary_sensor_name as string | undefined),
+        (c.ulm_card_power_outlet_name as string | undefined),
       icon:
         config.icon ??
-        (c.ulm_card_binary_sensor_icon as string | undefined),
+        (c.ulm_card_power_outlet_icon as string | undefined),
       color: (config.color ||
-        c.ulm_card_binary_sensor_color ||
-        "blue") as UlmThemeColor,
-      show_last_changed: Boolean(
-        config.show_last_changed ??
-          c.ulm_card_binary_sensor_show_last_changed ??
-          c.ulm_show_last_changed ??
-          false,
-      ),
+        c.ulm_card_power_outlet_color ||
+        "yellow") as UlmThemeColor,
+      consumption_sensor:
+        config.consumption_sensor ??
+        (c.ulm_card_power_outlet_consumption_sensor as string | undefined),
       force_background_color: Boolean(
         config.force_background_color ??
-          c.ulm_card_binary_sensor_force_background_color ??
+          c.ulm_card_power_outlet_force_background_color ??
           false,
       ),
-      type: "custom:ulm-binary-sensor-card",
+      enable_popup: Boolean(
+        config.enable_popup ?? c.ulm_outlet_power_enable_popup ?? false,
+      ),
+      type: "custom:ulm-power-outlet-card",
     };
   }
 
@@ -144,13 +149,13 @@ export class UlmBinarySensorCard extends LitElement implements LovelaceCard {
     if (!this._config || !this.hass) return nothing;
     const stateObj = this.hass.states[this._config.entity];
     if (!stateObj) {
-      return html`<ha-card class="ulm-card ulm-binary-sensor"
+      return html`<ha-card class="ulm-card ulm-power-outlet"
         ><div class="warning">Entity not found: ${this._config.entity}</div></ha-card
       >`;
     }
 
     const active = isActive(stateObj.state);
-    const color = (this._config.color || "blue") as UlmThemeColor;
+    const color = (this._config.color || "yellow") as UlmThemeColor;
     const rgb = resolveThemeRgb(this, color);
     const forceBg = !!this._config.force_background_color && active;
     const iconStyle = activeIconStyle(
@@ -168,8 +173,8 @@ export class UlmBinarySensorCard extends LitElement implements LovelaceCard {
     const icon =
       this._config.icon ||
       (stateObj.attributes.icon as string | undefined) ||
-      "mdi:checkbox-blank-circle";
-    const label = this._label(stateObj);
+      "mdi:power-socket-eu";
+    const label = this._label(stateObj, active);
     const cardStyle = forceBg
       ? {
           backgroundColor: `rgba(${rgb}, var(--opacity-bg, 1))`,
@@ -181,7 +186,7 @@ export class UlmBinarySensorCard extends LitElement implements LovelaceCard {
       <ha-card
         class=${classMap({
           "ulm-card": true,
-          "ulm-binary-sensor": true,
+          "ulm-power-outlet": true,
           active,
           "force-bg": forceBg,
         })}
@@ -191,11 +196,11 @@ export class UlmBinarySensorCard extends LitElement implements LovelaceCard {
           <button
             class="icon-btn"
             style=${styleMap(iconStyle)}
-            @click=${this._moreInfo}
+            @click=${this._iconTap}
           >
             <ha-icon .icon=${icon}></ha-icon>
           </button>
-          <button class="info-btn" @click=${this._moreInfo}>
+          <button class="info-btn" @click=${this._nameTap}>
             <div class="name" style=${styleMap(textStyle)}>${name}</div>
             <div class="label" style=${styleMap(textStyle)}>${label}</div>
           </button>
@@ -204,31 +209,39 @@ export class UlmBinarySensorCard extends LitElement implements LovelaceCard {
     `;
   }
 
-  private _label(stateObj: HassEntity): string {
-    if (this._config?.show_last_changed && stateObj.last_changed) {
-      return this._relativeTime(stateObj.last_changed);
+  private _label(stateObj: HassEntity, active: boolean): string {
+    const stateLabel = this.hass?.formatEntityState
+      ? this.hass.formatEntityState(stateObj)
+      : stateObj.state;
+
+    const sensorId = this._config?.consumption_sensor;
+    if (active && sensorId && this.hass?.states[sensorId]) {
+      const watts = this.hass.states[sensorId].state;
+      return `${stateLabel} • ${watts}W`;
     }
-    if (this.hass?.formatEntityState) {
-      return this.hass.formatEntityState(stateObj);
-    }
-    return stateObj.state;
+    return stateLabel;
   }
 
-  private _relativeTime(iso: string): string {
-    const then = new Date(iso).getTime();
-    if (Number.isNaN(then)) return "";
-    const sec = Math.max(0, Math.round((Date.now() - then) / 1000));
-    if (sec < 60) return `${sec}s`;
-    const min = Math.round(sec / 60);
-    if (min < 60) return `${min}m`;
-    const hr = Math.round(min / 60);
-    if (hr < 48) return `${hr}h`;
-    return `${Math.round(hr / 24)}d`;
-  }
+  private _iconTap = (ev: Event) => {
+    ev.stopPropagation();
+    if (!this._config || !this.hass) return;
+    if (this._config.enable_popup) {
+      openUlmPopup(this, "power_outlet", this._config.entity);
+      return;
+    }
+    const domain = this._config.entity.split(".")[0];
+    this.hass.callService(domain, "toggle", {
+      entity_id: this._config.entity,
+    });
+  };
 
-  private _moreInfo = (ev: Event) => {
+  private _nameTap = (ev: Event) => {
     ev.stopPropagation();
     if (!this._config) return;
+    if (this._config.enable_popup) {
+      openUlmPopup(this, "power_outlet", this._config.entity);
+      return;
+    }
     this.dispatchEvent(
       new CustomEvent("hass-more-info", {
         bubbles: true,
@@ -246,7 +259,7 @@ export class UlmBinarySensorCard extends LitElement implements LovelaceCard {
       align-self: start;
     }
 
-    ha-card.ulm-binary-sensor {
+    ha-card.ulm-power-outlet {
       height: auto;
     }
   `;

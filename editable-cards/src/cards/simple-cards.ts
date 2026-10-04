@@ -51,22 +51,7 @@ export const SIMPLE_CARDS = [
     },
     stateLabel: formatState,
   }),
-  createSimpleEntityCard({
-    tag: "ulm-power-outlet-card",
-    editorTag: "ulm-power-outlet-card-editor",
-    type: "custom:ulm-power-outlet-card",
-    name: "ULM Power Outlet",
-    description: "Switch/outlet card",
-    defaultIcon: "mdi:power-socket-eu",
-    defaultColor: "blue",
-    stubEntity: "switch.ac",
-    isActive: (s) => s.state === "on",
-    onIconTap: (hass, config) => {
-      const domain = config.entity.split(".")[0];
-      hass.callService(domain, "toggle", { entity_id: config.entity });
-    },
-    stateLabel: formatState,
-  }),
+  // Power Outlet specialized: editable-cards/src/cards/power-outlet/
   createSimpleEntityCard({
     tag: "ulm-script-card",
     editorTag: "ulm-script-card-editor",
