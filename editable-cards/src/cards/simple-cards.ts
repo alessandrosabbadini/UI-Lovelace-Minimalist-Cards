@@ -8,25 +8,8 @@ function formatState(hass: HomeAssistant, state: HassEntity): string {
 }
 
 export const SIMPLE_CARDS = [
-  // Binary / Battery / Generic(+Swap) / Navigate / Power Outlet / Input Boolean
-  createSimpleEntityCard({
-    tag: "ulm-script-card",
-    editorTag: "ulm-script-card-editor",
-    type: "custom:ulm-script-card",
-    name: "ULM Script",
-    description: "Run a script / toggle switch",
-    defaultIcon: "mdi:script-text",
-    defaultColor: "purple",
-    stubEntity: "switch.decorative_lights",
-    isActive: (s) => s.state === "on",
-    onIconTap: (hass, config) => {
-      const domain = config.entity.split(".")[0];
-      hass.callService(domain, "toggle", { entity_id: config.entity });
-    },
-    stateLabel: formatState,
-  }),
-  // Navigate specialized: editable-cards/src/cards/navigate/ulm-navigate-card.ts
-  // Fan / Vacuum are specialized cards under editable-cards/src/cards/
+  // Specialized: binary, battery, generic(+swap), navigate, power outlet,
+  // input boolean, script → editable-cards/src/cards/*
   createSimpleEntityCard({
     tag: "ulm-vertical-button-card",
     editorTag: "ulm-vertical-button-card-editor",

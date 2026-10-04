@@ -16,6 +16,7 @@ import "./cards/power-outlet/ulm-power-outlet-card";
 import "./cards/generic/ulm-generic-card";
 import "./cards/generic/ulm-generic-swap-card";
 import "./cards/input-boolean/ulm-input-boolean-card";
+import "./cards/script/ulm-script-card";
 import "./cards/room/ulm-room-card";
 import "./cards/chips/ulm-chips-card";
 import "./cards/title/ulm-title-card";
@@ -134,6 +135,11 @@ const SPECIALIZED = [
     type: "ulm-input-boolean-card",
     name: "ULM Input Boolean",
     description: "Toggle input_boolean / switch card",
+  },
+  {
+    type: "ulm-script-card",
+    name: "ULM Script",
+    description: "Run a script from a compact icon+title card",
   },
   {
     type: "ulm-room-card",

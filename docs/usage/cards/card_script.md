@@ -34,16 +34,10 @@ This card starts/runs a script. You can configure icon and text.
 ## Usage
 
 ```yaml
-- type: 'custom:button-card'
-  template: card_script
-  variables:
-    ulm_card_script_title: Romantic lights
-    ulm_card_script_icon: 'mdi:candle'
-  tap_action:
-    action: call-service
-    service: script.turn_on
-    service_data:
-      entity_id: script.romantic_livingroom_lights
+- type: "custom:ulm-script-card"
+  entity: script.romantic_livingroom_lights
+  name: Romantic lights
+  icon: mdi:candle
 ```
 
 ??? note "Template Code"
