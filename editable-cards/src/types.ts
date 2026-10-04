@@ -69,14 +69,18 @@ export interface LovelaceCard extends HTMLElement {
   getGridOptions?(): LovelaceGridOptions;
 }
 
+export interface CustomLovelaceEntry {
+  type: string;
+  name: string;
+  description?: string;
+  preview?: boolean;
+  documentationURL?: string;
+}
+
 declare global {
   interface Window {
-    customCards?: Array<{
-      type: string;
-      name: string;
-      description?: string;
-      preview?: boolean;
-      documentationURL?: string;
-    }>;
+    customCards?: CustomLovelaceEntry[];
+    /** Same shape as customCards; chips register in both pickers */
+    customBadges?: CustomLovelaceEntry[];
   }
 }

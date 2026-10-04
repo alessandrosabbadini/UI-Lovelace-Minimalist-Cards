@@ -34,6 +34,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | input_boolean | yes | toggle, color, force bg |
 | script | yes | title, icon, entity, service_data |
 | vertical_button | yes | state match, color, last changed |
+| chips (official) | yes | emoji-label vs mdi; dual register: customCards + customBadges |
 
 ## Sources
 

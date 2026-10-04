@@ -25,7 +25,8 @@ This fork is moving away from `custom:button-card` YAML templates toward native 
 | `card_weather` / `card_weather_ulm` | `custom:ulm-weather-card` |
 | `card_room` | `custom:ulm-room-card` |
 | `card_welcome_scenes` / `card_scenes_welcome` | `custom:ulm-welcome-card` |
-| chips (`chip_*`) | `custom:ulm-chips-card` |
+| chips (`chip_*`) | `custom:ulm-chip-*-card` (also as **view badges**) |
+| chips row helper | `custom:ulm-chips-card` |
 | title templates | `custom:ulm-title-card` |
 | `card_binary_sensor` | `custom:ulm-binary-sensor-card` |
 | `card_binary_sensor_alert` | `custom:ulm-binary-sensor-alert-card` |

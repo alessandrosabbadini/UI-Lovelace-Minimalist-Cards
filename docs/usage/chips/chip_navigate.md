@@ -14,7 +14,7 @@ Navigate chip
 type: custom:ulm-chip-navigate-card
 ```
 
-Add from the UI card picker: search for **ULM Chip**.
+Add from the UI card picker (**ULM Chip…**) or as a **view badge** (Edit dashboard → Badges).
 
 ## Migration
 

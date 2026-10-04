@@ -1,5 +1,9 @@
+/**
+ * Faithful Lit ports of official chip_*.yaml templates (emoji-label or mdi).
+ */
 import { LitElement, html, nothing } from "lit";
 import { property, state } from "lit/decorators.js";
+import { styleMap } from "lit/directives/style-map.js";
 import {
   entityField,
   iconField,
@@ -9,6 +13,7 @@ import {
 import { ulmChipStyles } from "../../shared/chip-styles";
 import type {
   HomeAssistant,
+  HassEntity,
   LovelaceCard,
   LovelaceCardConfig,
 } from "../../types";
@@ -20,9 +25,21 @@ interface ChipDef {
   description: string;
   fields: HaFormSchema[];
   stub: Record<string, unknown>;
+  /** Normalize legacy ulm_chip_* keys onto short Lit keys */
+  normalize?: (cfg: Record<string, unknown>) => Record<string, unknown>;
+  /** When set, render ha-icon (mdi chips). Return undefined to skip. */
+  renderIcon?: (
+    hass: HomeAssistant,
+    config: Record<string, unknown>,
+  ) => { icon: string; color?: string } | undefined;
   renderLabel: (hass: HomeAssistant, config: Record<string, unknown>) => string;
-  renderIcon?: (hass: HomeAssistant, config: Record<string, unknown>) => string;
-  onTap?: (hass: HomeAssistant, config: Record<string, unknown>, host: HTMLElement) => void;
+  onTap?: (
+    hass: HomeAssistant,
+    config: Record<string, unknown>,
+    host: HTMLElement,
+  ) => void;
+  /** chip_icon_label / chip_alarm denser layout */
+  variant?: "default" | "icon-label";
 }
 
 const WEATHER_EMOJI: Record<string, string> = {
@@ -42,9 +59,36 @@ const WEATHER_EMOJI: Record<string, string> = {
   windy: "🌪️",
 };
 
+const ALARM_ICON: Record<string, string> = {
+  default: "mdi:shield-outline",
+  armed_home: "mdi:shield-home",
+  armed_away: "mdi:shield-lock",
+  armed_night: "mdi:shield-moon",
+  disarmed: "mdi:shield-off",
+  arming: "mdi:shield",
+  triggered: "mdi:shield-alert",
+};
+
+const ALARM_COLOR: Record<string, string> = {
+  default: "var(--google-yellow)",
+  armed_home: "var(--google-red)",
+  armed_away: "var(--google-red)",
+  armed_night: "var(--google-red)",
+  disarmed: "var(--google-green)",
+  arming: "var(--google-yellow)",
+  triggered: "var(--google-red)",
+};
+
 function stateOf(hass: HomeAssistant, entity?: unknown) {
   if (!entity || typeof entity !== "string") return undefined;
   return hass.states[entity];
+}
+
+function localize(hass: HomeAssistant, s?: HassEntity): string {
+  if (!s) return "";
+  if (hass.formatEntityState) return hass.formatEntityState(s);
+  const unit = s.attributes.unit_of_measurement;
+  return unit ? `${s.state} ${unit}` : s.state;
 }
 
 function moreInfo(host: HTMLElement, entityId: string) {
@@ -57,63 +101,124 @@ function moreInfo(host: HTMLElement, entityId: string) {
   );
 }
 
+function navigate(path: string) {
+  if (!path) return;
+  history.pushState(null, "", path);
+  window.dispatchEvent(new Event("location-changed"));
+}
+
+function pick(
+  cfg: Record<string, unknown>,
+  ...keys: string[]
+): unknown {
+  for (const k of keys) {
+    const v = cfg[k];
+    if (v !== undefined && v !== null && v !== "") return v;
+  }
+  return undefined;
+}
+
+function convertTemperature(temp: unknown): string {
+  if (temp === undefined || temp === null || temp === "") return "?";
+  const n = Number(temp);
+  if (!Number.isNaN(n) && !Number.isInteger(n)) return n.toFixed(1);
+  return String(temp);
+}
+
+function localeOf(hass: HomeAssistant, cfg: Record<string, unknown>): string {
+  return String(pick(cfg, "ulm_language", "language") || hass.language || undefined);
+}
+
 const CHIP_DEFS: ChipDef[] = [
   {
     tag: "ulm-chip-back-card",
     type: "custom:ulm-chip-back-card",
     name: "ULM Chip Back",
-    description: "Back navigation chip",
-    fields: [iconField("icon")],
+    description: "Back navigation chip (mdi arrow)",
+    fields: [iconField("icon"), textField("navigation_path")],
     stub: { icon: "mdi:arrow-left" },
+    normalize: (c) => ({
+      ...c,
+      icon: pick(c, "icon", "ulm_chip_back_icon") || "mdi:arrow-left",
+      navigation_path: pick(c, "navigation_path", "ulm_chip_back_path"),
+    }),
     renderLabel: () => "",
-    renderIcon: (_h, c) => String(c.icon || "mdi:arrow-left"),
-    onTap: () => history.back(),
+    renderIcon: (_h, c) => ({
+      icon: String(c.icon || "mdi:arrow-left"),
+    }),
+    onTap: (_h, c) => {
+      const path = String(c.navigation_path || "");
+      if (path) navigate(path);
+      else history.back();
+    },
   },
   {
     tag: "ulm-chip-navigate-card",
     type: "custom:ulm-chip-navigate-card",
     name: "ULM Chip Navigate",
-    description: "Navigate to a Lovelace path",
+    description: "Navigate chip with optional label",
     fields: [
       iconField("icon"),
       textField("navigation_path"),
       textField("label"),
+      textField("icon_color"),
+      textField("label_color"),
     ],
-    stub: { icon: "mdi:page-next", navigation_path: "/lovelace/home" },
-    renderLabel: (_h, c) => String(c.label || ""),
-    renderIcon: (_h, c) => String(c.icon || "mdi:page-next"),
-    onTap: (_h, c) => {
-      const path = String(c.navigation_path || "");
-      if (!path) return;
-      history.pushState(null, "", path);
-      window.dispatchEvent(new Event("location-changed"));
+    stub: {
+      icon: "mdi:page-next",
+      navigation_path: "/lovelace/home",
+      label: "",
     },
+    normalize: (c) => ({
+      ...c,
+      icon: pick(c, "icon", "ulm_chip_navigate_icon") || "mdi:page-next",
+      navigation_path: pick(c, "navigation_path", "ulm_chip_navigate_path"),
+      label: pick(c, "label", "ulm_chip_navigate_label") || "",
+      icon_color: pick(c, "icon_color", "ulm_chip_navigate_icon_color"),
+      label_color: pick(c, "label_color", "ulm_chip_navigate_label_color"),
+    }),
+    renderLabel: (_h, c) => String(c.label || ""),
+    renderIcon: (_h, c) => ({
+      icon: String(c.icon || "mdi:page-next"),
+      color: c.icon_color ? String(c.icon_color) : undefined,
+    }),
+    onTap: (_h, c) => navigate(String(c.navigation_path || "")),
   },
   {
     tag: "ulm-chip-icon-only-card",
     type: "custom:ulm-chip-icon-only-card",
     name: "ULM Chip Icon Only",
-    description: "Chip with icon only",
-    fields: [entityField("entity", undefined, false), iconField("icon")],
-    stub: { icon: "mdi:home" },
-    renderLabel: () => "",
-    renderIcon: (h, c) => {
-      const s = stateOf(h, c.entity);
-      return String(c.icon || s?.attributes.icon || "mdi:circle-medium");
-    },
-    onTap: (h, c, host) => {
-      if (typeof c.entity === "string") moreInfo(host, c.entity);
-    },
+    description: "Emoji / text chip (no MDI)",
+    fields: [textField("icon")],
+    stub: { icon: "💡" },
+    normalize: (c) => ({
+      ...c,
+      icon: pick(c, "icon", "ulm_chip_icon_only") || "❔",
+    }),
+    renderLabel: (_h, c) => String(c.icon || "❔"),
   },
   {
     tag: "ulm-chip-mdi-icon-only-card",
     type: "custom:ulm-chip-mdi-icon-only-card",
     name: "ULM Chip MDI Icon Only",
-    description: "Chip with forced MDI icon",
-    fields: [iconField("icon"), entityField("entity", undefined, false)],
+    description: "MDI icon chip",
+    fields: [
+      iconField("icon"),
+      entityField("entity", undefined, false),
+      textField("icon_color"),
+    ],
     stub: { icon: "mdi:home" },
+    normalize: (c) => ({
+      ...c,
+      icon: pick(c, "icon", "ulm_chip_mdi_icon_only_icon") || "mdi:home",
+      entity: pick(c, "entity", "ulm_chip_mdi_icon_only_entity"),
+      icon_color: pick(c, "icon_color", "ulm_chip_mdi_icon_only_icon_color"),
+    }),
     renderLabel: () => "",
-    renderIcon: (_h, c) => String(c.icon || "mdi:home"),
+    renderIcon: (_h, c) => ({
+      icon: String(c.icon || "mdi:home"),
+      color: c.icon_color ? String(c.icon_color) : undefined,
+    }),
     onTap: (_h, c, host) => {
       if (typeof c.entity === "string") moreInfo(host, c.entity);
     },
@@ -122,18 +227,19 @@ const CHIP_DEFS: ChipDef[] = [
     tag: "ulm-chip-icon-state-card",
     type: "custom:ulm-chip-icon-state-card",
     name: "ULM Chip Icon State",
-    description: "Icon + entity state",
-    fields: [entityField("entity"), iconField("icon")],
-    stub: { entity: "sensor.outside_temperature" },
+    description: "Emoji + localized entity state",
+    fields: [entityField("entity"), textField("icon")],
+    stub: { entity: "sensor.outside_temperature", icon: "🌡️" },
+    normalize: (c) => ({
+      ...c,
+      entity: pick(c, "entity", "ulm_chip_icon_state_entity"),
+      icon: pick(c, "icon", "ulm_chip_icon_state_icon") || "❔",
+    }),
     renderLabel: (h, c) => {
       const s = stateOf(h, c.entity);
-      if (!s) return "?";
-      const unit = s.attributes.unit_of_measurement;
-      return unit ? `${s.state}${unit}` : s.state;
-    },
-    renderIcon: (h, c) => {
-      const s = stateOf(h, c.entity);
-      return String(c.icon || s?.attributes.icon || "mdi:information");
+      const icon = String(c.icon || "❔");
+      const state = localize(h, s);
+      return state ? `${icon} ${state}` : icon;
     },
     onTap: (_h, c, host) => {
       if (typeof c.entity === "string") moreInfo(host, c.entity);
@@ -143,11 +249,33 @@ const CHIP_DEFS: ChipDef[] = [
     tag: "ulm-chip-mdi-icon-state-card",
     type: "custom:ulm-chip-mdi-icon-state-card",
     name: "ULM Chip MDI Icon State",
-    description: "Forced MDI icon + state",
-    fields: [entityField("entity"), iconField("icon")],
-    stub: { entity: "sensor.outside_temperature", icon: "mdi:information" },
-    renderLabel: (h, c) => stateOf(h, c.entity)?.state || "?",
-    renderIcon: (_h, c) => String(c.icon || "mdi:information"),
+    description: "MDI icon + localized state",
+    fields: [
+      entityField("entity"),
+      iconField("icon"),
+      textField("icon_color"),
+      textField("label_color"),
+    ],
+    stub: {
+      entity: "sensor.outside_temperature",
+      icon: "mdi:thermometer",
+    },
+    normalize: (c) => ({
+      ...c,
+      entity: pick(c, "entity", "ulm_chip_mdi_icon_state_entity"),
+      icon: pick(c, "icon", "ulm_chip_mdi_icon_state_icon") || "mdi:information",
+      icon_color: pick(c, "icon_color", "ulm_chip_mdi_icon_state_icon_color"),
+      label_color: pick(
+        c,
+        "label_color",
+        "ulm_chip_mdi_icon_state_label_color",
+      ),
+    }),
+    renderLabel: (h, c) => localize(h, stateOf(h, c.entity)) || "?",
+    renderIcon: (_h, c) => ({
+      icon: String(c.icon || "mdi:information"),
+      color: c.icon_color ? String(c.icon_color) : undefined,
+    }),
     onTap: (_h, c, host) => {
       if (typeof c.entity === "string") moreInfo(host, c.entity);
     },
@@ -156,15 +284,22 @@ const CHIP_DEFS: ChipDef[] = [
     tag: "ulm-chip-icon-label-card",
     type: "custom:ulm-chip-icon-label-card",
     name: "ULM Chip Icon Label",
-    description: "Icon + custom label",
+    description: "MDI icon + custom label",
     fields: [
       iconField("icon"),
       textField("label"),
       entityField("entity", undefined, false),
     ],
     stub: { icon: "mdi:tag", label: "Label" },
+    normalize: (c) => ({
+      ...c,
+      icon: pick(c, "icon", "ulm_chip_icon_label_icon") || "mdi:tag",
+      label: pick(c, "label", "ulm_chip_icon_label_label") || "",
+      entity: pick(c, "entity", "ulm_chip_icon_label_entity"),
+    }),
+    variant: "icon-label",
     renderLabel: (_h, c) => String(c.label || ""),
-    renderIcon: (_h, c) => String(c.icon || "mdi:tag"),
+    renderIcon: (_h, c) => ({ icon: String(c.icon || "mdi:tag") }),
     onTap: (_h, c, host) => {
       if (typeof c.entity === "string") moreInfo(host, c.entity);
     },
@@ -173,24 +308,34 @@ const CHIP_DEFS: ChipDef[] = [
     tag: "ulm-chip-icon-double-state-card",
     type: "custom:ulm-chip-icon-double-state-card",
     name: "ULM Chip Icon Double State",
-    description: "Icon + two entity states",
+    description: "Emoji + two localized states (•)",
     fields: [
       entityField("entity_1"),
       entityField("entity_2"),
-      iconField("icon"),
+      textField("icon"),
+      textField("navigation_path"),
     ],
-    stub: { entity_1: "sensor.outside_temperature", entity_2: "sensor.outside_humidity" },
+    stub: {
+      entity_1: "sensor.outside_temperature",
+      entity_2: "sensor.outside_humidity",
+      icon: "🌡️",
+    },
+    normalize: (c) => ({
+      ...c,
+      entity_1: pick(c, "entity_1", "ulm_chip_icon_double_state_entity_1"),
+      entity_2: pick(c, "entity_2", "ulm_chip_icon_double_state_entity_2"),
+      icon: pick(c, "icon", "ulm_chip_icon_double_state_icon") || "❔",
+      navigation_path: pick(c, "navigation_path", "ulm_chip_navigate_path"),
+    }),
     renderLabel: (h, c) => {
-      const a = stateOf(h, c.entity_1)?.state ?? "?";
-      const b = stateOf(h, c.entity_2)?.state ?? "?";
-      return `${a} / ${b}`;
+      const icon = String(c.icon || "❔");
+      const a = localize(h, stateOf(h, c.entity_1)) || "?";
+      const b = localize(h, stateOf(h, c.entity_2)) || "?";
+      return `${icon} ${a} • ${b}`;
     },
-    renderIcon: (h, c) => {
-      const s = stateOf(h, c.entity_1);
-      return String(c.icon || s?.attributes.icon || "mdi:format-list-bulleted");
-    },
-    onTap: (_h, c, host) => {
-      if (typeof c.entity_1 === "string") moreInfo(host, c.entity_1);
+    onTap: (_h, c) => {
+      const path = String(c.navigation_path || "");
+      if (path) navigate(path);
     },
   },
   {
@@ -200,12 +345,18 @@ const CHIP_DEFS: ChipDef[] = [
     description: "Alarm control panel chip",
     fields: [entityField("entity", "alarm_control_panel")],
     stub: { entity: "alarm_control_panel.security" },
-    renderLabel: (h, c) => stateOf(h, c.entity)?.state || "unknown",
+    normalize: (c) => ({
+      ...c,
+      entity: pick(c, "entity", "ulm_chip_alarm_entity"),
+    }),
+    variant: "icon-label",
+    renderLabel: (h, c) => localize(h, stateOf(h, c.entity)) || "unknown",
     renderIcon: (h, c) => {
-      const state = stateOf(h, c.entity)?.state;
-      if (state === "armed_away" || state === "armed_home") return "mdi:shield-lock";
-      if (state === "triggered") return "mdi:shield-alert";
-      return "mdi:shield-home";
+      const state = (stateOf(h, c.entity)?.state || "").toLowerCase();
+      return {
+        icon: ALARM_ICON[state] || ALARM_ICON.default,
+        color: ALARM_COLOR[state] || ALARM_COLOR.default,
+      };
     },
     onTap: (_h, c, host) => {
       if (typeof c.entity === "string") moreInfo(host, c.entity);
@@ -215,67 +366,105 @@ const CHIP_DEFS: ChipDef[] = [
     tag: "ulm-chip-power-consumption-card",
     type: "custom:ulm-chip-power-consumption-card",
     name: "ULM Chip Power Consumption",
-    description: "Power consumption chip",
-    fields: [entityField("entity"), iconField("icon")],
-    stub: { entity: "sensor.power_consumption", icon: "mdi:flash" },
+    description: "⚡ price or consumption chip",
+    fields: [
+      entityField("electric_consumption", undefined, false),
+      entityField("electric_price", undefined, false),
+    ],
+    stub: { electric_consumption: "sensor.power_consumption" },
+    normalize: (c) => ({
+      ...c,
+      electric_consumption: pick(
+        c,
+        "electric_consumption",
+        "ulm_chip_electric_consumption",
+        "entity",
+      ),
+      electric_price: pick(c, "electric_price", "ulm_chip_electric_price"),
+    }),
     renderLabel: (h, c) => {
-      const s = stateOf(h, c.entity);
-      if (!s) return "?";
-      const unit = s.attributes.unit_of_measurement || "W";
-      return `${s.state} ${unit}`;
+      const price = stateOf(h, c.electric_price);
+      if (price) {
+        const currency =
+          (price.attributes.unit_of_measurement as string | undefined) || "";
+        return `⚡ ${price.state}${currency}`;
+      }
+      const cons = stateOf(h, c.electric_consumption);
+      return cons ? `⚡ ${localize(h, cons)}` : "⚡ ?";
     },
-    renderIcon: (_h, c) => String(c.icon || "mdi:flash"),
     onTap: (_h, c, host) => {
-      if (typeof c.entity === "string") moreInfo(host, c.entity);
+      const entity = String(c.electric_price || c.electric_consumption || "");
+      if (entity) moreInfo(host, entity);
     },
   },
   {
     tag: "ulm-chip-presence-detection-card",
     type: "custom:ulm-chip-presence-detection-card",
     name: "ULM Chip Presence",
-    description: "Presence detection chip",
-    fields: [entityField("entity", "binary_sensor")],
-    stub: { entity: "binary_sensor.movement_backyard" },
-    renderLabel: (h, c) => {
-      const s = stateOf(h, c.entity);
-      if (!s) return "?";
-      return s.state === "on" ? "Home" : "Away";
+    description: "🏠 residents [/ guests] counters",
+    fields: [
+      entityField("residents"),
+      entityField("guests", undefined, false),
+    ],
+    stub: {
+      residents: "input_number.residents_home",
+      guests: "input_number.guests_home",
     },
-    renderIcon: (h, c) =>
-      stateOf(h, c.entity)?.state === "on"
-        ? "mdi:home-account"
-        : "mdi:home-outline",
+    normalize: (c) => ({
+      ...c,
+      residents: pick(
+        c,
+        "residents",
+        "ulm_chip_presence_counter_residents",
+        "entity",
+      ),
+      guests: pick(c, "guests", "ulm_chip_presence_counter_guests"),
+    }),
+    renderLabel: (h, c) => {
+      const res = stateOf(h, c.residents)?.state ?? "?";
+      const guests = stateOf(h, c.guests);
+      if (guests) return `🏠 ${res} / ${guests.state}`;
+      return `🏠 ${res}`;
+    },
     onTap: (_h, c, host) => {
-      if (typeof c.entity === "string") moreInfo(host, c.entity);
+      if (typeof c.residents === "string") moreInfo(host, c.residents);
     },
   },
   {
     tag: "ulm-chip-temperature-card",
     type: "custom:ulm-chip-temperature-card",
     name: "ULM Chip Temperature",
-    description: "Outside/inside temperature chip",
+    description: "Weather emoji + outside [/ inside] °",
     fields: [
-      entityField("ulm_chip_temperature_weather", "weather"),
-      entityField("ulm_chip_temperature_outside"),
-      entityField("ulm_chip_temperature_inside", undefined, false),
+      entityField("weather", "weather"),
+      entityField("outside"),
+      entityField("inside", undefined, false),
     ],
     stub: {
-      ulm_chip_temperature_weather: "weather.demo_weather_north",
-      ulm_chip_temperature_outside: "sensor.outside_temperature",
+      weather: "weather.demo_weather_north",
+      outside: "sensor.outside_temperature",
     },
+    normalize: (c) => ({
+      ...c,
+      weather: pick(c, "weather", "ulm_chip_temperature_weather"),
+      outside: pick(c, "outside", "ulm_chip_temperature_outside"),
+      inside: pick(c, "inside", "ulm_chip_temperature_inside"),
+    }),
     renderLabel: (h, c) => {
-      const weather = stateOf(h, c.ulm_chip_temperature_weather);
-      const outside = stateOf(h, c.ulm_chip_temperature_outside);
-      const inside = stateOf(h, c.ulm_chip_temperature_inside);
+      const weather = stateOf(h, c.weather);
+      const outside = stateOf(h, c.outside);
+      const inside = stateOf(h, c.inside);
       const emoji = WEATHER_EMOJI[weather?.state || ""] || "🌡️";
-      const out = outside?.state ?? weather?.attributes.temperature ?? "?";
-      if (inside) return `${emoji} ${out}° / ${inside.state}°`;
+      const out = convertTemperature(
+        outside?.state ?? weather?.attributes.temperature,
+      );
+      if (inside) {
+        return `${emoji} ${out}° / ${convertTemperature(inside.state)}°`;
+      }
       return `${emoji} ${out}°`;
     },
     onTap: (_h, c, host) => {
-      const entity = String(
-        c.ulm_chip_temperature_weather || c.ulm_chip_temperature_outside || "",
-      );
+      const entity = String(c.weather || c.outside || "");
       if (entity) moreInfo(host, entity);
     },
   },
@@ -283,19 +472,21 @@ const CHIP_DEFS: ChipDef[] = [
     tag: "ulm-chip-weather-date-card",
     type: "custom:ulm-chip-weather-date-card",
     name: "ULM Chip Weather Date",
-    description: "Weather condition + date chip",
+    description: "Weather emoji + short date",
     fields: [entityField("entity", "weather")],
     stub: { entity: "weather.demo_weather_north" },
+    normalize: (c) => ({
+      ...c,
+      entity: pick(c, "entity", "ulm_weather", "ulm_chip_weather_date_entity"),
+    }),
     renderLabel: (h, c) => {
       const s = stateOf(h, c.entity);
       const emoji = WEATHER_EMOJI[s?.state || ""] || "🌡️";
-      const date = new Date().toLocaleDateString(undefined, {
-        weekday: "short",
-        day: "numeric",
+      const date = new Date().toLocaleDateString(localeOf(h, c), {
         month: "short",
+        day: "numeric",
       });
-      const temp = s?.attributes.temperature;
-      return temp !== undefined ? `${emoji} ${temp}° · ${date}` : `${emoji} ${date}`;
+      return `${emoji} ${date}`;
     },
     onTap: (_h, c, host) => {
       if (typeof c.entity === "string") moreInfo(host, c.entity);
@@ -305,16 +496,15 @@ const CHIP_DEFS: ChipDef[] = [
     tag: "ulm-chip-short-date-with-day-card",
     type: "custom:ulm-chip-short-date-with-day-card",
     name: "ULM Chip Short Date",
-    description: "Short date with weekday",
-    fields: [iconField("icon")],
-    stub: { icon: "mdi:calendar" },
-    renderLabel: () =>
-      new Date().toLocaleDateString(undefined, {
-        weekday: "long",
+    description: "Weekday + short date (label only)",
+    fields: [],
+    stub: {},
+    renderLabel: (h, c) =>
+      new Intl.DateTimeFormat(localeOf(h, c), {
+        weekday: "short",
         day: "numeric",
         month: "short",
-      }),
-    renderIcon: (_h, c) => String(c.icon || "mdi:calendar"),
+      }).format(Date.now()),
   },
 ];
 
@@ -332,27 +522,61 @@ function createChipCard(def: ChipDef) {
     }
 
     public setConfig(config: LovelaceCardConfig): void {
-      this._config = { ...config, type: def.type };
+      const raw = { ...config } as Record<string, unknown>;
+      const normalized = def.normalize ? def.normalize(raw) : raw;
+      this._config = { ...normalized, type: def.type };
     }
 
     public getCardSize(): number {
       return 1;
     }
 
+    public getGridOptions() {
+      return {
+        columns: 3,
+        min_columns: 2,
+        max_columns: 12,
+      };
+    }
+
     protected render() {
       if (!this._config || !this.hass) return nothing;
       const cfg = this._config as Record<string, unknown>;
-      const icon = def.renderIcon?.(this.hass, cfg);
+      const iconInfo = def.renderIcon?.(this.hass, cfg);
       const label = def.renderLabel(this.hass, cfg);
+      const labelColor =
+        typeof cfg.label_color === "string" ? cfg.label_color : undefined;
+      const classes = [
+        "chip",
+        def.variant === "icon-label" ? "icon-label" : "",
+        iconInfo && label ? "has-icon-and-label" : "",
+      ]
+        .filter(Boolean)
+        .join(" ");
+
       return html`
-        <button class="chip" @click=${this._onTap}>
-          ${icon ? html`<ha-icon .icon=${icon}></ha-icon>` : nothing}
-          ${label ? html`<span class="label">${label}</span>` : nothing}
+        <button class=${classes} @click=${this._onTap}>
+          ${iconInfo
+            ? html`<ha-icon
+                .icon=${iconInfo.icon}
+                style=${styleMap(
+                  iconInfo.color ? { color: iconInfo.color } : {},
+                )}
+              ></ha-icon>`
+            : nothing}
+          ${label
+            ? html`<span
+                class="label"
+                style=${styleMap(labelColor ? { color: labelColor } : {})}
+                >${label}</span
+              >`
+            : nothing}
         </button>
       `;
     }
 
-    private _onTap = () => {
+    private _onTap = (ev: Event) => {
+      ev.stopPropagation();
       if (!this.hass || !this._config) return;
       def.onTap?.(this.hass, this._config as Record<string, unknown>, this);
     };

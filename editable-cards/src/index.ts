@@ -34,6 +34,10 @@ console.info(
 );
 
 window.customCards = window.customCards || [];
+window.customBadges = window.customBadges || [];
+
+const DOCS_URL =
+  "https://github.com/UI-Lovelace-Minimalist/UI/tree/main/editable-cards";
 
 function register(
   card: {
@@ -46,8 +50,25 @@ function register(
   window.customCards!.push({
     ...card,
     preview,
-    documentationURL:
-      "https://github.com/UI-Lovelace-Minimalist/UI/tree/main/editable-cards",
+    documentationURL: DOCS_URL,
+  });
+}
+
+/** Official chips: same element in card picker and badge (view header) picker */
+function registerChip(chip: {
+  type: string;
+  name: string;
+  description: string;
+}) {
+  const entry = {
+    ...chip,
+    preview: true,
+    documentationURL: DOCS_URL,
+  };
+  window.customCards!.push(entry);
+  window.customBadges!.push({
+    ...entry,
+    description: `${chip.description} (also usable as a view badge)`,
   });
 }
 
@@ -182,7 +203,7 @@ for (const { def } of SIMPLE_CARDS) {
 }
 
 for (const def of OFFICIAL_CHIPS) {
-  register({
+  registerChip({
     type: def.type.replace(/^custom:/, ""),
     name: def.name,
     description: def.description,
