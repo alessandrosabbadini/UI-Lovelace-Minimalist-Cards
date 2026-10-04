@@ -16,7 +16,8 @@ export interface WelcomeEntityConfig {
   color?: UlmThemeColor | string;
   state?: string;
   nav_path?: string;
-  service_data?: Record<string, unknown>;
+  /** Object (YAML) or JSON string (UI form) */
+  service_data?: Record<string, unknown> | string;
 }
 
 export interface UlmWelcomeCardConfig extends LovelaceCardConfig {
@@ -133,8 +134,31 @@ function pillSchema(n: number) {
       },
       { name: "entity_id", selector: { entity: {} } },
       { name: "state", selector: { text: {} } },
+      {
+        name: "service_data",
+        selector: { text: { multiline: true, type: "text" } },
+      },
     ],
   };
+}
+
+function parseServiceData(
+  raw: unknown,
+): Record<string, unknown> | undefined {
+  if (raw == null || raw === "") return undefined;
+  if (typeof raw === "object" && !Array.isArray(raw)) {
+    return raw as Record<string, unknown>;
+  }
+  if (typeof raw !== "string") return undefined;
+  try {
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+      return parsed as Record<string, unknown>;
+    }
+  } catch {
+    /* keep undefined — invalid JSON from form */
+  }
+  return undefined;
 }
 
 @customElement("ulm-welcome-card")
@@ -148,31 +172,28 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
   public static getConfigForm() {
     return {
       schema: [
+        // Top-level fields so HA always persists them (expandables can drop values)
         {
           name: "ulm_weather",
           selector: { entity: { domain: "weather" } },
+        },
+        {
+          name: "ulm_card_welcome_scenes_collapse",
+          selector: { entity: { domain: "input_boolean" } },
         },
         {
           name: "ulm_language",
           selector: { text: {} },
         },
         {
-          type: "expandable" as const,
-          name: "greetings",
-          title: "Greeting overrides",
+          type: "grid" as const,
+          name: "",
           flatten: true,
           schema: [
-            {
-              type: "grid" as const,
-              name: "",
-              flatten: true,
-              schema: [
-                { name: "ulm_morning", selector: { text: {} } },
-                { name: "ulm_afternoon", selector: { text: {} } },
-                { name: "ulm_evening", selector: { text: {} } },
-                { name: "ulm_hello", selector: { text: {} } },
-              ],
-            },
+            { name: "ulm_morning", selector: { text: {} } },
+            { name: "ulm_afternoon", selector: { text: {} } },
+            { name: "ulm_evening", selector: { text: {} } },
+            { name: "ulm_hello", selector: { text: {} } },
           ],
         },
         pillSchema(1),
@@ -186,6 +207,8 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       computeLabel: (schema: { name?: string }) => {
         const labels: Record<string, string> = {
           ulm_weather: "Weather (ulm_weather)",
+          ulm_card_welcome_scenes_collapse:
+            "Collapse toggle (ulm_card_welcome_scenes_collapse)",
           ulm_language: "Language (ulm_language)",
           ulm_morning: "Morning",
           ulm_afternoon: "Afternoon",
@@ -197,6 +220,7 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
           color: "Icon color",
           entity_id: "Entity (optional)",
           state: "Active state (optional)",
+          service_data: "service_data (JSON)",
         };
         return labels[schema.name || ""] || undefined;
       },
@@ -204,6 +228,8 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
         switch (schema.name) {
           case "ulm_weather":
             return "Weather entity for the top chip (emoji + date).";
+          case "ulm_card_welcome_scenes_collapse":
+            return "Optional input_boolean. When set, chevron toggles it and hides pills while on.";
           case "ulm_language":
             return 'BCP-47 tag, e.g. "it" or "en-US".';
           case "nav_path":
@@ -212,6 +238,8 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
             return "Color of the icon circle only. Pill background stays white.";
           case "entity_id":
             return "Optional. Leave empty for navigation-only shortcuts.";
+          case "service_data":
+            return 'JSON object passed to scene/script turn_on, e.g. {"brightness": 50}.';
           default:
             return undefined;
         }
@@ -257,8 +285,19 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
   }
 
   public setConfig(config: UlmWelcomeCardConfig): void {
+    const c = config as UlmWelcomeCardConfig & Record<string, unknown>;
+    // Nested leftovers from older expandable form
+    const greetings = (c.greetings || {}) as Record<string, unknown>;
     const next: UlmWelcomeCardConfig = {
       ...config,
+      ulm_morning:
+        config.ulm_morning ?? (greetings.ulm_morning as string | undefined),
+      ulm_afternoon:
+        config.ulm_afternoon ??
+        (greetings.ulm_afternoon as string | undefined),
+      ulm_evening:
+        config.ulm_evening ?? (greetings.ulm_evening as string | undefined),
+      ulm_hello: config.ulm_hello ?? (greetings.ulm_hello as string | undefined),
       type: "custom:ulm-welcome-card",
     };
     // Drop empty nested objects from ha-form expandables
@@ -267,9 +306,9 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
       if (!ent || typeof ent !== "object") continue;
       const cleaned: WelcomeEntityConfig = {};
       for (const [k, v] of Object.entries(ent)) {
-        if (v !== "" && v != null) {
-          (cleaned as Record<string, unknown>)[k] = v;
-        }
+        if (v === "" || v == null) continue;
+        // Keep service_data as string (form) or object (YAML)
+        (cleaned as Record<string, unknown>)[k] = v;
       }
       if (Object.keys(cleaned).length) next[key] = cleaned;
       else delete next[key];
@@ -302,7 +341,16 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
     };
   }
 
+  private _collapseEntity(): string | undefined {
+    const id = this._config?.ulm_card_welcome_scenes_collapse;
+    return id && typeof id === "string" && id.length ? id : undefined;
+  }
+
   private _isCollapsed(): boolean {
+    const entityId = this._collapseEntity();
+    if (entityId && this.hass?.states[entityId]) {
+      return this.hass.states[entityId].state === "on";
+    }
     return this._localCollapsed;
   }
 
@@ -463,17 +511,34 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
     }
     if (!conf.entity_id) return;
     const id = conf.entity_id;
+    const data = parseServiceData(conf.service_data) || {};
     if (id.startsWith("scene.")) {
       this.hass.callService("scene", "turn_on", {
         entity_id: id,
-        ...(conf.service_data || {}),
+        ...data,
       });
       return;
     }
     if (id.startsWith("script.")) {
+      // Original may call script.xxx directly; turn_on + data works for fields
       this.hass.callService("script", "turn_on", {
         entity_id: id,
-        ...(conf.service_data || {}),
+        ...data,
+      });
+      return;
+    }
+    if (id.startsWith("input_select.") && conf.state) {
+      this.hass.callService("input_select", "select_option", {
+        entity_id: id,
+        option: conf.state,
+        ...data,
+      });
+      return;
+    }
+    if (id.startsWith("media_player.")) {
+      this.hass.callService("media_player", "media_play_pause", {
+        entity_id: id,
+        ...data,
       });
       return;
     }
@@ -484,6 +549,14 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
   private _toggleCollapse = (ev: Event) => {
     ev.preventDefault();
     ev.stopPropagation();
+    const entityId = this._collapseEntity();
+    if (entityId && this.hass) {
+      this.hass.callService("input_boolean", "toggle", {
+        entity_id: entityId,
+      });
+      this.updateComplete.then(() => this._applyLayoutSize());
+      return;
+    }
     this._localCollapsed = !this._localCollapsed;
     this.updateComplete.then(() => this._applyLayoutSize());
   };
@@ -524,6 +597,8 @@ export class UlmWelcomeCard extends LitElement implements LovelaceCard {
     }
     if (changed.has("hass")) {
       this._syncDarkAttr();
+      // Collapse via input_boolean updates through hass — reflow height
+      if (this._collapseEntity()) this._applyLayoutSize();
     }
   }
 

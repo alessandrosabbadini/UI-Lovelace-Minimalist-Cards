@@ -20,7 +20,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | light | yes | flattened to top-level |
 | person | yes | flattened to top-level |
 | room | yes | flattened; slot tap/hold/templates + nav path |
-| welcome | partial | missing scenes_collapse / service_data |
+| welcome | yes | collapse input_boolean + per-pill service_data |
 | weather | stub | depends on simple-weather-card |
 
 ## Sources
