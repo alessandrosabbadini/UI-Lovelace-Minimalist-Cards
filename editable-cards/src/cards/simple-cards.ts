@@ -155,19 +155,7 @@ export const SIMPLE_CARDS = [
       window.dispatchEvent(new Event("location-changed"));
     },
   }),
-  createSimpleEntityCard({
-    tag: "ulm-fan-card",
-    editorTag: "ulm-fan-card-editor",
-    type: "custom:ulm-fan-card",
-    name: "ULM Fan",
-    description: "Fan toggle card",
-    defaultIcon: "mdi:fan",
-    defaultColor: "green",
-    stubEntity: "fan.living_room_fan",
-    isActive: (s) => s.state === "on",
-    onIconTap: domainServiceToggle("fan"),
-    stateLabel: formatState,
-  }),
+  // Fan is a specialized card: editable-cards/src/cards/fan/ulm-fan-card.ts
   createSimpleEntityCard({
     tag: "ulm-vacuum-card",
     editorTag: "ulm-vacuum-card-editor",
