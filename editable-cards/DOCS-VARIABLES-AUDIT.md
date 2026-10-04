@@ -21,7 +21,8 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | person | yes | flattened to top-level |
 | room | yes | flattened; slot tap/hold/templates + nav path |
 | welcome | yes | collapse input_boolean + per-pill service_data |
-| weather | stub | depends on simple-weather-card |
+| weather | yes | native simple-weather style (no dependency) |
+| weather_ulm | yes | humidity/temp chips + popup |
 
 ## Sources
 

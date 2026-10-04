@@ -142,12 +142,30 @@ export class UlmPopupDialog extends LitElement {
           <button @click=${() => this._call("vacuum", "pause")}>Pause</button>
           <button @click=${() => this._call("vacuum", "return_to_base")}>Dock</button>
         </div>`;
-      case "weather":
+      case "weather": {
+        const attrs = this.hass!.states[this._entity].attributes;
+        const forecast = Array.isArray(attrs.forecast)
+          ? (attrs.forecast as Array<Record<string, unknown>>).slice(0, 5)
+          : [];
+        const unit = (attrs.temperature_unit as string | undefined) || "°";
         return html`<div class="info">
-          Condition: ${state}<br />
-          Temperature:
-          ${this.hass!.states[this._entity].attributes.temperature ?? "n/a"}°
+          <div>Condition: ${state}</div>
+          <div>
+            Temperature: ${attrs.temperature ?? "n/a"}${unit}
+            ${attrs.humidity != null ? html` · Humidity: ${attrs.humidity}%` : nothing}
+          </div>
+          ${forecast.length
+            ? html`<div class="forecast">
+                ${forecast.map(
+                  (d) => html`<div class="f-row">
+                    <span>${String(d.condition || d.datetime || "").toString().slice(0, 16)}</span>
+                    <span>${d.templow != null ? `${d.templow}/` : ""}${d.temperature}${unit}</span>
+                  </div>`,
+                )}
+              </div>`
+            : nothing}
         </div>`;
+      }
       case "power_outlet":
         return html`<div class="actions">
           <button
@@ -244,6 +262,18 @@ export class UlmPopupDialog extends LitElement {
       display: grid;
       gap: 8px;
       margin-top: 16px;
+      font-size: 13px;
+    }
+    .forecast {
+      margin-top: 12px;
+      display: grid;
+      gap: 6px;
+    }
+    .f-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      opacity: 0.85;
       font-size: 13px;
     }
     .info {
