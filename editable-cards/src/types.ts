@@ -8,6 +8,8 @@ export interface HomeAssistant {
     data?: Record<string, unknown>,
   ) => Promise<unknown>;
   formatEntityState?: (stateObj: HassEntity) => string;
+  /** Resolve a relative HA path (e.g. /api/media_player_proxy/…) to an absolute URL */
+  hassUrl?: (path?: string) => string;
   user?: { id?: string; name?: string; is_admin?: boolean };
   themes?: { darkMode?: boolean; theme?: string };
   config?: { unit_system?: { temperature?: string } };
