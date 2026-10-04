@@ -998,6 +998,7 @@ export const CUSTOM_CARD_DEFS = [
 /** Tags with a dedicated Lit port under editable-cards/src/cards/custom/* */
 const SPECIALIZED_CUSTOM_TAGS = new Set([
   "ulm-custom-card-afvalophaling-card",
+  "ulm-custom-card-alarm-time-card",
 ]);
 
 export const CUSTOM_CARDS = CUSTOM_CARD_DEFS.filter(

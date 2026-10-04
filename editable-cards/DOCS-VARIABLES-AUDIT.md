@@ -36,6 +36,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | vertical_button | yes | state match, color, last changed |
 | chips (official) | yes | emoji-label vs mdi; dual register: customCards + customBadges |
 | custom afvalophaling | yes | multi-entity waste schedule (specialized) |
+| custom alarm_time | yes | toggle + datetime +/- step, collapse/horizontal |
 
 ## Sources
 
