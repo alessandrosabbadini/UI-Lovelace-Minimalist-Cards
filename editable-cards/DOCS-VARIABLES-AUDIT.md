@@ -37,6 +37,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | chips (official) | yes | emoji-label vs mdi; dual register: customCards + customBadges |
 | custom afvalophaling | yes | multi-entity waste schedule (specialized) |
 | custom alarm_time | yes | toggle + datetime +/- step, collapse/horizontal |
+| custom apexcharts | yes | 3 entity rows + nested HACS apexcharts-card |
 
 ## Sources
 

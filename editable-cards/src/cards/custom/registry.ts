@@ -999,6 +999,7 @@ export const CUSTOM_CARD_DEFS = [
 const SPECIALIZED_CUSTOM_TAGS = new Set([
   "ulm-custom-card-afvalophaling-card",
   "ulm-custom-card-alarm-time-card",
+  "ulm-custom-card-apexcharts-card",
 ]);
 
 export const CUSTOM_CARDS = CUSTOM_CARD_DEFS.filter(

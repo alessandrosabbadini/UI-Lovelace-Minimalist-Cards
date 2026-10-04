@@ -24,6 +24,7 @@ import "./cards/title/ulm-title-card";
 import "./cards/welcome/ulm-welcome-card";
 import "./cards/custom/afvalophaling/ulm-custom-card-afvalophaling-card";
 import "./cards/custom/alarm-time/ulm-custom-card-alarm-time-card";
+import "./cards/custom/apexcharts/ulm-custom-card-apexcharts-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -199,6 +200,12 @@ const SPECIALIZED = [
     type: "ulm-custom-card-alarm-time-card",
     name: "ULM Custom alarm time",
     description: "Alarm toggle with adjustable input_datetime time",
+  },
+  {
+    type: "ulm-custom-card-apexcharts-card",
+    name: "ULM Custom apexcharts",
+    description:
+      "Three entities + apexcharts-card (line/scatter/pie/donut/radialBar)",
   },
 ] as const;
 
