@@ -18,6 +18,8 @@ export interface HomeAssistant {
 export interface HassEntity {
   entity_id: string;
   state: string;
+  last_changed?: string;
+  last_updated?: string;
   attributes: Record<string, unknown> & {
     friendly_name?: string;
     icon?: string;

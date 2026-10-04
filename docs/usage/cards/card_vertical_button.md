@@ -35,15 +35,13 @@ The variable `ulm_card_vertical_button_state` needs to be used together with inp
 ## Usage
 
 ```yaml
-- type: 'custom:button-card'
-  template: card_vertical_button
+- type: "custom:ulm-vertical-button-card"
   entity: input_select.test_vertical_buttons
   name: Away
   icon: mdi:television-classic
+  state: Away
+  color: green
   show_last_changed: true
-  variables:
-    ulm_card_vertical_button_state: Away
-    ulm_card_vertical_button_color: green
 ```
 
 ??? note "Template Code"

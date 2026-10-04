@@ -33,6 +33,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | generic_swap | yes | name primary / state secondary; force bg |
 | input_boolean | yes | toggle, color, force bg |
 | script | yes | title, icon, entity, service_data |
+| vertical_button | yes | state match, color, last changed |
 
 ## Sources
 

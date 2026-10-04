@@ -17,6 +17,7 @@ import "./cards/generic/ulm-generic-card";
 import "./cards/generic/ulm-generic-swap-card";
 import "./cards/input-boolean/ulm-input-boolean-card";
 import "./cards/script/ulm-script-card";
+import "./cards/vertical-button/ulm-vertical-button-card";
 import "./cards/room/ulm-room-card";
 import "./cards/chips/ulm-chips-card";
 import "./cards/title/ulm-title-card";
@@ -140,6 +141,11 @@ const SPECIALIZED = [
     type: "ulm-script-card",
     name: "ULM Script",
     description: "Run a script from a compact icon+title card",
+  },
+  {
+    type: "ulm-vertical-button-card",
+    name: "ULM Vertical Button",
+    description: "Vertical scene/toggle button with active state color",
   },
   {
     type: "ulm-room-card",
