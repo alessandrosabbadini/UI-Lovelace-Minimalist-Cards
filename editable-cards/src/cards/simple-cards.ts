@@ -8,20 +8,7 @@ function formatState(hass: HomeAssistant, state: HassEntity): string {
 }
 
 export const SIMPLE_CARDS = [
-  // Binary Sensor (+ Alert) specialized: editable-cards/src/cards/binary-sensor/
-  // Battery specialized: editable-cards/src/cards/battery/ulm-battery-card.ts
-  createSimpleEntityCard({
-    tag: "ulm-generic-card",
-    editorTag: "ulm-generic-card-editor",
-    type: "custom:ulm-generic-card",
-    name: "ULM Generic",
-    description: "Generic entity card",
-    defaultIcon: "mdi:flash",
-    defaultColor: "blue",
-    stubEntity: "sensor.outside_temperature",
-    isActive: (s) => !["off", "unavailable", "unknown"].includes(s.state),
-    stateLabel: formatState,
-  }),
+  // Binary / Battery / Generic / Navigate / Power Outlet → specialized folders
   createSimpleEntityCard({
     tag: "ulm-generic-swap-card",
     editorTag: "ulm-generic-swap-card-editor",

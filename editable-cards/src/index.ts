@@ -13,6 +13,7 @@ import "./cards/binary-sensor/ulm-binary-sensor-card";
 import "./cards/binary-sensor/ulm-binary-sensor-alert-card";
 import "./cards/navigate/ulm-navigate-card";
 import "./cards/power-outlet/ulm-power-outlet-card";
+import "./cards/generic/ulm-generic-card";
 import "./cards/room/ulm-room-card";
 import "./cards/chips/ulm-chips-card";
 import "./cards/title/ulm-title-card";
@@ -116,6 +117,11 @@ const SPECIALIZED = [
     type: "ulm-power-outlet-card",
     name: "ULM Power Outlet",
     description: "Switch/outlet with optional consumption and popup",
+  },
+  {
+    type: "ulm-generic-card",
+    name: "ULM Generic",
+    description: "Generic sensor card (state primary, name secondary)",
   },
   {
     type: "ulm-room-card",

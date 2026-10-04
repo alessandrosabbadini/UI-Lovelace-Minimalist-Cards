@@ -29,6 +29,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | binary_sensor_alert | yes | + alert badge, invert_state |
 | navigate | yes | path, title, icon, color |
 | power_outlet | yes | consumption sensor, color, force bg, popup |
+| generic | yes | state primary / name secondary; force bg |
 
 ## Sources
 
