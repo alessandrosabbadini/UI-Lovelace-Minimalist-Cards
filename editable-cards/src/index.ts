@@ -22,6 +22,7 @@ import "./cards/room/ulm-room-card";
 import "./cards/chips/ulm-chips-card";
 import "./cards/title/ulm-title-card";
 import "./cards/welcome/ulm-welcome-card";
+import "./cards/custom/afvalophaling/ulm-custom-card-afvalophaling-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -187,6 +188,11 @@ const SPECIALIZED = [
     type: "ulm-welcome-card",
     name: "ULM Welcome",
     description: "Welcome card with greeting and navigation shortcuts",
+  },
+  {
+    type: "ulm-custom-card-afvalophaling-card",
+    name: "ULM Custom afvalophaling",
+    description: "Dutch waste collection schedule card",
   },
 ] as const;
 

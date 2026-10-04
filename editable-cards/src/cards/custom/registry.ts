@@ -995,7 +995,14 @@ export const CUSTOM_CARD_DEFS = [
   }
 ] as const;
 
-export const CUSTOM_CARDS = CUSTOM_CARD_DEFS.map((def) =>
+/** Tags with a dedicated Lit port under editable-cards/src/cards/custom/* */
+const SPECIALIZED_CUSTOM_TAGS = new Set([
+  "ulm-custom-card-afvalophaling-card",
+]);
+
+export const CUSTOM_CARDS = CUSTOM_CARD_DEFS.filter(
+  (def) => !SPECIALIZED_CUSTOM_TAGS.has(def.tag),
+).map((def) =>
   createSimpleEntityCard({
     tag: def.tag,
     editorTag: def.editorTag,

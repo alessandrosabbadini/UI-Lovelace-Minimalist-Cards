@@ -35,6 +35,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | script | yes | title, icon, entity, service_data |
 | vertical_button | yes | state match, color, last changed |
 | chips (official) | yes | emoji-label vs mdi; dual register: customCards + customBadges |
+| custom afvalophaling | yes | multi-entity waste schedule (specialized) |
 
 ## Sources
 
