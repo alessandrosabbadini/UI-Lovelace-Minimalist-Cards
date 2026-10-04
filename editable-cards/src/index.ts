@@ -30,6 +30,8 @@ import "./cards/custom/camera/ulm-custom-card-camera-card";
 import "./cards/custom/esh-room/ulm-custom-card-esh-room-card";
 import "./cards/custom/httpedo13-sun/ulm-custom-card-httpedo13-sun-card";
 import "./cards/custom/damix48-power-details/ulm-custom-card-damix48-power-details-card";
+import "./cards/custom/eraycetinay-lock/ulm-custom-card-eraycetinay-lock-card";
+import "./cards/custom/nik-door/ulm-custom-card-nik-door-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -239,6 +241,18 @@ const SPECIALIZED = [
     name: "ULM Custom Power details",
     description:
       "Power header + mini-graph-card with hours window and thresholds",
+  },
+  {
+    type: "ulm-custom-card-eraycetinay-lock-card",
+    name: "ULM Custom Lock",
+    description:
+      "Door lock with tap control, battery and door-open warning badges",
+  },
+  {
+    type: "ulm-custom-card-nik-door-card",
+    name: "ULM Custom Minimal Door Lock",
+    description:
+      "Nik door lock: state sensor + battery badge + open/lock widgets",
   },
 ] as const;
 

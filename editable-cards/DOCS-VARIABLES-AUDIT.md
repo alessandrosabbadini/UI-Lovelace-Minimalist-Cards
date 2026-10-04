@@ -43,6 +43,8 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | custom esh_room | yes | rectangular room + light/climate/cover widgets |
 | custom httpedo13_sun | yes | Minimalist shell + nested HACS sun-card |
 | custom damix48_power_details | yes | header + nested HACS mini-graph-card |
+| custom eraycetinay_lock | yes | lock tap + battery/door-open badges |
+| custom nik_door | yes | Minimal Door Lock + battery + open/lock widgets |
 
 ## Sources
 

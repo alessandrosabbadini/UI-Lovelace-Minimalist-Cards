@@ -1,65 +1,60 @@
 ---
-title: nik door
+title: Minimal Door Lock Card
 hide:
   - toc
 ---
 
-# nik door
+# Custom-card "Minimal Door Lock"
 
-Editable Home Assistant card port of the Minimalist custom card `custom_card_nik_door`.
+Lit port of Minimalist `custom_card_nik_door` — door state + battery badge + open/lock widgets (double-tap to unlock controls).
 
 ## Credits
 
-Original author: Nik - 2022 Version: 2.0.0 (v2.0.0)
+Author: Nik - 2022  
+Version: 2.0.0
 
 ## New card type
 
 ```yaml
 type: custom:ulm-custom-card-nik-door-card
-entity: <main_entity>
-name: Optional name
-icon: mdi:icon
-color: blue
-force_background_color: false
-# Extra fields mapped from original variables (optional strings):
-ulm_custom_card_entity_1_lock: # optional
-ulm_custom_card_entity_1_lock_battery: # optional
-ulm_custom_card_entity_1_name: # optional
+entity: sensor.nuki_blindato_door_security_state
+name: Blindato
+lock_entity: lock.nuki_blindato_lock
+battery_entity: sensor.blindato_battery
+require_double_tap_unlock: true
 ```
 
 ## UI editor
 
-Add the card from the Lovelace picker: **ULM Custom nik door**.
+Add the card from the Lovelace picker: **ULM Custom Minimal Door Lock**.
 
 ## Variables
 
-| Variable | Required | Notes |
+| Variable | Maps from | Required |
 | --- | --- | --- |
-| entity | yes | Main entity shown on the card |
-| name | no | Override friendly name |
-| icon | no | Override icon (default `mdi:puzzle`) |
-| color | no | Theme color: yellow/blue/green/red/pink/purple/grey |
-| force_background_color | no | Colored background when active |
-| ulm_custom_card_entity_1_lock | no | Ported optional field from original YAML |
-| ulm_custom_card_entity_1_lock_battery | no | Ported optional field from original YAML |
-| ulm_custom_card_entity_1_name | no | Ported optional field from original YAML |
-| ulm_language_variables | no | Ported optional field from original YAML |
+| entity | door security / open-close sensor | yes |
+| name | `ulm_custom_card_entity_1_name` | no |
+| lock_entity | `ulm_custom_card_entity_1_lock` | yes |
+| battery_entity | `ulm_custom_card_entity_1_lock_battery` | yes |
+| require_double_tap_unlock | button-card `lock.unlock: double_tap` | no (default true) |
+
+### Widget colors (by door sensor state)
+
+| State | Open widget | Lock widget |
+| --- | --- | --- |
+| `Open` | red | grey |
+| `Closed & Unlocked` | yellow | grey |
+| `Closed & Locked` | grey | green |
+
+### Battery badge
+
+- ≤ 40% → red background, `mdi:battery-20`
+- else → green, icon by level (100 / 70 / 60 / 50)
+
+### Safety
+
+Double-tap the card to unlock the bottom controls for 5 seconds (same idea as the original card lock).
 
 ## Legacy YAML
 
-Original button-card templates remain in this folder for reference:
 - `custom_card_nik_door.yaml`
-
-## Migration
-
-Old:
-```yaml
-type: custom:button-card
-template: custom_card_nik_door
-```
-
-New:
-```yaml
-type: custom:ulm-custom-card-nik-door-card
-entity: entity.example
-```

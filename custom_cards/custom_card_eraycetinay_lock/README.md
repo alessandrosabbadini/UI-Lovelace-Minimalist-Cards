@@ -1,85 +1,67 @@
 ---
-title: eraycetinay lock
+title: Custom-card "Lock"
 hide:
   - toc
 ---
 
-# eraycetinay lock
+# Custom-card "Lock"
 
-Editable Home Assistant card port of the Minimalist custom card `custom_card_eraycetinay_lock`.
+Lit port of Minimalist `custom_card_eraycetinay_lock` — lock/unlock card with optional battery and door-open warning badges.
 
 ## Credits
 
-Original author: eraycetinay - 2022 (v0.0.3)
+Author: eraycetinay - 2022  
+Version: 0.0.3  
+Contributor: Sisimomo (battery + door-open warnings)
 
 ## New card type
 
 ```yaml
 type: custom:ulm-custom-card-eraycetinay-lock-card
-entity: <main_entity>
-name: Optional name
-icon: mdi:icon
-color: blue
-force_background_color: false
-# Extra fields mapped from original variables (optional strings):
-ulm_custom_card_eraycetinay_lock_battery_is_at: # optional
-ulm_custom_card_eraycetinay_lock_battery_is_low: # optional
-ulm_custom_card_eraycetinay_lock_battery_level: # optional
-ulm_custom_card_eraycetinay_lock_battery_sensor_binary: # optional
-ulm_custom_card_eraycetinay_lock_battery_sensor_binary_low_state: # optional
-ulm_custom_card_eraycetinay_lock_battery_warning: # optional
-ulm_custom_card_eraycetinay_lock_battery_warning_low: # optional
-ulm_custom_card_eraycetinay_lock_door_open: # optional
+entity: lock.door_lock
+name: Door Lock
+icon: mdi:lock
+tap_control: true
+only_open: false
+battery_level: sensor.door_battery
+battery_warning: 20
+battery_warning_low: 5
+battery_sensor_binary: false
+battery_sensor_binary_low_state: on
+door_open: binary_sensor.door_open
 ```
 
 ## UI editor
 
-Add the card from the Lovelace picker: **ULM Custom eraycetinay lock**.
+Add the card from the Lovelace picker: **ULM Custom Lock**.
 
 ## Variables
 
-| Variable | Required | Notes |
+| Variable | Maps from | Default |
 | --- | --- | --- |
-| entity | yes | Main entity shown on the card |
-| name | no | Override friendly name |
-| icon | no | Override icon (default `mdi:puzzle`) |
-| color | no | Theme color: yellow/blue/green/red/pink/purple/grey |
-| force_background_color | no | Colored background when active |
-| ulm_custom_card_eraycetinay_lock_battery_is_at | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_battery_is_low | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_battery_level | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_battery_sensor_binary | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_battery_sensor_binary_low_state | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_battery_warning | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_battery_warning_low | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_door_open | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_jammed | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_locked | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_locked_and_opened | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_locking | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_only_open | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_tap_control | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_unavailable | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_unlocked | no | Ported optional field from original YAML |
-| ulm_custom_card_eraycetinay_lock_unlocking | no | Ported optional field from original YAML |
-| ulm_translation_engine | no | Ported optional field from original YAML |
-| ulm_translation_state | no | Ported optional field from original YAML |
+| entity | lock entity | — |
+| name / icon | card fields | entity attrs |
+| tap_control | `ulm_custom_card_eraycetinay_lock_tap_control` | `false` |
+| only_open | `ulm_custom_card_eraycetinay_lock_only_open` | `false` |
+| battery_level | `ulm_custom_card_eraycetinay_lock_battery_level` | — |
+| battery_warning | `…_battery_warning` | `20` |
+| battery_warning_low | `…_battery_warning_low` | `5` |
+| battery_sensor_binary | `…_battery_sensor_binary` | `false` |
+| battery_sensor_binary_low_state | `…_battery_sensor_binary_low_state` | `on` |
+| door_open | `ulm_custom_card_eraycetinay_lock_door_open` | — |
+
+### Colors
+
+- **locked / closed / locking** → green
+- **unlocked / open / opened / unlocking** → yellow
+- other → grey
+
+### Tap
+
+- `tap_control: false` → more-info
+- `tap_control: true` + `only_open` → `lock.open`
+- `tap_control: true` → unlock when locked, lock when unlocked
 
 ## Legacy YAML
 
-Original button-card templates remain in this folder for reference:
 - `custom_card_eraycetinay_lock.yaml`
-
-## Migration
-
-Old:
-```yaml
-type: custom:button-card
-template: custom_card_eraycetinay_lock
-```
-
-New:
-```yaml
-type: custom:ulm-custom-card-eraycetinay-lock-card
-entity: entity.example
-```
