@@ -15,11 +15,11 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | vacuum | yes | + `enable_popup` (YAML) |
 | fan | yes | + button_icon/service/oscillate_attribute |
 | media_player | yes | + `idle_off` (YAML) |
-| cover | yes | some still in expandable `controls` |
-| thermostat | yes | layout/advanced still expandable |
+| cover | yes | flattened to top-level |
+| thermostat | yes | flattened to top-level |
 | light | yes | flattened to top-level |
-| person | yes | extras expandable |
-| room | partial | missing tap/hold/templates on slots |
+| person | yes | flattened to top-level |
+| room | yes | flattened; slot tap/hold/templates + nav path |
 | welcome | partial | missing scenes_collapse / service_data |
 | weather | stub | depends on simple-weather-card |
 

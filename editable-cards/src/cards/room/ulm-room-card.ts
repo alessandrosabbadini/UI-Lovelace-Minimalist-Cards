@@ -11,11 +11,11 @@ import {
   booleanField,
   colorField,
   entityField,
-  expandable,
   grid,
   helpers,
   iconField,
   labels,
+  selectField,
   textField,
 } from "../../shared/config-form";
 import type {
@@ -47,6 +47,13 @@ export interface UlmRoomEntityConfig {
   hold_action?: UlmRoomAction;
 }
 
+const SLOT_ACTION_OPTIONS = [
+  { value: "toggle", label: "toggle" },
+  { value: "more-info", label: "more-info" },
+  { value: "navigate", label: "navigate" },
+  { value: "none", label: "none" },
+];
+
 export interface UlmRoomCardConfig extends LovelaceCardConfig {
   type: "custom:ulm-room-card";
   name?: string;
@@ -72,6 +79,23 @@ export interface UlmRoomCardConfig extends LovelaceCardConfig {
   entity_2_icon?: string;
   entity_3_icon?: string;
   entity_4_icon?: string;
+  /** Comma-separated button-card templates, e.g. yellow_on */
+  entity_1_templates?: string;
+  entity_2_templates?: string;
+  entity_3_templates?: string;
+  entity_4_templates?: string;
+  entity_1_tap_action?: string;
+  entity_2_tap_action?: string;
+  entity_3_tap_action?: string;
+  entity_4_tap_action?: string;
+  entity_1_hold_action?: string;
+  entity_2_hold_action?: string;
+  entity_3_hold_action?: string;
+  entity_4_hold_action?: string;
+  entity_1_navigation_path?: string;
+  entity_2_navigation_path?: string;
+  entity_3_navigation_path?: string;
+  entity_4_navigation_path?: string;
 }
 
 type SlotKey = "entity_1" | "entity_2" | "entity_3" | "entity_4";
@@ -99,40 +123,100 @@ function parseTemplates(templates?: string[]): {
   return {};
 }
 
+function parseTemplateList(raw?: string | string[]): string[] | undefined {
+  if (!raw) return undefined;
+  if (Array.isArray(raw)) {
+    return raw.map(String).map((s) => s.trim()).filter(Boolean);
+  }
+  const list = String(raw)
+    .split(/[,\n]/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  return list.length ? list : undefined;
+}
+
+function actionFromFlat(
+  actionName: string | undefined,
+  navigationPath: string | undefined,
+  fallback: UlmRoomAction,
+): UlmRoomAction {
+  if (!actionName) return fallback;
+  const action: UlmRoomAction = { action: actionName };
+  if (actionName === "navigate" && navigationPath) {
+    action.navigation_path = navigationPath;
+  }
+  return action;
+}
+
 function asEntity(
   value: string | UlmRoomEntityConfig | undefined,
-  flatColor?: UlmThemeColor,
-  flatIcon?: string,
+  opts: {
+    flatColor?: UlmThemeColor;
+    flatIcon?: string;
+    flatTemplates?: string | string[];
+    flatTap?: string;
+    flatHold?: string;
+    flatNavPath?: string;
+  } = {},
 ): UlmRoomEntityConfig | undefined {
   if (!value) return undefined;
+  const flatTemplates = parseTemplateList(opts.flatTemplates);
+
   if (typeof value === "string") {
+    const fromTpl = parseTemplates(flatTemplates);
     return {
       entity_id: value,
-      color: flatColor,
-      icon: flatIcon,
-      color_mode: flatColor ? "on" : undefined,
-      tap_action: { action: "toggle" },
-      hold_action: { action: "more-info" },
+      color: opts.flatColor || fromTpl.color,
+      icon: opts.flatIcon,
+      templates: flatTemplates,
+      color_mode:
+        fromTpl.color_mode || (opts.flatColor ? "on" : undefined),
+      tap_action: actionFromFlat(opts.flatTap, opts.flatNavPath, {
+        action: "toggle",
+      }),
+      hold_action: actionFromFlat(opts.flatHold, opts.flatNavPath, {
+        action: "more-info",
+      }),
     };
   }
-  const fromTpl = parseTemplates(value.templates);
+
+  const templates = value.templates?.length
+    ? value.templates
+    : flatTemplates;
+  const fromTpl = parseTemplates(templates);
   const entityId =
     value.entity_id ||
     (value as unknown as { entity?: string }).entity ||
     "";
   if (!entityId) return undefined;
+  const tapFallback = value.tap_action || { action: "toggle" };
+  const holdFallback = value.hold_action || { action: "more-info" };
   return {
     ...value,
     entity_id: entityId,
-    color: value.color || flatColor || fromTpl.color,
-    icon: value.icon || flatIcon,
+    templates,
+    color: value.color || opts.flatColor || fromTpl.color,
+    icon: value.icon || opts.flatIcon,
     color_mode:
       value.color_mode ||
       fromTpl.color_mode ||
-      (value.color || flatColor ? "on" : undefined),
-    tap_action: value.tap_action || { action: "toggle" },
-    hold_action: value.hold_action || { action: "more-info" },
+      (value.color || opts.flatColor ? "on" : undefined),
+    tap_action: actionFromFlat(opts.flatTap, opts.flatNavPath, tapFallback),
+    hold_action: actionFromFlat(opts.flatHold, opts.flatNavPath, holdFallback),
   };
+}
+
+function slotSchema(n: 1 | 2 | 3 | 4) {
+  return [
+    entityField(`entity_${n}`, undefined, false),
+    grid([iconField(`entity_${n}_icon`), colorField(`entity_${n}_color`)]),
+    textField(`entity_${n}_templates`),
+    grid([
+      selectField(`entity_${n}_tap_action`, SLOT_ACTION_OPTIONS),
+      selectField(`entity_${n}_hold_action`, SLOT_ACTION_OPTIONS),
+    ]),
+    textField(`entity_${n}_navigation_path`),
+  ];
 }
 
 function isOn(state: string): boolean {
@@ -148,31 +232,18 @@ export class UlmRoomCard extends LitElement implements LovelaceCard {
   public static getConfigForm() {
     return {
       schema: [
+        // Top-level fields so HA always persists them (expandables can drop values)
         grid([textField("name"), iconField("icon")]),
         entityField("entity", undefined, false),
         colorField("color"),
         textField("navigation_path"),
-        expandable("label_opts", "Label", [
-          booleanField("label_use_temperature"),
-          booleanField("label_use_brightness"),
-          textField("label"),
-        ]),
-        expandable("sub1", "Entity 1", [
-          entityField("entity_1", undefined, false),
-          grid([iconField("entity_1_icon"), colorField("entity_1_color")]),
-        ]),
-        expandable("sub2", "Entity 2", [
-          entityField("entity_2", undefined, false),
-          grid([iconField("entity_2_icon"), colorField("entity_2_color")]),
-        ]),
-        expandable("sub3", "Entity 3", [
-          entityField("entity_3", undefined, false),
-          grid([iconField("entity_3_icon"), colorField("entity_3_color")]),
-        ]),
-        expandable("sub4", "Entity 4", [
-          entityField("entity_4", undefined, false),
-          grid([iconField("entity_4_icon"), colorField("entity_4_color")]),
-        ]),
+        booleanField("label_use_temperature"),
+        booleanField("label_use_brightness"),
+        textField("label"),
+        ...slotSchema(1),
+        ...slotSchema(2),
+        ...slotSchema(3),
+        ...slotSchema(4),
       ],
       computeLabel: labels({
         name: "Name",
@@ -187,19 +258,47 @@ export class UlmRoomCard extends LitElement implements LovelaceCard {
         entity_2: "entity_2",
         entity_3: "entity_3",
         entity_4: "entity_4",
-        entity_1_icon: "Icon",
-        entity_2_icon: "Icon",
-        entity_3_icon: "Icon",
-        entity_4_icon: "Icon",
-        entity_1_color: "Color template (yellow_on…)",
-        entity_2_color: "Color template (yellow_on…)",
-        entity_3_color: "Color template (yellow_on…)",
-        entity_4_color: "Color template (yellow_on…)",
+        entity_1_icon: "entity_1 icon",
+        entity_2_icon: "entity_2 icon",
+        entity_3_icon: "entity_3 icon",
+        entity_4_icon: "entity_4 icon",
+        entity_1_color: "entity_1 color (yellow_on…)",
+        entity_2_color: "entity_2 color (yellow_on…)",
+        entity_3_color: "entity_3 color (yellow_on…)",
+        entity_4_color: "entity_4 color (yellow_on…)",
+        entity_1_templates: "entity_1 templates",
+        entity_2_templates: "entity_2 templates",
+        entity_3_templates: "entity_3 templates",
+        entity_4_templates: "entity_4 templates",
+        entity_1_tap_action: "entity_1 tap_action",
+        entity_2_tap_action: "entity_2 tap_action",
+        entity_3_tap_action: "entity_3 tap_action",
+        entity_4_tap_action: "entity_4 tap_action",
+        entity_1_hold_action: "entity_1 hold_action",
+        entity_2_hold_action: "entity_2 hold_action",
+        entity_3_hold_action: "entity_3 hold_action",
+        entity_4_hold_action: "entity_4 hold_action",
+        entity_1_navigation_path: "entity_1 navigation_path",
+        entity_2_navigation_path: "entity_2 navigation_path",
+        entity_3_navigation_path: "entity_3 navigation_path",
+        entity_4_navigation_path: "entity_4 navigation_path",
       }),
       computeHelper: helpers({
         entity: "Entity used for label (temperature / brightness / state).",
         color: "Colors large icon + name + label (like *_no_state).",
         label_use_brightness: "Only used when label_use_temperature is false.",
+        entity_1_templates:
+          "Comma-separated button-card templates, e.g. yellow_on, green_off.",
+        entity_2_templates:
+          "Comma-separated button-card templates, e.g. yellow_on, green_off.",
+        entity_3_templates:
+          "Comma-separated button-card templates, e.g. yellow_on, green_off.",
+        entity_4_templates:
+          "Comma-separated button-card templates, e.g. yellow_on, green_off.",
+        entity_1_navigation_path: "Used when tap/hold action is navigate.",
+        entity_2_navigation_path: "Used when tap/hold action is navigate.",
+        entity_3_navigation_path: "Used when tap/hold action is navigate.",
+        entity_4_navigation_path: "Used when tap/hold action is navigate.",
       }),
     };
   }
@@ -226,35 +325,90 @@ export class UlmRoomCard extends LitElement implements LovelaceCard {
   public setConfig(config: UlmRoomCardConfig): void {
     const c = config as UlmRoomCardConfig & Record<string, unknown>;
     const tap = c.tap_action as UlmRoomAction | undefined;
+    // Nested leftovers from older expandable form
+    const labelOpts = (c.label_opts || {}) as Record<string, unknown>;
+    const nestedSlots: Record<string, Record<string, unknown>> = {
+      entity_1: (c.sub1 || {}) as Record<string, unknown>,
+      entity_2: (c.sub2 || {}) as Record<string, unknown>,
+      entity_3: (c.sub3 || {}) as Record<string, unknown>,
+      entity_4: (c.sub4 || {}) as Record<string, unknown>,
+    };
 
     const keys: SlotKey[] = ["entity_1", "entity_2", "entity_3", "entity_4"];
     this._slots = {};
     const flat: Record<string, unknown> = {};
     for (const key of keys) {
       const n = key.slice(-1);
-      const rich = asEntity(
-        config[key],
-        config[`entity_${n}_color` as keyof UlmRoomCardConfig] as
-          | UlmThemeColor
-          | undefined,
-        config[`entity_${n}_icon` as keyof UlmRoomCardConfig] as
-          | string
-          | undefined,
-      );
+      const nested = nestedSlots[key] || {};
+      const raw =
+        config[key] ??
+        (nested[key] as string | UlmRoomEntityConfig | undefined) ??
+        (nested[`entity_${n}`] as string | UlmRoomEntityConfig | undefined);
+      const rich = asEntity(raw, {
+        flatColor:
+          (config[`entity_${n}_color` as keyof UlmRoomCardConfig] as
+            | UlmThemeColor
+            | undefined) ||
+          (nested[`entity_${n}_color`] as UlmThemeColor | undefined),
+        flatIcon:
+          (config[`entity_${n}_icon` as keyof UlmRoomCardConfig] as
+            | string
+            | undefined) || (nested[`entity_${n}_icon`] as string | undefined),
+        flatTemplates:
+          (config[`entity_${n}_templates` as keyof UlmRoomCardConfig] as
+            | string
+            | undefined) ||
+          (nested[`entity_${n}_templates`] as string | undefined),
+        flatTap:
+          (config[`entity_${n}_tap_action` as keyof UlmRoomCardConfig] as
+            | string
+            | undefined) ||
+          (nested[`entity_${n}_tap_action`] as string | undefined),
+        flatHold:
+          (config[`entity_${n}_hold_action` as keyof UlmRoomCardConfig] as
+            | string
+            | undefined) ||
+          (nested[`entity_${n}_hold_action`] as string | undefined),
+        flatNavPath:
+          (config[`entity_${n}_navigation_path` as keyof UlmRoomCardConfig] as
+            | string
+            | undefined) ||
+          (nested[`entity_${n}_navigation_path`] as string | undefined),
+      });
       if (rich) {
         this._slots[key] = rich;
         flat[key] = rich.entity_id;
         flat[`entity_${n}_color`] = rich.color;
         flat[`entity_${n}_icon`] = rich.icon;
+        if (rich.templates?.length) {
+          flat[`entity_${n}_templates`] = rich.templates.join(", ");
+        }
+        if (rich.tap_action?.action) {
+          flat[`entity_${n}_tap_action`] = rich.tap_action.action;
+        }
+        if (rich.hold_action?.action) {
+          flat[`entity_${n}_hold_action`] = rich.hold_action.action;
+        }
+        const nav =
+          rich.tap_action?.navigation_path ||
+          rich.hold_action?.navigation_path;
+        if (nav) flat[`entity_${n}_navigation_path`] = nav;
       }
     }
 
+    const useTemp =
+      config.label_use_temperature ?? labelOpts.label_use_temperature;
+    const useBri =
+      config.label_use_brightness ?? labelOpts.label_use_brightness;
+
     this._config = {
       icon: "mdi:sofa-single",
-      label_use_temperature: true,
-      label_use_brightness: false,
       ...config,
       ...flat,
+      label_use_temperature: useTemp != null ? Boolean(useTemp) : true,
+      label_use_brightness: useBri != null ? Boolean(useBri) : false,
+      label:
+        config.label ?? (labelOpts.label as string | undefined) ?? undefined,
       navigation_path: config.navigation_path || tap?.navigation_path,
       type: "custom:ulm-room-card",
     };

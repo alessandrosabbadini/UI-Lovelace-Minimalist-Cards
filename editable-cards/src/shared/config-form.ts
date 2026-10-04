@@ -56,6 +56,22 @@ export function colorField(name = "color"): HaFormSchema {
   return { name, selector: COLOR_SELECT };
 }
 
+export function selectField(
+  name: string,
+  options: { value: string; label: string }[],
+  mode: "dropdown" | "list" = "dropdown",
+): HaFormSchema {
+  return {
+    name,
+    selector: {
+      select: {
+        mode,
+        options,
+      },
+    },
+  };
+}
+
 export function expandable(
   name: string,
   title: string,
