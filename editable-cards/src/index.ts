@@ -100,7 +100,7 @@ const SPECIALIZED = [
   {
     type: "ulm-title-card",
     name: "ULM Title",
-    description: "Section title card",
+    description: "Section title and optional subtitle",
   },
   {
     type: "ulm-welcome-card",

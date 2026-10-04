@@ -23,6 +23,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | welcome | yes | collapse input_boolean + per-pill service_data |
 | weather | yes | native simple-weather style (no dependency) |
 | weather_ulm | yes | humidity/temp chips + popup |
+| title | yes | name + label; transparent layout |
 
 ## Sources
 
