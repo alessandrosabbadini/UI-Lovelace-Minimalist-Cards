@@ -1,4 +1,4 @@
-import { LitElement, html, nothing } from "lit";
+import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { activeIconStyle, resolveThemeRgb } from "../../shared/colors";
@@ -83,16 +83,17 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
         entityField("entity", "cover"),
         grid([textField("name"), iconField("icon")]),
         colorField("color"),
-        expandable("controls", "Controls", [
-          booleanField("enable_controls"),
-          booleanField("enable_slider"),
+        // Top-level so HA persists toggles reliably
+        booleanField("enable_controls"),
+        booleanField("enable_slider"),
+        booleanField("enable_popup"),
+        booleanField("force_background_color"),
+        expandable("controls", "More options", [
           booleanField("enable_horizontal"),
           booleanField("invert_percent"),
           booleanField("display_left_right"),
           booleanField("enable_tilt"),
           booleanField("garage_large"),
-          booleanField("enable_popup"),
-          booleanField("force_background_color"),
           booleanField("show_last_changed"),
           numberField("favorite_percentage"),
           grid([numberField("slider_min"), numberField("slider_max")]),
@@ -106,12 +107,12 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
         enable_controls: "Enable controls",
         enable_slider: "Enable slider",
         enable_horizontal: "Horizontal layout",
-        invert_percent: "Invert percent",
+        invert_percent: "Invert percent (100% = closed)",
         display_left_right: "Left/right buttons",
         enable_tilt: "Tilt controls",
         garage_large: "Garage large icon",
         enable_popup: "Enable popup",
-        force_background_color: "Force colored background",
+        force_background_color: "Force colored background when open",
         show_last_changed: "Show last changed",
         favorite_percentage: "Favorite %",
         slider_min: "Slider min",
@@ -122,6 +123,7 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
         enable_horizontal:
           "Place controls/slider beside the icon row when enabled.",
         favorite_percentage: "Optional preset position button (0–100).",
+        invert_percent: "Use when your cover reports 100% as closed.",
       }),
     };
   }
@@ -136,13 +138,18 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
   }
 
   public setConfig(config: UlmCoverCardConfig): void {
-    if (!config.entity) throw new Error("Please define an entity");
     const c = config as UlmCoverCardConfig & Record<string, unknown>;
+    const controls = (c.controls || {}) as Record<string, unknown>;
+    const entity =
+      config.entity || (c.ulm_card_cover_entity as string | undefined);
+    if (!entity) throw new Error("Please define an entity");
     const favorite =
       config.favorite_percentage ??
-      (c.ulm_card_cover_favorite_percentage as number | undefined);
+      controls.favorite_percentage ??
+      c.ulm_card_cover_favorite_percentage;
     this._config = {
       ...config,
+      entity,
       name: config.name ?? (c.ulm_card_cover_name as string | undefined),
       icon: config.icon || (c.ulm_card_cover_icon as string | undefined),
       color:
@@ -150,53 +157,90 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
         (c.ulm_card_cover_color as UlmThemeColor) ||
         "blue",
       enable_controls: Boolean(
-        config.enable_controls ?? c.ulm_card_cover_enable_controls,
+        config.enable_controls ??
+          controls.enable_controls ??
+          c.ulm_card_cover_enable_controls,
       ),
       enable_slider: Boolean(
-        config.enable_slider ?? c.ulm_card_cover_enable_slider,
+        config.enable_slider ??
+          controls.enable_slider ??
+          c.ulm_card_cover_enable_slider,
       ),
       enable_horizontal: Boolean(
-        config.enable_horizontal ?? c.ulm_card_cover_enable_horizontal,
+        config.enable_horizontal ??
+          controls.enable_horizontal ??
+          c.ulm_card_cover_enable_horizontal,
       ),
       enable_popup: Boolean(
-        config.enable_popup ?? c.ulm_card_cover_enable_popup,
+        config.enable_popup ??
+          controls.enable_popup ??
+          c.ulm_card_cover_enable_popup,
       ),
       force_background_color: Boolean(
         config.force_background_color ??
+          controls.force_background_color ??
           c.ulm_card_cover_force_background_color,
       ),
       invert_percent: Boolean(
         config.invert_percent ??
+          controls.invert_percent ??
           c.ulm_card_invert_percent ??
           c.ulm_card_cover_invert_percent,
       ),
       display_left_right: Boolean(
-        config.display_left_right ?? c.ulm_card_cover_display_left_right,
+        config.display_left_right ??
+          controls.display_left_right ??
+          c.ulm_card_cover_display_left_right,
       ),
       enable_tilt: Boolean(
-        config.enable_tilt ?? c.ulm_card_cover_enable_tilt,
+        config.enable_tilt ??
+          controls.enable_tilt ??
+          c.ulm_card_cover_enable_tilt,
       ),
       garage_large: Boolean(
-        config.garage_large ?? c.ulm_card_cover_garage_large,
+        config.garage_large ??
+          controls.garage_large ??
+          c.ulm_card_cover_garage_large,
       ),
       show_last_changed: Boolean(
-        config.show_last_changed ?? c.ulm_card_cover_show_last_changed,
+        config.show_last_changed ??
+          controls.show_last_changed ??
+          c.ulm_card_cover_show_last_changed,
       ),
       favorite_percentage:
         favorite === null || favorite === undefined || favorite === false
           ? undefined
           : Number(favorite),
       slider_min: Number(
-        config.slider_min ?? c.ulm_card_cover_slider_min ?? 0,
+        config.slider_min ??
+          controls.slider_min ??
+          c.ulm_card_cover_slider_min ??
+          0,
       ),
       slider_max: Number(
-        config.slider_max ?? c.ulm_card_cover_slider_max ?? 100,
+        config.slider_max ??
+          controls.slider_max ??
+          c.ulm_card_cover_slider_max ??
+          100,
       ),
       type: "custom:ulm-cover-card",
     };
   }
 
   public getCardSize(): number {
+    return this._contentRows();
+  }
+
+  public getGridOptions() {
+    const horizontal = !!this._config?.enable_horizontal;
+    return {
+      columns: horizontal ? 12 : 6,
+      min_columns: horizontal ? 6 : 3,
+      max_columns: 12,
+    };
+  }
+
+  private _contentRows(): number {
     let n = 1;
     if (this._config?.enable_controls) n++;
     if (this._config?.enable_slider) n++;
@@ -257,15 +301,23 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
 
     const label = this._label(stateObj, displayPos, hasPosition, invert);
 
+    const cardBg = forceBg
+      ? `rgba(${rgb}, var(--opacity-bg, 1))`
+      : undefined;
+
     return html`
       <ha-card
-        class="ulm-card"
-        style=${styleMap({
-          backgroundColor: forceBg
-            ? `rgba(${rgb}, var(--opacity-bg, 1))`
-            : undefined,
-          color: forceBg ? "rgb(250,250,250)" : undefined,
-        })}
+        class="ulm-card cover"
+        style=${styleMap(
+          cardBg
+            ? {
+                "--ha-card-background": cardBg,
+                background: cardBg,
+                backgroundColor: cardBg,
+                color: "rgb(250,250,250)",
+              }
+            : {},
+        )}
       >
         <div class=${stackClass}>
           <div class="row">
@@ -527,5 +579,23 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
     );
   };
 
-  static styles = ulmCardStyles;
+  static styles = [
+    ulmCardStyles,
+    css`
+      :host {
+        height: auto !important;
+        align-self: start;
+      }
+
+      ha-card.cover {
+        height: auto;
+        overflow: visible;
+        background: var(
+          --ha-card-background,
+          var(--card-background-color, #fafafa)
+        );
+        transition: background-color 0.2s ease;
+      }
+    `,
+  ];
 }
