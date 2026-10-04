@@ -9,7 +9,6 @@ import { resolveThemeRgb } from "../../shared/colors";
 import {
   booleanField,
   entityField,
-  expandable,
   grid,
   helpers,
   iconField,
@@ -83,23 +82,19 @@ export class UlmThermostatCard extends LitElement implements LovelaceCard {
   public static getConfigForm() {
     return {
       schema: [
+        // Top-level fields so HA always persists them (expandables can drop values)
         entityField("entity", "climate"),
         grid([textField("name"), iconField("icon")]),
-        // Top-level fields so HA always persists them (expandables can drop values)
         booleanField("enable_controls"),
         booleanField("enable_hvac_modes"),
         booleanField("enable_background_color"),
         booleanField("enable_collapse"),
         booleanField("enable_popup"),
+        booleanField("enable_horizontal"),
+        booleanField("enable_display_temperature"),
         entityField("fan_entity", "fan", false),
-        expandable("layout", "More layout", [
-          booleanField("enable_horizontal"),
-          booleanField("enable_display_temperature"),
-        ]),
-        expandable("advanced", "Advanced", [
-          numberField("temp_step"),
-          numberField("minimum_temp_spread"),
-        ]),
+        numberField("temp_step"),
+        numberField("minimum_temp_spread"),
       ],
       computeLabel: labels({
         entity: "Climate entity",

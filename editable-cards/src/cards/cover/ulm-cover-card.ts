@@ -6,7 +6,6 @@ import {
   booleanField,
   colorField,
   entityField,
-  expandable,
   grid,
   helpers,
   iconField,
@@ -80,24 +79,22 @@ export class UlmCoverCard extends LitElement implements LovelaceCard {
   public static getConfigForm() {
     return {
       schema: [
+        // Top-level fields so HA always persists them (expandables can drop values)
         entityField("entity", "cover"),
         grid([textField("name"), iconField("icon")]),
         colorField("color"),
-        // Top-level so HA persists toggles reliably
         booleanField("enable_controls"),
         booleanField("enable_slider"),
         booleanField("enable_popup"),
         booleanField("force_background_color"),
-        expandable("controls", "More options", [
-          booleanField("enable_horizontal"),
-          booleanField("invert_percent"),
-          booleanField("display_left_right"),
-          booleanField("enable_tilt"),
-          booleanField("garage_large"),
-          booleanField("show_last_changed"),
-          numberField("favorite_percentage"),
-          grid([numberField("slider_min"), numberField("slider_max")]),
-        ]),
+        booleanField("enable_horizontal"),
+        booleanField("invert_percent"),
+        booleanField("display_left_right"),
+        booleanField("enable_tilt"),
+        booleanField("garage_large"),
+        booleanField("show_last_changed"),
+        numberField("favorite_percentage"),
+        grid([numberField("slider_min"), numberField("slider_max")]),
       ],
       computeLabel: labels({
         entity: "Entity",

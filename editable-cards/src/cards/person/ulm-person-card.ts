@@ -11,7 +11,6 @@ import { resolveThemeRgb } from "../../shared/colors";
 import {
   booleanField,
   entityField,
-  expandable,
   grid,
   helpers,
   iconField,
@@ -44,14 +43,13 @@ export class UlmPersonCard extends LitElement implements LovelaceCard {
   public static getConfigForm() {
     return {
       schema: [
+        // Top-level fields so HA always persists them (expandables can drop values)
         entityField("entity", "person"),
         grid([textField("name"), iconField("icon")]),
         booleanField("use_entity_picture"),
-        expandable("extras", "Extras", [
-          entityField("battery_entity", "sensor", false),
-          entityField("eta_entity", "sensor", false),
-          entityField("address_entity", undefined, false),
-        ]),
+        entityField("battery_entity", "sensor", false),
+        entityField("eta_entity", "sensor", false),
+        entityField("address_entity", undefined, false),
       ],
       computeLabel: labels({
         entity: "Person entity (ulm_card_person_entity)",
@@ -82,6 +80,8 @@ export class UlmPersonCard extends LitElement implements LovelaceCard {
 
   public setConfig(config: UlmPersonCardConfig): void {
     const c = config as UlmPersonCardConfig & Record<string, unknown>;
+    // Nested leftovers from older expandable form
+    const extras = (c.extras || {}) as Record<string, unknown>;
     const entity =
       config.entity || (c.ulm_card_person_entity as string | undefined);
     if (!entity) throw new Error("Please define an entity");
@@ -96,12 +96,17 @@ export class UlmPersonCard extends LitElement implements LovelaceCard {
         config.use_entity_picture ?? c.ulm_card_person_use_entity_picture,
       ),
       battery_entity:
-        config.battery_entity ||
+        (config.battery_entity as string | undefined) ||
+        (extras.battery_entity as string | undefined) ||
         (c.ulm_card_person_battery as string | undefined),
       eta_entity:
-        config.eta_entity || (c.ulm_card_person_eta as string | undefined),
+        (config.eta_entity as string | undefined) ||
+        (extras.eta_entity as string | undefined) ||
+        (c.ulm_card_person_eta as string | undefined),
       address_entity:
-        config.address_entity || (c.ulm_address as string | undefined),
+        (config.address_entity as string | undefined) ||
+        (extras.address_entity as string | undefined) ||
+        (c.ulm_address as string | undefined),
       type: "custom:ulm-person-card",
     };
   }
