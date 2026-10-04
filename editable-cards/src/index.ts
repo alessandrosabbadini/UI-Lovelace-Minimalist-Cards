@@ -14,6 +14,7 @@ import "./cards/binary-sensor/ulm-binary-sensor-alert-card";
 import "./cards/navigate/ulm-navigate-card";
 import "./cards/power-outlet/ulm-power-outlet-card";
 import "./cards/generic/ulm-generic-card";
+import "./cards/generic/ulm-generic-swap-card";
 import "./cards/room/ulm-room-card";
 import "./cards/chips/ulm-chips-card";
 import "./cards/title/ulm-title-card";
@@ -122,6 +123,11 @@ const SPECIALIZED = [
     type: "ulm-generic-card",
     name: "ULM Generic",
     description: "Generic sensor card (state primary, name secondary)",
+  },
+  {
+    type: "ulm-generic-swap-card",
+    name: "ULM Generic Swap",
+    description: "Generic card (name primary, state secondary)",
   },
   {
     type: "ulm-room-card",

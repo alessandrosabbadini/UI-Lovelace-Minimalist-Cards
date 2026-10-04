@@ -30,6 +30,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | navigate | yes | path, title, icon, color |
 | power_outlet | yes | consumption sensor, color, force bg, popup |
 | generic | yes | state primary / name secondary; force bg |
+| generic_swap | yes | name primary / state secondary; force bg |
 
 ## Sources
 
