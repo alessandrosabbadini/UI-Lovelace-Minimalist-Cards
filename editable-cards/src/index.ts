@@ -28,6 +28,7 @@ import "./cards/custom/apexcharts/ulm-custom-card-apexcharts-card";
 import "./cards/custom/bar-card/ulm-custom-card-bar-card-card";
 import "./cards/custom/camera/ulm-custom-card-camera-card";
 import "./cards/custom/esh-room/ulm-custom-card-esh-room-card";
+import "./cards/custom/httpedo13-sun/ulm-custom-card-httpedo13-sun-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -225,6 +226,12 @@ const SPECIALIZED = [
     name: "ULM Custom Room (esh)",
     description:
       "Rectangular room card with light / climate / cover widgets",
+  },
+  {
+    type: "ulm-custom-card-httpedo13-sun-card",
+    name: "ULM Custom Sun",
+    description:
+      "Minimalist shell around HACS sun-card (azimuth / elevation / times)",
   },
 ] as const;
 

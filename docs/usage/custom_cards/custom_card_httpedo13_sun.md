@@ -1,60 +1,54 @@
 ---
-title: httpedo13 sun
+title: Custom-card "Sun"
 hide:
   - toc
 ---
 
-# httpedo13 sun
+# Custom-card "Sun"
 
-Editable Home Assistant card port of the Minimalist custom card `custom_card_httpedo13_sun`.
+Lit port of Minimalist `custom_card_httpedo13_sun` — wraps HACS [sun-card](https://github.com/AitorDB/home-assistant-sun-card) in a Minimalist shell.
 
 ## Credits
 
-Original author: httpedo13 - 2021 (v1.0.0)
+Author: httpedo13 - 2021  
+Version: 1.0.0
+
+## Requirements
+
+| Component / card | Required | Link |
+| --- | --- | --- |
+| Sun integration | yes | [docs](https://www.home-assistant.io/integrations/sun/) |
+| Sun card (HACS) | yes | [AitorDB/home-assistant-sun-card](https://github.com/AitorDB/home-assistant-sun-card) |
 
 ## New card type
 
 ```yaml
 type: custom:ulm-custom-card-httpedo13-sun-card
-entity: <main_entity>
-name: Optional name
-icon: mdi:icon
-color: blue
-force_background_color: false
-# Extra fields mapped from original variables (optional strings):
-# (see Variables)
+# title: "Sun"
+language: it          # optional; default = HA language
+dark_mode: auto       # auto | true | false  (auto = hass.themes.darkMode)
+time_format: 24h      # 12h | 24h
+show_azimuth: false
+show_elevation: false
 ```
 
 ## UI editor
 
-Add the card from the Lovelace picker: **ULM Custom httpedo13 sun**.
+Add the card from the Lovelace picker: **ULM Custom Sun**.
 
 ## Variables
 
-| Variable | Required | Notes |
+| Variable | Maps from / sun-card | Default |
 | --- | --- | --- |
-| entity | yes | Main entity shown on the card |
-| name | no | Override friendly name |
-| icon | no | Override icon (default `mdi:puzzle`) |
-| color | no | Theme color: yellow/blue/green/red/pink/purple/grey |
-| force_background_color | no | Colored background when active |
+| title | `title` | none (no title) |
+| language | `language` | HA language |
+| dark_mode | `darkMode` | `auto` → `hass.themes.darkMode` |
+| time_format | `timeFormat` | `24h` |
+| show_azimuth | `showAzimuth` | `false` |
+| show_elevation | `showElevation` | `false` |
 
+Supported languages: `da`, `de`, `en`, `es`, `et`, `fi`, `fr`, `hu`, `it`, `nl`, `pl`, `pt-BR`, `ru`, `sl`, `sv`.
 
 ## Legacy YAML
 
-Original button-card templates remain in this folder for reference:
-- `custom_card_httpedo13_sun.yaml`
-
-## Migration
-
-Old:
-```yaml
-type: custom:button-card
-template: custom_card_httpedo13_sun
-```
-
-New:
-```yaml
-type: custom:ulm-custom-card-httpedo13-sun-card
-entity: entity.example
-```
+- `custom_card_httpedo13_sun.yaml` (`custom_card_httpedo13_sun` → nested `custom:sun-card`)

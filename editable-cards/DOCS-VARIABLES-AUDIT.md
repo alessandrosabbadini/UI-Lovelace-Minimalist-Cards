@@ -41,6 +41,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | custom bar_card | yes | card_generic header + nested HACS bar-card |
 | custom camera | yes | optional blue title + nested picture-entity live |
 | custom esh_room | yes | rectangular room + light/climate/cover widgets |
+| custom httpedo13_sun | yes | Minimalist shell + nested HACS sun-card |
 
 ## Sources
 
