@@ -29,6 +29,7 @@ import "./cards/custom/bar-card/ulm-custom-card-bar-card-card";
 import "./cards/custom/camera/ulm-custom-card-camera-card";
 import "./cards/custom/esh-room/ulm-custom-card-esh-room-card";
 import "./cards/custom/httpedo13-sun/ulm-custom-card-httpedo13-sun-card";
+import "./cards/custom/damix48-power-details/ulm-custom-card-damix48-power-details-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -232,6 +233,12 @@ const SPECIALIZED = [
     name: "ULM Custom Sun",
     description:
       "Minimalist shell around HACS sun-card (azimuth / elevation / times)",
+  },
+  {
+    type: "ulm-custom-card-damix48-power-details-card",
+    name: "ULM Custom Power details",
+    description:
+      "Power header + mini-graph-card with hours window and thresholds",
   },
 ] as const;
 

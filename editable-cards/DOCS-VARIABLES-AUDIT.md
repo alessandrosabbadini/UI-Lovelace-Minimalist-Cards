@@ -42,6 +42,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | custom camera | yes | optional blue title + nested picture-entity live |
 | custom esh_room | yes | rectangular room + light/climate/cover widgets |
 | custom httpedo13_sun | yes | Minimalist shell + nested HACS sun-card |
+| custom damix48_power_details | yes | header + nested HACS mini-graph-card |
 
 ## Sources
 

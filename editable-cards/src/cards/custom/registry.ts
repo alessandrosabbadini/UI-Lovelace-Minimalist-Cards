@@ -1002,6 +1002,7 @@ const SPECIALIZED_CUSTOM_TAGS = new Set([
   "ulm-custom-card-apexcharts-card",
   "ulm-custom-card-bar-card-card",
   "ulm-custom-card-camera-card",
+  "ulm-custom-card-damix48-power-details-card",
   "ulm-custom-card-esh-room-card",
   "ulm-custom-card-httpedo13-sun-card",
 ]);
