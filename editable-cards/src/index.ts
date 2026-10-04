@@ -26,6 +26,7 @@ import "./cards/custom/afvalophaling/ulm-custom-card-afvalophaling-card";
 import "./cards/custom/alarm-time/ulm-custom-card-alarm-time-card";
 import "./cards/custom/apexcharts/ulm-custom-card-apexcharts-card";
 import "./cards/custom/bar-card/ulm-custom-card-bar-card-card";
+import "./cards/custom/camera/ulm-custom-card-camera-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -212,6 +213,11 @@ const SPECIALIZED = [
     type: "ulm-custom-card-bar-card-card",
     name: "ULM Custom bar card",
     description: "Generic header + HACS bar-card progress bar",
+  },
+  {
+    type: "ulm-custom-card-camera-card",
+    name: "ULM Custom camera",
+    description: "Optional blue title row + live picture-entity camera",
   },
 ] as const;
 

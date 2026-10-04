@@ -1001,6 +1001,7 @@ const SPECIALIZED_CUSTOM_TAGS = new Set([
   "ulm-custom-card-alarm-time-card",
   "ulm-custom-card-apexcharts-card",
   "ulm-custom-card-bar-card-card",
+  "ulm-custom-card-camera-card",
 ]);
 
 export const CUSTOM_CARDS = CUSTOM_CARD_DEFS.filter(

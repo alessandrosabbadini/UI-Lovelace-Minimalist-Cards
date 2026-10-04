@@ -16,51 +16,35 @@ Original author: Eltarius, from the script of [Clemalex](https://forum.hacf.fr/t
 
 ```yaml
 type: custom:ulm-custom-card-camera-card
-entity: <main_entity>
-name: Optional name
-icon: mdi:icon
-color: blue
-force_background_color: false
-# Extra fields mapped from original variables (optional strings):
-ulm_custom_card_camera_aspect_ratio: # optional
-ulm_custom_card_camera_label: # optional
-ulm_custom_card_camera_name: # optional
-ulm_custom_card_camera_title: # optional
+entity: camera.front_door
+show_title: true
+name: Front door
+label: Live
+icon: mdi:cctv
+aspect_ratio: "16:9"
 ```
 
 ## UI editor
 
 Add the card from the Lovelace picker: **ULM Custom camera**.
 
+## Behaviour
+
+- Optional header (`show_title` / original `ulm_custom_card_camera_title`): blue icon chip + name + label.
+- Body: nested core `picture-entity` with `camera_view: live`.
+
 ## Variables
 
 | Variable | Required | Notes |
 | --- | --- | --- |
-| entity | yes | Main entity shown on the card |
-| name | no | Override friendly name |
-| icon | no | Override icon (default `mdi:puzzle`) |
-| color | no | Theme color: yellow/blue/green/red/pink/purple/grey |
-| force_background_color | no | Colored background when active |
-| ulm_custom_card_camera_aspect_ratio | no | Ported optional field from original YAML |
-| ulm_custom_card_camera_label | no | Ported optional field from original YAML |
-| ulm_custom_card_camera_name | no | Ported optional field from original YAML |
-| ulm_custom_card_camera_title | no | Ported optional field from original YAML |
+| entity | yes | Camera entity |
+| show_title | no | Show header (maps from `ulm_custom_card_camera_title`) |
+| name | no | Header name (`ulm_custom_card_camera_name`) |
+| label | no | Header label (`ulm_custom_card_camera_label`) |
+| icon | no | Header icon (default entity icon / `mdi:cctv`) |
+| aspect_ratio | no | picture-entity ratio (default `16:9`) |
 
 ## Legacy YAML
 
 Original button-card templates remain in this folder for reference:
 - `custom_card_camera.yaml`
-
-## Migration
-
-Old:
-```yaml
-type: custom:button-card
-template: custom_card_camera
-```
-
-New:
-```yaml
-type: custom:ulm-custom-card-camera-card
-entity: entity.example
-```

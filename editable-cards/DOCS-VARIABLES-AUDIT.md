@@ -39,6 +39,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | custom alarm_time | yes | toggle + datetime +/- step, collapse/horizontal |
 | custom apexcharts | yes | 3 entity rows + nested HACS apexcharts-card |
 | custom bar_card | yes | card_generic header + nested HACS bar-card |
+| custom camera | yes | optional blue title + nested picture-entity live |
 
 ## Sources
 
