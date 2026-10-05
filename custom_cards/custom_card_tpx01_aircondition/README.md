@@ -1,61 +1,60 @@
 ---
-title: tpx01 aircondition
+title: Custom-card "AirCondition"
 hide:
   - toc
 ---
 
-# tpx01 aircondition
+# Custom-card "AirCondition"
 
-Editable Home Assistant card port of the Minimalist custom card `custom_card_tpx01_aircondition`.
+Lit port of Minimalist `custom_card_tpx01_aircondition` (`custom_card_tpx01_aircondition_with_buttons`).
 
 ## Credits
 
-Original author: tpx01 - 2021 (v1.0.0)
+Author: tpx01 - 2021  
+Version: 1.0.0
 
 ## New card type
 
 ```yaml
 type: custom:ulm-custom-card-tpx01-aircondition-card
-entity: <main_entity>
-name: Optional name
-icon: mdi:icon
-color: blue
-force_background_color: false
-# Extra fields mapped from original variables (optional strings):
-# (see Variables)
+entity: climate.livingroom
+name: A/C Livingroom
+# temp_step: 0.5   # optional
 ```
 
 ## UI editor
 
-Add the card from the Lovelace picker: **ULM Custom tpx01 aircondition**.
+Add the card from the Lovelace picker: **ULM Custom AirCondition**.
 
 ## Variables
 
 | Variable | Required | Notes |
 | --- | --- | --- |
-| entity | yes | Main entity shown on the card |
-| name | no | Override friendly name |
-| icon | no | Override icon (default `mdi:puzzle`) |
-| color | no | Theme color: yellow/blue/green/red/pink/purple/grey |
-| force_background_color | no | Colored background when active |
-| ulm_translation_engine | no | Ported optional field from original YAML |
-| ulm_translation_state | no | Ported optional field from original YAML |
+| entity | yes | Climate / AC entity |
+| name | no | Display name (docs marked required) |
+| temp_step | no | ± step; else entity `target_temp_step`, else `0.5` |
+
+### Layout
+
+1. **Header** — mode icon + name/state + power widget  
+   - Off → `mdi:power` sets `hvac_mode: cool`  
+   - On → `mdi:power-off` sets `hvac_mode: off`  
+   - Icon blue when state ≠ `off`
+2. **Controls** — minus / target °C / plus via `climate.set_temperature`
+
+### Mode icons
+
+| State | Icon |
+| --- | --- |
+| dry | `mdi:water` |
+| heat | `mdi:radiator` |
+| cool | `mdi:snowflake` |
+| fan_only | `mdi:fan` |
+| other | `mdi:air-conditioner` |
 
 ## Legacy YAML
 
-Original button-card templates remain in this folder for reference:
-- `custom_card_tpx01_aircondition.yaml`
+- `custom_card_tpx01_aircondition.yaml`  
+  (`custom_card_tpx01_aircondition` + `custom_card_tpx01_aircondition_with_buttons`)
 
-## Migration
-
-Old:
-```yaml
-type: custom:button-card
-template: custom_card_tpx01_aircondition
-```
-
-New:
-```yaml
-type: custom:ulm-custom-card-tpx01-aircondition-card
-entity: entity.example
-```
+Original minus/plus called `script.decrease_climate_temperature` / `script.increment_climate_temperature`; the Lit port uses `climate.set_temperature` directly.

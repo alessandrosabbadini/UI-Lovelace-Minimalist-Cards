@@ -34,6 +34,7 @@ import "./cards/custom/eraycetinay-lock/ulm-custom-card-eraycetinay-lock-card";
 import "./cards/custom/nik-door/ulm-custom-card-nik-door-card";
 import "./cards/custom/scenes/ulm-custom-card-scenes-card";
 import "./cards/custom/mpse-printer/ulm-custom-card-mpse-printer-card";
+import "./cards/custom/tpx01-aircondition/ulm-custom-card-tpx01-aircondition-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -267,6 +268,12 @@ const SPECIALIZED = [
     name: "ULM Custom Printer",
     description:
       "Printer status header + CMYK toner level bars",
+  },
+  {
+    type: "ulm-custom-card-tpx01-aircondition-card",
+    name: "ULM Custom AirCondition",
+    description:
+      "Air conditioner with power and temperature controls",
   },
 ] as const;
 

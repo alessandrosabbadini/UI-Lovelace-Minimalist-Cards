@@ -805,11 +805,11 @@ export const CUSTOM_CARD_DEFS = [
     "tag": "ulm-custom-card-tpx01-aircondition-card",
     "editorTag": "ulm-custom-card-tpx01-aircondition-card-editor",
     "type": "custom:ulm-custom-card-tpx01-aircondition-card",
-    "name": "ULM Custom tpx01 aircondition",
-    "description": "Minimalist custom card port: custom_card_tpx01_aircondition",
-    "defaultIcon": "mdi:puzzle",
+    "name": "ULM Custom AirCondition",
+    "description": "Air conditioner with power and temperature controls",
+    "defaultIcon": "mdi:air-conditioner",
     "defaultColor": "blue",
-    "stubEntity": "sensor.demo",
+    "stubEntity": "climate.hvac",
     "extraKeys": []
   },
   {
@@ -1009,6 +1009,7 @@ const SPECIALIZED_CUSTOM_TAGS = new Set([
   "ulm-custom-card-mpse-printer-card",
   "ulm-custom-card-nik-door-card",
   "ulm-custom-card-scenes-card",
+  "ulm-custom-card-tpx01-aircondition-card",
 ]);
 
 export const CUSTOM_CARDS = CUSTOM_CARD_DEFS.filter(

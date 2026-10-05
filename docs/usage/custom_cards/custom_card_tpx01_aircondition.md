@@ -1,49 +1,42 @@
 ---
-title: tpx01 aircondition
+title: Custom-card "AirCondition"
 hide:
   - toc
 ---
 
-# tpx01 aircondition
+# Custom-card "AirCondition"
 
 Editable Home Assistant card port of the Minimalist custom card `custom_card_tpx01_aircondition`.
 
 ## Credits
 
-Original author: tpx01 - 2021 (v1.0.0)
+Author: tpx01 - 2021  
+Version: 1.0.0
 
 ## New card type
 
 ```yaml
 type: custom:ulm-custom-card-tpx01-aircondition-card
-entity: <main_entity>
-name: Optional name
-icon: mdi:icon
-color: blue
-force_background_color: false
-# Extra fields mapped from original variables (optional strings):
-# (see Variables)
+entity: climate.livingroom
+name: A/C Livingroom
 ```
 
 ## UI editor
 
-Add the card from the Lovelace picker: **ULM Custom tpx01 aircondition**.
+Add the card from the Lovelace picker: **ULM Custom AirCondition**.
 
 ## Variables
 
 | Variable | Required | Notes |
 | --- | --- | --- |
-| entity | yes | Main entity shown on the card |
-| name | no | Override friendly name |
-| icon | no | Override icon (default `mdi:puzzle`) |
-| color | no | Theme color: yellow/blue/green/red/pink/purple/grey |
-| force_background_color | no | Colored background when active |
-| ulm_translation_engine | no | Ported optional field from original YAML |
-| ulm_translation_state | no | Ported optional field from original YAML |
+| entity | yes | Climate entity |
+| name | no | Display name |
+| temp_step | no | ± temperature step |
+
+Power toggles cool/off. Minus/plus adjust target temperature via `climate.set_temperature`.
 
 ## Legacy YAML
 
-Original button-card templates remain in this folder for reference:
 - `custom_card_tpx01_aircondition.yaml`
 
 ## Migration
@@ -51,11 +44,15 @@ Original button-card templates remain in this folder for reference:
 Old:
 ```yaml
 type: custom:button-card
-template: custom_card_tpx01_aircondition
+template: custom_card_tpx01_aircondition_with_buttons
+variables:
+  entity: climate.livingroom
+  name: A/C Livingroom
 ```
 
 New:
 ```yaml
 type: custom:ulm-custom-card-tpx01-aircondition-card
-entity: entity.example
+entity: climate.livingroom
+name: A/C Livingroom
 ```
