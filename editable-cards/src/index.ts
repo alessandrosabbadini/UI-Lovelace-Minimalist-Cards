@@ -35,6 +35,11 @@ import "./cards/custom/nik-door/ulm-custom-card-nik-door-card";
 import "./cards/custom/scenes/ulm-custom-card-scenes-card";
 import "./cards/custom/mpse-printer/ulm-custom-card-mpse-printer-card";
 import "./cards/custom/tpx01-aircondition/ulm-custom-card-tpx01-aircondition-card";
+import "./cards/custom/input-number/ulm-custom-card-input-number-card";
+import "./cards/custom/input-datetime/ulm-custom-card-input-datetime-card";
+import "./cards/custom/homeassistant-updates/ulm-custom-card-homeassistant-updates-card";
+import "./cards/custom/water-heater/ulm-custom-card-water-heater-card";
+import "./cards/custom/more-power-outlet/ulm-custom-card-more-power-outlet-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -274,6 +279,31 @@ const SPECIALIZED = [
     name: "ULM Custom AirCondition",
     description:
       "Air conditioner with power and temperature controls",
+  },
+  {
+    type: "ulm-custom-card-input-number-card",
+    name: "ULM Custom input number",
+    description: "Number / counter / select with down-up controls",
+  },
+  {
+    type: "ulm-custom-card-input-datetime-card",
+    name: "ULM Custom input datetime",
+    description: "Time helper with minute step arrows",
+  },
+  {
+    type: "ulm-custom-card-homeassistant-updates-card",
+    name: "ULM Custom Home Assistant updates",
+    description: "Core / Supervisor / OS update status + shortcuts",
+  },
+  {
+    type: "ulm-custom-card-water-heater-card",
+    name: "ULM Custom water heater",
+    description: "Water heater with consumption-driven heating state",
+  },
+  {
+    type: "ulm-custom-card-more-power-outlet-card",
+    name: "ULM Custom more power outlet",
+    description: "Outlet with power / energy / runtime label",
   },
 ] as const;
 

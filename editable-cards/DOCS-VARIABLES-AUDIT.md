@@ -48,6 +48,11 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | custom scenes | yes | 5 nested scene pills (entity_id/icon/colors/name) |
 | custom mpse_printer | yes | status header + CMYK toner bars |
 | custom tpx01_aircondition | yes | power + temp −/readout/+ (with_buttons) |
+| custom input_number | yes | ↓ / value / ↑ for number counter select |
+| custom input_datetime | yes | time ± minute step |
+| custom homeassistant_updates | yes | Core/Supervisor/OS + shortcut widgets |
+| custom water_heater | yes | consumption-driven red heating state |
+| custom more_power_outlet | yes | power + energy + runtime label |
 
 ## Sources
 

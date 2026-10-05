@@ -221,11 +221,11 @@ export const CUSTOM_CARD_DEFS = [
     "tag": "ulm-custom-card-homeassistant-updates-card",
     "editorTag": "ulm-custom-card-homeassistant-updates-card-editor",
     "type": "custom:ulm-custom-card-homeassistant-updates-card",
-    "name": "ULM Custom homeassistant updates",
-    "description": "Minimalist custom card port: custom_card_homeassistant_updates",
-    "defaultIcon": "mdi:puzzle",
+    "name": "ULM Custom Home Assistant updates",
+    "description": "Core / Supervisor / OS update status + shortcuts",
+    "defaultIcon": "mdi:home-assistant",
     "defaultColor": "blue",
-    "stubEntity": "sensor.demo",
+    "stubEntity": "update.demo_update_with_progress",
     "extraKeys": [
       "ulm_card_homeassistant_entity",
       "ulm_no_updates_available",
@@ -310,10 +310,10 @@ export const CUSTOM_CARD_DEFS = [
     "editorTag": "ulm-custom-card-input-datetime-card-editor",
     "type": "custom:ulm-custom-card-input-datetime-card",
     "name": "ULM Custom input datetime",
-    "description": "Minimalist custom card port: custom_card_input_datetime",
-    "defaultIcon": "mdi:puzzle",
+    "description": "Time helper with minute step arrows",
+    "defaultIcon": "mdi:clock-outline",
     "defaultColor": "blue",
-    "stubEntity": "sensor.demo",
+    "stubEntity": "input_datetime.alarm_weekday_time",
     "extraKeys": []
   },
   {
@@ -322,10 +322,10 @@ export const CUSTOM_CARD_DEFS = [
     "editorTag": "ulm-custom-card-input-number-card-editor",
     "type": "custom:ulm-custom-card-input-number-card",
     "name": "ULM Custom input number",
-    "description": "Minimalist custom card port: custom_card_input_number",
-    "defaultIcon": "mdi:puzzle",
+    "description": "Number / counter / select with down-up controls",
+    "defaultIcon": "mdi:counter",
     "defaultColor": "blue",
-    "stubEntity": "sensor.demo",
+    "stubEntity": "input_number.residents_home",
     "extraKeys": []
   },
   {
@@ -417,10 +417,10 @@ export const CUSTOM_CARD_DEFS = [
     "editorTag": "ulm-custom-card-more-power-outlet-card-editor",
     "type": "custom:ulm-custom-card-more-power-outlet-card",
     "name": "ULM Custom more power outlet",
-    "description": "Minimalist custom card port: custom_card_more_power_outlet",
-    "defaultIcon": "mdi:puzzle",
-    "defaultColor": "blue",
-    "stubEntity": "sensor.demo",
+    "description": "Outlet with power / energy / runtime label",
+    "defaultIcon": "mdi:power-socket-eu",
+    "defaultColor": "yellow",
+    "stubEntity": "switch.decorative_lights",
     "extraKeys": []
   },
   {
@@ -830,10 +830,10 @@ export const CUSTOM_CARD_DEFS = [
     "editorTag": "ulm-custom-card-water-heater-card-editor",
     "type": "custom:ulm-custom-card-water-heater-card",
     "name": "ULM Custom water heater",
-    "description": "Minimalist custom card port: custom_card_water_heater",
-    "defaultIcon": "mdi:puzzle",
-    "defaultColor": "blue",
-    "stubEntity": "sensor.demo",
+    "description": "Water heater with consumption-driven heating state",
+    "defaultIcon": "mdi:waves",
+    "defaultColor": "red",
+    "stubEntity": "water_heater.demo_water_heater",
     "extraKeys": []
   },
   {
@@ -1010,6 +1010,11 @@ const SPECIALIZED_CUSTOM_TAGS = new Set([
   "ulm-custom-card-nik-door-card",
   "ulm-custom-card-scenes-card",
   "ulm-custom-card-tpx01-aircondition-card",
+  "ulm-custom-card-input-number-card",
+  "ulm-custom-card-input-datetime-card",
+  "ulm-custom-card-homeassistant-updates-card",
+  "ulm-custom-card-water-heater-card",
+  "ulm-custom-card-more-power-outlet-card",
 ]);
 
 export const CUSTOM_CARDS = CUSTOM_CARD_DEFS.filter(
