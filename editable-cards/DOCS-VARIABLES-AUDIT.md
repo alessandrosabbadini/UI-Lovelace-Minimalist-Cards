@@ -63,6 +63,14 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | custom speedtest_shogun160 | yes | 3 SVG gauges (no apexcharts) |
 | custom esh_welcome | yes | weather topbar + greeting + nav pills |
 | custom nas | yes | simple blue icon_info sensor |
+| custom chip_group_counter | yes | card+badge dual register |
+| custom chip_moon | yes | card+badge dual register |
+| custom chip_myenedis | yes | card+badge dual register |
+| custom chip_simple_temp | yes | card+badge dual register |
+| custom chip_tesla_temperature | yes | card+badge dual register |
+| custom chip_update | yes | card+badge dual register |
+| custom chip_vlape_garage | yes | card+badge dual register |
+| custom template_shogun160_battery_info | yes | battery ring as card+badge |
 
 ## Sources
 

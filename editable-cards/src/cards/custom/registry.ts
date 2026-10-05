@@ -1025,6 +1025,14 @@ const SPECIALIZED_CUSTOM_TAGS = new Set([
   "ulm-custom-card-speedtest-shogun160-card",
   "ulm-custom-card-esh-welcome-card",
   "ulm-custom-card-nas-card",
+  "ulm-custom-chip-group-counter-card",
+  "ulm-custom-chip-moon-card",
+  "ulm-custom-chip-myenedis-card",
+  "ulm-custom-chip-simple-temp-card",
+  "ulm-custom-chip-tesla-temperature-card",
+  "ulm-custom-chip-update-card",
+  "ulm-custom-chip-vlape-garage-card",
+  "ulm-custom-template-shogun160-battery-info-card",
 ]);
 
 export const CUSTOM_CARDS = CUSTOM_CARD_DEFS.filter(

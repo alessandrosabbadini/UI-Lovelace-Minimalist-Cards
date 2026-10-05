@@ -53,6 +53,7 @@ import "./cards/custom/nas/ulm-custom-card-nas-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
+import { COMMUNITY_CHIPS } from "./cards/chips/community-chips";
 import { CUSTOM_CARDS } from "./cards/custom/registry";
 
 console.info(
@@ -380,6 +381,14 @@ for (const { def } of SIMPLE_CARDS) {
 }
 
 for (const def of OFFICIAL_CHIPS) {
+  registerChip({
+    type: def.type.replace(/^custom:/, ""),
+    name: def.name,
+    description: def.description,
+  });
+}
+
+for (const def of COMMUNITY_CHIPS) {
   registerChip({
     type: def.type.replace(/^custom:/, ""),
     name: def.name,
