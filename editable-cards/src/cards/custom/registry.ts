@@ -198,10 +198,10 @@ export const CUSTOM_CARD_DEFS = [
     "editorTag": "ulm-custom-card-haven-washer-card-editor",
     "type": "custom:ulm-custom-card-haven-washer-card",
     "name": "ULM Custom haven washer",
-    "description": "Minimalist custom card port: custom_card_haven_washer",
-    "defaultIcon": "mdi:puzzle",
+    "description": "Washer power + phase icons + progress bar",
+    "defaultIcon": "mdi:washing-machine",
     "defaultColor": "blue",
-    "stubEntity": "sensor.demo",
+    "stubEntity": "switch.decorative_lights",
     "extraKeys": []
   },
   {
@@ -386,10 +386,10 @@ export const CUSTOM_CARD_DEFS = [
     "editorTag": "ulm-custom-card-light-colorpick-card-editor",
     "type": "custom:ulm-custom-card-light-colorpick-card",
     "name": "ULM Custom light colorpick",
-    "description": "Minimalist custom card port: custom_card_light_colorpick",
-    "defaultIcon": "mdi:puzzle",
-    "defaultColor": "blue",
-    "stubEntity": "sensor.demo",
+    "description": "Light with brightness slider + RGB preset chips",
+    "defaultIcon": "mdi:palette",
+    "defaultColor": "yellow",
+    "stubEntity": "light.living_room_rgbww_lights",
     "extraKeys": [
       "ulm_card_light_colorpick_name",
       "ulm_card_light_colorpick_transition",
@@ -548,10 +548,10 @@ export const CUSTOM_CARD_DEFS = [
     "editorTag": "ulm-custom-card-nik-nas-card-editor",
     "type": "custom:ulm-custom-card-nik-nas-card",
     "name": "ULM Custom nik nas",
-    "description": "Minimalist custom card port: custom_card_nik_nas",
-    "defaultIcon": "mdi:puzzle",
+    "description": "NAS power status + up to 4 metric rows",
+    "defaultIcon": "mdi:nas",
     "defaultColor": "blue",
-    "stubEntity": "sensor.demo",
+    "stubEntity": "switch.ac",
     "extraKeys": []
   },
   {
@@ -707,10 +707,10 @@ export const CUSTOM_CARD_DEFS = [
     "editorTag": "ulm-custom-card-saxel-fan-card-editor",
     "type": "custom:ulm-custom-card-saxel-fan-card",
     "name": "ULM Custom saxel fan",
-    "description": "Minimalist custom card port: custom_card_saxel_fan",
-    "defaultIcon": "mdi:puzzle",
+    "description": "Fan with slider, oscillate button, temp/hum attributes",
+    "defaultIcon": "mdi:fan",
     "defaultColor": "blue",
-    "stubEntity": "sensor.demo",
+    "stubEntity": "fan.living_room_fan",
     "extraKeys": [
       "ulm_card_fan_horizontal",
       "ulm_card_fan_hum_attribute",
@@ -735,10 +735,10 @@ export const CUSTOM_CARD_DEFS = [
     "editorTag": "ulm-custom-card-schumijo-car-card-editor",
     "type": "custom:ulm-custom-card-schumijo-car-card",
     "name": "ULM Custom schumijo car",
-    "description": "Minimalist custom card port: custom_card_schumijo_car",
-    "defaultIcon": "mdi:puzzle",
+    "description": "Car tracker + lock badges with energy/range widgets",
+    "defaultIcon": "mdi:car",
     "defaultColor": "blue",
-    "stubEntity": "sensor.demo",
+    "stubEntity": "person.alessandro_sabbadini",
     "extraKeys": [
       "ulm_card_schumijo_car_lock"
     ]
@@ -1015,6 +1015,11 @@ const SPECIALIZED_CUSTOM_TAGS = new Set([
   "ulm-custom-card-homeassistant-updates-card",
   "ulm-custom-card-water-heater-card",
   "ulm-custom-card-more-power-outlet-card",
+  "ulm-custom-card-saxel-fan-card",
+  "ulm-custom-card-schumijo-car-card",
+  "ulm-custom-card-nik-nas-card",
+  "ulm-custom-card-haven-washer-card",
+  "ulm-custom-card-light-colorpick-card",
 ]);
 
 export const CUSTOM_CARDS = CUSTOM_CARD_DEFS.filter(

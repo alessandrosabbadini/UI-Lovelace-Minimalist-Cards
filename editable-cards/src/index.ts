@@ -40,6 +40,11 @@ import "./cards/custom/input-datetime/ulm-custom-card-input-datetime-card";
 import "./cards/custom/homeassistant-updates/ulm-custom-card-homeassistant-updates-card";
 import "./cards/custom/water-heater/ulm-custom-card-water-heater-card";
 import "./cards/custom/more-power-outlet/ulm-custom-card-more-power-outlet-card";
+import "./cards/custom/saxel-fan/ulm-custom-card-saxel-fan-card";
+import "./cards/custom/schumijo-car/ulm-custom-card-schumijo-car-card";
+import "./cards/custom/nik-nas/ulm-custom-card-nik-nas-card";
+import "./cards/custom/haven-washer/ulm-custom-card-haven-washer-card";
+import "./cards/custom/light-colorpick/ulm-custom-card-light-colorpick-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -304,6 +309,31 @@ const SPECIALIZED = [
     type: "ulm-custom-card-more-power-outlet-card",
     name: "ULM Custom more power outlet",
     description: "Outlet with power / energy / runtime label",
+  },
+  {
+    type: "ulm-custom-card-saxel-fan-card",
+    name: "ULM Custom saxel fan",
+    description: "Fan with slider, oscillate button, temp/hum attributes",
+  },
+  {
+    type: "ulm-custom-card-schumijo-car-card",
+    name: "ULM Custom schumijo car",
+    description: "Car tracker + lock badges with energy/range widgets",
+  },
+  {
+    type: "ulm-custom-card-nik-nas-card",
+    name: "ULM Custom nik nas",
+    description: "NAS power status + up to 4 metric rows",
+  },
+  {
+    type: "ulm-custom-card-haven-washer-card",
+    name: "ULM Custom haven washer",
+    description: "Washer power + phase icons + progress bar",
+  },
+  {
+    type: "ulm-custom-card-light-colorpick-card",
+    name: "ULM Custom light colorpick",
+    description: "Light with brightness slider + RGB preset chips",
   },
 ] as const;
 

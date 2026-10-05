@@ -53,6 +53,11 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | custom homeassistant_updates | yes | Core/Supervisor/OS + shortcut widgets |
 | custom water_heater | yes | consumption-driven red heating state |
 | custom more_power_outlet | yes | power + energy + runtime label |
+| custom saxel_fan | yes | fan slider/oscillate + temp/hum + variant_blue |
+| custom schumijo_car | yes | tracker/lock badges + energy/range widgets |
+| custom nik_nas | yes | NAS power + 4 metric rows (no apex chart) |
+| custom haven_washer | yes | power + phases + progress + optional services |
+| custom light_colorpick | yes | brightness slider + RGB preset chips |
 
 ## Sources
 
