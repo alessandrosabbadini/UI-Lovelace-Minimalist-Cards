@@ -33,6 +33,7 @@ import "./cards/custom/damix48-power-details/ulm-custom-card-damix48-power-detai
 import "./cards/custom/eraycetinay-lock/ulm-custom-card-eraycetinay-lock-card";
 import "./cards/custom/nik-door/ulm-custom-card-nik-door-card";
 import "./cards/custom/scenes/ulm-custom-card-scenes-card";
+import "./cards/custom/mpse-printer/ulm-custom-card-mpse-printer-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -260,6 +261,12 @@ const SPECIALIZED = [
     name: "ULM Custom scenes",
     description:
       "Row of up to 5 scene / script / automation pills",
+  },
+  {
+    type: "ulm-custom-card-mpse-printer-card",
+    name: "ULM Custom Printer",
+    description:
+      "Printer status header + CMYK toner level bars",
   },
 ] as const;
 

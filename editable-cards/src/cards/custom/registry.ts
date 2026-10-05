@@ -440,8 +440,8 @@ export const CUSTOM_CARD_DEFS = [
     "tag": "ulm-custom-card-mpse-printer-card",
     "editorTag": "ulm-custom-card-mpse-printer-card-editor",
     "type": "custom:ulm-custom-card-mpse-printer-card",
-    "name": "ULM Custom mpse printer",
-    "description": "Minimalist custom card port: custom_card_mpse_printer",
+    "name": "ULM Custom Printer",
+    "description": "Printer status header + CMYK toner level bars",
     "defaultIcon": "mdi:puzzle",
     "defaultColor": "blue",
     "stubEntity": "sensor.demo",
@@ -1006,6 +1006,7 @@ const SPECIALIZED_CUSTOM_TAGS = new Set([
   "ulm-custom-card-eraycetinay-lock-card",
   "ulm-custom-card-esh-room-card",
   "ulm-custom-card-httpedo13-sun-card",
+  "ulm-custom-card-mpse-printer-card",
   "ulm-custom-card-nik-door-card",
   "ulm-custom-card-scenes-card",
 ]);

@@ -46,6 +46,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | custom eraycetinay_lock | yes | lock tap + battery/door-open badges |
 | custom nik_door | yes | Minimal Door Lock + battery + open/lock widgets |
 | custom scenes | yes | 5 nested scene pills (entity_id/icon/colors/name) |
+| custom mpse_printer | yes | status header + CMYK toner bars |
 
 ## Sources
 
