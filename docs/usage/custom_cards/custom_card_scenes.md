@@ -1,10 +1,10 @@
 ---
-title: scenes
+title: Scenes Card
 hide:
   - toc
 ---
 
-# scenes
+# Custom-card "Scenes Card"
 
 Editable Home Assistant card port of the Minimalist custom card `custom_card_scenes`.
 
@@ -16,13 +16,18 @@ Original author: sildehoop - 2021 (v1.2.0)
 
 ```yaml
 type: custom:ulm-custom-card-scenes-card
-entity: <main_entity>
-name: Optional name
-icon: mdi:icon
-color: blue
-force_background_color: false
-# Extra fields mapped from original variables (optional strings):
-# (see Variables)
+entity_1:
+  entity_id: script.movie_time
+  name: Movie
+  icon: mdi:movie-open
+  icon_color: blue
+  bg_color: blue
+entity_2:
+  entity_id: script.romantic_lights
+  name: Romance
+  icon: mdi:candle
+  icon_color: pink
+  bg_color: pink
 ```
 
 ## UI editor
@@ -31,18 +36,21 @@ Add the card from the Lovelace picker: **ULM Custom scenes**.
 
 ## Variables
 
-| Variable | Required | Notes |
-| --- | --- | --- |
-| entity | yes | Main entity shown on the card |
-| name | no | Override friendly name |
-| icon | no | Override icon (default `mdi:puzzle`) |
-| color | no | Theme color: yellow/blue/green/red/pink/purple/grey |
-| force_background_color | no | Colored background when active |
+Each of `entity_1` … `entity_5`:
 
+| Field | Required | Notes |
+| --- | --- | --- |
+| entity_id | no | scene / script / automation / switch / … |
+| name | no | Label under the icon |
+| icon | no | Default `mdi:help-circle-outline` |
+| icon_color | no | `gray` = theme tint; else ULM theme color |
+| bg_color | no | Icon circle background |
+
+Tap: `automation.trigger` for automations, otherwise `homeassistant.turn_on`.
 
 ## Legacy YAML
 
-Original button-card templates remain in this folder for reference:
+Original button-card templates remain in `custom_cards/custom_card_scenes/`:
 - `card_scenes.yaml`
 
 ## Migration
@@ -50,11 +58,23 @@ Original button-card templates remain in this folder for reference:
 Old:
 ```yaml
 type: custom:button-card
-template: custom_card_scenes
+template: card_scenes
+variables:
+  entity_1:
+    entity_id: script.movie_time
+    name: Movie
+    icon: mdi:movie-open
+    icon_color: blue
+    bg_color: blue
 ```
 
 New:
 ```yaml
 type: custom:ulm-custom-card-scenes-card
-entity: entity.example
+entity_1:
+  entity_id: script.movie_time
+  name: Movie
+  icon: mdi:movie-open
+  icon_color: blue
+  bg_color: blue
 ```

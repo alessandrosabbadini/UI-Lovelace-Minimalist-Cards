@@ -1007,6 +1007,7 @@ const SPECIALIZED_CUSTOM_TAGS = new Set([
   "ulm-custom-card-esh-room-card",
   "ulm-custom-card-httpedo13-sun-card",
   "ulm-custom-card-nik-door-card",
+  "ulm-custom-card-scenes-card",
 ]);
 
 export const CUSTOM_CARDS = CUSTOM_CARD_DEFS.filter(

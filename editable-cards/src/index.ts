@@ -32,6 +32,7 @@ import "./cards/custom/httpedo13-sun/ulm-custom-card-httpedo13-sun-card";
 import "./cards/custom/damix48-power-details/ulm-custom-card-damix48-power-details-card";
 import "./cards/custom/eraycetinay-lock/ulm-custom-card-eraycetinay-lock-card";
 import "./cards/custom/nik-door/ulm-custom-card-nik-door-card";
+import "./cards/custom/scenes/ulm-custom-card-scenes-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -253,6 +254,12 @@ const SPECIALIZED = [
     name: "ULM Custom Minimal Door Lock",
     description:
       "Nik door lock: state sensor + battery badge + open/lock widgets",
+  },
+  {
+    type: "ulm-custom-card-scenes-card",
+    name: "ULM Custom scenes",
+    description:
+      "Row of up to 5 scene / script / automation pills",
   },
 ] as const;
 

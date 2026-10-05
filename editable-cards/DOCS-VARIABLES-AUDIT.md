@@ -45,6 +45,7 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | custom damix48_power_details | yes | header + nested HACS mini-graph-card |
 | custom eraycetinay_lock | yes | lock tap + battery/door-open badges |
 | custom nik_door | yes | Minimal Door Lock + battery + open/lock widgets |
+| custom scenes | yes | 5 nested scene pills (entity_id/icon/colors/name) |
 
 ## Sources
 
