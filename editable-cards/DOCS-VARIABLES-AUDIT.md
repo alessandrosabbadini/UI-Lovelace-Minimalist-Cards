@@ -58,6 +58,11 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | custom nik_nas | yes | NAS power + 4 metric rows (no apex chart) |
 | custom haven_washer | yes | power + phases + progress + optional services |
 | custom light_colorpick | yes | brightness slider + RGB preset chips |
+| custom media_player_sonos | yes | header + vol−/play-pause/vol+ |
+| custom person_info | yes | zone badge + battery/commute rows |
+| custom speedtest_shogun160 | yes | 3 SVG gauges (no apexcharts) |
+| custom esh_welcome | yes | weather topbar + greeting + nav pills |
+| custom nas | yes | simple blue icon_info sensor |
 
 ## Sources
 

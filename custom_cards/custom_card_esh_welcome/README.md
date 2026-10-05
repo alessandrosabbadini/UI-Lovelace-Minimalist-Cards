@@ -1,67 +1,22 @@
 ---
-title: esh welcome
+title: Custom-card "esh Welcome"
 hide:
   - toc
 ---
 
-# esh welcome
+# Custom-card "esh Welcome"
 
-Editable Home Assistant card port of the Minimalist custom card `custom_card_esh_welcome`.
-
-## Credits
-
-Original author: Everything Smart Home - 2022 (v1.1.0)
-
-## New card type
+Lit port of `custom_card_esh_welcome` — weather topbar, time-based greeting, up to five nav pills.
 
 ```yaml
 type: custom:ulm-custom-card-esh-welcome-card
-entity: <main_entity>
-name: Optional name
-icon: mdi:icon
-color: blue
-force_background_color: false
-# Extra fields mapped from original variables (optional strings):
-ulm_weather: # optional
+weather: weather.home
+collapse: input_boolean.welcome_collapse
+entity_1:
+  name: Home
+  icon: mdi:home
+  color: blue
+  path: /lovelace/0
 ```
 
-## UI editor
-
-Add the card from the Lovelace picker: **ULM Custom esh welcome**.
-
-## Variables
-
-| Variable | Required | Notes |
-| --- | --- | --- |
-| entity | yes | Main entity shown on the card |
-| name | no | Override friendly name |
-| icon | no | Override icon (default `mdi:puzzle`) |
-| color | no | Theme color: yellow/blue/green/red/pink/purple/grey |
-| force_background_color | no | Colored background when active |
-| ulm_afternoon | no | Ported optional field from original YAML |
-| ulm_card_esh_welcome_collapse | no | Ported optional field from original YAML |
-| ulm_chip_mdi_icon_only_icon | no | Ported optional field from original YAML |
-| ulm_evening | no | Ported optional field from original YAML |
-| ulm_hello | no | Ported optional field from original YAML |
-| ulm_language_variables | no | Ported optional field from original YAML |
-| ulm_morning | no | Ported optional field from original YAML |
-| ulm_weather | no | Ported optional field from original YAML |
-
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_esh_welcome.yaml`
-
-## Migration
-
-Old:
-```yaml
-type: custom:button-card
-template: custom_card_esh_welcome
-```
-
-New:
-```yaml
-type: custom:ulm-custom-card-esh-welcome-card
-entity: entity.example
-```
+Legacy: `ulm_weather`, `ulm_card_esh_welcome_collapse`.

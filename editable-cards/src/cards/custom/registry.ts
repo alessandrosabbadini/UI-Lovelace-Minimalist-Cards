@@ -1020,6 +1020,11 @@ const SPECIALIZED_CUSTOM_TAGS = new Set([
   "ulm-custom-card-nik-nas-card",
   "ulm-custom-card-haven-washer-card",
   "ulm-custom-card-light-colorpick-card",
+  "ulm-custom-card-media-player-sonos-card",
+  "ulm-custom-card-person-info-card",
+  "ulm-custom-card-speedtest-shogun160-card",
+  "ulm-custom-card-esh-welcome-card",
+  "ulm-custom-card-nas-card",
 ]);
 
 export const CUSTOM_CARDS = CUSTOM_CARD_DEFS.filter(

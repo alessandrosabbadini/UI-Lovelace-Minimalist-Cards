@@ -45,6 +45,11 @@ import "./cards/custom/schumijo-car/ulm-custom-card-schumijo-car-card";
 import "./cards/custom/nik-nas/ulm-custom-card-nik-nas-card";
 import "./cards/custom/haven-washer/ulm-custom-card-haven-washer-card";
 import "./cards/custom/light-colorpick/ulm-custom-card-light-colorpick-card";
+import "./cards/custom/media-player-sonos/ulm-custom-card-media-player-sonos-card";
+import "./cards/custom/person-info/ulm-custom-card-person-info-card";
+import "./cards/custom/speedtest-shogun160/ulm-custom-card-speedtest-shogun160-card";
+import "./cards/custom/esh-welcome/ulm-custom-card-esh-welcome-card";
+import "./cards/custom/nas/ulm-custom-card-nas-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -334,6 +339,31 @@ const SPECIALIZED = [
     type: "ulm-custom-card-light-colorpick-card",
     name: "ULM Custom light colorpick",
     description: "Light with brightness slider + RGB preset chips",
+  },
+  {
+    type: "ulm-custom-card-media-player-sonos-card",
+    name: "ULM Custom Sonos",
+    description: "Sonos media player with volume and play/pause widgets",
+  },
+  {
+    type: "ulm-custom-card-person-info-card",
+    name: "ULM Custom person info",
+    description: "Person card with zone badge, battery and commute",
+  },
+  {
+    type: "ulm-custom-card-speedtest-shogun160-card",
+    name: "ULM Custom speedtest",
+    description: "Download / upload / ping gauges (CSS, no apexcharts)",
+  },
+  {
+    type: "ulm-custom-card-esh-welcome-card",
+    name: "ULM Custom esh welcome",
+    description: "Welcome greeting with weather topbar and nav pills",
+  },
+  {
+    type: "ulm-custom-card-nas-card",
+    name: "ULM Custom nas",
+    description: "Simple NAS sensor icon_info (blue)",
   },
 ] as const;
 
