@@ -60,6 +60,16 @@ import "./cards/custom/nik-clock/ulm-custom-card-nik-clock-card";
 import "./cards/custom/wilbiev-title/ulm-custom-card-wilbiev-title-card";
 import "./cards/custom/wilbiev-subtitle/ulm-custom-card-wilbiev-subtitle-card";
 import "./cards/custom/yagrasdemonde-lights-count/ulm-custom-card-yagrasdemonde-lights-count-card";
+import "./cards/custom/drealine-roomview/ulm-custom-card-drealine-roomview-card";
+import "./cards/custom/eraycetinay-elapsed-time/ulm-custom-card-eraycetinay-elapsed-time-card";
+import "./cards/custom/heat-pump/ulm-custom-card-heat-pump-card";
+import "./cards/custom/httpedo13-thermostat/ulm-custom-card-httpedo13-thermostat-card";
+import "./cards/custom/imswel-medias/ulm-custom-card-imswel-medias-card";
+import "./cards/custom/imswel-person/ulm-custom-card-imswel-person-card";
+import "./cards/custom/irmajavi-entities/ulm-custom-card-irmajavi-entities-card";
+import "./cards/custom/irmajavi-speedtest/ulm-custom-card-irmajavi-speedtest-card";
+import "./cards/custom/irmajavi-weather/ulm-custom-card-irmajavi-weather-card";
+import "./cards/custom/mpse-gauge/ulm-custom-card-mpse-gauge-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -415,6 +425,56 @@ const SPECIALIZED = [
     type: "ulm-custom-card-yagrasdemonde-lights-count-card",
     name: "ULM Custom lights count",
     description: "Lights / covers count with icon",
+  },
+  {
+    type: "ulm-custom-card-drealine-roomview-card",
+    name: "ULM Custom drealine roomview",
+    description: "Room overview with sensor alerts and device toggles",
+  },
+  {
+    type: "ulm-custom-card-eraycetinay-elapsed-time-card",
+    name: "ULM Custom elapsed time",
+    description: "input_datetime elapsed time label (days/hours ago)",
+  },
+  {
+    type: "ulm-custom-card-heat-pump-card",
+    name: "ULM Custom heat pump",
+    description: "Climate heat pump with temp and HVAC mode widgets",
+  },
+  {
+    type: "ulm-custom-card-httpedo13-thermostat-card",
+    name: "ULM Custom httpedo13 thermostat",
+    description: "Radiator thermostat with orange heating state",
+  },
+  {
+    type: "ulm-custom-card-imswel-medias-card",
+    name: "ULM Custom imswel medias",
+    description: "Plex/Radarr/Sonarr recently-added or upcoming artwork",
+  },
+  {
+    type: "ulm-custom-card-imswel-person-card",
+    name: "ULM Custom imswel person",
+    description: "Person presence with zone badge",
+  },
+  {
+    type: "ulm-custom-card-irmajavi-entities-card",
+    name: "ULM Custom irmajavi entities",
+    description: "Header status + four metric entities",
+  },
+  {
+    type: "ulm-custom-card-irmajavi-speedtest-card",
+    name: "ULM Custom irmajavi speedtest",
+    description: "Router speedtest refresh + download/upload tiles",
+  },
+  {
+    type: "ulm-custom-card-irmajavi-weather-card",
+    name: "ULM Custom irmajavi weather",
+    description: "Weather emoji header + four sensor metrics",
+  },
+  {
+    type: "ulm-custom-card-mpse-gauge-card",
+    name: "ULM Custom mpse gauge",
+    description: "icon_info header + native SVG semicircle gauge",
   },
 ] as const;
 

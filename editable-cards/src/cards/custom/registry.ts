@@ -1044,6 +1044,16 @@ const SPECIALIZED_CUSTOM_TAGS = new Set([
   "ulm-custom-card-wilbiev-title-card",
   "ulm-custom-card-wilbiev-subtitle-card",
   "ulm-custom-card-yagrasdemonde-lights-count-card",
+  "ulm-custom-card-drealine-roomview-card",
+  "ulm-custom-card-eraycetinay-elapsed-time-card",
+  "ulm-custom-card-heat-pump-card",
+  "ulm-custom-card-httpedo13-thermostat-card",
+  "ulm-custom-card-imswel-medias-card",
+  "ulm-custom-card-imswel-person-card",
+  "ulm-custom-card-irmajavi-entities-card",
+  "ulm-custom-card-irmajavi-speedtest-card",
+  "ulm-custom-card-irmajavi-weather-card",
+  "ulm-custom-card-mpse-gauge-card",
 ]);
 
 export const CUSTOM_CARDS = CUSTOM_CARD_DEFS.filter(

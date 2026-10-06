@@ -82,6 +82,16 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | custom wilbiev_title | yes | title + optional nav |
 | custom wilbiev_subtitle | yes | subtitle divider |
 | custom yagrasdemonde_lights_count | yes | lights/covers count |
+| custom drealine_roomview | yes | room sensors + device toggles |
+| custom eraycetinay_elapsed_time | yes | input_datetime elapsed label |
+| custom heat_pump | yes | climate temp + HVAC modes |
+| custom httpedo13_thermostat | yes | radiator + orange heating |
+| custom imswel_medias | yes | library/upcoming artwork |
+| custom imswel_person | yes | person + zone badge |
+| custom irmajavi_entities | yes | header + 4 metrics |
+| custom irmajavi_speedtest | yes | router + speed tiles |
+| custom irmajavi_weather | yes | weather emoji + 4 metrics |
+| custom mpse_gauge | yes | icon_info + SVG gauge |
 
 ## Sources
 
