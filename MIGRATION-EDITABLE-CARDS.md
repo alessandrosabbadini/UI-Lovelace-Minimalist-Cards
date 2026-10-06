@@ -1,17 +1,18 @@
 # Migration: YAML Minimalist → Editable Cards
 
-This fork is moving away from `custom:button-card` YAML templates toward native Lovelace cards with Home Assistant UI editors (Mushroom-style).
+This fork moved away from `custom:button-card` YAML templates toward native
+Lovelace cards with Home Assistant UI editors (Mushroom-style).
 
 ## What changed
 
-- New package: `editable-cards/`
-- Old removed:
-  - `custom_components/.../lovelace/ulm_templates/**` button-card templates
-  - `custom_cards/**` community YAML cards
-- **Themes kept as original** under:
-  - `custom_components/ui_lovelace_minimalist/lovelace/themefiles/` (source)
-  - `themes/` (same files, HA-ready layout)
-  - `minimalist-desktop`, `minimalist-mobile`, `minimalist-mobile-tapbar`, `minimalist-ios-tapbar`
+- **Runtime cards:** `editable-cards/` → build `dist/ulm-editable-cards.js`
+- **Themes kept:** `themes/` and `custom_components/.../lovelace/themefiles/`
+- **Removed from the package:**
+  - Official card/chip/action YAML under `ulm_templates/card_templates` and `actions`
+  - Community YAML under `custom_cards/**/*.yaml` (READMEs kept)
+  - Bundled HACS frontend deps (button-card, card-mod, mini-*, …)
+  - YAML example dashboards (`ui-lovelace.yaml`, `adaptive-dash`)
+- **Kept for porting only:** `legacy/popup_templates/` (original popup YAML)
 
 ## Mapping (old → new)
 
@@ -40,19 +41,17 @@ This fork is moving away from `custom:button-card` YAML templates toward native 
 | `card_fan` | `custom:ulm-fan-card` |
 | `card_vacuum` | `custom:ulm-vacuum-card` |
 | `card_vertical_button` | `custom:ulm-vertical-button-card` |
+| community `custom_card_*` | `custom:ulm-custom-card-*-card` |
 
-## Card editors (Home Assistant official API)
-
-All ULM editable cards use the built-in form editor via static `getConfigForm()`
-(selectors, expandable panels, `computeLabel` / `computeHelper`) — same pattern
-as the Welcome card and as documented at
-[Custom card](https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card/).
-
-Shared helpers live in `editable-cards/src/shared/config-form.ts`.
-
-## Install new cards
+## Install
 
 1. `cd editable-cards && npm install && npm run build`
-2. Copy `dist/ulm-editable-cards.js` to `/config/www/`
-3. Add Lovelace resource `/local/ulm-editable-cards.js` (module)
-4. Use a **UI mode** dashboard and add cards from the picker (`ULM ...`)
+2. Copy `dist/ulm-editable-cards.js` → `/config/www/`
+3. Lovelace resource: `/local/ulm-editable-cards.js` (JavaScript Module)
+4. UI-mode dashboard → Add card → search `ULM`
+5. (Optional) Keep the integration for **themes** only
+
+## Remaining work
+
+Port advanced popup flows from `legacy/popup_templates/` into
+`editable-cards/src/popups/` (color temp, sources, radar, history, maps, …).

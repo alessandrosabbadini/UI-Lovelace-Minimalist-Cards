@@ -1,13 +1,10 @@
-# Deprecated YAML templates
+# ulm_templates
 
-The button-card YAML templates previously stored here have been removed.
+Card / chip / action YAML templates have been removed.
 
-Use the new UI-editable cards in `/editable-cards` instead:
+Popup YAML sources for the remaining Lit port live in:
 
-```bash
-cd editable-cards
-npm install
-npm run build
-```
+`legacy/popup_templates/`
 
-Then load `editable-cards/dist/ulm-editable-cards.js` as a Lovelace resource.
+Runtime cards are the Lit package under `editable-cards/`.
+Themes stay in `lovelace/themefiles/` (mirrored in `/themes`).

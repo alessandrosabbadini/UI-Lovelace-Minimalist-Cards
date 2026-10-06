@@ -19,8 +19,6 @@ from aiogithubapi import (
 )
 from homeassistant.components.frontend import add_extra_js_url, async_remove_panel
 from homeassistant.components.http import StaticPathConfig
-from homeassistant.components.lovelace import _register_panel
-from homeassistant.components.lovelace.dashboard import LovelaceYAML
 from homeassistant.config_entries import ConfigEntry, ConfigEntryState
 
 if TYPE_CHECKING:
@@ -357,53 +355,10 @@ class UlmBase:
                         await asyncio.gather(*download_tasks)
 
     async def configure_plugins(self) -> bool:
-        """Configure the Plugins ULM depends on."""
-        self.log.debug("Checking Dependencies.")
-        self.log.info("Setup ULM Plugins")
+        """Register leftover static assets (theme helpers). Cards are Lit modules."""
+        self.log.info("Setup ULM Plugins (themes helpers only)")
 
         try:
-            browser_mod_path = Path(
-                self.hass.config.path("custom_components/browser_mod")
-            )
-            if not browser_mod_path.exists():
-                self.log.error('HACS Integration repo "Browser Mod" is not installed')
-
-            depenceny_resource_paths = [
-                "button-card",
-                "light-entity-card",
-                "lovelace-card-mod",
-                "lovelace-auto-entities",
-                "mini-graph-card",
-                "mini-media-player",
-                "my-cards",
-                "simple-weather-card",
-                "lovelace-layout-card",
-                "lovelace-state-switch",
-                "weather-radar-card",
-            ]
-            for p in depenceny_resource_paths:
-                frontend_repo_path = Path(self.hass.config.path(f"www/community/{p}"))
-                if not self.configuration.include_other_cards:
-                    if not frontend_repo_path.exists():
-                        self.log.error(
-                            'HACS Frontend repo "%s" is not installed, '
-                            "See Integration Configuration",
-                            p,
-                        )
-                elif frontend_repo_path.exists():
-                    self.log.error(
-                        'HACS Frontend repo "%s" is already installed, '
-                        "Remove it or disable include custom cards",
-                        p,
-                    )
-
-            if self.configuration.include_other_cards:
-                for c in depenceny_resource_paths:
-                    add_extra_js_url(
-                        self.hass, f"/ui_lovelace_minimalist/cards/{c}/{c}.js"
-                    )
-
-            # Register
             await self.hass.http.async_register_static_paths(
                 [
                     StaticPathConfig(
@@ -414,10 +369,7 @@ class UlmBase:
                 ]
             )
 
-            # Home Assistant 2026+ renders the Lovelace header/tab bar inside
-            # hui-root shadow DOM and card-mod theme root styles may not be
-            # applied there. Load a tiny compatibility module globally; it
-            # activates only for the minimalist-mobile-tapbar theme.
+            # Home Assistant 2026+ tapbar compatibility for minimalist-mobile-tapbar.
             add_extra_js_url(
                 self.hass,
                 "/ui_lovelace_minimalist/cards/hermes-mobile-tapbar-fix/hermes-mobile-tapbar-fix.js",
@@ -431,160 +383,47 @@ class UlmBase:
         return True
 
     async def configure_dashboard(self) -> bool:
-        """Configure the ULM Dashboards."""
-        self.log.info("Setup ULM Dashboard")
+        """Legacy YAML dashboards removed — use Lit cards on a UI-mode dashboard."""
+        self.log.info(
+            "ULM YAML dashboards are disabled; add editable-cards via Lovelace resources"
+        )
 
-        dashboard_url = "ui-lovelace-minimalist"
-        dashboard_config = {
-            "mode": "yaml",
-            "icon": self.configuration.sidepanel_icon,
-            "title": self.configuration.sidepanel_title,
-            "filename": "ui_lovelace_minimalist/dashboard/ui-lovelace.yaml",
-            "show_in_sidebar": True,
-            "require_admin": False,
-        }
-
-        adv_dashboard_url = "adaptive-dash"
-        adv_dashboard_config = {
-            "mode": "yaml",
-            "icon": self.configuration.adaptive_ui_icon,
-            "title": self.configuration.adaptive_ui_title,
-            "filename": "ui_lovelace_minimalist/dashboard/adaptive-dash/adaptive-ui.yaml",
-            "show_in_sidebar": True,
-            "require_admin": False,
-        }
-        # Optoinal override can be done with config_flow?
-        # if not dashboard_url in hass.data["lovelace"].dashboards:
         try:
-            if self.configuration.sidepanel_enabled:
-                self.hass.data["lovelace"].dashboards[dashboard_url] = LovelaceYAML(
-                    self.hass, dashboard_url, dashboard_config
-                )
-
-                _register_panel(
-                    self.hass, dashboard_url, "yaml", dashboard_config, True
-                )
-            elif dashboard_url in self.hass.data["lovelace"].dashboards:
-                async_remove_panel(self.hass, "ui-lovelace-minimalist")
-
-            if self.configuration.adaptive_ui_enabled:
-                self.hass.data["lovelace"].dashboards[adv_dashboard_url] = LovelaceYAML(
-                    self.hass, adv_dashboard_url, adv_dashboard_config
-                )
-
-                _register_panel(
-                    self.hass, adv_dashboard_url, "yaml", adv_dashboard_config, True
-                )
-            elif adv_dashboard_url in self.hass.data["lovelace"].dashboards:
-                async_remove_panel(self.hass, "adaptive-dash")
-
-        except MinimalistException as exception:
-            self.log.error(exception)
-            self.disable_ulm(UlmDisabledReason.LOAD_ULM)
-            return False
+            # Remove stale panels from older installs
+            for url in ("ui-lovelace-minimalist", "adaptive-dash"):
+                if url in self.hass.data.get("lovelace", {}).dashboards:
+                    async_remove_panel(self.hass, url)
+        except Exception:  # noqa: BLE001 — best-effort cleanup
+            self.log.debug("Could not remove legacy ULM sidebar panels", exc_info=True)
 
         return True
 
     async def configure_ulm(self) -> bool:
-        """Configure initial dashboard & cards directory."""
-        self.log.info("Setup ULM Configuration")
+        """Install themes; Lit cards are loaded via Lovelace resources."""
+        self.log.info("Setup ULM Configuration (themes)")
 
-        # Define Path objects
         base_dir = Path(self.hass.config.path(DOMAIN))
         integration_lovelace = Path(self.integration_dir) / "lovelace"
-        dashboard_file = base_dir / "dashboard" / "ui-lovelace.yaml"
-        adaptive_dir = base_dir / "dashboard" / "adaptive-dash"
-        actions_file = base_dir / "custom_actions" / "custom_actions.yaml"
 
         def _sync_file_operations():
-            """Grouped synchronous I/O to run in one executor job."""
-            # Cleanup legacy folders
-            for folder in ["configs", "addons"]:
+            for folder in ["configs", "addons", "dashboard", "custom_cards"]:
                 shutil.rmtree(base_dir / folder, ignore_errors=True)
 
-            # Create necessary directories
-            for folder in ["dashboard", "custom_cards", "custom_actions"]:
-                (base_dir / folder).mkdir(parents=True, exist_ok=True)
-
-            # Proceed if dashboard dir exists (it should, we just created it)
-            if (base_dir / "dashboard").exists():
-                self.templates_dir.mkdir(parents=True, exist_ok=True)
-
-                # Translations
-                language = LANGUAGES[self.configuration.language]
-
-                # Copy default language file over to config dir
-                shutil.copy2(
-                    integration_lovelace / "translations" / "default.yaml",
-                    self.templates_dir / "default.yaml",
-                )
-
-                # Copy chosen language file over to config dir
-                shutil.copy2(
-                    integration_lovelace / "translations" / f"{language}.yaml",
-                    self.templates_dir / "language.yaml",
-                )
-
-                # Copy example dashboard file over to user config dir if not exists
-                if self.configuration.sidepanel_enabled and not dashboard_file.exists():
-                    shutil.copy2(
-                        integration_lovelace / "ui-lovelace.yaml", dashboard_file
-                    )
-
-                if self.configuration.adaptive_ui_enabled and not adaptive_dir.exists():
-                    shutil.copytree(
-                        integration_lovelace / "adaptive-dash", adaptive_dir
-                    )
-
-                # Copy example custom actions file over to user config dir if not exists
-                if not actions_file.exists():
-                    shutil.copy2(
-                        integration_lovelace / "custom_actions.yaml", actions_file
-                    )
-
-                # Copy over cards from integration
-                shutil.copytree(
-                    integration_lovelace / "ulm_templates",
-                    self.templates_dir,
-                    dirs_exist_ok=True,
-                )
-
-                # Copy over manually installed custom_cards from user
-                shutil.copytree(
-                    base_dir / "custom_cards",
-                    self.templates_dir / "custom_cards",
-                    dirs_exist_ok=True,
-                )
-
-                # Copy over manually installed custom_actions from user
-                shutil.copytree(
-                    base_dir / "custom_actions",
-                    self.templates_dir / "custom_actions",
-                    dirs_exist_ok=True,
-                )
-
-                # Copy over themes to defined themes folder
-                theme_target = Path(
-                    self.hass.config.path(self.configuration.theme_path)
-                )
-                shutil.copytree(
-                    integration_lovelace / "themefiles",
-                    theme_target,
-                    dirs_exist_ok=True,
-                )
+            theme_target = Path(self.hass.config.path(self.configuration.theme_path))
+            shutil.copytree(
+                integration_lovelace / "themefiles",
+                theme_target,
+                dirs_exist_ok=True,
+            )
 
         try:
-            # Run all disk I/O in a single block
             await self.hass.async_add_executor_job(_sync_file_operations)
-
-            # UI Reload and Service Registration
             self.hass.bus.async_fire("ui_lovelace_minimalist_reload")
 
-            async def handle_reload(call):
+            async def handle_reload(_call):
                 self.log.debug("Reload UI Lovelace Minimalist Configuration")
                 await self.reload_configuration()
 
-            # Register servcie ui_lovelace_minimalist.reload
             self.hass.services.async_register(DOMAIN, "reload", handle_reload)
 
         except MinimalistException as exception:
@@ -595,26 +434,18 @@ class UlmBase:
         return True
 
     async def reload_configuration(self):
-        """Reload Configuration."""
-        self.log.info("Reloading ULM Configuration")
+        """Reload themes into the configured theme path."""
+        self.log.info("Reloading ULM themes")
 
-        # Define Path objects
-        base_path = Path(self.hass.config.path(DOMAIN))
+        integration_lovelace = Path(self.integration_dir) / "lovelace"
 
-        def _sync_custom_folders():
-            """Internal helper to group I/O operations."""
+        def _sync_themes():
+            theme_target = Path(self.hass.config.path(self.configuration.theme_path))
+            shutil.copytree(
+                integration_lovelace / "themefiles",
+                theme_target,
+                dirs_exist_ok=True,
+            )
 
-            # Copy over manually installed custom_cards from user
-            folders = ["custom_cards", "custom_actions"]
-            for folder in folders:
-                source = base_path / folder
-                if source.exists():
-                    shutil.copytree(
-                        source, self.templates_dir / folder, dirs_exist_ok=True
-                    )
-
-        # Run all I/O in one executor thread
-        await self.hass.async_add_executor_job(_sync_custom_folders)
-
-        # Notify the system
+        await self.hass.async_add_executor_job(_sync_themes)
         self.hass.bus.async_fire("ui_lovelace_minimalist_reload")

@@ -12,7 +12,7 @@ Port completo delle card UI Lovelace Minimalist (ufficiali + custom + chips) ver
 | Popup | 7 kind | `src/popups/ulm-popup.ts` |
 | Chips row helper | 1 | `ulm-chips-card` |
 
-I README di ogni custom card restano in `custom_cards/<nome>/README.md` (aggiornati alle nuove type) e sono sincronizzati in `docs/usage/custom_cards/`.
+I README di ogni custom card restano in `custom_cards/<nome>/README.md` (type Lit) e in `docs/usage/custom_cards/`. I YAML button-card sono stati rimossi; i popup originali da portare sono in `legacy/popup_templates/`.
 
 ## Build
 
