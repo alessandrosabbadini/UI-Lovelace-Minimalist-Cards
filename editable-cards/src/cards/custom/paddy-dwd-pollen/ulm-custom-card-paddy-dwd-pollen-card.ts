@@ -205,7 +205,7 @@ export class UlmCustomPaddyDwdPollenCard
 
     return html`
       <ha-card class="ulm-card ulm-paddy-dwd-pollen" @click=${this._moreInfo}>
-        <div class="more-info-row">
+        <div class="row">
           <button class="icon-btn" type="button" style=${styleMap(iconStyle)}>
             <ha-icon .icon=${icon}></ha-icon>
           </button>
@@ -240,6 +240,12 @@ export class UlmCustomPaddyDwdPollenCard
         backgroundColor: bg,
       };
     }
+    if (level === "0") {
+      return {
+        color: "rgba(var(--color-theme, 51, 51, 51), 0.2)",
+        backgroundColor: "rgba(var(--color-theme, 51, 51, 51), 0.05)",
+      };
+    }
     return {
       color: "rgba(var(--color-theme, 51, 51, 51), 0.2)",
       backgroundColor: "rgba(var(--color-theme, 51, 51, 51), 0.05)",
@@ -272,14 +278,7 @@ export class UlmCustomPaddyDwdPollenCard
       padding: 12px;
     }
 
-    .more-info-row {
-      display: grid;
-      grid-template-columns: min-content auto;
-      column-gap: 0;
-      align-items: center;
-    }
-
-    .more-info-row .info-btn {
+    .row .info-btn {
       padding: 6px 0;
       margin-left: -6px;
     }

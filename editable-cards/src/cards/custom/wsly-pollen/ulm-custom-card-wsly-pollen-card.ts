@@ -1,6 +1,6 @@
 /**
  * Lit port of custom_cards/custom_card_wsly_pollen/
- * Three vertical pollen columns (tree / grass / weed) with level colors.
+ * list_3_items outer card + 3× vertical_buttons (no per-item shadow).
  */
 import { LitElement, css, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
@@ -27,9 +27,10 @@ type PollenLevel =
   | "low"
   | "medium"
   | "high"
-  | "very_high";
+  | "very_high"
+  | "unknown";
 
-const DEFAULT_LEVEL_LABELS: Record<PollenLevel, string> = {
+const DEFAULT_LEVEL_LABELS: Record<Exclude<PollenLevel, "unknown">, string> = {
   none: "None",
   very_low: "Very low",
   low: "Low",
@@ -37,6 +38,12 @@ const DEFAULT_LEVEL_LABELS: Record<PollenLevel, string> = {
   high: "High",
   very_high: "Very high",
 };
+
+const DEFAULT_ICONS = {
+  tree: "mdi:tree",
+  grass: "mdi:grass",
+  weed: "mdi:flower-pollen",
+} as const;
 
 export interface UlmCustomWslyPollenCardConfig extends LovelaceCardConfig {
   type: "custom:ulm-custom-card-wsly-pollen-card";
@@ -69,6 +76,7 @@ function asStr(raw: unknown): string | undefined {
   return typeof raw === "string" && raw ? raw : undefined;
 }
 
+/** Match YAML state styles; unknown → vertical_buttons default (theme 0.2 / 0.05). */
 function levelStyle(
   host: HTMLElement,
   level: PollenLevel,
@@ -112,18 +120,38 @@ function levelStyle(
   }
 }
 
-function normalizeLevel(state: string): PollenLevel {
+/**
+ * Klimalogger / pollen sensors use none|very_low|…|very_high.
+ * Also accept 0–5 indexes and common aliases.
+ */
+function normalizeLevel(raw: string): PollenLevel {
+  const s = raw.trim().toLowerCase().replace(/\s+/g, "_");
   if (
-    state === "none" ||
-    state === "very_low" ||
-    state === "low" ||
-    state === "medium" ||
-    state === "high" ||
-    state === "very_high"
+    s === "none" ||
+    s === "very_low" ||
+    s === "low" ||
+    s === "medium" ||
+    s === "high" ||
+    s === "very_high"
   ) {
-    return state;
+    return s;
   }
-  return "none";
+  if (s === "verylow" || s === "sehr_niedrig" || s === "zeer_laag") {
+    return "very_low";
+  }
+  if (s === "sehr_hoch" || s === "veryhigh" || s === "extreem_hoog") {
+    return "very_high";
+  }
+  const n = Number.parseFloat(raw);
+  if (Number.isFinite(n)) {
+    if (n <= 0) return "none";
+    if (n <= 1) return "very_low";
+    if (n <= 2) return "low";
+    if (n <= 3) return "medium";
+    if (n <= 4) return "high";
+    return "very_high";
+  }
+  return "unknown";
 }
 
 @customElement("ulm-custom-card-wsly-pollen-card")
@@ -137,18 +165,9 @@ export class UlmCustomWslyPollenCard extends LitElement implements LovelaceCard 
         entityField("tree_entity", undefined, false),
         entityField("grass_entity", undefined, false),
         entityField("weed_entity", undefined, false),
-        grid([
-          textField("tree_name"),
-          iconField("tree_icon"),
-        ]),
-        grid([
-          textField("grass_name"),
-          iconField("grass_icon"),
-        ]),
-        grid([
-          textField("weed_name"),
-          iconField("weed_icon"),
-        ]),
+        grid([textField("tree_name"), iconField("tree_icon")]),
+        grid([textField("grass_name"), iconField("grass_icon")]),
+        grid([textField("weed_name"), iconField("weed_icon")]),
         textField("label_none"),
         textField("label_very_low"),
         textField("label_low"),
@@ -193,6 +212,9 @@ export class UlmCustomWslyPollenCard extends LitElement implements LovelaceCard 
       tree_name: "Trees",
       grass_name: "Grass",
       weed_name: "Weeds",
+      tree_icon: DEFAULT_ICONS.tree,
+      grass_icon: DEFAULT_ICONS.grass,
+      weed_icon: DEFAULT_ICONS.weed,
     };
   }
 
@@ -267,25 +289,32 @@ export class UlmCustomWslyPollenCard extends LitElement implements LovelaceCard 
   protected render() {
     if (!this._config || !this.hass) return nothing;
 
+    /* Always 3 columns like list_3_items + item1/2/3 */
     const columns = [
       {
         entityId: this._config.tree_entity,
-        name: this._config.tree_name || "Trees",
+        name: this._config.tree_name,
         icon: this._config.tree_icon,
+        fallbackIcon: DEFAULT_ICONS.tree,
+        fallbackName: "Trees",
       },
       {
         entityId: this._config.grass_entity,
-        name: this._config.grass_name || "Grass",
+        name: this._config.grass_name,
         icon: this._config.grass_icon,
+        fallbackIcon: DEFAULT_ICONS.grass,
+        fallbackName: "Grass",
       },
       {
         entityId: this._config.weed_entity,
-        name: this._config.weed_name || "Weeds",
+        name: this._config.weed_name,
         icon: this._config.weed_icon,
+        fallbackIcon: DEFAULT_ICONS.weed,
+        fallbackName: "Weeds",
       },
-    ].filter((col) => col.entityId);
+    ];
 
-    if (!columns.length) {
+    if (!columns.some((c) => c.entityId)) {
       return html`
         <ha-card class="ulm-card ulm-wsly-pollen">
           <div class="warning">No pollen entities configured</div>
@@ -295,14 +324,15 @@ export class UlmCustomWslyPollenCard extends LitElement implements LovelaceCard 
 
     return html`
       <ha-card class="ulm-card ulm-wsly-pollen">
-        <div
-          class="columns"
-          style=${styleMap({
-            gridTemplateColumns: `repeat(${columns.length}, 1fr)`,
-          })}
-        >
+        <div class="columns">
           ${columns.map((col) =>
-            this._renderColumn(col.entityId!, col.name, col.icon),
+            this._renderColumn(
+              col.entityId,
+              col.name,
+              col.icon,
+              col.fallbackIcon,
+              col.fallbackName,
+            ),
           )}
         </div>
       </ha-card>
@@ -310,10 +340,16 @@ export class UlmCustomWslyPollenCard extends LitElement implements LovelaceCard 
   }
 
   private _renderColumn(
-    entityId: string,
-    name: string,
-    iconOverride?: string,
+    entityId: string | undefined,
+    nameOverride: string | undefined,
+    iconOverride: string | undefined,
+    fallbackIcon: string,
+    fallbackName: string,
   ) {
+    if (!entityId) {
+      return html`<div class="column"></div>`;
+    }
+
     const stateObj = this.hass!.states[entityId];
     if (!stateObj) {
       return html`
@@ -328,17 +364,21 @@ export class UlmCustomWslyPollenCard extends LitElement implements LovelaceCard 
     const icon =
       iconOverride ||
       (stateObj.attributes.icon as string | undefined) ||
-      "mdi:flower-pollen";
+      fallbackIcon;
+    /* YAML: variables.*_name || friendly_name */
     const displayName =
-      name ||
-      stateObj.attributes.friendly_name ||
-      entityId;
-    const label = this._levelLabel(level);
+      nameOverride ||
+      (stateObj.attributes.friendly_name as string | undefined) ||
+      fallbackName;
+    const label =
+      level === "unknown"
+        ? this._levelLabel("none")
+        : this._levelLabel(level);
     const rgbRed = resolveThemeRgb(this, "red");
 
     return html`
       <div
-        class="column vertical-btn"
+        class="column"
         role="button"
         tabindex="0"
         @click=${() => this._moreInfo(entityId)}
@@ -349,35 +389,31 @@ export class UlmCustomWslyPollenCard extends LitElement implements LovelaceCard 
           }
         }}
       >
-        <button
-          class="icon-btn"
-          type="button"
-          style=${styleMap(iconStyle)}
-          tabindex="-1"
-        >
+        <div class="icon-btn" style=${styleMap(iconStyle)}>
           <ha-icon .icon=${icon}></ha-icon>
-          ${level === "very_high"
-            ? html`
-                <span
-                  class="extreme"
-                  style=${styleMap({
-                    backgroundColor: `rgba(${rgbRed}, 1)`,
-                  })}
-                >
-                  <ha-icon icon="mdi:exclamation-thick"></ha-icon>
-                </span>
-              `
-            : nothing}
-        </button>
+        </div>
+        ${level === "very_high"
+          ? html`
+              <!-- custom_fields.extreme — absolute on card, not on icon -->
+              <div
+                class="extreme"
+                style=${styleMap({
+                  backgroundColor: `rgba(${rgbRed}, 1)`,
+                })}
+              >
+                <ha-icon icon="mdi:exclamation-thick"></ha-icon>
+              </div>
+            `
+          : nothing}
         <div class="col-name">${displayName}</div>
         <div class="col-label">${label}</div>
       </div>
     `;
   }
 
-  private _levelLabel(level: PollenLevel): string {
+  private _levelLabel(level: Exclude<PollenLevel, "unknown">): string {
     const cfg = this._config;
-    const map: Record<PollenLevel, string | undefined> = {
+    const map: Record<Exclude<PollenLevel, "unknown">, string | undefined> = {
       none: cfg?.label_none,
       very_low: cfg?.label_very_low,
       low: cfg?.label_low,
@@ -406,35 +442,74 @@ export class UlmCustomWslyPollenCard extends LitElement implements LovelaceCard 
       align-self: start;
     }
 
+    /* Outer: list_3_items padding 0 + card shadow/radius from custom_card_wsly_pollen */
     ha-card.ulm-wsly-pollen {
       height: auto !important;
       padding: 0;
       overflow: visible;
+      box-shadow: var(--ulm-shadow);
+      border-radius: var(--ulm-radius);
     }
 
+    /* list_3_items grid */
     .columns {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: min-content;
       column-gap: 7px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
-    .vertical-btn {
+    /*
+     * vertical_buttons item with box-shadow: none
+     * (one shared outer card — not three mini-cards)
+     */
+    .column {
+      position: relative;
       display: grid;
-      grid-template-rows: min-content min-content min-content;
       grid-template-areas:
         "icon"
         "name"
         "label";
+      grid-template-columns: 1fr;
+      grid-template-rows: min-content min-content min-content;
       justify-items: center;
+      align-content: start;
       padding: 10px 0 8px;
       border-radius: var(--ulm-radius);
       box-shadow: none;
+      background: transparent;
       cursor: pointer;
+      outline: none;
+      box-sizing: border-box;
+      min-width: 0;
     }
 
-    .vertical-btn .icon-btn {
+    .column:focus-visible {
+      outline: 2px solid var(--primary-color);
+      outline-offset: -2px;
+    }
+
+    .icon-btn {
       grid-area: icon;
-      margin-top: 0;
+      place-self: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: visible;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    .icon-btn ha-icon {
+      --mdc-icon-size: 20px;
     }
 
     .col-name {
@@ -443,40 +518,77 @@ export class UlmCustomWslyPollenCard extends LitElement implements LovelaceCard 
       font-weight: bold;
       font-size: 14px;
       text-align: center;
+      justify-self: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      padding: 0 4px;
+      box-sizing: border-box;
     }
 
     .col-label {
       grid-area: label;
       font-size: 12px;
       font-weight: bolder;
-      opacity: 0.4;
+      filter: opacity(40%);
       text-align: center;
+      align-self: start;
+      justify-self: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      padding: 0 4px;
+      box-sizing: border-box;
     }
 
+    /*
+     * custom_fields.extreme — circle position from YAML (do not change):
+     * left 38px; right 0; top 8px; margin auto; 16×16 + 2px border.
+     */
     .extreme {
       position: absolute;
+      margin-left: auto;
+      margin-right: auto;
       left: 38px;
       right: 0;
       top: 8px;
-      margin-left: auto;
-      margin-right: auto;
-      width: 16px;
       height: 16px;
+      width: 16px;
       border-radius: 50%;
       border: 2px solid var(--card-background-color);
-      display: grid;
-      place-items: center;
+      font-size: 12px;
+      line-height: 14px;
+      color: white;
+      box-sizing: content-box;
+      padding: 0;
+      z-index: 2;
       pointer-events: none;
+      overflow: hidden;
     }
 
+    /* Center ! inside the red disc only — does not move .extreme */
     .extreme ha-icon {
       --mdc-icon-size: 12px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 12px;
+      height: 12px;
+      margin: 0;
+      padding: 0;
+      display: block;
+      line-height: 0;
       color: var(--primary-background-color);
     }
 
     .warning.small {
       font-size: 11px;
       padding: 8px 4px;
+      text-align: center;
+      word-break: break-all;
     }
   `;
 }

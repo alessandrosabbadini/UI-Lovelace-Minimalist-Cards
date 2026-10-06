@@ -315,10 +315,17 @@ export class UlmCustomRistouPersonCard
       >`;
     }
 
+    const hasFooter = this._showFooter();
     return html`
-      <ha-card class="ulm-card ulm-ristou-person">
+      <ha-card
+        class=${classMap({
+          "ulm-card": true,
+          "ulm-ristou-person": true,
+          "has-footer": hasFooter,
+        })}
+      >
         ${this._headerRow(stateObj)}
-        ${this._showFooter() ? html`<div class="footer-host"></div>` : nothing}
+        ${hasFooter ? html`<div class="footer-host"></div>` : nothing}
       </ha-card>
     `;
   }
@@ -338,7 +345,7 @@ export class UlmCustomRistouPersonCard
       cfg.driving_entity,
     );
     const useBadge = cfg.use_badge !== false;
-    const displayIcon = useBadge ? cfg.icon || "mdi:face-man" : status.icon;
+    const displayIcon = useBadge ? "mdi:face-man" : status.icon;
     const avatarColor: RistouStatusColor = useBadge ? "theme" : status.color;
     const name =
       cfg.name ||
@@ -572,6 +579,11 @@ export class UlmCustomRistouPersonCard
         overflow: hidden;
       }
 
+      ha-card.ulm-ristou-person.has-footer .header-row {
+        border-radius: var(--border-radius, var(--ulm-radius, 20px))
+          var(--border-radius, var(--ulm-radius, 20px)) 0 0;
+      }
+
       .header-row {
         display: grid;
         grid-template-columns: min-content 1fr auto;
@@ -612,8 +624,8 @@ export class UlmCustomRistouPersonCard
 
       .notification {
         position: absolute;
-        left: 26px;
-        top: -2px;
+        left: 38px;
+        top: 8px;
         width: 16px;
         height: 16px;
         border-radius: 50%;

@@ -178,7 +178,6 @@ export class UlmCustomNeeksterUpdateCard
           color: "rgba(var(--color-theme, 51, 51, 51), 0.2)",
           backgroundColor: `rgba(${rgbYellow}, 0.2)`,
         };
-
     const stackClass = classMap({
       stack: true,
       horizontal: !!(this._config.horizontal && showControls),
@@ -342,11 +341,17 @@ export class UlmCustomNeeksterUpdateCard
     .controls {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      column-gap: 7px;
+      gap: 7px;
     }
 
     .stack.horizontal .controls {
       min-width: 0;
+    }
+
+    .row.header {
+      padding: 0;
+      background: none;
+      box-shadow: none;
     }
   `;
 }

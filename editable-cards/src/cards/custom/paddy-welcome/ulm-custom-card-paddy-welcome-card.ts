@@ -357,6 +357,8 @@ export class UlmCustomPaddyWelcomeCard
       }
 
       .stack {
+        display: flex;
+        flex-direction: column;
         gap: 12px;
       }
 
@@ -383,9 +385,37 @@ export class UlmCustomPaddyWelcomeCard
       }
 
       .secondary-host ha-card,
-      .secondary-host .type-weather-forecast {
+      .secondary-host hui-weather-forecast-card {
         border-radius: 14px !important;
         box-shadow: none !important;
+      }
+
+      .secondary-host hui-weather-forecast-card .state,
+      .secondary-host hui-weather-forecast-card .name {
+        text-align: left;
+        font-size: 14px;
+      }
+
+      .secondary-host hui-weather-forecast-card .state {
+        font-weight: bolder;
+      }
+
+      .secondary-host hui-weather-forecast-card .temp-attribute,
+      .secondary-host hui-weather-forecast-card .temp,
+      .secondary-host hui-weather-forecast-card .temp span,
+      .secondary-host hui-weather-forecast-card .attribute {
+        text-align: right;
+      }
+
+      .secondary-host hui-weather-forecast-card .temp,
+      .secondary-host hui-weather-forecast-card .temp span {
+        font-size: medium;
+        font-weight: bolder;
+        margin-right: 16px;
+      }
+
+      .secondary-host hui-weather-forecast-card .attribute {
+        font-size: smaller;
       }
     `,
   ];

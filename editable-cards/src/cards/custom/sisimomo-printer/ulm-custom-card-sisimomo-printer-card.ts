@@ -64,7 +64,10 @@ function normalizeCartridges(raw: unknown): SisimomoCartridge[] | undefined {
 type CartridgeRender =
   | { kind: "errors"; messages: string[] }
   | { kind: "unavailable" }
-  | { kind: "bars"; rows: { label: string; pct: number; fillStyle: string }[] };
+  | {
+      kind: "bars";
+      rows: { label: string; pct: number; barStyle: Record<string, string> }[];
+    };
 
 @customElement("ulm-custom-card-sisimomo-printer-card")
 export class UlmCustomSisimomoPrinterCard
@@ -314,17 +317,23 @@ export class UlmCustomSisimomoPrinterCard
       const type = cartridge.type ?? "unicolor";
       const ent = this.hass!.states[cartridge.entity_id]!;
       const pct = Number(ent.state);
-      let fillStyle: string;
+      let barStyle: Record<string, string>;
       if (type === "unicolor") {
-        fillStyle = `background-color: ${cartridge.color as string}; width: ${pct}%;`;
+        barStyle = {
+          width: `${pct}%`,
+          backgroundColor: cartridge.color as string,
+        };
       } else {
         const [c0, c1, c2] = cartridge.color as string[];
-        fillStyle = `background: linear-gradient(180deg, ${c0}, ${c0} 33%, ${c1} 33%, ${c1} 66%, ${c2} 66%, ${c2}); width: ${pct}%;`;
+        barStyle = {
+          width: `${pct}%`,
+          background: `linear-gradient(180deg, ${c0}, ${c0} 33%, ${c1} 33%, ${c1} 66%, ${c2} 66%, ${c2})`,
+        };
       }
       return {
         label: cartridge.label,
         pct,
-        fillStyle: fillStyle.replace(/\s{2,}/g, " "),
+        barStyle,
       };
     });
 
@@ -351,7 +360,7 @@ export class UlmCustomSisimomoPrinterCard
         ${block.rows.flatMap((row) => [
           html`<div class="label">${row.label}</div>`,
           html`<div class="container-bar">
-            <div class="bar" style=${row.fillStyle}></div>
+            <div class="bar" style=${styleMap(row.barStyle)}></div>
           </div>`,
           html`<div class="state">${row.pct}%</div>`,
         ])}
@@ -383,6 +392,7 @@ export class UlmCustomSisimomoPrinterCard
       padding: 12px;
       display: flex;
       flex-direction: column;
+      /* YAML: printer_state then cartridges — no extra card row-gap */
       gap: 0;
       overflow: visible;
     }
@@ -391,7 +401,7 @@ export class UlmCustomSisimomoPrinterCard
       display: grid;
       grid-template-columns: min-content 1fr;
       align-items: center;
-      gap: 12px;
+      column-gap: 0;
       background: none;
       border: none;
       padding: 0;
@@ -400,6 +410,15 @@ export class UlmCustomSisimomoPrinterCard
       text-align: left;
       color: inherit;
       width: 100%;
+    }
+
+    .header .icon-cell {
+      margin: 0;
+    }
+
+    .header .info {
+      margin-left: 12px;
+      min-width: 0;
     }
 
     .icon-cell {
@@ -431,11 +450,15 @@ export class UlmCustomSisimomoPrinterCard
       color: rgba(var(--color-blue-text, var(--color-blue, 61, 90, 254)), 1);
     }
 
+    /* card_mod cartridges wrapper — 12px top separates bars from header */
     .wrapper {
       display: grid;
       grid-template-columns: auto 1fr auto;
-      grid-gap: 1rem;
+      grid-column-gap: 1rem;
+      grid-row-gap: 1rem;
       padding: 12px 8px 8px;
+      align-items: center;
+      box-sizing: border-box;
     }
 
     .wrapper > *:nth-child(3n-2),
@@ -443,26 +466,43 @@ export class UlmCustomSisimomoPrinterCard
       place-self: center start;
     }
 
+    .wrapper > .container-bar {
+      place-self: center stretch;
+      width: 100%;
+      min-width: 0;
+      align-self: center;
+    }
+
     .label {
       filter: opacity(70%);
       font-size: medium;
+      line-height: 20px;
+      white-space: nowrap;
     }
 
     .container-bar {
       position: relative;
       border-radius: 4px;
       border: 0.01rem solid rgba(var(--color-theme, 51, 51, 51), 0.35);
-      min-height: 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+      height: 20px;
+      background: transparent;
     }
 
     .bar {
       height: 20px;
       border-radius: 4px;
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
     .state {
       filter: opacity(40%);
       font-size: medium;
+      line-height: 20px;
+      white-space: nowrap;
+      text-align: left;
     }
 
     .error-container {

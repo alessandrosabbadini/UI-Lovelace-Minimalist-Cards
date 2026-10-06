@@ -45,6 +45,49 @@ function headerIcon(state: string): string {
   return "mdi:thermostat";
 }
 
+function resolveThemeRgbVar(host: HTMLElement, varName: string): string {
+  let raw = getComputedStyle(host).getPropertyValue(varName).trim();
+  const m = raw.match(/^var\(--([a-z0-9-]+)\)$/i);
+  if (m) {
+    raw = getComputedStyle(host).getPropertyValue(`--${m[1]}`).trim() || raw;
+  }
+  return raw;
+}
+
+function headerBackgroundStyle(
+  host: HTMLElement,
+  mode: "heat" | "cool",
+): Record<string, string> {
+  const bgVar =
+    mode === "heat" ? "--color-background-red" : "--color-background-blue";
+  const accent = mode === "heat" ? "red" : "blue";
+  let raw = resolveThemeRgbVar(host, bgVar);
+  if (!/^\d+\s*,/.test(raw)) {
+    raw = resolveThemeRgb(host, accent);
+  }
+  const opacity =
+    getComputedStyle(host).getPropertyValue("--opacity-bg").trim() || "1";
+  return { backgroundColor: `rgba(${raw}, ${opacity})` };
+}
+
+function headerTextStyle(host: HTMLElement, state: string): Record<string, string> {
+  if (state === "heat") {
+    let raw = resolveThemeRgbVar(host, "--color-red-text");
+    if (!/^\d+\s*,/.test(raw)) {
+      raw = resolveThemeRgb(host, "red");
+    }
+    return { color: `rgba(${raw}, 1)` };
+  }
+  if (state === "cool") {
+    let raw = resolveThemeRgbVar(host, "--color-blue-text");
+    if (!/^\d+\s*,/.test(raw)) {
+      raw = resolveThemeRgb(host, "blue");
+    }
+    return { color: `rgba(${raw}, 1)` };
+  }
+  return {};
+}
+
 function headerStyles(
   host: HTMLElement,
   state: string,
@@ -52,9 +95,7 @@ function headerStyles(
   if (state === "heat") {
     const rgb = resolveThemeRgb(host, "red");
     return {
-      row: {
-        backgroundColor: `rgba(var(--color-background-red, ${rgb}), var(--opacity-bg, 1))`,
-      },
+      row: headerBackgroundStyle(host, "heat"),
       icon: {
         color: `rgba(${rgb}, 1)`,
         backgroundColor: `rgba(${rgb}, 0.2)`,
@@ -64,9 +105,7 @@ function headerStyles(
   if (state === "cool") {
     const rgb = resolveThemeRgb(host, "blue");
     return {
-      row: {
-        backgroundColor: `rgba(var(--color-background-blue, ${rgb}), var(--opacity-bg, 1))`,
-      },
+      row: headerBackgroundStyle(host, "cool"),
       icon: {
         color: `rgba(${rgb}, 1)`,
         backgroundColor: `rgba(${rgb}, 0.2)`,
@@ -80,16 +119,6 @@ function headerStyles(
       backgroundColor: "rgba(var(--color-theme, 51, 51, 51), 0.05)",
     },
   };
-}
-
-function headerTextStyle(state: string): Record<string, string> {
-  if (state === "heat") {
-    return { color: "rgba(var(--color-red-text, var(--color-red, 245, 68, 54)), 1)" };
-  }
-  if (state === "cool") {
-    return { color: "rgba(var(--color-blue-text, var(--color-blue, 61, 90, 254)), 1)" };
-  }
-  return {};
 }
 
 @customElement("ulm-custom-card-mpse-thermostat-card")
@@ -157,7 +186,7 @@ export class UlmCustomMpseThermostatCard
 
     const mode = stateObj.state;
     const { row: rowStyle, icon: iconStyle } = headerStyles(this, mode);
-    const textStyle = headerTextStyle(mode);
+    const textStyle = headerTextStyle(this, mode);
     const name =
       this._config.name ||
       stateObj.attributes.friendly_name ||
@@ -299,7 +328,7 @@ export class UlmCustomMpseThermostatCard
     .controls {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      column-gap: 7px;
+      gap: 7px;
       align-items: center;
     }
 
@@ -313,6 +342,12 @@ export class UlmCustomMpseThermostatCard
       color: rgba(var(--color-theme, 51, 51, 51), 0.9);
       background: transparent;
       box-shadow: none;
+      text-align: center;
+      min-width: 0;
+    }
+
+    .icon-info .label {
+      filter: none;
     }
   `;
 }

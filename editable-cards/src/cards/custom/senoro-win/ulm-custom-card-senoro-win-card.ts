@@ -255,32 +255,32 @@ export class UlmCustomSenoroWinCard extends LitElement implements LovelaceCard {
         style=${styleMap(cardBg ? { backgroundColor: cardBg } : {})}
         @click=${this._moreInfo}
       >
-        <div class="grid">
+        <div class="row">
           <div class="icon-btn" style=${styleMap(iconStyle)}>
             <ha-icon .icon=${icon}></ha-icon>
+            ${notify
+              ? html`<span
+                  class="badge notify"
+                  style=${styleMap({
+                    backgroundColor: notify.bg,
+                  })}
+                >
+                  <ha-icon .icon=${notify.icon}></ha-icon>
+                </span>`
+              : nothing}
+            ${battery
+              ? html`<span
+                  class="badge battery"
+                  style=${styleMap({ backgroundColor: battery.bg })}
+                >
+                  <ha-icon icon="mdi:battery-low"></ha-icon>
+                </span>`
+              : nothing}
           </div>
           <div class="info-btn">
             <div class="name">${name}</div>
             <div class="label">${label}</div>
           </div>
-          ${notify
-            ? html`<span
-                class="badge notify"
-                style=${styleMap({
-                  backgroundColor: notify.bg,
-                })}
-              >
-                <ha-icon .icon=${notify.icon}></ha-icon>
-              </span>`
-            : nothing}
-          ${battery
-            ? html`<span
-                class="badge battery"
-                style=${styleMap({ backgroundColor: battery.bg })}
-              >
-                <ha-icon icon="mdi:battery-low"></ha-icon>
-              </span>`
-            : nothing}
         </div>
       </ha-card>
     `;
@@ -440,13 +440,13 @@ export class UlmCustomSenoroWinCard extends LitElement implements LovelaceCard {
       cursor: pointer;
     }
 
-    .grid {
-      position: relative;
-    }
-
     .icon-btn,
     .info-btn {
       pointer-events: none;
+    }
+
+    .icon-btn {
+      overflow: visible;
     }
 
     .badge {

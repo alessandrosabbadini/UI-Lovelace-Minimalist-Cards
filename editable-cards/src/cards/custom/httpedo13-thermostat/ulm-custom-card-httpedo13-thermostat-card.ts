@@ -386,8 +386,10 @@ export class UlmCustomHttpedo13ThermostatCard
       width: 100%;
       box-sizing: border-box;
       font-size: 14px;
+      font-weight: bold;
       text-align: center;
       line-height: 1;
+      background: var(--card-background-color, #fafafa);
     }
 
     .controls {
@@ -407,8 +409,9 @@ export class UlmCustomHttpedo13ThermostatCard
       width: 100%;
       box-sizing: border-box;
       font-size: 14px;
+      font-weight: bold;
       color: rgba(var(--color-theme, 51, 51, 51), 0.9);
-      background: transparent;
+      background: var(--card-background-color, #fafafa);
       box-shadow: none;
       padding: 0;
       text-align: center;

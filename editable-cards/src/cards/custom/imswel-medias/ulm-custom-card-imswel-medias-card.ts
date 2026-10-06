@@ -558,7 +558,7 @@ export class UlmCustomImswelMediasCard
         grid-area: l;
         font-weight: bold;
         font-size: 12px;
-        opacity: 0.6;
+        filter: opacity(60%);
         z-index: 2;
       }
 

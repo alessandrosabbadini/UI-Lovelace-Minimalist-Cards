@@ -54,10 +54,11 @@ function asStr(raw: unknown): string | undefined {
   return typeof raw === "string" && raw ? raw : undefined;
 }
 
-function barSeverityColor(pct: number): "red" | "yellow" | "green" {
-  if (pct <= 30) return "red";
-  if (pct <= 59) return "yellow";
-  return "green";
+/** Matches custom_bar_card_nik_tablet severity (var(--google-*)). */
+function barSeverityColor(pct: number): string {
+  if (pct <= 30) return "var(--google-red, var(--error-color))";
+  if (pct <= 59) return "var(--google-yellow, var(--warning-color))";
+  return "var(--google-green, var(--success-color))";
 }
 
 @customElement("ulm-custom-card-nik-tablet-card")
@@ -398,11 +399,12 @@ export class UlmCustomNikTabletCard extends LitElement implements LovelaceCard {
     const pct = Number.isFinite(raw)
       ? Math.max(1, Math.min(100, raw))
       : 0;
-    const sev = barSeverityColor(pct);
-    const fillRgb = resolveThemeRgb(this, sev);
+    const fillColor = barSeverityColor(pct);
     const icon =
       (st?.attributes.icon as string | undefined) || "mdi:battery";
 
+    /* custom_bar_card: card_generic — primary = state, secondary = name; then bar */
+    const stateLine = st ? `${Math.round(pct)}%` : "—";
     return html`
       <div class="battery-block">
         <button class="battery-header" @click=${() => this._moreInfo(id)}>
@@ -410,19 +412,20 @@ export class UlmCustomNikTabletCard extends LitElement implements LovelaceCard {
             <ha-icon .icon=${icon}></ha-icon>
           </div>
           <div class="main-info">
-            <div class="main-name">${name}</div>
-            <div class="main-label">${st ? `${Math.round(pct)}%` : "—"}</div>
+            <div class="main-name">${stateLine}</div>
+            <div class="main-label">${name}</div>
           </div>
         </button>
-        <div class="bar-track">
+        <div class="bar-track" aria-hidden="true">
+          <div class="bar-background"></div>
           <div
             class="bar-fill"
             style=${styleMap({
               width: `${pct}%`,
-              backgroundColor: `rgba(${fillRgb}, 1)`,
+              backgroundColor: fillColor,
             })}
           ></div>
-          <span class="bar-value">${st ? `${Math.round(pct)}%` : "—"}</span>
+          <span class="bar-value">${stateLine}</span>
         </div>
       </div>
     `;
@@ -463,9 +466,13 @@ export class UlmCustomNikTabletCard extends LitElement implements LovelaceCard {
     .main-header,
     .battery-header {
       display: grid;
-      grid-template-columns: min-content 1fr;
+      grid-template-columns: min-content auto;
+      grid-template-rows: min-content min-content;
+      grid-template-areas:
+        "icon name"
+        "icon label";
       align-items: center;
-      gap: 12px;
+      column-gap: 0;
       background: none;
       border: none;
       padding: 0;
@@ -478,10 +485,13 @@ export class UlmCustomNikTabletCard extends LitElement implements LovelaceCard {
 
     .battery-header {
       cursor: pointer;
-      padding: 12px 0 0;
+      /* Align with main header / widgets (outer card already has 12px) */
+      padding: 0;
+      margin-top: 0;
     }
 
     .icon-cell {
+      grid-area: icon;
       width: 42px;
       height: 42px;
       border-radius: 50%;
@@ -494,29 +504,42 @@ export class UlmCustomNikTabletCard extends LitElement implements LovelaceCard {
       --mdc-icon-size: 20px;
     }
 
+    .main-info {
+      display: contents;
+    }
+
     .bat-icon {
+      /* card_generic inactive numeric → theme 0.2 / 0.05 */
       background: rgba(var(--color-theme, 51, 51, 51), 0.05);
-      color: rgba(var(--color-theme, 51, 51, 51), 0.9);
+      color: rgba(var(--color-theme, 51, 51, 51), 0.2);
     }
 
     .main-name {
+      grid-area: name;
+      align-self: end;
       font-weight: bold;
       font-size: 14px;
+      margin-left: 12px;
+      line-height: 1.2;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     .main-label {
+      grid-area: label;
+      align-self: start;
       font-weight: bold;
       font-size: 12px;
+      margin-left: 12px;
+      line-height: 1.2;
       filter: opacity(40%);
     }
 
     .row-3 {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
+      column-gap: 7px;
     }
 
     .widget {
@@ -538,8 +561,9 @@ export class UlmCustomNikTabletCard extends LitElement implements LovelaceCard {
       --mdc-icon-size: 20px;
     }
 
+    /* YAML: item3 → item4 → item5 are consecutive min-content (no 10px spacer) */
     .metrics {
-      margin-top: 12px;
+      margin-top: 0;
     }
 
     .metric {
@@ -568,19 +592,34 @@ export class UlmCustomNikTabletCard extends LitElement implements LovelaceCard {
     }
 
     .battery-block {
-      margin-top: 4px;
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
+    /* Pill bar: same width as widgets, under battery header */
     .bar-track {
       position: relative;
       height: 35px;
-      border-radius: 4px;
-      border: 0.01rem solid rgba(var(--color-theme, 51, 51, 51), 0.35);
+      width: 100%;
       overflow: hidden;
-      background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-sizing: border-box;
+      padding: 0;
+      border-radius: 14px;
+    }
+
+    .bar-background {
+      position: absolute;
+      inset: 0;
+      border-radius: 14px;
+      background: rgba(var(--color-theme, 51, 51, 51), 0.08);
+      pointer-events: none;
     }
 
     .bar-fill {
@@ -588,7 +627,8 @@ export class UlmCustomNikTabletCard extends LitElement implements LovelaceCard {
       left: 0;
       top: 0;
       bottom: 0;
-      border-radius: 4px;
+      right: auto;
+      border-radius: 14px;
       pointer-events: none;
     }
 
@@ -597,6 +637,8 @@ export class UlmCustomNikTabletCard extends LitElement implements LovelaceCard {
       z-index: 1;
       font-weight: bold;
       font-size: 12px;
+      line-height: 35px;
+      pointer-events: none;
     }
   `;
 }

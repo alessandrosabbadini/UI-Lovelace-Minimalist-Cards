@@ -112,7 +112,7 @@ function headerIconStyle(
       };
     default:
       return {
-        color: "rgba(var(--color-theme, 51, 51, 51), 0.9)",
+        color: "rgba(var(--color-theme, 51, 51, 51), 0.2)",
         backgroundColor: "rgba(var(--color-theme, 51, 51, 51), 0.05)",
       };
   }

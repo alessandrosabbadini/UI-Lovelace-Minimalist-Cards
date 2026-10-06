@@ -303,6 +303,32 @@ export class UlmCustomLightColorpickCard
 
     .slider-wrap {
       grid-area: slider;
+      height: 42px;
+      border-radius: 14px;
+    }
+
+    .slider-wrap input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 42px;
+      margin: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .slider-wrap input[type="range"]::-webkit-slider-runnable-track {
+      height: 42px;
+      border-radius: 14px;
+      background: transparent;
+    }
+
+    .slider-wrap input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 12px;
+      height: 42px;
+      border-radius: 0;
+      background: transparent;
     }
 
     .chips {

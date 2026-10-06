@@ -32,17 +32,65 @@ export interface UlmCustomSchumijoFlowerCardConfig extends LovelaceCardConfig {
   label_correct?: string;
 }
 
+/** Attribute keys + defaults aligned with HA plant / classic flower-card. */
 const PLANT_ATTRS: {
   key: string;
   icon: string;
-  max?: number;
+  minKey: string;
+  maxKey: string;
+  defaultMin: number;
+  defaultMax: number;
+  logScale?: boolean;
 }[] = [
-  { key: "moisture", icon: "mdi:water-percent", max: 100 },
-  { key: "conductivity", icon: "mdi:flash", max: 2000 },
-  { key: "brightness", icon: "mdi:brightness-6", max: 100000 },
-  { key: "temperature", icon: "mdi:thermometer", max: 40 },
-  { key: "humidity", icon: "mdi:water", max: 100 },
+  {
+    key: "moisture",
+    icon: "mdi:water-percent",
+    minKey: "min_moisture",
+    maxKey: "max_moisture",
+    defaultMin: 20,
+    defaultMax: 60,
+  },
+  {
+    key: "conductivity",
+    icon: "mdi:flash",
+    minKey: "min_conductivity",
+    maxKey: "max_conductivity",
+    defaultMin: 500,
+    defaultMax: 3000,
+  },
+  {
+    key: "brightness",
+    icon: "mdi:brightness-6",
+    minKey: "min_brightness",
+    maxKey: "max_brightness",
+    defaultMin: 500,
+    defaultMax: 30000,
+    logScale: true,
+  },
+  {
+    key: "temperature",
+    icon: "mdi:thermometer",
+    minKey: "min_temperature",
+    maxKey: "max_temperature",
+    defaultMin: 15,
+    defaultMax: 30,
+  },
+  {
+    key: "humidity",
+    icon: "mdi:water",
+    minKey: "min_humidity",
+    maxKey: "max_humidity",
+    defaultMin: 30,
+    defaultMax: 80,
+  },
 ];
+
+function numAttr(attrs: Record<string, unknown>, key: string): number | undefined {
+  const v = attrs[key];
+  if (v === undefined || v === null || v === "") return undefined;
+  const n = Number.parseFloat(String(v));
+  return Number.isFinite(n) ? n : undefined;
+}
 
 function pick(cfg: Record<string, unknown>, ...keys: string[]): unknown {
   for (const k of keys) {
@@ -154,7 +202,7 @@ export class UlmCustomSchumijoFlowerCard
     }
 
     const problem = st.state === "problem";
-    const healthy = st.state !== "on" && !problem;
+    const healthy = st.state !== "on" && st.state !== "problem";
     const greenRgb = resolveThemeRgb(this, "green");
     const icon = problem ? "mdi:alert-circle" : "mdi:flower";
     const iconStyle = healthy
@@ -192,37 +240,80 @@ export class UlmCustomSchumijoFlowerCard
 
   private _renderAttributes(st: HassEntity) {
     const showBars = this._config!.show_bars !== false;
+    const attrs = st.attributes as Record<string, unknown>;
     const items = PLANT_ATTRS.filter(
-      (a) => st.attributes[a.key] !== undefined && st.attributes[a.key] !== null,
+      (a) => attrs[a.key] !== undefined && attrs[a.key] !== null,
     );
     if (!items.length) {
       return html`<div class="attrs-empty">No plant attributes on entity</div>`;
     }
 
+    /* flower-card: 3-segment meter (red | green | red), good/bad colours */
     return items.map((a) => {
-      const raw = Number.parseFloat(String(st.attributes[a.key]));
-      const hasNum = Number.isFinite(raw);
-      const pct =
-        hasNum && a.max
-          ? Math.max(0, Math.min(100, (raw / a.max) * 100))
-          : hasNum
-            ? Math.max(0, Math.min(100, raw))
-            : 0;
-      const rgb = resolveThemeRgb(this, "green");
+      const val = numAttr(attrs, a.key);
+      const aval = val !== undefined;
+      const min = numAttr(attrs, a.minKey) ?? a.defaultMin;
+      const max = numAttr(attrs, a.maxKey) ?? a.defaultMax;
+      const span = max - min;
+      let pct = 0;
+      if (aval && span > 0) {
+        if (a.logScale && val! > 0 && min > 0) {
+          pct =
+            100 *
+            Math.max(
+              0,
+              Math.min(
+                1,
+                (Math.log(val!) - Math.log(min)) /
+                  (Math.log(max) - Math.log(min)),
+              ),
+            );
+        } else {
+          pct = 100 * Math.max(0, Math.min(1, (val! - min) / span));
+        }
+      }
+      const outOfRange = aval && (val! < min || val! > max);
+      const leftClass = !aval
+        ? "unavailable"
+        : outOfRange
+          ? "bad"
+          : "good";
+      const midClass = !aval
+        ? "unavailable"
+        : aval && val! > max
+          ? "bad"
+          : "good";
+      const rightWidth = aval && val! > max ? 100 : 0;
+      const tip = aval
+        ? `${a.key}: ${val} (${min} ~ ${max})`
+        : `${a.key}: unavailable`;
 
       return html`
-        <div class="attr" title=${`${a.key}: ${st.attributes[a.key]}`}>
+        <div class="attr" title=${tip}>
           <ha-icon .icon=${a.icon}></ha-icon>
           ${showBars
-            ? html`<div class="attr-bar">
-                <div
-                  class="attr-fill"
-                  style=${styleMap({
-                    width: `${pct}%`,
-                    backgroundColor: `rgba(${rgb}, 0.85)`,
-                  })}
-                ></div>
-              </div>`
+            ? html`
+                <div class="meter red">
+                  <span
+                    class=${leftClass}
+                    style=${styleMap({ width: "100%" })}
+                  ></span>
+                </div>
+                <div class="meter green">
+                  <span
+                    class=${midClass}
+                    style=${styleMap({
+                      width: aval ? `${pct}%` : "0%",
+                    })}
+                  ></span>
+                </div>
+                <div class="meter red">
+                  <span
+                    class="bad"
+                    style=${styleMap({ width: `${rightWidth}%` })}
+                  ></span>
+                </div>
+              `
             : nothing}
         </div>
       `;
@@ -295,44 +386,84 @@ export class UlmCustomSchumijoFlowerCard
       filter: opacity(40%);
     }
 
+    /* flower-card .attributes — padding 0 via YAML card_mod */
     .attrs {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px 12px;
-      padding: 4px 0 0;
-      justify-content: space-around;
+      white-space: nowrap;
+      padding: 0;
+      width: 100%;
+      box-sizing: border-box;
+      row-gap: 6px;
     }
 
     .attrs-empty {
       font-size: 12px;
       opacity: 0.5;
       text-align: center;
+      width: 100%;
     }
 
+    /* flower-card .attribute — 50% width, icon + 3 meters */
     .attr {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 4px;
-      min-width: 36px;
+      width: 50%;
+      box-sizing: border-box;
+      white-space: nowrap;
+      min-width: 0;
+      padding-right: 4px;
     }
 
     .attr ha-icon {
       --mdc-icon-size: 16px;
+      margin-left: 5px;
+      margin-right: 10px;
+      flex-shrink: 0;
       color: rgba(var(--color-theme, 51, 51, 51), 0.85);
     }
 
-    .attr-bar {
-      width: 32px;
-      height: 4px;
+    /* Three equal-width meter segments */
+    .meter {
+      height: 8px;
+      background-color: var(
+        --primary-background-color,
+        rgba(var(--color-theme, 51, 51, 51), 0.12)
+      );
       border-radius: 2px;
-      background: rgba(var(--color-theme, 51, 51, 51), 0.12);
+      display: inline-grid;
       overflow: hidden;
+      flex: 1 1 0;
+      min-width: 0;
+      margin-right: 4px;
     }
 
-    .attr-fill {
+    .meter:last-of-type {
+      margin-right: 0;
+    }
+
+    .meter.red,
+    .meter.green {
+      max-width: none;
+    }
+
+    .meter > span {
+      grid-row: 1;
+      grid-column: 1;
       height: 100%;
-      border-radius: 2px;
+      display: block;
+    }
+
+    .meter > .good {
+      background-color: rgba(43, 194, 83, 1);
+    }
+
+    .meter > .bad {
+      background-color: rgba(240, 163, 163, 1);
+    }
+
+    .meter > .unavailable {
+      background-color: rgba(158, 158, 158, 1);
     }
   `;
 }

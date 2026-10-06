@@ -181,10 +181,7 @@ export class UlmCustomVncntdevDeviceTracerCard
     return html`
       <ha-card class="ulm-card ulm-vncntdev-tracer" @click=${this._moreInfo}>
         <div class="row">
-          <div
-            class="icon-btn tracer-icon"
-            style="color: ${iconColor}; background-color: transparent;"
-          >
+          <div class="icon-btn" style="color: ${iconColor};">
             <ha-icon .icon=${this._config.icon}></ha-icon>
           </div>
           <div class="info-btn">
@@ -219,10 +216,6 @@ export class UlmCustomVncntdevDeviceTracerCard
     ha-card.ulm-vncntdev-tracer {
       height: auto;
       cursor: pointer;
-    }
-
-    .tracer-icon {
-      background-color: transparent !important;
     }
 
     .icon-btn,
