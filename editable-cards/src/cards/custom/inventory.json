@@ -474,8 +474,8 @@
   },
   {
     "dir": "custom_card_iAbadia_battery_chip",
-    "tag": "ulm-custom-card-iAbadia-battery-chip-card",
-    "type": "custom:ulm-custom-card-iAbadia-battery-chip-card",
+    "tag": "ulm-custom-card-iabadia-battery-chip-card",
+    "type": "custom:ulm-custom-card-iabadia-battery-chip-card",
     "name": "ULM Custom iAbadia battery chip",
     "author": "Iñaki Abadia - 2024",
     "version": "1.0.0",

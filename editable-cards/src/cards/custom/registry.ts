@@ -258,14 +258,14 @@ export const CUSTOM_CARD_DEFS = [
   },
   {
     "dir": "custom_card_iAbadia_battery_chip",
-    "tag": "ulm-custom-card-iAbadia-battery-chip-card",
-    "editorTag": "ulm-custom-card-iAbadia-battery-chip-card-editor",
-    "type": "custom:ulm-custom-card-iAbadia-battery-chip-card",
-    "name": "ULM Custom iAbadia battery chip",
+    "tag": "ulm-custom-card-battery-chip-card",
+    "editorTag": "ulm-custom-card-battery-chip-card-editor",
+    "type": "custom:ulm-custom-card-battery-chip-card",
+    "name": "ULM Custom battery chip",
     "description": "Minimalist custom card port: custom_card_iAbadia_battery_chip",
-    "defaultIcon": "mdi:puzzle",
+    "defaultIcon": "mdi:battery",
     "defaultColor": "blue",
-    "stubEntity": "sensor.demo",
+    "stubEntity": "sensor.outside_temperature_battery",
     "extraKeys": [
       "ulm_custom_card_iAbadia_battery_chip_entity"
     ]
@@ -1033,6 +1033,17 @@ const SPECIALIZED_CUSTOM_TAGS = new Set([
   "ulm-custom-chip-update-card",
   "ulm-custom-chip-vlape-garage-card",
   "ulm-custom-template-shogun160-battery-info-card",
+  "ulm-custom-card-person-chip-card",
+  "ulm-custom-card-iabadia-battery-chip-card",
+  "ulm-custom-card-battery-chip-card",
+  "ulm-custom-card-mpse-wifisignal-card",
+  "ulm-custom-card-device-tracker-card",
+  "ulm-custom-card-chromecast-card",
+  "ulm-custom-card-playstation-card",
+  "ulm-custom-card-nik-clock-card",
+  "ulm-custom-card-wilbiev-title-card",
+  "ulm-custom-card-wilbiev-subtitle-card",
+  "ulm-custom-card-yagrasdemonde-lights-count-card",
 ]);
 
 export const CUSTOM_CARDS = CUSTOM_CARD_DEFS.filter(

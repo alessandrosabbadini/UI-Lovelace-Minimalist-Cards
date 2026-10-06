@@ -72,6 +72,17 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | custom chip_vlape_garage | yes | card+badge dual register |
 | custom template_shogun160_battery_info | yes | battery ring as card+badge |
 
+| custom person_chip | yes | card+badge |
+| custom iAbadia_battery_chip | yes | card+badge |
+| custom mpse_wifisignal | yes | dBm wifi icon_info |
+| custom device_tracker | yes | tracker badges |
+| custom chromecast | yes | power/play/HDMI |
+| custom playstation | yes | cover art states |
+| custom nik_clock | yes | clock + date |
+| custom wilbiev_title | yes | title + optional nav |
+| custom wilbiev_subtitle | yes | subtitle divider |
+| custom yagrasdemonde_lights_count | yes | lights/covers count |
+
 ## Sources
 
 - https://ui-lovelace-minimalist.github.io/UI/usage/cards/

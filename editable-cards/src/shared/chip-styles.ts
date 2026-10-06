@@ -1,9 +1,22 @@
 import { css } from "lit";
+import type { HomeAssistant } from "../types";
 
 /**
  * Matches internal_templates/chips.yaml.
  * Same host works as a Lovelace card and as a view badge (header strip).
+ *
+ * Minimalist dark themes set --box-shadow: none; chips.yaml overrides that
+ * with a hard shadow — call syncChipDarkMode() from the card so :host([dark])
+ * applies the same rule.
  */
+export function syncChipDarkMode(
+  el: HTMLElement,
+  hass?: HomeAssistant,
+): void {
+  if (hass?.themes?.darkMode) el.setAttribute("dark", "");
+  else el.removeAttribute("dark");
+}
+
 export const ulmChipStyles = css`
   :host {
     display: inline-flex;
@@ -31,6 +44,11 @@ export const ulmChipStyles = css`
     cursor: pointer;
     box-sizing: border-box;
     line-height: 100%;
+  }
+
+  /* chips.yaml darkMode — theme --box-shadow is none */
+  :host([dark]) button.chip {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.8);
   }
 
   button.chip.has-icon-and-label {

@@ -15,7 +15,7 @@ Original author: Iñaki Abadia - 2024 (v1.0.0)
 ## New card type
 
 ```yaml
-type: custom:ulm-custom-card-iAbadia-battery-chip-card
+type: custom:ulm-custom-card-battery-chip-card
 entity: <main_entity>
 name: Optional name
 icon: mdi:icon
@@ -58,6 +58,6 @@ template: custom_card_iAbadia_battery_chip
 
 New:
 ```yaml
-type: custom:ulm-custom-card-iAbadia-battery-chip-card
+type: custom:ulm-custom-card-battery-chip-card
 entity: entity.example
 ```

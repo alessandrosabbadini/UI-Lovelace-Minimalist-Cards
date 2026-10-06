@@ -50,6 +50,16 @@ import "./cards/custom/person-info/ulm-custom-card-person-info-card";
 import "./cards/custom/speedtest-shogun160/ulm-custom-card-speedtest-shogun160-card";
 import "./cards/custom/esh-welcome/ulm-custom-card-esh-welcome-card";
 import "./cards/custom/nas/ulm-custom-card-nas-card";
+import "./cards/custom/person-chip/ulm-custom-card-person-chip-card";
+import "./cards/custom/iabadia-battery-chip/ulm-custom-card-iabadia-battery-chip-card";
+import "./cards/custom/mpse-wifisignal/ulm-custom-card-mpse-wifisignal-card";
+import "./cards/custom/device-tracker/ulm-custom-card-device-tracker-card";
+import "./cards/custom/chromecast/ulm-custom-card-chromecast-card";
+import "./cards/custom/playstation/ulm-custom-card-playstation-card";
+import "./cards/custom/nik-clock/ulm-custom-card-nik-clock-card";
+import "./cards/custom/wilbiev-title/ulm-custom-card-wilbiev-title-card";
+import "./cards/custom/wilbiev-subtitle/ulm-custom-card-wilbiev-subtitle-card";
+import "./cards/custom/yagrasdemonde-lights-count/ulm-custom-card-yagrasdemonde-lights-count-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -366,6 +376,46 @@ const SPECIALIZED = [
     name: "ULM Custom nas",
     description: "Simple NAS sensor icon_info (blue)",
   },
+  {
+    type: "ulm-custom-card-mpse-wifisignal-card",
+    name: "ULM Custom wifi signal",
+    description: "WiFi dBm strength icon_info",
+  },
+  {
+    type: "ulm-custom-card-device-tracker-card",
+    name: "ULM Custom device tracker",
+    description: "Device tracker with optional source badges",
+  },
+  {
+    type: "ulm-custom-card-chromecast-card",
+    name: "ULM Custom chromecast",
+    description: "Chromecast media player with power / play / HDMI",
+  },
+  {
+    type: "ulm-custom-card-playstation-card",
+    name: "ULM Custom playstation",
+    description: "PlayStation media card with cover art",
+  },
+  {
+    type: "ulm-custom-card-nik-clock-card",
+    name: "ULM Custom nik clock",
+    description: "Large clock + date, optional switch toggle",
+  },
+  {
+    type: "ulm-custom-card-wilbiev-title-card",
+    name: "ULM Custom wilbiev title",
+    description: "Section title with optional navigate",
+  },
+  {
+    type: "ulm-custom-card-wilbiev-subtitle-card",
+    name: "ULM Custom wilbiev subtitle",
+    description: "Section subtitle divider",
+  },
+  {
+    type: "ulm-custom-card-yagrasdemonde-lights-count-card",
+    name: "ULM Custom lights count",
+    description: "Lights / covers count with icon",
+  },
 ] as const;
 
 for (const card of SPECIALIZED) {
@@ -395,6 +445,24 @@ for (const def of COMMUNITY_CHIPS) {
     description: def.description,
   });
 }
+
+// Chip-style custom cards: also usable as view badges
+registerChip({
+  type: "ulm-custom-card-person-chip-card",
+  name: "ULM Custom person chip",
+  description: "Person picture + state chip",
+});
+registerChip({
+  type: "ulm-custom-card-battery-chip-card",
+  name: "ULM Custom battery chip",
+  description: "Battery level icon chip (green/yellow/red)",
+});
+// Alias kept for older dashboard configs (all-lowercase only)
+registerChip({
+  type: "ulm-custom-card-iabadia-battery-chip-card",
+  name: "ULM Custom iAbadia battery chip",
+  description: "Alias of battery chip (legacy type name)",
+});
 
 for (const { def } of CUSTOM_CARDS) {
   register(

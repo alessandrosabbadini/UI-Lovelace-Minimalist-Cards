@@ -10,7 +10,10 @@ import {
   textField,
   type HaFormSchema,
 } from "../../shared/config-form";
-import { ulmChipStyles } from "../../shared/chip-styles";
+import {
+  syncChipDarkMode,
+  ulmChipStyles,
+} from "../../shared/chip-styles";
 import type {
   HomeAssistant,
   HassEntity,
@@ -537,6 +540,10 @@ function createChipCard(def: ChipDef) {
         min_columns: 2,
         max_columns: 12,
       };
+    }
+
+    protected updated(): void {
+      syncChipDarkMode(this, this.hass);
     }
 
     protected render() {
