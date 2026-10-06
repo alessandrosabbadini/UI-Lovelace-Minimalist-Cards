@@ -70,8 +70,9 @@ markdown_extensions:
   - "pymdownx.details"
   - "pymdownx.inlinehilite"
   - pymdownx.snippets:
-      base_path: [".", "custom_components/ui_lovelace_minimalist"]
-      check_paths: true
+      base_path: [".", "custom_components/ui_lovelace_minimalist", "legacy"]
+      # Legacy YAML card templates were removed; docs still WIP and may omit snippets.
+      check_paths: false
   - "pymdownx.critic"
   - "pymdownx.caret"
   - "pymdownx.keys"
