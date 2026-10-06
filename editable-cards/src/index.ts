@@ -70,6 +70,20 @@ import "./cards/custom/irmajavi-entities/ulm-custom-card-irmajavi-entities-card"
 import "./cards/custom/irmajavi-speedtest/ulm-custom-card-irmajavi-speedtest-card";
 import "./cards/custom/irmajavi-weather/ulm-custom-card-irmajavi-weather-card";
 import "./cards/custom/mpse-gauge/ulm-custom-card-mpse-gauge-card";
+import "./cards/custom/mpse-thermostat/ulm-custom-card-mpse-thermostat-card";
+import "./cards/custom/neekster-update/ulm-custom-card-neekster-update-card";
+import "./cards/custom/nik-tablet/ulm-custom-card-nik-tablet-card";
+import "./cards/custom/paddy-dwd-pollen/ulm-custom-card-paddy-dwd-pollen-card";
+import "./cards/custom/paddy-waste-collection/ulm-custom-card-paddy-waste-collection-card";
+import "./cards/custom/paddy-welcome/ulm-custom-card-paddy-welcome-card";
+import "./cards/custom/person-info-small/ulm-custom-card-person-info-small-card";
+import "./cards/custom/qubino/ulm-custom-card-qubino-card";
+import "./cards/custom/ristou-person/ulm-custom-card-ristou-person-card";
+import "./cards/custom/schumijo-flower/ulm-custom-card-schumijo-flower-card";
+import "./cards/custom/senoro-win/ulm-custom-card-senoro-win-card";
+import "./cards/custom/sisimomo-printer/ulm-custom-card-sisimomo-printer-card";
+import "./cards/custom/vncntdev-device-tracer/ulm-custom-card-vncntdev-device-tracer-card";
+import "./cards/custom/wsly-pollen/ulm-custom-card-wsly-pollen-card";
 import "./popups/ulm-popup";
 import { SIMPLE_CARDS } from "./cards/simple-cards";
 import { OFFICIAL_CHIPS } from "./cards/chips/official-chips";
@@ -474,7 +488,77 @@ const SPECIALIZED = [
   {
     type: "ulm-custom-card-mpse-gauge-card",
     name: "ULM Custom mpse gauge",
-    description: "icon_info header + native SVG semicircle gauge",
+    description: "icon_info header + dual concentric gauge",
+  },
+  {
+    type: "ulm-custom-card-mpse-thermostat-card",
+    name: "ULM Custom mpse thermostat",
+    description: "Climate header with heat/cool tint and temp arrows",
+  },
+  {
+    type: "ulm-custom-card-neekster-update-card",
+    name: "ULM Custom neekster update",
+    description: "Update entity status with install/skip actions",
+  },
+  {
+    type: "ulm-custom-card-nik-tablet-card",
+    name: "ULM Custom nik tablet",
+    description: "Tablet controls, metrics, and battery bar",
+  },
+  {
+    type: "ulm-custom-card-paddy-dwd-pollen-card",
+    name: "ULM Custom paddy DWD pollen",
+    description: "DWD pollen level with colored icon cell",
+  },
+  {
+    type: "ulm-custom-card-paddy-waste-collection-card",
+    name: "ULM Custom paddy waste collection",
+    description: "Waste collection days with urgency badge",
+  },
+  {
+    type: "ulm-custom-card-paddy-welcome-card",
+    name: "ULM Custom paddy welcome",
+    description: "Time-based greeting with optional weather/feed",
+  },
+  {
+    type: "ulm-custom-card-person-info-small-card",
+    name: "ULM Custom person info small",
+    description: "Compact person card with battery and zone badge",
+  },
+  {
+    type: "ulm-custom-card-qubino-card",
+    name: "ULM Custom qubino",
+    description: "Fil pilote light with French consigne labels",
+  },
+  {
+    type: "ulm-custom-card-ristou-person-card",
+    name: "ULM Custom ristou person",
+    description: "Person header with map or camera footer",
+  },
+  {
+    type: "ulm-custom-card-schumijo-flower-card",
+    name: "ULM Custom schumijo flower",
+    description: "Plant status with attribute meters",
+  },
+  {
+    type: "ulm-custom-card-senoro-win-card",
+    name: "ULM Custom senoro win",
+    description: "Window contact/handle status with badges",
+  },
+  {
+    type: "ulm-custom-card-sisimomo-printer-card",
+    name: "ULM Custom sisimomo printer",
+    description: "Printer status with cartridge toner bars",
+  },
+  {
+    type: "ulm-custom-card-vncntdev-device-tracer-card",
+    name: "ULM Custom vncntdev device tracer",
+    description: "Device online/offline status row",
+  },
+  {
+    type: "ulm-custom-card-wsly-pollen-card",
+    name: "ULM Custom wsly pollen",
+    description: "Tree/grass/weed pollen columns",
   },
 ] as const;
 

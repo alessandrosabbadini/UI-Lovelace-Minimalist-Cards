@@ -91,7 +91,21 @@ Generated from official Minimalist docs + local YAML, for keeping `getConfigForm
 | custom irmajavi_entities | yes | header + 4 metrics |
 | custom irmajavi_speedtest | yes | router + speed tiles |
 | custom irmajavi_weather | yes | weather emoji + 4 metrics |
-| custom mpse_gauge | yes | icon_info + SVG gauge |
+| custom mpse_gauge | yes | icon_info + dual concentric gauge |
+| custom mpse_thermostat | yes | climate temp arrows |
+| custom neekster_update | yes | update install/skip |
+| custom nik_tablet | yes | tablet widgets + battery |
+| custom paddy_dwd_pollen | yes | DWD pollen level |
+| custom paddy_waste_collection | yes | waste daysTo badge |
+| custom paddy_welcome | yes | greeting + weather/feed |
+| custom person_info_small | yes | compact person + battery |
+| custom qubino | yes | fil pilote consignes |
+| custom ristou_person | yes | person + map/camera |
+| custom schumijo_flower | yes | plant attributes |
+| custom senoro_win | yes | window contact/handle |
+| custom sisimomo_printer | yes | cartridge toner bars |
+| custom vncntdev_device_tracer | yes | device online/offline |
+| custom wsly_pollen | yes | tree/grass/weed pollen |
 
 ## Sources
 

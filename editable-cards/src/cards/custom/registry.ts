@@ -1054,6 +1054,20 @@ const SPECIALIZED_CUSTOM_TAGS = new Set([
   "ulm-custom-card-irmajavi-speedtest-card",
   "ulm-custom-card-irmajavi-weather-card",
   "ulm-custom-card-mpse-gauge-card",
+  "ulm-custom-card-mpse-thermostat-card",
+  "ulm-custom-card-neekster-update-card",
+  "ulm-custom-card-nik-tablet-card",
+  "ulm-custom-card-paddy-dwd-pollen-card",
+  "ulm-custom-card-paddy-waste-collection-card",
+  "ulm-custom-card-paddy-welcome-card",
+  "ulm-custom-card-person-info-small-card",
+  "ulm-custom-card-qubino-card",
+  "ulm-custom-card-ristou-person-card",
+  "ulm-custom-card-schumijo-flower-card",
+  "ulm-custom-card-senoro-win-card",
+  "ulm-custom-card-sisimomo-printer-card",
+  "ulm-custom-card-vncntdev-device-tracer-card",
+  "ulm-custom-card-wsly-pollen-card",
 ]);
 
 export const CUSTOM_CARDS = CUSTOM_CARD_DEFS.filter(
