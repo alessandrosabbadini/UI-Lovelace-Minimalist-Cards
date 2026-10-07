@@ -17,16 +17,28 @@ I README di ogni custom card restano in `custom_cards/<nome>/README.md` (type Li
 ## Build
 
 ```bash
+# From repo root — builds Lit and copies the HACS artifact to ./dist/
+bash scripts/build-hacs.sh
+```
+
+Or only the package:
+
+```bash
 cd editable-cards
 npm install
 npm run build
 ```
 
-Output: `dist/ulm-editable-cards.js`
+Output for HACS: `../dist/ulm-editable-cards.js` (repo root).
 
 ## Installazione HA
 
-1. Copia `dist/ulm-editable-cards.js` → `/config/www/`
+**HACS (consigliato):** custom repository → category **Dashboard** →  
+`alessandrosabbadini/UI-Lovelace-Minimalist-Cards` (repo still private).
+
+**Manuale:**
+
+1. Copia `dist/ulm-editable-cards.js` (root del repo) → `/config/www/`
 2. Resource Lovelace: `/local/ulm-editable-cards.js` (JavaScript Module)
 3. Dashboard **UI mode** → Add card → cerca `ULM`
 

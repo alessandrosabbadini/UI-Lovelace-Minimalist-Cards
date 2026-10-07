@@ -1,8 +1,7 @@
 {
-  "name": "UI Lovelace Minimalist",
+  "name": "UI Lovelace Minimalist Cards",
+  "filename": "ulm-editable-cards.js",
   "render_readme": true,
-  "homeassistant": "2025.12.3",
-  "zip_release": true,
-  "filename": "ui_lovelace_minimalist.zip",
-  "hacs": "2.0.5"
+  "homeassistant": "2024.12.0",
+  "hacs": "2.0.0"
 }

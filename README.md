@@ -42,18 +42,31 @@ See also [MIGRATION-EDITABLE-CARDS.md](./MIGRATION-EDITABLE-CARDS.md).
 | Community custom cards & chips | Ported (some MVP / fidelity TBD) |
 | Themes | Original Minimalist themes kept |
 | Popups | Partial Lit dialogs; advanced flows still in `legacy/popup_templates/` |
-| HACS / release packaging | Not finalized |
+| HACS / release packaging | Custom repository (Dashboard) ready; repo still **private** |
 | Docs | Partially outdated vs Lit package |
 
-## Quick install (dev / test)
+## Install with HACS (custom repository)
+
+> Repo is still **private**. Only accounts with GitHub access can add it.
+> In HACS, for private repos you typically need a GitHub token with `repo` scope
+> (HACS → settings / GitHub).
+
+1. HACS → **⋯** → **Custom repositories**
+2. Repository: `alessandrosabbadini/UI-Lovelace-Minimalist-Cards`
+3. Category: **Dashboard**
+4. Download / Install **UI Lovelace Minimalist Cards**
+5. Restart Home Assistant if prompted
+6. Dashboard **UI mode** → Add card → search **ULM**
+
+HACS looks for `dist/ulm-editable-cards.js` (see `hacs.json`).
+
+## Manual install (without HACS)
 
 ```bash
-cd editable-cards
-npm install
-npm run build
+bash scripts/build-hacs.sh
 ```
 
-1. Copy `editable-cards/dist/ulm-editable-cards.js` → `/config/www/`
+1. Copy `dist/ulm-editable-cards.js` → `/config/www/`
 2. Lovelace resource: `/local/ulm-editable-cards.js` (**JavaScript Module**)
 3. Create a **UI mode** dashboard → Add card → search **ULM**
 4. Optional: use the integration only to install **themes**

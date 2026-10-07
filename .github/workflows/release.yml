@@ -5,32 +5,41 @@ on:
   release:
     types: ["published"]
 
+permissions:
+  contents: write
+
 jobs:
-  update_hacs_manifest:
-    name: "Prepare release asset"
+  publish_plugin:
+    name: "Build & upload Lovelace plugin"
     runs-on: "ubuntu-latest"
     steps:
       - name: "Check out repository"
         uses: "actions/checkout@v6"
 
-      - name: "Get version"
-        id: "version"
-        uses: "home-assistant/actions/helpers/version@master"
+      - name: "Setup Node"
+        uses: "actions/setup-node@v4"
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: "editable-cards/package-lock.json"
 
-      - name: "Set manifest version number"
-        run: |
-          python3 ${{ github.workspace }}/.github/update_hacs_manifest.py --version ${{ steps.version.outputs.version }}
+      - name: "Build HACS plugin"
+        run: "bash scripts/build-hacs.sh"
 
-      - name: "Create zip"
-        run: |
-          cd custom_components/ui_lovelace_minimalist
-          zip ui_lovelace_minimalist.zip -r ./
-
-      - name: "Upload zip to release"
+      - name: "Upload ulm-editable-cards.js"
         uses: "svenstaro/upload-release-action@2.11.5"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          file: "./custom_components/ui_lovelace_minimalist/ui_lovelace_minimalist.zip"
-          asset_name: "ui_lovelace_minimalist.zip"
+          file: "dist/ulm-editable-cards.js"
+          asset_name: "ulm-editable-cards.js"
+          tag: "${{ github.ref }}"
+          overwrite: true
+
+      - name: "Upload ulm-editable-cards.js.gz"
+        uses: "svenstaro/upload-release-action@2.11.5"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          file: "dist/ulm-editable-cards.js.gz"
+          asset_name: "ulm-editable-cards.js.gz"
           tag: "${{ github.ref }}"
           overwrite: true

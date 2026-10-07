@@ -3,8 +3,14 @@ __pycache__
 .pytest*
 *.egg-info
 */build/*
-*/dist/*
 .venv
+
+# Ignore nested dist folders, but keep the HACS plugin artifact at ./dist/
+**/dist/
+!/dist/
+!/dist/ulm-editable-cards.js
+!/dist/ulm-editable-cards.js.gz
+!/dist/.gitkeep
 
 
 # misc
@@ -54,3 +60,4 @@ custom_components/ui_lovelace_minimalist/.installed
 
 # Keep original Minimalist themes in /themes (mirrors lovelace/themefiles)
 # Do not ignore /themes/
+site/
