@@ -1,11 +1,12 @@
----
 name: "Automatic custom_cards docs"
 
 on:
   push:
-    # Should only run on "dev" when new cards are submitted via PR
     branches: ["main"]
-    paths: ["custom_cards/*/README.md", "docs/"]
+    paths:
+      - "editable-cards/src/cards/custom/*/README.md"
+      - "editable-cards/src/cards/chips/community/*/README.md"
+      - "docs/"
 
 jobs:
   docit:
@@ -16,12 +17,27 @@ jobs:
           fetch-depth: 0
       - name: "Copy and rename README.md files"
         run: |
-          find ./custom_cards/ -type f -name "README.md" | while read fname; do
-            dirname=`dirname "$fname"`
-            foldername=`basename "$dirname"`
-            filename=`basename "$fname"`
-            newname=`echo "$dirname" | sed -e "s/ /_/g"`
-            cp "${dirname}/$filename" "./docs/usage/custom_cards/${foldername}.md"
+          mkdir -p ./docs/usage/custom_cards
+
+          # Lit custom cards → docs/usage/custom_cards/custom_card_<underscored>.md
+          for readme in ./editable-cards/src/cards/custom/*/README.md; do
+            [ -f "$readme" ] || continue
+            foldername=$(basename "$(dirname "$readme")")
+            docname="custom_card_${foldername//-/_}"
+            cp "$readme" "./docs/usage/custom_cards/${docname}.md"
+          done
+
+          # Community chips / templates → custom_chip_* or custom_template_*
+          for readme in ./editable-cards/src/cards/chips/community/*/README.md; do
+            [ -f "$readme" ] || continue
+            foldername=$(basename "$(dirname "$readme")")
+            underscored="${foldername//-/_}"
+            if [ "$foldername" = "shogun160-battery-info" ]; then
+              docname="custom_template_${underscored}"
+            else
+              docname="custom_chip_${underscored}"
+            fi
+            cp "$readme" "./docs/usage/custom_cards/${docname}.md"
           done
       - name: "Find and replace asset paths"
         uses: "jacobtomlinson/gha-find-replace@v3"

@@ -45,8 +45,9 @@ node_modules/
 editable-cards/node_modules/
 editable-cards/dist/
 
-# Local HA test instance (auth, storage, runtime)
-ha-local-test/config/
+# Local HA test instances (entire folders — docker scaffolding + runtime)
+ha-local-test/
+ha-hacs-test/
 
 # UI Lovelace Minimalist
 custom_components/*

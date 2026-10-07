@@ -8,11 +8,11 @@ Port completo delle card UI Lovelace Minimalist (ufficiali + custom + chips) ver
 | --- | --- | --- |
 | Card ufficiali | ~22 | `src/cards/**` + `simple-cards.ts` |
 | Chip ufficiali | 14 | `src/cards/chips/official-chips.ts` |
-| Custom cards / custom chips | 70 | `src/cards/custom/registry.ts` (generate da `custom_cards/`) |
+| Custom cards / custom chips | 70 | `src/cards/custom/` + `src/cards/chips/community/` |
 | Popup | 7 kind | `src/popups/ulm-popup.ts` |
 | Chips row helper | 1 | `ulm-chips-card` |
 
-I README di ogni custom card restano in `custom_cards/<nome>/README.md` (type Lit) e in `docs/usage/custom_cards/`. I YAML button-card sono stati rimossi; i popup originali da portare sono in `legacy/popup_templates/`.
+I README di ogni custom card / chip stanno accanto al sorgente Lit (`src/cards/custom/<nome>/README.md`, chips in `src/cards/chips/community/`) e vengono copiati in `docs/usage/custom_cards/` dal workflow CI. I YAML button-card sono stati rimossi; i popup originali da portare sono in `legacy/popup_templates/`.
 
 ## Build
 
@@ -49,9 +49,11 @@ API: `openUlmPopup(host, kind, entity)`.
 
 Kind supportati: `light`, `cover`, `thermostat`, `media_player`, `vacuum`, `weather`, `power_outlet`.
 
-## Rigenerare custom cards da YAML
+## Aggiungere una custom card
 
-Se aggiungi cartelle in `custom_cards/`, rilancia il generatore usato in sviluppo (script node in chat / CI) per aggiornare `src/cards/custom/registry.ts` e i README.
+1. Crea `src/cards/custom/<nome>/` con il file Lit + `README.md`
+2. Registra la type in `src/cards/custom/registry.ts` (e nell’entry del bundle se serve)
+3. Per un chip community: `src/cards/chips/community/<nome>/README.md`
 
 ## Nota sulla fedeltà
 

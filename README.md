@@ -16,7 +16,7 @@ This project is a **rewrite / migration**, not a drop-in replacement of the clas
 | YAML templates + `custom:button-card` | Lit custom cards (`editable-cards/`) |
 | YAML dashboards / template variables | Lovelace **UI mode** + card editors (`getConfigForm`) |
 | Bundled frontend deps (button-card, card-mod, …) | Single module: `ulm-editable-cards.js` |
-| Community cards as YAML in `custom_cards/` | Ported Lit types (`custom:ulm-custom-card-*-card`) |
+| Community cards as YAML in `custom_cards/` | Ported Lit types next to README (`editable-cards/src/cards/custom/`) |
 | Popup YAML (browser_mod + button-card) | Basic Lit popups; full fidelity still WIP |
 
 **Kept from the original project**
@@ -28,7 +28,7 @@ This project is a **rewrite / migration**, not a drop-in replacement of the clas
 **Removed**
 
 - Official card/chip/action YAML templates
-- Community YAML card definitions (READMEs kept under `custom_cards/*/README.md`)
+- Community YAML card definitions (READMEs live next to each Lit card / chip)
 - Bundled HACS frontend dependency packs
 - Legacy YAML example dashboards
 
@@ -79,7 +79,7 @@ This work is derived from [UI Lovelace Minimalist](https://github.com/UI-Lovelac
 
 - Original design: [tben](https://community.home-assistant.io/u/tben/summary)
 - Upstream maintainers & contributors — see the [original repository](https://github.com/UI-Lovelace-Minimalist/UI)
-- Community custom-card authors credited in each `custom_cards/*/README.md`
+- Community custom-card authors credited in each card/chip `README.md` under `editable-cards/src/cards/`
 
 ## License
 

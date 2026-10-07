@@ -9,7 +9,7 @@ Lovelace cards with Home Assistant UI editors (Mushroom-style).
 - **Themes kept:** `themes/` and `custom_components/.../lovelace/themefiles/`
 - **Removed from the package:**
   - Official card/chip/action YAML under `ulm_templates/card_templates` and `actions`
-  - Community YAML under `custom_cards/**/*.yaml` (READMEs kept)
+  - Community YAML under `custom_cards/**/*.yaml` (folder removed; READMEs next to Lit sources)
   - Bundled HACS frontend deps (button-card, card-mod, mini-*, …)
   - YAML example dashboards (`ui-lovelace.yaml`, `adaptive-dash`)
 - **Kept for porting only:** `legacy/popup_templates/` (original popup YAML)

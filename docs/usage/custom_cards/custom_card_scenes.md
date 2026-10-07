@@ -50,7 +50,7 @@ Tap: `automation.trigger` for automations, otherwise `homeassistant.turn_on`.
 
 ## Legacy YAML
 
-Original button-card templates remain in `custom_cards/custom_card_scenes/`:
+Original button-card YAML was removed; Lit source and README live in `editable-cards/src/cards/custom/scenes/`:
 - `card_scenes.yaml`
 
 ## Migration
