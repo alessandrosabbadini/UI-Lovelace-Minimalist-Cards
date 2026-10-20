@@ -322,18 +322,25 @@ export const popupStyles = css`
     row-gap: 0;
   }
 
-  /* Thermostat-style: modes strip always visible (also on desktop) */
+  /* Thermostat-style: modes strip always visible (also on desktop).
+     Use fr (not vh) so rows fit inside the dialog — vh was clipping the footer. */
   .ulm-grid.with-buttons {
-    grid-template-rows: 16vh 42vh 14vh 14vh;
+    grid-template-rows: 16fr 42fr 14fr 18fr;
     grid-template-areas:
       "header"
       "body"
       "buttons"
       "footer";
+    height: 100%;
   }
   .ulm-grid.with-buttons .area-buttons {
     display: grid;
     place-items: center;
+    align-content: start;
+  }
+  .ulm-grid.with-buttons .area-footer {
+    margin-top: 8px;
+    align-content: start;
   }
 
   .ulm-grid.cols-2 {
@@ -451,6 +458,9 @@ export const popupStyles = css`
         "body"
         "buttons"
         "footer";
+    }
+    .ulm-grid.with-buttons {
+      grid-template-rows: 16fr 48fr 14fr 18fr;
     }
     .ulm-grid.media-infos {
       grid-template-columns: 1fr;
@@ -597,15 +607,17 @@ export const popupStyles = css`
     align-items: center;
     gap: 4px;
     width: 50%;
+    max-width: 420px;
     margin: 0 auto;
     padding: 4px;
     border-radius: 21px;
-    background: rgba(var(--ulm-color-theme), 0.1);
+    background: rgba(51, 51, 51, 0.1);
     box-sizing: border-box;
   }
   @media (max-width: 800px) {
     .ulm-mode-bar {
       width: 100%;
+      max-width: none;
     }
   }
   .ulm-mode-chip {
@@ -619,6 +631,7 @@ export const popupStyles = css`
     display: grid;
     place-items: center;
     padding: 0;
+    flex: 0 0 auto;
   }
   .ulm-mode-chip.active {
     background: var(--card-background-color);
@@ -627,6 +640,38 @@ export const popupStyles = css`
   }
   .ulm-mode-chip ha-icon {
     --mdc-icon-size: 20px;
+  }
+
+  /* Thermostat dial: fit fully in body (no bottom clip), no drag-scroll */
+  .thermo-popup .area-body {
+    overflow: hidden;
+    overscroll-behavior: none;
+    container-type: size;
+    align-content: center;
+  }
+
+  /* Desktop: gap under dial + a bit more body height for the circle */
+  @media (min-width: 801px) {
+    .thermo-popup.ulm-grid.with-buttons {
+      row-gap: 16px;
+      grid-template-rows: 14fr 46fr 14fr 16fr;
+    }
+    .thermo-popup .area-buttons {
+      align-content: center;
+    }
+  }
+
+  /* Size to body height so the full circle stays visible */
+  ulm-thermo-embed {
+    display: block;
+    width: min(320px, 100%, 100cqh);
+    max-width: 100%;
+    max-height: 100%;
+    aspect-ratio: 1;
+    justify-self: center;
+    overflow: hidden;
+    touch-action: none;
+    overscroll-behavior: none;
   }
 
   .ulm-list-row {

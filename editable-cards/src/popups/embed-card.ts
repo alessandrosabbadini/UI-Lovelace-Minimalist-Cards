@@ -25,14 +25,24 @@ export async function mountLovelaceCard(
 
   const tag =
     tagHint ||
-    (typeof config.type === "string"
+    (typeof config.type === "string" && config.type.startsWith("custom:")
       ? config.type.replace(/^custom:/, "")
       : undefined);
 
   let el: (LovelaceCard & HTMLElement) | null = null;
 
   try {
-    if (tag) {
+    // Built-in Lovelace cards (thermostat, etc.): always use HA helpers.
+    // Direct createElement("hui-thermostat-card") often mounts an empty shell.
+    const w = window as Window & {
+      loadCardHelpers?: () => Promise<Helpers>;
+    };
+    const preferHelpers =
+      !tagHint &&
+      typeof config.type === "string" &&
+      !config.type.startsWith("custom:");
+
+    if (!preferHelpers && tag) {
       if (!customElements.get(tag)) {
         await Promise.race([
           customElements.whenDefined(tag),
@@ -44,7 +54,6 @@ export async function mountLovelaceCard(
       if (customElements.get(tag)) {
         el = document.createElement(tag) as LovelaceCard & HTMLElement;
         if (typeof el.setConfig === "function") {
-          // Cards expect config without the Lovelace `type` field
           const { type: _t, ...rest } = config as LovelaceCardConfig & {
             type?: string;
           };
@@ -53,23 +62,17 @@ export async function mountLovelaceCard(
       }
     }
 
-    // Fallback: HA helpers (built-in cards like thermostat)
-    if (!el) {
-      const w = window as Window & {
-        loadCardHelpers?: () => Promise<Helpers>;
-      };
-      if (typeof w.loadCardHelpers === "function") {
-        const helpers = await w.loadCardHelpers();
-        const created = helpers.createCardElement(config) as LovelaceCard &
-          HTMLElement;
-        // Reject error cards when we expected a specific tag
-        if (
-          !tag ||
-          created.localName === tag ||
-          created.localName === `hui-${tag}-card`
-        ) {
-          el = created;
-        }
+    if (!el && typeof w.loadCardHelpers === "function") {
+      const helpers = await w.loadCardHelpers();
+      const created = helpers.createCardElement(config) as LovelaceCard &
+        HTMLElement;
+      if (
+        !tag ||
+        preferHelpers ||
+        created.localName === tag ||
+        created.localName === `hui-${tag}-card`
+      ) {
+        el = created;
       }
     }
   } catch {

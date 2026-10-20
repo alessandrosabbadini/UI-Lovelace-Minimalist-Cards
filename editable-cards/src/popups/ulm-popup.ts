@@ -32,16 +32,31 @@ type HostEl = HTMLElement & { hass?: HomeAssistant };
  * Opens a Minimalist-style popup dialog for an entity.
  * Usage: openUlmPopup(this, kind, entity, opts?)
  */
+/** Prefer HA's shadow tree so Lit context (needed by thermostat dial) is available. */
+function popupMountParent(): ParentNode {
+  const ha = document.querySelector("home-assistant");
+  if (ha?.shadowRoot) return ha.shadowRoot;
+  if (ha) return ha;
+  return document.body;
+}
+
 export function openUlmPopup(
   host: HostEl,
   kind: UlmPopupKind,
   entity: string,
   opts: UlmPopupOpts = {},
 ) {
-  let el = document.querySelector("ulm-popup-dialog") as UlmPopupDialog | null;
+  let el =
+    (document.querySelector("ulm-popup-dialog") as UlmPopupDialog | null) ||
+    (popupMountParent().querySelector(
+      "ulm-popup-dialog",
+    ) as UlmPopupDialog | null);
   if (!el) {
     el = document.createElement("ulm-popup-dialog") as UlmPopupDialog;
-    document.body.appendChild(el);
+    popupMountParent().appendChild(el);
+  } else if (el.parentNode === document.body) {
+    // Migrate older body-mounted instance into HA shadow for context
+    popupMountParent().appendChild(el);
   }
   el.attachHost(host);
   if (host.hass) el.hass = host.hass;
@@ -62,8 +77,6 @@ export class UlmPopupDialog extends LitElement {
   private _host?: HostEl;
   private _syncTimer?: number;
   private _viewStack: PopupView[] = [];
-  private _thermoHost?: HTMLElement;
-  private _thermoEl?: (LovelaceCard & HTMLElement) | null;
   private _vacuumHost?: HTMLElement;
   private _vacuumEl?: (LovelaceCard & HTMLElement) | null;
   private _graphHost?: HTMLElement;
@@ -85,7 +98,6 @@ export class UlmPopupDialog extends LitElement {
     this._view = this._defaultView(kind);
     this._viewStack = [];
     this._history = [];
-    this._thermoEl = null;
     this._vacuumEl = null;
     this._graphEl = null;
     this._slotEls.clear();
@@ -117,19 +129,7 @@ export class UlmPopupDialog extends LitElement {
 
   private async _syncEmbeds() {
     if (!this.hass) return;
-    if (this._kind === "thermostat" && this._thermoHost) {
-      this._thermoEl = await mountLovelaceCard(
-        this._thermoHost,
-        this.hass,
-        { type: "thermostat", entity: this._entity },
-        this._thermoEl,
-        "hui-thermostat-card",
-      );
-      if (this._thermoEl) {
-        this._thermoHost.style.cssText =
-          "width:100%;max-width:360px;--ha-card-box-shadow:none;--ha-card-background:transparent;";
-      }
-    }
+    // Thermostat uses <ulm-thermo-embed> (HA thermostat card in shadow DOM).
     if (this._kind === "vacuum" && this._vacuumHost) {
       const map = this._opts.camera || "null";
       this._vacuumEl = await mountLovelaceCard(
@@ -220,20 +220,39 @@ export class UlmPopupDialog extends LitElement {
     }
   }
 
+  private _lastEntityState?: string;
+
   private _startSync() {
     this._stopSync();
+    this._lastEntityState = undefined;
     this._syncTimer = window.setInterval(() => {
       if (!this._open) return;
-      if (this._host?.hass && this._host.hass !== this.hass) {
+      // HA mutates hass in place — always pull from host
+      if (this._host?.hass) {
         this.hass = this._host.hass;
       }
-      if (this._thermoEl && this.hass) this._thermoEl.hass = this.hass;
       if (this._vacuumEl && this.hass) this._vacuumEl.hass = this.hass;
       if (this._graphEl && this.hass) this._graphEl.hass = this.hass;
       if (this.hass) {
         for (const el of this._slotEls.values()) {
           if (el) el.hass = this.hass;
         }
+      }
+      // Thermostat dial lives outside mountLovelaceCard — push hass every tick
+      const thermo = this.renderRoot?.querySelector(
+        "ulm-thermo-embed",
+      ) as (HTMLElement & { hass?: HomeAssistant }) | null;
+      if (thermo && this.hass) {
+        thermo.hass = this.hass;
+      }
+      // Re-render chips / header when entity state changes
+      const st = this.hass?.states?.[this._entity];
+      const key = st
+        ? `${st.state}|${st.last_changed}|${JSON.stringify(st.attributes?.hvac_action)}|${st.attributes?.temperature}`
+        : "";
+      if (key && key !== this._lastEntityState) {
+        this._lastEntityState = key;
+        this.requestUpdate();
       }
     }, 300);
   }
@@ -380,10 +399,7 @@ export class UlmPopupDialog extends LitElement {
       case "cover":
         return renderCover(ctx);
       case "thermostat":
-        return renderThermostat(ctx, (el) => {
-          this._thermoHost = el as HTMLElement | undefined;
-          if (el) void this._syncEmbeds();
-        });
+        return renderThermostat(ctx);
       case "media_player":
         return renderMedia(ctx);
       case "vacuum":

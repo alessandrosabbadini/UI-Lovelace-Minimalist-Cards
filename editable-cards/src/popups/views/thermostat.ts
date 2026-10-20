@@ -1,11 +1,11 @@
 import { html, type TemplateResult } from "lit";
-import { ref } from "lit/directives/ref.js";
 import type { PopupContext } from "../types";
 import {
   capitalize,
   renderPopupFooter,
   renderPopupHeader,
 } from "../shared";
+import "../ulm-thermo-embed";
 
 /** Order + icons from legacy popup_thermostat_temperature.yaml */
 const HVAC_ORDER = [
@@ -46,10 +46,32 @@ export function defaultThermostatView(): "main" {
   return "main";
 }
 
-export function renderThermostat(
+function localize(
   ctx: PopupContext,
-  onEmbedHost?: (el: Element | undefined) => void,
-): TemplateResult {
+  key: string,
+  fallback: string,
+): string {
+  const loc = (
+    ctx.hass as { localize?: (k: string) => string }
+  ).localize;
+  if (typeof loc === "function") {
+    const v = loc(key);
+    if (v && v !== key) return v;
+  }
+  return fallback;
+}
+
+/**
+ * Port of legacy popup_thermostat_temperature.yaml:
+ * - header (popup_header)
+ * - content1: built-in HA `type: thermostat` card (+ card_mod via ulm-thermo-embed)
+ * - buttons: HVAC / preset mode chips
+ * - footer: back + power
+ *
+ * The dial is NOT custom — it is Home Assistant’s thermostat card
+ * (ha-control-circular-slider). No external libraries.
+ */
+export function renderThermostat(ctx: PopupContext): TemplateResult {
   const s = ctx.stateObj;
   const attrs = s.attributes;
   const usePreset = !!ctx.opts.preset_mode;
@@ -61,6 +83,8 @@ export function renderThermostat(
     : [];
   const currentPreset = String(attrs.preset_mode || "");
   const currentHvac = s.state;
+
+  const label = capitalize(s.state);
 
   const modes = usePreset
     ? PRESET_ORDER.filter((m) =>
@@ -76,30 +100,46 @@ export function renderThermostat(
       })
     : HVAC_ORDER.filter((m) =>
         hvacModes.some((h) => h.toLowerCase() === m),
-      ).map((m) => ({
-        id: m,
-        icon: HVAC_ICONS[m],
-        active: currentHvac === m,
-      }));
+      ).map((m) => {
+        const real =
+          hvacModes.find((h) => h.toLowerCase() === m) || m;
+        return {
+          id: real,
+          icon: HVAC_ICONS[m],
+          active: currentHvac.toLowerCase() === m,
+        };
+      });
 
-  return html`<div class="ulm-grid with-buttons">
+  return html`<div class="ulm-grid with-buttons thermo-popup">
     <div class="area-header">
       ${renderPopupHeader({
         name: s.attributes.friendly_name || ctx.entity,
-        label: capitalize(s.state),
+        label,
         icon: (s.attributes.icon as string) || "mdi:thermostat",
       })}
     </div>
     <div class="area-body">
-      <div class="embed-host" ${ref((el) => onEmbedHost?.(el))}></div>
+      <ulm-thermo-embed
+        .hass=${ctx.hass}
+        .entity=${ctx.entity}
+      ></ulm-thermo-embed>
     </div>
     <div class="area-buttons">
       <div class="ulm-mode-bar">
         ${modes.map(
           (m) => html`<button
+            type="button"
             class="ulm-mode-chip ${m.active ? "active" : ""}"
             title=${m.id}
-            @click=${() => {
+            @click=${(ev: Event) => {
+              // Instant dial feedback (demo climate keeps hvac_action=cooling)
+              const root = (ev.currentTarget as HTMLElement).closest(
+                ".thermo-popup",
+              );
+              const embed = root?.querySelector(
+                "ulm-thermo-embed",
+              ) as { setHvacMode?: (mode: string) => void } | null;
+              if (!usePreset) embed?.setHvacMode?.(m.id);
               if (usePreset) {
                 ctx.call("climate", "set_preset_mode", { preset_mode: m.id });
               } else {
@@ -115,8 +155,9 @@ export function renderThermostat(
     <div class="area-footer">
       ${renderPopupFooter({
         onBack: ctx.goBack,
-        onPower: () => ctx.call(ctx.domain, "toggle"),
-        powerLabel: capitalize(s.state),
+        backLabel: localize(ctx, "ui.common.back", "Back"),
+        onPower: () => ctx.call("homeassistant", "toggle"),
+        powerLabel: localize(ctx, "ui.common.toggle", "Toggle"),
       })}
     </div>
   </div>`;
