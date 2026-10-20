@@ -41,18 +41,15 @@ export function renderCover(ctx: PopupContext): TemplateResult {
       })}
     </div>
     <div class="area-body">
-      <div class="ulm-embed-host" data-ulm-embed="cover-slider"></div>
-      <div class="ulm-embed-fallback">
-        ${renderVerticalSlider({
-          value,
-          flipped: true,
-          thumbWidth: 40,
-          fill: "rgba(var(--ulm-color-theme),0.9)",
-          track: "rgba(var(--ulm-color-theme),0.09)",
-          onChange: (v) =>
-            ctx.call("cover", "set_cover_position", { position: v }),
-        })}
-      </div>
+      ${renderVerticalSlider({
+        value,
+        flipped: true,
+        thumbWidth: 40,
+        fill: "rgba(51, 51, 51, 0.9)",
+        track: "rgba(51, 51, 51, 0.09)",
+        onChange: (v) =>
+          ctx.call("cover", "set_cover_position", { position: v }),
+      })}
     </div>
     <div class="area-buttons">
       <div class="ulm-mode-row">

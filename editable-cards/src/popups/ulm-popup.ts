@@ -6,7 +6,6 @@ import {
   lightEntityColor,
   miniMediaArtwork,
   miniMediaInfo,
-  mySliderCover,
   mySliderVolume,
   weatherRadar,
 } from "./embed-configs";
@@ -200,13 +199,6 @@ export class UlmPopupDialog extends LitElement {
         key: "light-color",
         config: lightEntityColor(this._entity),
         tag: "light-entity-card",
-      });
-    }
-    if (this._kind === "cover") {
-      slots.push({
-        key: "cover-slider",
-        config: mySliderCover(this._entity),
-        tag: "my-slider-v2",
       });
     }
     if (this._kind === "media_player") {

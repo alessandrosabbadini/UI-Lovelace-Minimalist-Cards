@@ -119,9 +119,7 @@ export function renderVerticalSlider(opts: {
     0,
     Math.min(100, ((opts.value - min) / (max - min || 1)) * 100),
   );
-  // Visual fill from bottom; flipped still fills from bottom with value amount
   const pct = rawPct;
-  const thumbBottom = opts.flipped ? `calc(${pct}% - 2px)` : `calc(${pct}% - 2px)`;
   const trackStyle = opts.temperature
     ? "background: linear-gradient(180deg, #f3db6d, #fff, #c9f2fc)"
     : opts.track
@@ -130,23 +128,30 @@ export function renderVerticalSlider(opts: {
   const h = opts.height || "280px";
   const w = opts.width || "100px";
   const thumbW = opts.thumbWidth ?? 50;
-  // Flipped: invert displayed range value so dragging up increases position
+  // Flipped (covers): high value at top — fill grows downward from top
+  const fillStyle = [
+    `height:${pct}%`,
+    opts.fill ? `background:${opts.fill}` : "",
+    opts.flipped ? "top:0;bottom:auto" : "bottom:0;top:auto",
+  ]
+    .filter(Boolean)
+    .join(";");
+  const thumbStyle = [
+    opts.flipped ? `top:calc(${pct}% - 2px);bottom:auto` : `bottom:calc(${pct}% - 2px);top:auto`,
+    `width:${opts.temperature ? 0 : thumbW}px`,
+    opts.temperature ? "height:0" : "",
+  ]
+    .filter(Boolean)
+    .join(";");
+  // Range input is bottom→top visually after rotate; flip value mapping for covers
   const inputValue = opts.flipped ? max + min - opts.value : opts.value;
   const decode = (v: number) => (opts.flipped ? max + min - v : v);
   return html`<div class="ulm-vslider" style="height:${h};width:${w}">
     <div class="ulm-vslider-track" style="height:${h};width:${w};${trackStyle}">
       ${opts.temperature
         ? nothing
-        : html`<div
-            class="ulm-vslider-fill"
-            style="height:${pct}%;${opts.fill ? `background:${opts.fill}` : ""}"
-          ></div>`}
-      <div
-        class="ulm-vslider-thumb"
-        style="bottom:${thumbBottom};width:${opts.temperature ? 0 : thumbW}px;${opts.temperature
-          ? "height:0"
-          : ""}"
-      ></div>
+        : html`<div class="ulm-vslider-fill" style=${fillStyle}></div>`}
+      <div class="ulm-vslider-thumb" style=${thumbStyle}></div>
       <input
         type="range"
         min=${min}
@@ -645,7 +650,6 @@ export const popupStyles = css`
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
     background: rgba(255, 145, 1, 1);
     pointer-events: none;
     z-index: 1;
@@ -677,19 +681,24 @@ export const popupStyles = css`
     background: transparent;
     cursor: pointer;
     z-index: 3;
-    opacity: 0.01;
+    opacity: 0;
+    outline: none;
   }
   .ulm-vslider-track input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
+    appearance: none;
     width: 48px;
     height: 48px;
+    border: none;
     background: transparent;
+    box-shadow: none;
   }
   .ulm-vslider-track input[type="range"]::-moz-range-thumb {
     width: 48px;
     height: 48px;
     border: 0;
     background: transparent;
+    box-shadow: none;
   }
 
   .ulm-list {

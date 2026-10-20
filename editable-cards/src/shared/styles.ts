@@ -208,20 +208,47 @@ export const ulmCardStyles = css`
     margin: 0;
     background: transparent;
     cursor: pointer;
+    /* Kill native focus / thumb chrome that shows as a white dot */
+    outline: none;
+    color: transparent;
   }
 
   .slider-wrap input[type="range"]::-webkit-slider-runnable-track {
     height: 42px;
     border-radius: 14px;
     background: transparent;
+    border: none;
+    box-shadow: none;
   }
 
   .slider-wrap input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 12px;
-    height: 42px;
+    appearance: none;
+    width: 0;
+    height: 0;
+    border: none;
     border-radius: 0;
     background: transparent;
+    box-shadow: none;
+  }
+
+  .slider-wrap input[type="range"]::-moz-range-track {
+    height: 42px;
+    border-radius: 14px;
+    background: transparent;
+    border: none;
+  }
+
+  .slider-wrap input[type="range"]::-moz-range-thumb {
+    width: 0;
+    height: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .slider-wrap input[type="range"]::-moz-focus-outer {
+    border: 0;
   }
 
   .slider-fill {
