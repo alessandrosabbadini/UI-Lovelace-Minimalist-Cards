@@ -226,7 +226,10 @@ export class UlmPowerOutletCard extends LitElement implements LovelaceCard {
     ev.stopPropagation();
     if (!this._config || !this.hass) return;
     if (this._config.enable_popup) {
-      openUlmPopup(this, "power_outlet", this._config.entity);
+      openUlmPopup(this, "power_outlet", this._config.entity, {
+        sensor1: this._config.consumption_sensor,
+        graph_sensor: this._config.consumption_sensor,
+      });
       return;
     }
     const domain = this._config.entity.split(".")[0];
@@ -239,7 +242,10 @@ export class UlmPowerOutletCard extends LitElement implements LovelaceCard {
     ev.stopPropagation();
     if (!this._config) return;
     if (this._config.enable_popup) {
-      openUlmPopup(this, "power_outlet", this._config.entity);
+      openUlmPopup(this, "power_outlet", this._config.entity, {
+        sensor1: this._config.consumption_sensor,
+        graph_sensor: this._config.consumption_sensor,
+      });
       return;
     }
     this.dispatchEvent(

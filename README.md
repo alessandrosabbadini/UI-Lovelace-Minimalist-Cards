@@ -5,7 +5,6 @@ Lit / custom-card ports of [UI Lovelace Minimalist](https://github.com/UI-Lovela
 > [!WARNING]
 > **Work in progress.** This repository is under active development and is **not ready for production**.
 > APIs, card types, layouts, and install steps may change without notice. Use only for testing / feedback.
-> Advanced popups (color temp, sources, radar, history, maps, …) are still being ported from the legacy YAML.
 
 ## What we did
 
@@ -17,20 +16,19 @@ This project is a **rewrite / migration**, not a drop-in replacement of the clas
 | YAML dashboards / template variables | Lovelace **UI mode** + card editors (`getConfigForm`) |
 | Bundled frontend deps (button-card, card-mod, …) | Single module: `ulm-editable-cards.js` |
 | Community cards as YAML in `custom_cards/` | Ported Lit types next to README (`editable-cards/src/cards/custom/`) |
-| Popup YAML (browser_mod + button-card) | Basic Lit popups; full fidelity still WIP |
+| Popup YAML (browser_mod + button-card) | Native Lit popups (`openUlmPopup`, no third-party cards) |
 
 **Kept from the original project**
 
 - Minimalist themes (`themes/` / integration themefiles): desktop, mobile, mobile-tapbar, iOS-tapbar
 - Design language and naming inspired by ULM
-- Original popup YAML sources for the remaining port → `legacy/popup_templates/`
-
 **Removed**
 
 - Official card/chip/action YAML templates
 - Community YAML card definitions (READMEs live next to each Lit card / chip)
 - Bundled HACS frontend dependency packs
 - Legacy YAML example dashboards
+- Legacy popup YAML (`legacy/popup_templates/` — replaced by Lit popups)
 
 See also [MIGRATION-EDITABLE-CARDS.md](./MIGRATION-EDITABLE-CARDS.md).
 
@@ -41,7 +39,7 @@ See also [MIGRATION-EDITABLE-CARDS.md](./MIGRATION-EDITABLE-CARDS.md).
 | Official cards & chips | Ported (polish ongoing) |
 | Community custom cards & chips | Ported (some MVP / fidelity TBD) |
 | Themes | Original Minimalist themes kept |
-| Popups | Partial Lit dialogs; advanced flows still in `legacy/popup_templates/` |
+| Popups | Native Lit dialogs (light/cover/media/thermostat/vacuum/weather/outlet) |
 | HACS / release packaging | Custom repository (Dashboard) ready; repo still **private** |
 | Docs | Partially outdated vs Lit package |
 
@@ -79,7 +77,7 @@ This work is derived from [UI Lovelace Minimalist](https://github.com/UI-Lovelac
 
 - Original design: [tben](https://community.home-assistant.io/u/tben/summary)
 - Upstream maintainers & contributors — see the [original repository](https://github.com/UI-Lovelace-Minimalist/UI)
-- Community custom-card authors credited in each card/chip `README.md` under `editable-cards/src/cards/`
+- Card/chip docs live next to Lit sources under `editable-cards/src/cards/` (official + community)
 
 ## License
 

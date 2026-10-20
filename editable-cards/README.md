@@ -12,7 +12,16 @@ Port completo delle card UI Lovelace Minimalist (ufficiali + custom + chips) ver
 | Popup | 7 kind | `src/popups/ulm-popup.ts` |
 | Chips row helper | 1 | `ulm-chips-card` |
 
-I README di ogni custom card / chip stanno accanto al sorgente Lit (`src/cards/custom/<nome>/README.md`, chips in `src/cards/chips/community/`) e vengono copiati in `docs/usage/custom_cards/` dal workflow CI. I YAML button-card sono stati rimossi; i popup originali da portare sono in `legacy/popup_templates/`.
+I README stanno accanto al sorgente Lit e il workflow CI li sincronizza in `docs/usage/`:
+
+| Gruppo | Path README | Docs generati |
+| --- | --- | --- |
+| Card ufficiali | `src/cards/<nome>/README.md` (+ `README-*.md` varianti) | `docs/usage/cards/` |
+| Chip ufficiali | `src/cards/chips/official/<nome>/README.md` | `docs/usage/chips/` |
+| Custom / community | `src/cards/custom/<nome>/README.md` | `docs/usage/custom_cards/` |
+| Chip community | `src/cards/chips/community/<nome>/README.md` | `docs/usage/custom_cards/` |
+
+I YAML button-card e i popup YAML legacy sono stati rimossi; i popup vivono in `src/popups/`.
 
 ## Build
 
@@ -44,10 +53,15 @@ Output for HACS: `../dist/ulm-editable-cards.js` (repo root).
 
 ## Popup
 
-Su light / cover / media / thermostat abilita `enable_popup` nell’editor.
-API: `openUlmPopup(host, kind, entity)`.
+Su light / cover / media / thermostat / vacuum / weather / power-outlet abilita `enable_popup` nell’editor.
 
-Kind supportati: `light`, `cover`, `thermostat`, `media_player`, `vacuum`, `weather`, `power_outlet`.
+API: `openUlmPopup(host, kind, entity, opts?)`.
+
+Kind: `light`, `cover`, `thermostat`, `media_player`, `vacuum`, `weather`, `power_outlet`.
+
+Opts utili: `color_palette`, `preset_mode`, `camera`, `sensor1` / `sensor2` / `graph_sensor`.
+
+Implementazione Lit ad alta fedeltà rispetto a `legacy/popup_templates/` (layout vh, header/footer Minimalist, slider verticali, color wheel, sotto-viste). Dove possibile si incorporano card HA/HACS già presenti (`thermostat`, `mini-graph-card`, `vacuum-card`); altrimenti fallback Lit.
 
 ## Aggiungere una custom card
 

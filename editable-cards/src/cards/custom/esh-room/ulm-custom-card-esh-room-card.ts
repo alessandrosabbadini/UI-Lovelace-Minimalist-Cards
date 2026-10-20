@@ -640,7 +640,7 @@ export class UlmCustomEshRoomCard
     ev.stopPropagation();
     const cfg = this._config!;
     if (kind === "light" && cfg.enable_light_popup) {
-      openUlmPopup(this, "light", entityId);
+      openUlmPopup(this, "light", entityId, {});
       return;
     }
     if (kind === "climate" && cfg.enable_thermostat_popup) {
@@ -648,7 +648,7 @@ export class UlmCustomEshRoomCard
       return;
     }
     if (kind === "cover" && cfg.enable_cover_popup) {
-      openUlmPopup(this, "cover", entityId);
+      openUlmPopup(this, "cover", entityId, {});
       return;
     }
     this._moreInfo(entityId);

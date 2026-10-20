@@ -12,7 +12,8 @@ Lovelace cards with Home Assistant UI editors (Mushroom-style).
   - Community YAML under `custom_cards/**/*.yaml` (folder removed; READMEs next to Lit sources)
   - Bundled HACS frontend deps (button-card, card-mod, mini-*, …)
   - YAML example dashboards (`ui-lovelace.yaml`, `adaptive-dash`)
-- **Kept for porting only:** `legacy/popup_templates/` (original popup YAML)
+  - Popup runtime YAML / browser_mod — replaced by Lit popups in `editable-cards/src/popups/`
+- **Kept as visual reference:** `legacy/popup_templates/` (YAML originals for fidelity work)
 
 ## Mapping (old → new)
 
@@ -42,6 +43,7 @@ Lovelace cards with Home Assistant UI editors (Mushroom-style).
 | `card_vacuum` | `custom:ulm-vacuum-card` |
 | `card_vertical_button` | `custom:ulm-vertical-button-card` |
 | community `custom_card_*` | `custom:ulm-custom-card-*-card` |
+| popup_* (browser_mod) | `openUlmPopup(host, kind, entity, opts?)` |
 
 ## Install
 
@@ -53,5 +55,6 @@ Lovelace cards with Home Assistant UI editors (Mushroom-style).
 
 ## Remaining work
 
-Port advanced popup flows from `legacy/popup_templates/` into
-`editable-cards/src/popups/` (color temp, sources, radar, history, maps, …).
+- Slim / rewrite outdated `docs/setup/*` and CONTRIBUTING for the Lit + HACS Dashboard model
+- Decide whether `custom_components/` stays as a themes helper or is replaced by theme-only packaging
+- Card-by-card visual polish (some community cards remain MVP)

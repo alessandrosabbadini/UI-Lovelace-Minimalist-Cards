@@ -430,7 +430,9 @@ export class UlmVacuumCard extends LitElement implements LovelaceCard {
     ev.stopPropagation();
     if (!this._config) return;
     if (this._config.enable_popup) {
-      openUlmPopup(this, "vacuum", this._config.entity);
+      openUlmPopup(this, "vacuum", this._config.entity, {
+        camera: this._config.camera,
+      });
       return;
     }
     this.dispatchEvent(

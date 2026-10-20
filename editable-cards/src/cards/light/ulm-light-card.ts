@@ -429,7 +429,9 @@ export class UlmLightCard extends LitElement implements LovelaceCard {
     ev.stopPropagation();
     if (!this.hass || !this._config) return;
     if (this._config.enable_popup_tap || this._config.enable_popup) {
-      openUlmPopup(this, "light", this._config.entity);
+      openUlmPopup(this, "light", this._config.entity, {
+        color_palette: this._config.color_palette,
+      });
       return;
     }
     this.hass.callService("light", "toggle", { entity_id: this._config.entity });
@@ -439,7 +441,9 @@ export class UlmLightCard extends LitElement implements LovelaceCard {
     ev.stopPropagation();
     if (!this._config) return;
     if (this._config.enable_popup) {
-      openUlmPopup(this, "light", this._config.entity);
+      openUlmPopup(this, "light", this._config.entity, {
+        color_palette: this._config.color_palette,
+      });
       return;
     }
     this.dispatchEvent(

@@ -90,6 +90,7 @@ export class UlmThermostatCard extends LitElement implements LovelaceCard {
         booleanField("enable_background_color"),
         booleanField("enable_collapse"),
         booleanField("enable_popup"),
+        booleanField("preset_mode"),
         booleanField("enable_horizontal"),
         booleanField("enable_display_temperature"),
         entityField("fan_entity", "fan", false),
@@ -107,6 +108,7 @@ export class UlmThermostatCard extends LitElement implements LovelaceCard {
         enable_display_temperature: "Show current temp (top right)",
         enable_background_color: "Colored background when heating/cooling",
         enable_popup: "Enable thermostat popup",
+        preset_mode: "Popup uses preset modes (ulm_card_thermostat_preset_mode)",
         fan_entity: "Separate fan entity",
         temp_step: "Temperature step",
         minimum_temp_spread: "Min spread (heat_cool)",
@@ -189,6 +191,11 @@ export class UlmThermostatCard extends LitElement implements LovelaceCard {
         config.enable_popup ??
           layout.enable_popup ??
           c.ulm_card_thermostat_enable_popup,
+      ),
+      preset_mode: Boolean(
+        config.preset_mode ??
+          layout.preset_mode ??
+          c.ulm_card_thermostat_preset_mode,
       ),
       fan_entity: this._normalizeFanEntity(
         config.fan_entity ??
@@ -684,7 +691,9 @@ export class UlmThermostatCard extends LitElement implements LovelaceCard {
   private _open() {
     if (!this._config) return;
     if (this._config.enable_popup) {
-      openUlmPopup(this, "thermostat", this._config.entity);
+      openUlmPopup(this, "thermostat", this._config.entity, {
+        preset_mode: this._config.preset_mode,
+      });
       return;
     }
     this.dispatchEvent(
