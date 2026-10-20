@@ -2,13 +2,7 @@ import { LitElement, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import type { HomeAssistant, HassEntity, LovelaceCard } from "../types";
 import { mountLovelaceCard } from "./embed-card";
-import {
-  lightEntityColor,
-  miniMediaArtwork,
-  miniMediaInfo,
-  mySliderVolume,
-  weatherRadar,
-} from "./embed-configs";
+import { lightEntityColor, weatherRadar } from "./embed-configs";
 import { popupStyles } from "./shared";
 import type { LovelaceCardConfig } from "../types";
 import type {
@@ -200,25 +194,6 @@ export class UlmPopupDialog extends LitElement {
         config: lightEntityColor(this._entity),
         tag: "light-entity-card",
       });
-    }
-    if (this._kind === "media_player") {
-      slots.push(
-        {
-          key: "media-art",
-          config: miniMediaArtwork(this._entity),
-          tag: "mini-media-player",
-        },
-        {
-          key: "media-info",
-          config: miniMediaInfo(this._entity),
-          tag: "mini-media-player",
-        },
-        {
-          key: "media-vol",
-          config: mySliderVolume(this._entity),
-          tag: "my-slider-v2",
-        },
-      );
     }
     if (this._kind === "weather") {
       slots.push({
