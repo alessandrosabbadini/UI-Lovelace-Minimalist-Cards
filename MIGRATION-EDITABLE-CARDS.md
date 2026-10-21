@@ -53,8 +53,14 @@ Lovelace cards with Home Assistant UI editors (Mushroom-style).
 4. UI-mode dashboard → Add card → search `ULM`
 5. (Optional) Keep the integration for **themes** only
 
+## Integration / themes
+
+`custom_components/ui_lovelace_minimalist/` remains as a **themes helper**
+(themed files + HA packaging). It does not ship card/popup YAML. Theme-only
+packaging (dropping the Python integration) is optional future work.
+
 ## Remaining work
 
-- Slim / rewrite outdated `docs/setup/*` and CONTRIBUTING for the Lit + HACS Dashboard model
-- Decide whether `custom_components/` stays as a themes helper or is replaced by theme-only packaging
+- CONTRIBUTING / development docs pass for the Lit + HACS Dashboard model
+- Optional: theme-only packaging without the Python integration
 - Card-by-card visual polish (some community cards remain MVP)

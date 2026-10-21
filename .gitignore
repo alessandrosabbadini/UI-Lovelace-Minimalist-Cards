@@ -62,3 +62,6 @@ custom_components/ui_lovelace_minimalist/.installed
 # Keep original Minimalist themes in /themes (mirrors lovelace/themefiles)
 # Do not ignore /themes/
 site/
+
+# macOS AppleDouble junk
+._*

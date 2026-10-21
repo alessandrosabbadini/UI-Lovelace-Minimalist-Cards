@@ -3,150 +3,31 @@ title: Customizing
 hide:
   - toc
 ---
-!!! warning "Outdated — YAML / button-card setup"
-
-    This page describes the classic Minimalist YAML + `custom:button-card` workflow.
-    This repository ships **Lit cards** only. Install and configure via the root
-    [README](../../README.md) (HACS Dashboard → `ulm-editable-cards.js`).
 
 <!-- markdownlint-disable MD046 -->
 
-When you have finished the installation process successfully it's time to start customizing your dashboard.
-You can find your ui-minimalist-lovelace file here:
+## Themes
 
-```yaml
-config
-└── ui_lovelace_minimalist
-    ├── custom_cards
-    └── dashboard
-        └── ui-lovelace.yaml
-```
+Edit or override Minimalist theme YAML under `/config/themes/` (or the copies
+managed by the integration themefiles). Typical variables include card radius,
+fonts, and color tokens used by ULM cards.
 
-It should look like this:
+Reload themes after edits (Developer Tools → YAML → Reload themes, or restart).
 
-??? note "ui-lovelace.yaml"
+## Card options
 
-    ```yaml
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ui-lovelace.yaml"
-    ```
+Each Lit card exposes an editor (`getConfigForm`). Prefer the UI editor fields
+over hand-written template variables from the old button-card era.
 
-## How to customize the dashboard
+Common patterns:
 
-You can customize your dashboard like any other YAML-based lovelace dashboard.
+- `name` / `label` overrides
+- `force_background_color`
+- `enable_popup` on interactive domains
 
-!!! warning ""
-    UI-mode is not yet supported
-So first let add some cards. These can be found on the [Wiki](https://ui-lovelace-minimalist.github.io/UI/usage/cards/card_battery/). As an example we will add the [`card_light`](https://ui-lovelace-minimalist.github.io/UI/usage/cards/card_light/) and [`card_vacuum`](https://ui-lovelace-minimalist.github.io/UI/usage/cards/card_vacuum/) next to each other with help of a `horizontal-stack`. Please read carefully the wiki-page of each of the cards to understand their specific variables.
+## Actions
 
-```yaml
----
-button_card_templates: !include_dir_merge_named "../../custom_components/ui_lovelace_minimalist/__ui_minimalist__/ulm_templates/"
+Tap / hold / double-tap behaviour is configured **per card** in the editor (or
+YAML). There is no global `custom_actions.yaml` template file in this package.
 
-title: "UI Lovelace Minimalist"
-theme: "minimalist-desktop"
-background: "var(--background-image)"
-# views: !include_dir_merge_list "views/"
-views:
-  - title: "Example View"
-    path: 0
-    icon: "mdi:flower"
-    cards:
-      - type: "horizontal-stack"
-        cards:
-          - type: "custom:button-card"
-            template: card_light
-            entity: light.living_room
-            variables:
-              ulm_card_light_enable_slider: true
-              ulm_card_light_enable_color: true
-          - type: "custom:button-card"
-            template: "card_vacuum"
-            entity: "vacuum.roborock_s5"
-```
-
-!!! tip ""
-
-    The `path:` in the example above is also the path name used in `navigation_path:`
-
-## Add extra views (tabs)
-
-All views/tabs are created as list items underneath:
-
-```yaml
-views:
-```
-
-Make sure you set at least parameters for *title, path and icon* for each view
-
-```yaml
-views:
-  - title: "Main"
-    path: 0
-    icon: "mdi:flower"
-    cards:
-      - type: "custom:button-card"
-            template: card_light
-            entity: light.living_room
-            variables:
-              ulm_card_light_enable_slider: true
-              ulm_card_light_enable_color: true
-  - title: "Lights"
-    path: lights
-    icon: "mdi:lightbulb"
-    cards:
-      - type: "custom:button-card"
-            template: card_light
-            entity: light.living_room
-            variables:
-              ulm_card_light_enable_slider: true
-              ulm_card_light_enable_color: true
-```
-
-## Add multiple dashboards
-
-After you have build your first dashboard with UI-Minimalist it's time to build multiple dashboards.
-If you would to be able to adjust non-UI-Minimalist with the UI-mode it's best to work with storage mode.
-For the first dashboard we did all the configuration for you. To add a second one you need to take a few steps.
-
-  Add another `ui-lovelace.yaml` to your dashboard folder:
-
-```yaml
-config
-└── ui_lovelace_minimalist
-    ├── custom_cards
-    └── dashboard
-        └── ui-lovelace.yaml
-        └── ui-lovelace_2.yaml
-```
-
-  Add a reference to it in `configuration.yaml`:
-
-```yaml
-lovelace:
-  mode: storage
-  # Add yaml dashboards
-  dashboards:
-    lovelace-minimalist-2:
-      mode: yaml
-      title: Minimalist 2
-      icon: mdi:flower
-      show_in_sidebar: true
-      filename: ui_lovelace_minimalist/dashboard/ui-lovelace_2.yaml
-```
-
-!!! note ""
-    You don't need to add the first dashboard which is installed with the integration
-
-As mentioned on the [configuration page](https://ui-lovelace-minimalist.github.io/UI/setup/configuration/) you need to add a line of code to load in all Minimalist card templates. <br>
-The start of each new dashboard file should therefore, look like this:
-
-```yaml
----
-button_card_templates: !include_dir_merge_named "../../custom_components/ui_lovelace_minimalist/__ui_minimalist__/ulm_templates/"
-
-title: "My new dashboard"
-theme: "minimalist-desktop"
-background: "var(--background-image)"
-# views: !include_dir_merge_list "views/"
-views:
-```
+See also [Custom actions](custom_actions.md).

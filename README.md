@@ -63,7 +63,7 @@ See also [MIGRATION-EDITABLE-CARDS.md](./MIGRATION-EDITABLE-CARDS.md).
 | Themes | Original Minimalist themes kept |
 | Popups | Native Lit dialogs (light, cover, media, thermostat, vacuum, weather, power outlet) |
 | HACS / release packaging | Custom repository (Dashboard) ready; repo still **private** |
-| Docs | Partially outdated vs Lit package |
+| Docs | Setup pages aligned to Lit + HACS; usage docs sync from card READMEs |
 
 ## Install with HACS (custom repository)
 
