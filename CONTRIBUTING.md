@@ -104,7 +104,7 @@ Popup kinds live under `editable-cards/src/popups/` (`ulm-popup.ts`,
 
 - **Source of truth for card docs:** README next to the Lit card.
 - **Setup / install:** `docs/setup/` (Lit + HACS Dashboard model).
-- **Site:** MkDocs (`mkdocs.yml`) → GitHub Pages.
+- **Local preview (optional):** `mkdocs serve` from the repo root.
 
 When you change card behaviour or options, update that card’s README in the
 same PR.

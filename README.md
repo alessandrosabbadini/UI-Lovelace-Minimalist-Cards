@@ -25,8 +25,6 @@ Lit / custom-card ports of [UI Lovelace Minimalist](https://github.com/UI-Lovela
   <img src="docs/assets/img/popup_weather_phone.png" alt="Weather popup" width="140">
 </p>
 
-More screenshots: [documentation site](https://alessandrosabbadini.github.io/UI-Lovelace-Minimalist-Cards/).
-
 ## What we did
 
 This project is a **rewrite / migration**, not a drop-in replacement of the classic HACS integration:
