@@ -1,12 +1,20 @@
-name: "Automatic custom_cards docs"
+name: "Automatic card docs sync"
 
 on:
   push:
     branches: ["main"]
     paths:
+      - "editable-cards/src/cards/*/README.md"
+      - "editable-cards/src/cards/*/README-*.md"
       - "editable-cards/src/cards/custom/*/README.md"
       - "editable-cards/src/cards/chips/community/*/README.md"
+      - "editable-cards/src/cards/chips/official/*/README.md"
       - "docs/"
+      - ".github/workflows/automatic-custom-card-docs.yml"
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   docit:
@@ -15,24 +23,72 @@ jobs:
       - uses: "actions/checkout@v6"
         with:
           fetch-depth: 0
-      - name: "Copy and rename README.md files"
+      - name: "Sync Lit READMEs into docs/usage"
         run: |
-          mkdir -p ./docs/usage/custom_cards
+          mkdir -p ./docs/usage/cards ./docs/usage/chips ./docs/usage/custom_cards
 
-          # Lit custom cards → docs/usage/custom_cards/custom_card_<underscored>.md
-          for readme in ./editable-cards/src/cards/custom/*/README.md; do
+          # Official cards (primary README.md → card_<folder_underscored>.md)
+          for readme in ./editable-cards/src/cards/*/README.md; do
             [ -f "$readme" ] || continue
-            foldername=$(basename "$(dirname "$readme")")
-            docname="custom_card_${foldername//-/_}"
-            cp "$readme" "./docs/usage/custom_cards/${docname}.md"
+            folder=$(basename "$(dirname "$readme")")
+            case "$folder" in custom|chips) continue ;; esac
+            case "$folder" in
+              media) docname="card_media_player" ;;
+              welcome) docname="card_welcome_scenes" ;;
+              *) docname="card_${folder//-/_}" ;;
+            esac
+            cp "$readme" "./docs/usage/cards/${docname}.md"
           done
 
-          # Community chips / templates → custom_chip_* or custom_template_*
+          # Official card variants (README-*.md)
+          for readme in ./editable-cards/src/cards/*/README-*.md; do
+            [ -f "$readme" ] || continue
+            folder=$(basename "$(dirname "$readme")")
+            variant=$(basename "$readme" .md)
+            variant=${variant#README-}
+            case "$folder/$variant" in
+              binary-sensor/alert) docname="card_binary_sensor_alert" ;;
+              generic/swap) docname="card_generic_swap" ;;
+              generic/graph) docname="card_graph" ;;
+              weather/ulm) docname="card_weather_ulm" ;;
+              welcome/scenes) docname="card_scenes" ;;
+              *)
+                docname="card_${folder//-/_}_${variant//-/_}"
+                ;;
+            esac
+            cp "$readme" "./docs/usage/cards/${docname}.md"
+          done
+
+          # Official chips
+          for readme in ./editable-cards/src/cards/chips/official/*/README.md; do
+            [ -f "$readme" ] || continue
+            folder=$(basename "$(dirname "$readme")")
+            docname="chip_${folder//-/_}"
+            cp "$readme" "./docs/usage/chips/${docname}.md"
+          done
+
+          # Community custom cards
+          for readme in ./editable-cards/src/cards/custom/*/README.md; do
+            [ -f "$readme" ] || continue
+            folder=$(basename "$(dirname "$readme")")
+            # Preserve historical camelCase doc name used by MkDocs nav
+            case "$folder" in
+              iabadia-battery-chip) docname="custom_card_iAbadia_battery_chip" ;;
+              *) docname="custom_card_${folder//-/_}" ;;
+            esac
+            cp "$readme" "./docs/usage/custom_cards/${docname}.md"
+            # Drop accidental lowercase duplicate if present
+            if [ "$folder" = "iabadia-battery-chip" ]; then
+              rm -f "./docs/usage/custom_cards/custom_card_iabadia_battery_chip.md"
+            fi
+          done
+
+          # Community chips / templates
           for readme in ./editable-cards/src/cards/chips/community/*/README.md; do
             [ -f "$readme" ] || continue
-            foldername=$(basename "$(dirname "$readme")")
-            underscored="${foldername//-/_}"
-            if [ "$foldername" = "shogun160-battery-info" ]; then
+            folder=$(basename "$(dirname "$readme")")
+            underscored="${folder//-/_}"
+            if [ "$folder" = "shogun160-battery-info" ]; then
               docname="custom_template_${underscored}"
             else
               docname="custom_chip_${underscored}"
@@ -44,7 +100,7 @@ jobs:
         with:
           find: "../../docs/assets/img"
           replace: "../../assets/img"
-          include: "docs/usage/custom_cards/**"
+          include: "docs/usage/**"
           regex: true
       - name: "Create Pull Request"
         uses: "peter-evans/create-pull-request@v8"
@@ -54,7 +110,7 @@ jobs:
           delete-branch: true
           commit-message: "Update docs"
           committer: "GitHub <noreply@github.com>"
-          title: "[Action] Update custom_cards docs"
+          title: "[Action] Update card docs from Lit READMEs"
           labels: ":memo: documentation"
           body: |
-            Update custom_cards docs due to latest changes.
+            Sync docs/usage from editable-cards README sources.

@@ -1,11 +1,11 @@
 ---
 # Project information
-site_name: "UI Lovelace Minimalist"
-site_url: "https://ui-lovelace-minimalist.github.io/UI/"
+site_name: "UI Lovelace Minimalist Cards"
+site_url: "https://alessandrosabbadini.github.io/UI-Lovelace-Minimalist-Cards/"
 
 # Repository
-repo_url: "https://github.com/UI-Lovelace-Minimalist/UI"
-repo_name: "UI-Lovelace-Minimalist/UI"
+repo_url: "https://github.com/alessandrosabbadini/UI-Lovelace-Minimalist-Cards"
+repo_name: "alessandrosabbadini/UI-Lovelace-Minimalist-Cards"
 edit_uri: "blob/main/docs"
 
 # https://pythonrepo.com/repo/lukasgeiter-mkdocs-awesome-pages-plugin-python-documentation
@@ -79,8 +79,8 @@ markdown_extensions:
   - "pymdownx.tilde"
   - pymdownx.magiclink:
       repo_url_shorthand: true
-      user: "UI-Lovelace-Minimalist"
-      repo: "UI"
+      user: "alessandrosabbadini"
+      repo: "UI-Lovelace-Minimalist-Cards"
   - "tables"
   - "footnotes"
   - "attr_list"

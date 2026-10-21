@@ -6,6 +6,63 @@
     --md-accent-fg-color--transparent:  hsla(183, 56%, 52%, 0.1);
 }
 
+/* Homepage showcase galleries */
+.home-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+    align-items: start;
+}
+
+.home-gallery--wide {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.home-gallery figure {
+    margin: 0;
+    text-align: center;
+}
+
+.home-gallery img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.home-gallery figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    opacity: 0.75;
+}
+
+.home-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem 0 2rem;
+    align-items: flex-start;
+}
+
+.home-row img {
+    max-height: 180px;
+    width: auto;
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+    .home-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .home-row img {
+        max-height: 140px;
+    }
+}
+
 span.title {
     font-weight: bold;
 }
