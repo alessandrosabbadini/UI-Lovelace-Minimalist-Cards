@@ -6,6 +6,27 @@ Lit / custom-card ports of [UI Lovelace Minimalist](https://github.com/UI-Lovela
 > **Work in progress.** This repository is under active development and is **not ready for production**.
 > APIs, card types, layouts, and install steps may change without notice. Use only for testing / feedback.
 
+<p align="center">
+  <img src="docs/assets/img/example_home.png" alt="Home dashboard" width="180">
+  <img src="docs/assets/img/example_temperature.png" alt="Climate view" width="180">
+  <img src="docs/assets/img/example_consumption.png" alt="Energy view" width="180">
+  <img src="docs/assets/img/example_localisation.png" alt="Presence view" width="180">
+</p>
+
+<p align="center">
+  <img src="docs/assets/img/cards.png" alt="Official cards" height="120">
+  <img src="docs/assets/img/chips.png" alt="Chips" height="120">
+</p>
+
+<p align="center">
+  <img src="docs/assets/img/popup_light_phone.png" alt="Light popup" width="140">
+  <img src="docs/assets/img/popup_media_phone.png" alt="Media popup" width="140">
+  <img src="docs/assets/img/popup_thermostat_phone.png" alt="Thermostat popup" width="140">
+  <img src="docs/assets/img/popup_weather_phone.png" alt="Weather popup" width="140">
+</p>
+
+More screenshots: [documentation site](https://alessandrosabbadini.github.io/UI-Lovelace-Minimalist-Cards/).
+
 ## What we did
 
 This project is a **rewrite / migration**, not a drop-in replacement of the classic HACS integration:
