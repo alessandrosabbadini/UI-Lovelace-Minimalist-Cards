@@ -376,6 +376,9 @@ export const popupStyles = css`
   }
 
   .ulm-grid.outlet {
+    column-gap: 30px;
+  }
+  .ulm-grid.outlet-stats {
     grid-template-rows: 16vh 12vh 44vh 14vh;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
@@ -383,7 +386,22 @@ export const popupStyles = css`
       "tiles tiles"
       "graph log"
       "footer footer";
-    column-gap: 30px;
+  }
+  .ulm-grid.outlet-history {
+    grid-template-rows: 16vh 12vh 44vh 14vh 14vh;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "tiles"
+      "log"
+      "buttons"
+      "footer";
+  }
+  .ulm-grid.outlet-history .area-buttons {
+    display: grid;
+  }
+  .ulm-grid.outlet-stats .area-buttons {
+    display: none;
   }
 
   .area-header {
@@ -430,6 +448,16 @@ export const popupStyles = css`
   .area-graph {
     grid-area: graph;
     min-height: 0;
+    display: grid;
+    align-content: stretch;
+  }
+  .area-graph .ulm-embed-host {
+    width: 100%;
+    min-height: 220px;
+    height: 100%;
+    border-radius: var(--border-radius, 20px);
+    overflow: hidden;
+    background: var(--card-background-color);
   }
   .area-log {
     grid-area: log;
@@ -481,7 +509,7 @@ export const popupStyles = css`
         "body"
         "footer";
     }
-    .ulm-grid.outlet {
+    .ulm-grid.outlet-stats {
       grid-template-columns: 1fr;
       grid-template-rows: 16vh 12vh 40vh 14vh 14vh;
       grid-template-areas:
@@ -491,10 +519,28 @@ export const popupStyles = css`
         "buttons"
         "footer";
     }
+    .ulm-grid.outlet-stats .area-buttons {
+      display: grid;
+    }
+    .ulm-grid.outlet-stats .area-log {
+      display: none !important;
+    }
+    .ulm-grid.outlet-history {
+      grid-template-columns: 1fr;
+      grid-template-rows: 16vh 12vh 40vh 14vh 14vh;
+      grid-template-areas:
+        "header"
+        "tiles"
+        "log"
+        "buttons"
+        "footer";
+    }
+    .ulm-grid.outlet-history .area-log {
+      display: grid !important;
+    }
     .area-side,
     .area-c2,
-    .area-c3,
-    .area-log {
+    .area-c3 {
       display: none !important;
     }
     .area-buttons {
@@ -803,6 +849,8 @@ export const popupStyles = css`
     grid-template-columns: 1fr 1fr;
     gap: 12px;
     width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
   }
   .ulm-tile {
     display: grid;
@@ -821,6 +869,11 @@ export const popupStyles = css`
     max-width: 300px;
     width: 100%;
     justify-self: center;
+    min-width: 0;
+  }
+  .ulm-tile.muted-tile {
+    cursor: default;
+    opacity: 0.7;
   }
   .ulm-tile-icon {
     width: 42px;
@@ -829,15 +882,35 @@ export const popupStyles = css`
     display: grid;
     place-items: center;
     background: rgba(var(--ulm-color-theme), 0.05);
+    color: var(--primary-text-color);
+  }
+  .ulm-tile-icon ha-icon {
+    --mdc-icon-size: 20px;
+  }
+  .ulm-tile-text {
+    min-width: 0;
   }
   .ulm-tile-name {
     font-weight: 700;
     font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .ulm-tile-label {
     font-size: 12px;
     font-weight: 700;
     opacity: 0.4;
+  }
+  .outlet-logbook-host {
+    width: 100%;
+    height: 257px;
+    max-height: 40vh;
+    overflow: hidden;
+  }
+  .outlet-mode-row {
+    width: 100%;
+    justify-content: space-evenly;
   }
 
   .embed-host,

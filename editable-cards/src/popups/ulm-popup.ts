@@ -14,12 +14,7 @@ import type {
 import { defaultCoverView, renderCover } from "./views/cover";
 import { defaultLightView, renderLight } from "./views/light";
 import { defaultMediaView, renderMedia } from "./views/media";
-import {
-  defaultOutletView,
-  fetchEntityHistory,
-  renderPowerOutlet,
-  type HistoryPoint,
-} from "./views/power-outlet";
+import { defaultOutletView, renderPowerOutlet } from "./views/power-outlet";
 import { defaultThermostatView, renderThermostat } from "./views/thermostat";
 import { defaultVacuumView, renderVacuum } from "./views/vacuum";
 import {
@@ -77,16 +72,12 @@ export class UlmPopupDialog extends LitElement {
   @state() private _entity = "";
   @state() private _opts: UlmPopupOpts = {};
   @state() private _view: PopupView = "main";
-  @state() private _history: HistoryPoint[] = [];
-  @state() private _historyLoading = false;
   @state() private _forecast: WeatherForecastDay[] = [];
   @state() private _forecastLoading = false;
 
   private _host?: HostEl;
   private _syncTimer?: number;
   private _viewStack: PopupView[] = [];
-  private _graphHost?: HTMLElement;
-  private _graphEl?: (LovelaceCard & HTMLElement) | null;
   private _slotEls = new Map<string, (LovelaceCard & HTMLElement) | null>();
 
   private _onKey = (ev: KeyboardEvent) => {
@@ -103,13 +94,10 @@ export class UlmPopupDialog extends LitElement {
     this._opts = opts || {};
     this._view = this._defaultView(kind);
     this._viewStack = [];
-    this._history = [];
     this._forecast = [];
-    this._graphEl = null;
     this._slotEls.clear();
     this._open = true;
     this._startSync();
-    this._maybeLoadHistory();
     void this._maybeLoadForecast();
     window.addEventListener("keydown", this._onKey);
     document.body.style.overflow = "hidden";
@@ -136,39 +124,12 @@ export class UlmPopupDialog extends LitElement {
 
   private async _syncEmbeds() {
     if (!this.hass) return;
-    if (
-      this._kind === "power_outlet" &&
-      (this._view === "stats" || this._view === "main") &&
-      this._graphHost
-    ) {
-      const graphEntity =
-        this._opts.graph_sensor || this._opts.sensor1 || this._entity;
-      this._graphEl = await mountLovelaceCard(
-        this._graphHost,
-        this.hass,
-        {
-          type: "custom:mini-graph-card",
-          entities: [{ entity: graphEntity }],
-          line_color: "var(--info-color)",
-          height: 276,
-          hours_to_show: 168,
-          show: {
-            name: false,
-            icon: false,
-            legend: false,
-            state: false,
-          },
-        },
-        this._graphEl,
-        "mini-graph-card",
-      );
-    }
 
-    // Generic HACS embeds via data-ulm-embed hosts (+ Lit fallback siblings)
+    // Generic HACS / HA embeds via data-ulm-embed hosts (+ Lit fallback siblings)
     const slots: Array<{
       key: string;
       config: LovelaceCardConfig;
-      tag: string;
+      tag?: string;
     }> = [];
     if (this._kind === "light") {
       // Brightness / color-temp use Lit sliders (stable across hass updates).
@@ -184,6 +145,37 @@ export class UlmPopupDialog extends LitElement {
         key: "weather-radar",
         config: weatherRadar(!!this.hass.themes?.darkMode),
         tag: "weather-radar-card",
+      });
+    }
+    if (this._kind === "power_outlet") {
+      const graphEntity =
+        this._opts.graph_sensor || this._opts.sensor1 || this._entity;
+      if (this._view === "stats" || this._view === "main") {
+        slots.push({
+          key: "outlet-graph",
+          config: {
+            type: "custom:mini-graph-card",
+            entities: [{ entity: graphEntity }],
+            line_color: "var(--info-color)",
+            height: 276,
+            hours_to_show: 168,
+            show: {
+              name: false,
+              icon: false,
+              legend: false,
+              state: false,
+            },
+          },
+          tag: "mini-graph-card",
+        });
+      }
+      // Stats (desktop) + History both show the HA logbook card
+      slots.push({
+        key: "outlet-logbook",
+        config: {
+          type: "logbook",
+          entities: [this._entity],
+        },
       });
     }
 
@@ -212,6 +204,26 @@ export class UlmPopupDialog extends LitElement {
           card.style.borderRadius = "20px";
         }
       }
+      if (slot.key === "outlet-logbook" && el) {
+        el.style.setProperty("height", "100%");
+        const card = el.shadowRoot?.querySelector(
+          "ha-card",
+        ) as HTMLElement | null;
+        if (card) {
+          card.style.boxShadow = "none";
+          card.style.background = "none";
+          card.style.height = "257px";
+        }
+      }
+      if (slot.key === "outlet-graph" && el) {
+        const card = el.shadowRoot?.querySelector(
+          "ha-card",
+        ) as HTMLElement | null;
+        if (card) {
+          card.style.boxShadow = "none";
+          card.style.borderRadius = "var(--border-radius, 20px)";
+        }
+      }
     }
   }
 
@@ -226,7 +238,6 @@ export class UlmPopupDialog extends LitElement {
       if (this._host?.hass) {
         this.hass = this._host.hass;
       }
-      if (this._graphEl && this.hass) this._graphEl.hass = this.hass;
       if (this.hass) {
         for (const el of this._slotEls.values()) {
           if (el) el.hass = this.hass;
@@ -287,9 +298,6 @@ export class UlmPopupDialog extends LitElement {
     if (view === this._view) return;
     this._viewStack.push(this._view);
     this._view = view;
-    if (this._kind === "power_outlet" && view === "history") {
-      this._maybeLoadHistory();
-    }
   };
 
   private _goBack = () => {
@@ -327,19 +335,6 @@ export class UlmPopupDialog extends LitElement {
       }),
     );
   };
-
-  private async _maybeLoadHistory() {
-    if (this._kind !== "power_outlet" || !this.hass) return;
-    const entity =
-      this._opts.graph_sensor || this._opts.sensor1 || this._entity;
-    if (!entity) return;
-    this._historyLoading = true;
-    try {
-      this._history = await fetchEntityHistory(this.hass, entity, 168);
-    } finally {
-      this._historyLoading = false;
-    }
-  }
 
   private async _maybeLoadForecast() {
     if (this._kind !== "weather" || !this.hass || !this._entity) return;
@@ -413,15 +408,7 @@ export class UlmPopupDialog extends LitElement {
       case "weather":
         return renderWeather(ctx, this._forecast, this._forecastLoading);
       case "power_outlet":
-        return renderPowerOutlet(
-          ctx,
-          this._history,
-          this._historyLoading,
-          (el) => {
-            this._graphHost = el as HTMLElement | undefined;
-            if (el) void this._syncEmbeds();
-          },
-        );
+        return renderPowerOutlet(ctx);
       default:
         return nothing;
     }

@@ -32,6 +32,8 @@ export interface UlmPowerOutletCardConfig extends LovelaceCardConfig {
   icon?: string;
   color?: UlmThemeColor;
   consumption_sensor?: string;
+  /** Optional second sensor shown in the popup (energy, etc.) */
+  sensor2?: string;
   force_background_color?: boolean;
   enable_popup?: boolean;
 }
@@ -68,6 +70,7 @@ export class UlmPowerOutletCard extends LitElement implements LovelaceCard {
         iconField("icon"),
         colorField("color"),
         entityField("consumption_sensor", "sensor", false),
+        entityField("sensor2", "sensor", false),
         booleanField("force_background_color"),
         booleanField("enable_popup"),
       ],
@@ -78,12 +81,14 @@ export class UlmPowerOutletCard extends LitElement implements LovelaceCard {
         color: "Color (ulm_card_power_outlet_color)",
         consumption_sensor:
           "Consumption sensor (ulm_card_power_outlet_consumption_sensor)",
+        sensor2: "Popup sensor 2 (energy / secondary)",
         force_background_color: "Force background color when on",
         enable_popup: "Enable popup (ulm_outlet_power_enable_popup)",
       }),
       computeHelper: helpers({
         consumption_sensor:
-          "When the outlet is on, shows state • {value}W from this sensor.",
+          "When the outlet is on, shows state • {value}W from this sensor. Also used as popup sensor1 / graph.",
+        sensor2: "Second chip in the power outlet popup (legacy sensor2).",
         enable_popup: "Opens the ULM power outlet popup on tap.",
       }),
     };
@@ -121,6 +126,9 @@ export class UlmPowerOutletCard extends LitElement implements LovelaceCard {
       consumption_sensor:
         config.consumption_sensor ??
         (c.ulm_card_power_outlet_consumption_sensor as string | undefined),
+      sensor2:
+        config.sensor2 ??
+        (c.ulm_popup_power_outlet_sensor2 as string | undefined),
       force_background_color: Boolean(
         config.force_background_color ??
           c.ulm_card_power_outlet_force_background_color ??
@@ -228,6 +236,7 @@ export class UlmPowerOutletCard extends LitElement implements LovelaceCard {
     if (this._config.enable_popup) {
       openUlmPopup(this, "power_outlet", this._config.entity, {
         sensor1: this._config.consumption_sensor,
+        sensor2: this._config.sensor2,
         graph_sensor: this._config.consumption_sensor,
       });
       return;
@@ -244,6 +253,7 @@ export class UlmPowerOutletCard extends LitElement implements LovelaceCard {
     if (this._config.enable_popup) {
       openUlmPopup(this, "power_outlet", this._config.entity, {
         sensor1: this._config.consumption_sensor,
+        sensor2: this._config.sensor2,
         graph_sensor: this._config.consumption_sensor,
       });
       return;
