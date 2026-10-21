@@ -59,7 +59,7 @@ See also [MIGRATION-EDITABLE-CARDS.md](./MIGRATION-EDITABLE-CARDS.md).
 | Area | Status |
 | --- | --- |
 | Official cards & chips | Ported |
-| Community custom cards & chips | Ported (some MVP / fidelity TBD) |
+| Community custom cards & chips | Ported |
 | Themes | Original Minimalist themes kept |
 | Popups | Native Lit dialogs (light, cover, media, thermostat, vacuum, weather, power outlet) |
 | HACS / release packaging | Custom repository (Dashboard) ready; repo still **private** |

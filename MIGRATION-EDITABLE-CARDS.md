@@ -63,4 +63,3 @@ packaging (dropping the Python integration) is optional future work.
 
 - CONTRIBUTING / development docs pass for the Lit + HACS Dashboard model
 - Optional: theme-only packaging without the Python integration
-- Card-by-card visual polish (some community cards remain MVP)

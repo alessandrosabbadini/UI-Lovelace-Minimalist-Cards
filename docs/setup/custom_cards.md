@@ -16,9 +16,3 @@ an integration options dialog.
 
 - Docs: [Usage → Custom cards](../usage/custom_cards/custom_card_bar_card.md)
 - Sources + README: `editable-cards/src/cards/custom/<name>/`
-
-## Fidelity
-
-Some community cards are MVP: the type and editor exist; advanced embeds
-(ApexCharts, complex live camera layouts, etc.) may still be refined card by
-card.

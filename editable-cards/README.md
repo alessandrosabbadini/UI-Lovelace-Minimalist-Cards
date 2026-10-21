@@ -69,8 +69,7 @@ Implementazione Lit Minimalist (header/footer, slider verticali, color wheel, so
 2. Registra la type in `src/cards/custom/registry.ts` (e nell’entry del bundle se serve)
 3. Per un chip community: `src/cards/chips/community/<nome>/README.md`
 
-## Nota sulla fedeltà
+## Nota
 
 - Ogni card ufficiale, custom e chip ha una **type dedicata** nel picker.
 - Le custom community sono portate come card editabili con entity + campi opzionali derivati dalle variabili YAML originali.
-- Layout/grafici avanzati di alcune custom community (ApexCharts, camera live, ecc.) sono MVP: la type esiste e ha editor/README; il rendering avanzato si raffina card per card.
