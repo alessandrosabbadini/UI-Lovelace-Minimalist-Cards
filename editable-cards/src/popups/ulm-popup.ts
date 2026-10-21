@@ -2,7 +2,13 @@ import { LitElement, html, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import type { HomeAssistant, HassEntity, LovelaceCard } from "../types";
 import { mountLovelaceCard } from "./embed-card";
-import { lightEntityColor, weatherRadar } from "./embed-configs";
+import {
+  lightEntityColor,
+  outletGraphFit,
+  outletMiniGraph,
+  styleOutletMiniGraph,
+  weatherRadar,
+} from "./embed-configs";
 import { popupStyles } from "./shared";
 import type { LovelaceCardConfig } from "../types";
 import type {
@@ -79,6 +85,9 @@ export class UlmPopupDialog extends LitElement {
   private _syncTimer?: number;
   private _viewStack: PopupView[] = [];
   private _slotEls = new Map<string, (LovelaceCard & HTMLElement) | null>();
+  private _outletGraphFitKey = "";
+  private _outletGraphRo?: ResizeObserver;
+  private _outletGraphRoTimer?: number;
 
   private _onKey = (ev: KeyboardEvent) => {
     if (ev.key === "Escape" && this._open) this.close();
@@ -96,6 +105,7 @@ export class UlmPopupDialog extends LitElement {
     this._viewStack = [];
     this._forecast = [];
     this._slotEls.clear();
+    this._outletGraphFitKey = "";
     this._open = true;
     this._startSync();
     void this._maybeLoadForecast();
@@ -106,6 +116,7 @@ export class UlmPopupDialog extends LitElement {
   public close() {
     this._open = false;
     this._stopSync();
+    this._stopOutletGraphRo();
     window.removeEventListener("keydown", this._onKey);
     document.body.style.overflow = "";
   }
@@ -148,26 +159,9 @@ export class UlmPopupDialog extends LitElement {
       });
     }
     if (this._kind === "power_outlet") {
-      const graphEntity =
-        this._opts.graph_sensor || this._opts.sensor1 || this._entity;
-      if (this._view === "stats" || this._view === "main") {
-        slots.push({
-          key: "outlet-graph",
-          config: {
-            type: "custom:mini-graph-card",
-            entities: [{ entity: graphEntity }],
-            line_color: "var(--info-color)",
-            height: 276,
-            hours_to_show: 168,
-            show: {
-              name: false,
-              icon: false,
-              legend: false,
-              state: false,
-            },
-          },
-          tag: "mini-graph-card",
-        });
+      if (this._view !== "stats" && this._view !== "main") {
+        this._slotEls.delete("outlet-graph");
+        this._outletGraphFitKey = "";
       }
       // Stats (desktop) + History both show the HA logbook card
       slots.push({
@@ -215,16 +209,101 @@ export class UlmPopupDialog extends LitElement {
           card.style.height = "257px";
         }
       }
-      if (slot.key === "outlet-graph" && el) {
-        const card = el.shadowRoot?.querySelector(
-          "ha-card",
-        ) as HTMLElement | null;
-        if (card) {
-          card.style.boxShadow = "none";
-          card.style.borderRadius = "var(--border-radius, 20px)";
-        }
-      }
     }
+
+    if (
+      this._kind === "power_outlet" &&
+      (this._view === "stats" || this._view === "main")
+    ) {
+      await this._mountOutletGraph();
+    }
+  }
+
+  /**
+   * Mount outlet mini-graph sized to the cell so the bottom is never clipped
+   * on short / graph-only layouts. height is chosen once per cell size bucket.
+   */
+  private async _mountOutletGraph() {
+    if (!this.hass) return;
+    const host = this.renderRoot.querySelector(
+      '[data-ulm-embed="outlet-graph"]',
+    ) as HTMLElement | null;
+    if (!host) return;
+
+    // Wait for grid layout so clientHeight is the real cell size
+    await new Promise<void>((r) =>
+      requestAnimationFrame(() => requestAnimationFrame(() => r())),
+    );
+
+    const area = host.parentElement as HTMLElement | null;
+    const avail = area?.clientHeight || host.clientHeight || 0;
+    // Bucket by 20px so tiny resizes don't remount / move the line
+    const bucket = Math.round(avail / 20) * 20;
+    const fit = outletGraphFit(avail);
+    const fitKey = `${bucket}:${fit.height}:${fit.margin}`;
+    const graphEntity =
+      this._opts.graph_sensor || this._opts.sensor1 || this._entity;
+    const config = outletMiniGraph(graphEntity, fit.height);
+
+    if (
+      fitKey === this._outletGraphFitKey &&
+      this._slotEls.get("outlet-graph")?.isConnected
+    ) {
+      styleOutletMiniGraph(
+        this._slotEls.get("outlet-graph") as HTMLElement,
+        fit.margin,
+        fit.height,
+      );
+      return;
+    }
+
+    this._outletGraphFitKey = fitKey;
+    const el = await mountLovelaceCard(
+      host,
+      this.hass,
+      config,
+      null,
+      "mini-graph-card",
+    );
+    this._slotEls.set("outlet-graph", el);
+    if (el) {
+      styleOutletMiniGraph(el, fit.margin, fit.height);
+      // mini-graph paints async — re-apply px height after first render
+      window.setTimeout(
+        () => styleOutletMiniGraph(el, fit.margin, fit.height),
+        50,
+      );
+      window.setTimeout(
+        () => styleOutletMiniGraph(el, fit.margin, fit.height),
+        250,
+      );
+    }
+    this._watchOutletGraphResize(area);
+  }
+
+  /** Re-fit the chart when the dialog / window is resized. */
+  private _watchOutletGraphResize(area: HTMLElement | null) {
+    if (!area) return;
+    if (!this._outletGraphRo) {
+      this._outletGraphRo = new ResizeObserver(() => {
+        if (!this._open || this._kind !== "power_outlet") return;
+        if (this._view !== "stats" && this._view !== "main") return;
+        window.clearTimeout(this._outletGraphRoTimer);
+        this._outletGraphRoTimer = window.setTimeout(() => {
+          void this._mountOutletGraph();
+        }, 80);
+      });
+    } else {
+      this._outletGraphRo.disconnect();
+    }
+    this._outletGraphRo.observe(area);
+  }
+
+  private _stopOutletGraphRo() {
+    this._outletGraphRo?.disconnect();
+    this._outletGraphRo = undefined;
+    window.clearTimeout(this._outletGraphRoTimer);
+    this._outletGraphRoTimer = undefined;
   }
 
   private _lastEntityState?: string;

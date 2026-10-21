@@ -375,11 +375,15 @@ export const popupStyles = css`
       "footer footer footer";
   }
 
+  /* fr (not vh): rows must fit the dialog — vh overflowed under buttons on resize */
   .ulm-grid.outlet {
     column-gap: 30px;
+    height: 100%;
+    min-height: 0;
   }
+  /* Same proportions as legacy 16/12/44/14 vh, but fr so they shrink with the dialog */
   .ulm-grid.outlet-stats {
-    grid-template-rows: 16vh 12vh 44vh 14vh;
+    grid-template-rows: 16fr 12fr 44fr 14fr;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "header header"
@@ -388,7 +392,7 @@ export const popupStyles = css`
       "footer footer";
   }
   .ulm-grid.outlet-history {
-    grid-template-rows: 16vh 12vh 44vh 14vh 14vh;
+    grid-template-rows: 16fr 12fr 40fr 14fr 18fr;
     grid-template-columns: 1fr;
     grid-template-areas:
       "header"
@@ -445,19 +449,32 @@ export const popupStyles = css`
     grid-area: tiles;
     min-height: 0;
   }
+  /* Graph cell fills the grid row. JS fits chart height; overflow clips chrome only. */
   .area-graph {
     grid-area: graph;
     min-height: 0;
-    display: grid;
-    align-content: stretch;
+    height: 100%;
+    overflow: hidden;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
   }
   .area-graph .ulm-embed-host {
     width: 100%;
-    min-height: 220px;
-    height: 100%;
-    border-radius: var(--border-radius, 20px);
+    max-width: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: 100%;
+    box-sizing: border-box;
     overflow: hidden;
-    background: var(--card-background-color);
+  }
+  .area-graph .ulm-embed-host > * {
+    display: block;
+    width: 100% !important;
+    box-sizing: border-box;
+    /* Do not stretch to 100% — that + overflow clips the bottom stroke */
+    height: auto !important;
+    max-height: 100%;
   }
   .area-log {
     grid-area: log;
@@ -469,9 +486,15 @@ export const popupStyles = css`
     display: grid;
     align-content: start;
     padding-top: 12px;
+    position: relative;
+    z-index: 1;
+    background: var(--primary-background-color, #fafafa);
   }
   .area-buttons {
     grid-area: buttons;
+    position: relative;
+    z-index: 1;
+    background: var(--primary-background-color, #fafafa);
     display: none;
   }
 
@@ -509,9 +532,10 @@ export const popupStyles = css`
         "body"
         "footer";
     }
+    /* Same proportions as legacy mobile 16/12/40/14/14 vh → fr */
     .ulm-grid.outlet-stats {
       grid-template-columns: 1fr;
-      grid-template-rows: 16vh 12vh 40vh 14vh 14vh;
+      grid-template-rows: 16fr 12fr 40fr 14fr 14fr;
       grid-template-areas:
         "header"
         "tiles"
@@ -527,7 +551,7 @@ export const popupStyles = css`
     }
     .ulm-grid.outlet-history {
       grid-template-columns: 1fr;
-      grid-template-rows: 16vh 12vh 40vh 14vh 14vh;
+      grid-template-rows: 14fr 11fr 38fr 14fr 18fr;
       grid-template-areas:
         "header"
         "tiles"
@@ -542,6 +566,24 @@ export const popupStyles = css`
     .area-c2,
     .area-c3 {
       display: none !important;
+    }
+    .ulm-grid.weather-popup {
+      grid-template-columns: 1fr;
+      grid-template-rows: 10vh 56vh 13vh 13vh;
+      grid-template-areas:
+        "header"
+        "body"
+        "buttons"
+        "footer";
+    }
+    .weather-popup .area-side {
+      display: none !important;
+    }
+    .weather-popup .area-buttons {
+      display: grid;
+    }
+    .weather-popup .area-body {
+      padding-right: 0;
     }
     .area-buttons {
       display: grid;
@@ -1041,10 +1083,17 @@ export const popupStyles = css`
   }
   .ulm-embed-host[data-ulm-embed="weather-radar"] {
     width: 100%;
-    height: 350px;
+    height: min(350px, 100%);
+    min-height: 280px;
     max-width: 100%;
     border-radius: 20px;
     overflow: hidden;
+  }
+  .weather-radar-side .ulm-embed-fallback,
+  .weather-radar-side .radar-frame {
+    width: 100%;
+    height: min(350px, 100%);
+    min-height: 280px;
   }
   /* Hide Lit fallback only once a real card is mounted into the host */
   .ulm-embed-host.has-card:not(:empty) + .ulm-embed-fallback {
@@ -1282,15 +1331,36 @@ export const popupStyles = css`
     width: 100%;
   }
 
+  /* Desktop: forecast | radar like legacy popup_weather_forecast (1fr 1fr) */
+  .ulm-grid.weather-popup {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 14vh 56vh 16vh;
+    grid-template-areas:
+      "header header"
+      "body side"
+      "footer footer";
+    column-gap: 30px;
+    height: 100%;
+  }
   .weather-popup .area-body {
     align-content: center;
     justify-items: stretch;
+    padding-right: 3%;
+    overflow: auto;
+  }
+  .weather-popup .area-side {
+    align-content: center;
+    justify-items: stretch;
+    padding-top: 12px;
+    min-width: 0;
   }
   .weather-forecast-panel {
-    width: min(420px, 100%);
-    margin: 0 auto;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
     display: grid;
     gap: 12px;
+    justify-items: stretch;
   }
   .forecast-hero {
     display: flex;
@@ -1369,11 +1439,13 @@ export const popupStyles = css`
     color: #fff;
     line-height: 30px;
   }
+  /* Canonical Minimalist light accents — dark theme washes --color-blue/red
+     to pastels; pills must match docs/legacy screenshots (61,90,254 / 245,68,54). */
   .forecast-row .pill.low {
-    background: rgba(var(--ulm-color-blue), 1);
+    background: rgb(61, 90, 254);
   }
   .forecast-row .pill.high {
-    background: rgba(var(--ulm-color-red), 1);
+    background: rgb(245, 68, 54);
   }
   .weather-radar-body {
     width: 100%;

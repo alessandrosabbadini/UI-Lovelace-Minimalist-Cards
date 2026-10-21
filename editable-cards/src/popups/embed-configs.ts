@@ -175,6 +175,101 @@ export function weatherRadar(darkMode?: boolean): LovelaceCardConfig {
   };
 }
 
+/** Legacy defaults from popup_power_outlet_stats content2. */
+export const OUTLET_GRAPH_HEIGHT = 276;
+export const OUTLET_GRAPH_MARGIN = 37;
+/** ha-card padding (top+bottom) so the flat-series stroke clears the radius. */
+export const OUTLET_GRAPH_CHROME = 36;
+
+/**
+ * Fit legacy mini-graph into the available cell so the bottom is never clipped
+ * (mobile graph-only / short viewports). Keeps line near SVG bottom.
+ *
+ * mini-graph's `height` only sets the SVG viewBox; without an explicit CSS
+ * height the graph sizes by aspect ratio (width * h / 500) and can overflow
+ * short cells. We treat `height` as real px and apply it in styleOutletMiniGraph.
+ */
+export function outletGraphFit(availH: number): {
+  height: number;
+  margin: number;
+} {
+  if (availH <= 0) {
+    return { height: OUTLET_GRAPH_HEIGHT, margin: OUTLET_GRAPH_MARGIN };
+  }
+  const margin = Math.min(
+    OUTLET_GRAPH_MARGIN,
+    Math.max(8, Math.floor(availH * 0.1)),
+  );
+  const height = Math.min(
+    OUTLET_GRAPH_HEIGHT,
+    Math.max(80, availH - margin - OUTLET_GRAPH_CHROME),
+  );
+  return { height, margin };
+}
+
+/** Legacy popup_power_outlet_stats mini-graph-card config. */
+export function outletMiniGraph(
+  entity: string,
+  height = OUTLET_GRAPH_HEIGHT,
+): LovelaceCardConfig {
+  return {
+    type: "custom:mini-graph-card",
+    entities: [{ entity }],
+    line_color: "var(--info-color)",
+    height,
+    hours_to_show: 168,
+    show: {
+      name: false,
+      icon: false,
+      legend: false,
+      state: false,
+    },
+  };
+}
+
+/** Legacy card_mod for the outlet mini-graph ha-card + real px graph height. */
+export function styleOutletMiniGraph(
+  el: HTMLElement,
+  margin = OUTLET_GRAPH_MARGIN,
+  height = OUTLET_GRAPH_HEIGHT,
+) {
+  el.style.width = "100%";
+  el.style.maxWidth = "100%";
+  el.style.flexShrink = "0";
+  const root = el.shadowRoot;
+  if (!root) return;
+  const card = root.querySelector("ha-card") as HTMLElement | null;
+  if (card) {
+    card.style.boxShadow = "none";
+    card.style.borderRadius = "var(--border-radius, 20px)";
+    card.style.marginBottom = `${margin}px`;
+    card.style.background = "var(--card-background-color)";
+    // Flat-series stroke sits on the SVG bottom edge; keep it inside the
+    // rounded card (overflow+radius otherwise eats the line ends).
+    card.style.overflow = "hidden";
+    card.style.paddingTop = "12px";
+    card.style.paddingBottom = "14px";
+    card.style.paddingLeft = "10px";
+    card.style.paddingRight = "10px";
+    card.style.boxSizing = "border-box";
+  }
+  // Force pixel height — viewBox alone only sets aspect ratio
+  const graph = root.querySelector(".graph") as HTMLElement | null;
+  if (graph) {
+    graph.style.height = `${height}px`;
+    graph.style.flexShrink = "0";
+    graph.style.minHeight = `${height}px`;
+    graph.style.width = "100%";
+  }
+  const svg = root.querySelector("svg") as SVGElement | null;
+  if (svg) {
+    svg.style.height = `${height}px`;
+    svg.style.maxHeight = `${height}px`;
+    svg.style.width = "100%";
+    svg.style.overflow = "visible";
+  }
+}
+
 export const EMBED_TAGS: Record<string, string> = {
   "my-slider-v2": "my-slider-v2",
   "light-entity-card": "light-entity-card",
