@@ -50,11 +50,6 @@ Add the card from the Lovelace picker: **ULM Custom imswel medias**.
 | ulm_translation_engine | no | Ported optional field from original YAML |
 | ulm_translation_unavailable | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_imswel_medias.yaml`
-
 ## Migration
 
 Old:

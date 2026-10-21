@@ -15,7 +15,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![example-image](../../assets/img/ulm_cards/card_input_boolean.png){ width="500" }
@@ -42,8 +41,3 @@ The `input-boolean-card` is to switch an `input_boolean` on or off.
     ulm_card_input_boolean_name: Guest Mode
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_input_boolean.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_input_boolean.yaml"
-    ```

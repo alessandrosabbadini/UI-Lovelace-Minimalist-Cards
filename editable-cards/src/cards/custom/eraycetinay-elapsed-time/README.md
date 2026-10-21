@@ -48,11 +48,6 @@ Add the card from the Lovelace picker: **ULM Custom eraycetinay elapsed time**.
 | ulm_custom_card_eraycetinay_elapsed_time_minute | no | Ported optional field from original YAML |
 | ulm_custom_card_eraycetinay_elapsed_time_minutes | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_eraycetinay_elapsed_time.yaml`
-
 ## Migration
 
 Old:

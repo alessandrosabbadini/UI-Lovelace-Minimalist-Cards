@@ -51,11 +51,6 @@ Add the card from the Lovelace picker: **ULM Custom irmajavi speedtest**.
 | ulm_custom_card_irmajavi_speedtest_upload | no | Ported optional field from original YAML |
 | ulm_custom_card_irmajavi_speedtest_upload_speed_entity | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_irmajavi_speedtest.yaml`
-
 ## Migration
 
 Old:

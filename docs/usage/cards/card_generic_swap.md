@@ -15,7 +15,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![example-image](../../assets/img/ulm_cards/card_generic_swap.png){ width="500" }
@@ -40,8 +39,3 @@ This is a `generic-card` with swapped label and name.
   entity: sensor.next_waste_collection
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_generic_swap.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_generic_swap.yaml"
-    ```

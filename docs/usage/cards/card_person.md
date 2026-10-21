@@ -14,7 +14,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![example-image](../../assets/img/ulm_cards/card_person.png){ width="500" }
@@ -48,8 +47,3 @@ The `card_person` shows if a person is `home` or `not_home`. If you have setup o
     ulm_address: sensor.s10_mike_gegeocodeerde_locatie
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_person.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_person.yaml"
-    ```

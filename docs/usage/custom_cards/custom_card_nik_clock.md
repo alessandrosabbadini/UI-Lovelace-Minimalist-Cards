@@ -43,11 +43,6 @@ Add the card from the Lovelace picker: **ULM Custom nik clock**.
 | ulm_custom_card_nik_clock_switch_enable | no | Ported optional field from original YAML |
 | ulm_language | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_nik_clock.yaml`
-
 ## Migration
 
 Old:

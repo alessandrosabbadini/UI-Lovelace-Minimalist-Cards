@@ -15,7 +15,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![Image title](../../assets/img/ulm_cards/room-card.png){ width="500" }
@@ -100,8 +99,3 @@ If you want to tweak this card a little bit more, below are some examples. The f
         action: toggle
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_room.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_room.yaml"
-    ```

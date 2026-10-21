@@ -21,7 +21,7 @@ I README stanno accanto al sorgente Lit e il workflow CI li sincronizza in `docs
 | Custom / community | `src/cards/custom/<nome>/README.md` | `docs/usage/custom_cards/` |
 | Chip community | `src/cards/chips/community/<nome>/README.md` | `docs/usage/custom_cards/` |
 
-I YAML button-card e i popup YAML legacy sono stati rimossi; i popup vivono in `src/popups/`.
+I YAML button-card e i popup YAML sono stati rimossi dal repo; i popup vivono in `src/popups/`.
 
 ## Build
 
@@ -61,7 +61,7 @@ Kind: `light`, `cover`, `thermostat`, `media_player`, `vacuum`, `weather`, `powe
 
 Opts utili: `color_palette`, `preset_mode`, `camera`, `sensor1` / `sensor2` / `graph_sensor`.
 
-Implementazione Lit ad alta fedeltà rispetto a `legacy/popup_templates/` (layout vh, header/footer Minimalist, slider verticali, color wheel, sotto-viste). Dove possibile si incorporano card HA/HACS già presenti (`thermostat`, `mini-graph-card`, `vacuum-card`); altrimenti fallback Lit.
+Implementazione Lit Minimalist (header/footer, slider verticali, color wheel, sotto-viste). Dove possibile si incorporano card HA/HACS già presenti (`thermostat`, `mini-graph-card`, `vacuum-card`); altrimenti fallback Lit.
 
 ## Aggiungere una custom card
 
@@ -73,4 +73,4 @@ Implementazione Lit ad alta fedeltà rispetto a `legacy/popup_templates/` (layou
 
 - Ogni card ufficiale, custom e chip ha una **type dedicata** nel picker.
 - Le custom community sono portate come card editabili con entity + campi opzionali derivati dalle variabili YAML originali.
-- Layout/grafici avanzati di alcune custom (ApexCharts, camera live complessa, mappe vacuum, ecc.) sono MVP: la type esiste e ha editor/README; il rendering avanzato si raffina card per card.
+- Layout/grafici avanzati di alcune custom community (ApexCharts, camera live, ecc.) sono MVP: la type esiste e ha editor/README; il rendering avanzato si raffina card per card.

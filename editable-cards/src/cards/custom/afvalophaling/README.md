@@ -54,11 +54,6 @@ Add the card from the Lovelace picker: **ULM Custom afvalophaling**.
 | name | no | Forces title override |
 | icon | no | Idle icon (default `mdi:delete`) |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `card_afvalophaling.yaml`
-
 ## Migration
 
 Old:

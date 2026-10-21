@@ -15,7 +15,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![example-image](../../assets/img/ulm_cards/card_weather_ulm.png){ width="500" }
@@ -39,8 +38,3 @@ This is a card to show your weather without usage of custom resources.
     ulm_card_weather_ulm_enable_popup: true
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_weather.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_weather_ulm.yaml"
-    ```

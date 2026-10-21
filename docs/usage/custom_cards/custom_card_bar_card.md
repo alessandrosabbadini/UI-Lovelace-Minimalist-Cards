@@ -50,11 +50,6 @@ Add the card from the Lovelace picker: **ULM Custom bar card**.
 | ulm_custom_card_bar_card_show_icon | no | Ported optional field from original YAML |
 | ulm_custom_card_bar_card_value | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_bar_card.yaml`
-
 ## Migration
 
 Old:

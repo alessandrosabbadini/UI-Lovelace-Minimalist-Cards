@@ -49,11 +49,6 @@ Add the card from the Lovelace picker: **ULM Custom afvalophaling**.
 | ulm_ophaling | no | Ported optional field from original YAML |
 | ulm_volgende_ophaling | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `card_afvalophaling.yaml`
-
 ## Migration
 
 Old:

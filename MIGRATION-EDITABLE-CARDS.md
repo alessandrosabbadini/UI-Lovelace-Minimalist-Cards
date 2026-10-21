@@ -7,13 +7,13 @@ Lovelace cards with Home Assistant UI editors (Mushroom-style).
 
 - **Runtime cards:** `editable-cards/` → build `dist/ulm-editable-cards.js`
 - **Themes kept:** `themes/` and `custom_components/.../lovelace/themefiles/`
-- **Removed from the package:**
-  - Official card/chip/action YAML under `ulm_templates/card_templates` and `actions`
-  - Community YAML under `custom_cards/**/*.yaml` (folder removed; READMEs next to Lit sources)
+- **Removed:**
+  - Official card/chip/action YAML templates
+  - Community YAML under `custom_cards/**/*.yaml`
   - Bundled HACS frontend deps (button-card, card-mod, mini-*, …)
   - YAML example dashboards (`ui-lovelace.yaml`, `adaptive-dash`)
-  - Popup runtime YAML / browser_mod — replaced by Lit popups in `editable-cards/src/popups/`
-- **Kept as visual reference:** `legacy/popup_templates/` (YAML originals for fidelity work)
+  - Popup YAML / browser_mod (replaced by Lit popups in `editable-cards/src/popups/`)
+  - Legacy reference tree (`legacy/`) — no longer in the repo
 
 ## Mapping (old → new)
 
@@ -24,7 +24,7 @@ Lovelace cards with Home Assistant UI editors (Mushroom-style).
 | `card_person` | `custom:ulm-person-card` |
 | `card_media_player` | `custom:ulm-media-player-card` |
 | `card_thermostat` | `custom:ulm-thermostat-card` |
-| `card_weather` / `card_weather_ulm` | `custom:ulm-weather-card` |
+| `card_weather` / `card_weather_ulm` | `custom:ulm-weather-card` / `custom:ulm-weather-ulm-card` |
 | `card_room` | `custom:ulm-room-card` |
 | `card_welcome_scenes` / `card_scenes_welcome` | `custom:ulm-welcome-card` |
 | chips (`chip_*`) | `custom:ulm-chip-*-card` (also as **view badges**) |

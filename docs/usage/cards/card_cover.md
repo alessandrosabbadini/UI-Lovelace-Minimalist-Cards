@@ -15,7 +15,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![example-image](../../assets/img/ulm_cards/card_cover.png){ width="500" }
@@ -61,8 +60,3 @@ This card has backward compatibility with older template except custom name. It 
     ulm_card_cover_color: "green"
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_cover_buttons.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_cover.yaml"
-    ```

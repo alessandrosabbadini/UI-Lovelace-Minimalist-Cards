@@ -15,7 +15,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![example-image](../../assets/img/ulm_cards/card_weather.png){ width="500" }
@@ -51,8 +50,3 @@ This is a card based on simple-weather-card to show your weather.
       - temp: sensor.temperature
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_weather.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_weather.yaml"
-    ```

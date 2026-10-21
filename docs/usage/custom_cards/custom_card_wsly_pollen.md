@@ -39,12 +39,6 @@ Add the card from the Lovelace picker: **ULM Custom wsly pollen**.
 | color | no | Theme color: yellow/blue/green/red/pink/purple/grey |
 | force_background_color | no | Colored background when active |
 
-
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_wsly_pollen.yaml`
-
 ## Migration
 
 Old:

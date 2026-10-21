@@ -47,11 +47,6 @@ Add the card from the Lovelace picker: **ULM Custom paddy welcome**.
 | ulm_language_variables | no | Ported optional field from original YAML |
 | ulm_morning | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_paddy_welcome.yaml`
-
 ## Migration
 
 Old:

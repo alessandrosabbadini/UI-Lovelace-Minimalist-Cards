@@ -15,7 +15,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![example-image](../../assets/img/ulm_cards/card_graph.png){ width="500" }
@@ -57,8 +56,3 @@ The `card_graph` shows an entity with the actual state and a _min-graph-card_ in
     ulm_card_graph_line_width: 5
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_graph.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/2-line_cards/card_graph.yaml"
-    ```

@@ -55,7 +55,3 @@ Add the card from the Lovelace picker: **ULM Custom bar card**.
 | show_value | no | Value inside bar (default false; stub enables true) |
 | min / max | no | Bar scale (default 0 / 100) |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_bar_card.yaml`

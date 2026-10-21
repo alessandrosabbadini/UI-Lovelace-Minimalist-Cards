@@ -15,7 +15,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![example-image](../../assets/img/ulm_cards/card_binary_sensor_alert.png){ width="500" }
@@ -61,8 +60,3 @@ The `binary-sensor-card` is to show the state (on/off, open/close, etc.) of a bi
   entity: binary_sensor.garage_door
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_binary_sensor_alert.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_binary_sensor_alert.yaml"
-    ```

@@ -14,7 +14,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![Image title](../../assets/img/ulm_cards/card_thermostat.png){ width="500" }
@@ -69,8 +68,3 @@ This card merges the following one :
     ulm_card_thermostat_enable_popup: true
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_thermostat.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_thermostat.yaml"
-    ```

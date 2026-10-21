@@ -64,11 +64,6 @@ Add the card from the Lovelace picker: **ULM Custom ristou person**.
 | ulm_translation_engine | no | Ported optional field from original YAML |
 | ulm_translation_state | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_ristou_person.yaml`
-
 ## Migration
 
 Old:

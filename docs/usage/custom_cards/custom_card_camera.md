@@ -46,11 +46,6 @@ Add the card from the Lovelace picker: **ULM Custom camera**.
 | ulm_custom_card_camera_name | no | Ported optional field from original YAML |
 | ulm_custom_card_camera_title | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_camera.yaml`
-
 ## Migration
 
 Old:

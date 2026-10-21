@@ -1,0 +1,41 @@
+---
+title: Generic Card
+hide:
+  - toc
+---
+
+<!-- markdownlint-disable MD046 -->
+
+!!! info "Editable card port"
+    This card is now available as a UI-editable Lovelace card:
+
+    ```yaml
+    type: custom:ulm-generic-card
+    ```
+
+    Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
+
+## Description
+
+![example-image](../../assets/img/ulm_cards/card_generic.png){ width="500" }
+
+This is the `generic-card` to display values from a sensor, eg. to show humidity, your next waste collection date or whatever sensor value is provided.
+
+## Variables
+
+| Variable                                | Default | Required         | Notes                                                              |
+| --------------------------------------- | ------- | ---------------- | ------------------------------------------------------------------ |
+| entity                                  |         | :material-check: |                                                                    |
+| ulm_card_generic_name                   |         | :material-close: | Set custom Name                                                    |
+| ulm_card_generic_icon                   |         | :material-close: | Set custom Icon                                                    |
+| ulm_card_generic_color                  | `blue`  | :material-close: | Set Custom Color                                                   |
+| ulm_card_generic_force_background_color | `false` | :material-close: | Set `ulm_card_generic_color` as background color in active state ` |
+
+## Usage
+
+```yaml
+- type: "custom:ulm-generic-card"
+  template: card_generic
+  entity: sensor.next_waste_collection
+```
+

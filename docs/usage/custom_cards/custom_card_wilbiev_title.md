@@ -41,11 +41,6 @@ Add the card from the Lovelace picker: **ULM Custom wilbiev title**.
 | ulm_custom_card_wilbiev_title_name | no | Ported optional field from original YAML |
 | ulm_custom_card_wilbiev_title_nav | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_wilbiev_title.yaml`
-
 ## Migration
 
 Old:

@@ -15,7 +15,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![Image title](../../assets/img/ulm_cards/card_light.png){ width="500" }
@@ -75,8 +74,3 @@ To use `popup_light` you need to set the variable `ulm_card_light_enable_popup` 
     ulm_card_light_force_background_color: true
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_light.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_light.yaml"
-    ```

@@ -57,11 +57,6 @@ Add the card from the Lovelace picker: **ULM Custom irmajavi weather**.
 | ulm_custom_card_irmajavi_weather_name_4 | no | Ported optional field from original YAML |
 | ulm_custom_card_irmajavi_weather_temperature_outside | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_irmajavi_weather.yaml`
-
 ## Migration
 
 Old:

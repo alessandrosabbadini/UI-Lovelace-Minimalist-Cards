@@ -47,11 +47,6 @@ Add the card from the Lovelace picker: **ULM Custom alarm time**.
 | ulm_card_alarm_time_name | no | Ported optional field from original YAML |
 | ulm_card_alarm_time_step | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `card_alarm_time.yaml`
-
 ## Migration
 
 Old:

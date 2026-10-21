@@ -51,11 +51,6 @@ Add the card from the Lovelace picker: **ULM Custom paddy dwd pollen**.
 | ulm_custom_card_paddy_dwd_pollen_name | no | Ported optional field from original YAML |
 | ulm_custom_card_paddy_dwd_pollen_none | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_paddy_dwd_pollen.yaml`
-
 ## Migration
 
 Old:

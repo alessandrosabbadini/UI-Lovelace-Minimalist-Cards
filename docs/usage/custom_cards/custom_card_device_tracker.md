@@ -8,7 +8,6 @@ hide:
 
 Editable Home Assistant card port of the Minimalist custom card `custom_card_device_tracker`.
 
-
 ## New card type
 
 ```yaml
@@ -43,11 +42,6 @@ Add the card from the Lovelace picker: **ULM Custom device tracker**.
 | ulm_custom_card_device_tracker_tracker_2_type | no | Ported optional field from original YAML |
 | ulm_translation_engine | no | Ported optional field from original YAML |
 | ulm_translation_state | no | Ported optional field from original YAML |
-
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_device_tracker.yaml`
 
 ## Migration
 

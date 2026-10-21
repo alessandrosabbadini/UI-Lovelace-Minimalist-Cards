@@ -59,11 +59,6 @@ Add the card from the Lovelace picker: **ULM Custom senoro win**.
 | ulm_show_last_changed | no | Ported optional field from original YAML |
 | ulm_unavailable | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_senoro_win.yaml`
-
 ## Migration
 
 Old:

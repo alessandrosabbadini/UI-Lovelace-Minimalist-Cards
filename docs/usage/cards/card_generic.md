@@ -15,7 +15,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![example-image](../../assets/img/ulm_cards/card_generic.png){ width="500" }
@@ -40,8 +39,3 @@ This is the `generic-card` to display values from a sensor, eg. to show humidity
   entity: sensor.next_waste_collection
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_generic.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_generic.yaml"
-    ```

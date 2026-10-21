@@ -41,11 +41,6 @@ Add the card from the Lovelace picker: **ULM Custom mpse gauge**.
 | ulm_card_mpse_gauge_max | no | Ported optional field from original YAML |
 | ulm_card_mpse_gauge_min | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_mpse_gauge.yaml`
-
 ## Migration
 
 Old:

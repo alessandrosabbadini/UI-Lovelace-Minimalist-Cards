@@ -15,7 +15,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 This is the `fan-card`, used to toggle a fan entity.
@@ -112,8 +111,3 @@ Rather than deprecate and many breaking changes on that card for users, this new
     ulm_card_fan_force_background_color: true
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_fan.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_fan.yaml"
-    ```

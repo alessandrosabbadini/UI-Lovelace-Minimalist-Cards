@@ -3,6 +3,11 @@ title: Customizing
 hide:
   - toc
 ---
+!!! warning "Outdated — YAML / button-card setup"
+
+    This page describes the classic Minimalist YAML + `custom:button-card` workflow.
+    This repository ships **Lit cards** only. Install and configure via the root
+    [README](../../README.md) (HACS Dashboard → `ulm-editable-cards.js`).
 
 <!-- markdownlint-disable MD046 -->
 

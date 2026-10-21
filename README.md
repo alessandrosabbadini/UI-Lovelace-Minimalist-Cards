@@ -16,19 +16,20 @@ This project is a **rewrite / migration**, not a drop-in replacement of the clas
 | YAML dashboards / template variables | Lovelace **UI mode** + card editors (`getConfigForm`) |
 | Bundled frontend deps (button-card, card-mod, …) | Single module: `ulm-editable-cards.js` |
 | Community cards as YAML in `custom_cards/` | Ported Lit types next to README (`editable-cards/src/cards/custom/`) |
-| Popup YAML (browser_mod + button-card) | Native Lit popups (`openUlmPopup`, no third-party cards) |
+| Popup YAML (browser_mod + button-card) | Native Lit popups (`openUlmPopup`) |
 
 **Kept from the original project**
 
 - Minimalist themes (`themes/` / integration themefiles): desktop, mobile, mobile-tapbar, iOS-tapbar
 - Design language and naming inspired by ULM
+
 **Removed**
 
 - Official card/chip/action YAML templates
 - Community YAML card definitions (READMEs live next to each Lit card / chip)
 - Bundled HACS frontend dependency packs
 - Legacy YAML example dashboards
-- Legacy popup YAML (`legacy/popup_templates/` — replaced by Lit popups)
+- Legacy popup YAML / browser_mod templates (replaced by Lit popups)
 
 See also [MIGRATION-EDITABLE-CARDS.md](./MIGRATION-EDITABLE-CARDS.md).
 
@@ -36,10 +37,10 @@ See also [MIGRATION-EDITABLE-CARDS.md](./MIGRATION-EDITABLE-CARDS.md).
 
 | Area | Status |
 | --- | --- |
-| Official cards & chips | Ported (polish ongoing) |
+| Official cards & chips | Ported |
 | Community custom cards & chips | Ported (some MVP / fidelity TBD) |
 | Themes | Original Minimalist themes kept |
-| Popups | Native Lit dialogs (light/cover/media/thermostat/vacuum/weather/outlet) |
+| Popups | Native Lit dialogs (light, cover, media, thermostat, vacuum, weather, power outlet) |
 | HACS / release packaging | Custom repository (Dashboard) ready; repo still **private** |
 | Docs | Partially outdated vs Lit package |
 

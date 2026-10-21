@@ -8,7 +8,6 @@ hide:
 
 Editable Home Assistant card port of the Minimalist custom card `custom_card_chromecast`.
 
-
 ## New card type
 
 ```yaml
@@ -40,11 +39,6 @@ Add the card from the Lovelace picker: **ULM Custom chromecast**.
 | ulm_card_media_player_with_controls_name | no | Ported optional field from original YAML |
 | ulm_translation_engine | no | Ported optional field from original YAML |
 | ulm_translation_state | no | Ported optional field from original YAML |
-
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_chromecast.yaml`
 
 ## Migration
 

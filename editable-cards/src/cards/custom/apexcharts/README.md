@@ -65,7 +65,3 @@ Add the card from the Lovelace picker: **ULM Custom apexcharts**.
 | name_1..3 / icon_1..3 / color_1..3 | no | Overrides |
 | max_1..3 | no | Series max (default 100) |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `apexcharts.yaml`

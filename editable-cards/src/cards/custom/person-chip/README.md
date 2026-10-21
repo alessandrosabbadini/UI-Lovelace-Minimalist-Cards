@@ -41,11 +41,6 @@ Add the card from the Lovelace picker: **ULM Custom person chip**.
 | ulm_custom_card_person_chip_entity | no | Ported optional field from original YAML |
 | ulm_translation_engine | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_person_chip.yaml`
-
 ## Migration
 
 Old:

@@ -14,7 +14,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![example-image](../../assets/img/ulm_cards/card_example.png){ width="500" }
@@ -44,8 +43,3 @@ The variable `ulm_card_vertical_button_state` needs to be used together with inp
   show_last_changed: true
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_vertical_button.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_vertical_button.yaml"
-    ```

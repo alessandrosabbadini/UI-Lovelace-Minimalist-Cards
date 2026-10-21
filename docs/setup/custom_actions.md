@@ -221,7 +221,6 @@ The already available **Graph card** (`card_graph`) is an example for this imple
 ??? note "Graph card as example"
 
     ```yaml title="card_binary_sensor_alert.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/2-line_cards/card_graph.yaml"
     ```
 
 ### Use template `icon_more_info_new` or `icon_more_info_alert`
@@ -235,7 +234,6 @@ Most of the internal card templates uses this option. Take a look into the code.
 ??? note "Generic card as example"
 
     ```yaml title="card_binary_sensor_alert.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_generic.yaml"
     ```
 
 ### Use template `ulm_actions_card_overlay`

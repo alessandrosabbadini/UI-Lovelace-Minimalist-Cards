@@ -54,11 +54,6 @@ Add the card from the Lovelace picker: **ULM Custom alarm time**.
 | collapse | no | Hide controls when off |
 | step | no | Minutes per tap (default 15) |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `card_alarm_time.yaml`
-
 ## Migration
 
 Old:

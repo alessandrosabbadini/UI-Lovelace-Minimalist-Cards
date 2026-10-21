@@ -41,11 +41,6 @@ Add the card from the Lovelace picker: **ULM Custom paddy waste collection**.
 | ulm_card_generic_swap_icon | no | Ported optional field from original YAML |
 | ulm_card_generic_swap_name | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_paddy_waste_collection.yaml`
-
 ## Migration
 
 Old:

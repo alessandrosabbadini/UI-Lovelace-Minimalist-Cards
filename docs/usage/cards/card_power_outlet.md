@@ -15,7 +15,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![example-image](../../assets/img/ulm_cards/card_power_outlet.png){ width="500" }
@@ -44,8 +43,3 @@ This is the `power-outlet-card`. It shows you the state of a power outlet, and i
   entity: switch.power_outlet_livingroom
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_power_outlet.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_power_outlet.yaml"
-    ```

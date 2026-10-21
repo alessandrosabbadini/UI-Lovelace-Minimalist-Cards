@@ -14,7 +14,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![example-image](../../assets/img/ulm_cards/card_title.png){ width="500" }
@@ -37,8 +36,3 @@ Titles (and optionally subtitles) are used to separate different areas in your d
   label: 'Subtitle'
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_title.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/title/card_title.yaml"
-    ```

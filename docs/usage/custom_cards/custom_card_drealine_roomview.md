@@ -44,11 +44,6 @@ Add the card from the Lovelace picker: **ULM Custom drealine roomview**.
 | ulm_input_select | no | Ported optional field from original YAML |
 | ulm_input_select_option | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_drealine_roomview.yaml`
-
 ## Migration
 
 Old:

@@ -49,11 +49,6 @@ Add the card from the Lovelace picker: **ULM Custom neekster update**.
 | ulm_card_neekster_update_narrow_buttons | no | Ported optional field from original YAML |
 | ulm_language_variables | no | Ported optional field from original YAML |
 
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_neekster_update.yaml`
-
 ## Migration
 
 Old:

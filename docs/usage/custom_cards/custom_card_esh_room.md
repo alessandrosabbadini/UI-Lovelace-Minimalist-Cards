@@ -8,7 +8,6 @@ hide:
 
 Editable Home Assistant card port of the Minimalist custom card `custom_card_esh_room`.
 
-
 ## New card type
 
 ```yaml
@@ -63,11 +62,6 @@ Add the card from the Lovelace picker: **ULM Custom esh room**.
 | ulm_popup_thermostat_entity | no | Ported optional field from original YAML |
 | ulm_translation_engine | no | Ported optional field from original YAML |
 | ulm_translation_state | no | Ported optional field from original YAML |
-
-## Legacy YAML
-
-Original button-card templates remain in this folder for reference:
-- `custom_card_esh_room.yaml`
 
 ## Migration
 

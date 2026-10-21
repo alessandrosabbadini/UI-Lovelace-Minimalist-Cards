@@ -15,7 +15,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![example-image](../../assets/img/ulm_cards/card_media_player.png){ width="500" }
@@ -60,8 +59,3 @@ To use `popup_media_player` you need to set the variable `ulm_card_media_player_
     ulm_card_media_player_name: Livingroom Nvidia Shield
 ```
 
-??? note "Template Code"
-
-    ```yaml title="card_media_player.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_media_player.yaml"
-    ```

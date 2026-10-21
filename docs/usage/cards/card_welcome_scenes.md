@@ -15,7 +15,6 @@ hide:
 
     Configure it from the Home Assistant card picker (**ULM ...**). See `editable-cards/README.md`.
 
-
 ## Description
 
 ![example-image](../../assets/img/ulm_cards/card_welcome_scenes.png){ width="500" }
@@ -162,8 +161,3 @@ If set none it uses `auto-entities` with max 5 pills
 
     ```
 
-??? note "Template Code"
-
-    ```yaml title="card_welcome_scenes.yaml"
-    --8<-- "custom_components/ui_lovelace_minimalist/lovelace/ulm_templates/card_templates/cards/card_welcome_scenes.yaml"
-    ```
