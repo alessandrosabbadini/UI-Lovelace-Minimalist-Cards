@@ -850,8 +850,91 @@ export const popupStyles = css`
   .ulm-embed-host.wide {
     max-width: 100%;
   }
-  .embed-host.vacuum {
-    max-width: 40vh;
+  /* Vacuum: everything on a centered column (legacy vacuum-card no-camera) */
+  .vacuum-popup .area-header,
+  .vacuum-popup .area-body,
+  .vacuum-popup .area-footer {
+    width: 100%;
+    display: grid;
+    justify-items: center;
+    justify-content: center;
+  }
+  .vacuum-popup .area-body {
+    overflow: hidden;
+    align-content: center;
+    min-height: 0;
+  }
+  .vacuum-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: min(320px, 100%);
+    margin: 0 auto;
+    gap: 10px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  ulm-vacuum-embed {
+    display: block;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    flex: 0 0 auto;
+  }
+  .vacuum-caption {
+    display: grid;
+    justify-items: center;
+    gap: 2px;
+    width: 100%;
+  }
+  .vacuum-caption-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary-text-color);
+  }
+  .vacuum-caption-label {
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 0.45;
+  }
+  .vacuum-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(var(--ulm-color-theme, 51, 51, 51), 0.12);
+    margin: 4px 0 2px;
+  }
+  .vacuum-actions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    width: 100%;
+    margin: 0;
+    padding: 4px 0 0;
+  }
+  .vacuum-tool {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    padding: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--primary-text-color);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+  }
+  .vacuum-tool ha-icon {
+    --mdc-icon-size: 22px;
+  }
+  .vacuum-popup .ulm-pf {
+    width: min(320px, 100%);
+    margin: 0 auto;
+    justify-content: space-evenly;
   }
   .ulm-embed-host[data-ulm-embed="light-bright"],
   .ulm-embed-host[data-ulm-embed="light-temp"],

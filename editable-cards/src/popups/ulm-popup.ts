@@ -23,6 +23,7 @@ import {
 import { defaultThermostatView, renderThermostat } from "./views/thermostat";
 import { defaultVacuumView, renderVacuum } from "./views/vacuum";
 import { defaultWeatherView, renderWeather } from "./views/weather";
+import "./ulm-vacuum-embed";
 
 export type { UlmPopupKind, UlmPopupOpts } from "./types";
 
@@ -77,8 +78,6 @@ export class UlmPopupDialog extends LitElement {
   private _host?: HostEl;
   private _syncTimer?: number;
   private _viewStack: PopupView[] = [];
-  private _vacuumHost?: HTMLElement;
-  private _vacuumEl?: (LovelaceCard & HTMLElement) | null;
   private _graphHost?: HTMLElement;
   private _graphEl?: (LovelaceCard & HTMLElement) | null;
   private _slotEls = new Map<string, (LovelaceCard & HTMLElement) | null>();
@@ -98,7 +97,6 @@ export class UlmPopupDialog extends LitElement {
     this._view = this._defaultView(kind);
     this._viewStack = [];
     this._history = [];
-    this._vacuumEl = null;
     this._graphEl = null;
     this._slotEls.clear();
     this._open = true;
@@ -129,29 +127,6 @@ export class UlmPopupDialog extends LitElement {
 
   private async _syncEmbeds() {
     if (!this.hass) return;
-    // Thermostat uses <ulm-thermo-embed> (HA thermostat card in shadow DOM).
-    if (this._kind === "vacuum" && this._vacuumHost) {
-      const map = this._opts.camera || "null";
-      this._vacuumEl = await mountLovelaceCard(
-        this._vacuumHost,
-        this.hass,
-        {
-          type: "custom:vacuum-card",
-          entity: this._entity,
-          image: "default",
-          compact_view: false,
-          map: map === "null" ? undefined : map,
-        },
-        this._vacuumEl,
-        "vacuum-card",
-      );
-      if (this._vacuumEl) {
-        const fallback = this.renderRoot.querySelector(
-          ".vacuum-fallback-ui",
-        ) as HTMLElement | null;
-        if (fallback) fallback.style.display = "none";
-      }
-    }
     if (
       this._kind === "power_outlet" &&
       (this._view === "stats" || this._view === "main") &&
@@ -231,20 +206,21 @@ export class UlmPopupDialog extends LitElement {
       if (this._host?.hass) {
         this.hass = this._host.hass;
       }
-      if (this._vacuumEl && this.hass) this._vacuumEl.hass = this.hass;
       if (this._graphEl && this.hass) this._graphEl.hass = this.hass;
       if (this.hass) {
         for (const el of this._slotEls.values()) {
           if (el) el.hass = this.hass;
         }
       }
-      // Thermostat dial lives outside mountLovelaceCard — push hass every tick
+      // Thermo dial / vacuum animation live outside mountLovelaceCard
       const thermo = this.renderRoot?.querySelector(
         "ulm-thermo-embed",
       ) as (HTMLElement & { hass?: HomeAssistant }) | null;
-      if (thermo && this.hass) {
-        thermo.hass = this.hass;
-      }
+      if (thermo && this.hass) thermo.hass = this.hass;
+      const vacuum = this.renderRoot?.querySelector(
+        "ulm-vacuum-embed",
+      ) as (HTMLElement & { hass?: HomeAssistant }) | null;
+      if (vacuum && this.hass) vacuum.hass = this.hass;
       // Re-render chips / header when entity state changes
       const st = this.hass?.states?.[this._entity];
       const key = st
@@ -403,10 +379,7 @@ export class UlmPopupDialog extends LitElement {
       case "media_player":
         return renderMedia(ctx);
       case "vacuum":
-        return renderVacuum(ctx, (el) => {
-          this._vacuumHost = el as HTMLElement | undefined;
-          if (el) void this._syncEmbeds();
-        });
+        return renderVacuum(ctx);
       case "weather":
         return renderWeather(ctx);
       case "power_outlet":

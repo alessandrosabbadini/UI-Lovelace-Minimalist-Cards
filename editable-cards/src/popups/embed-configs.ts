@@ -1,5 +1,4 @@
 import type { LovelaceCardConfig } from "../types";
-import type { UlmPopupOpts } from "./types";
 
 /** Styles matching legacy popup YAML for my-slider-v2 (default card height is only 30px!). */
 const SLIDER_CARD = {
@@ -176,25 +175,10 @@ export function weatherRadar(darkMode?: boolean): LovelaceCardConfig {
   };
 }
 
-export function vacuumCard(
-  entity: string,
-  opts: UlmPopupOpts,
-): LovelaceCardConfig {
-  const map = opts.camera;
-  return {
-    type: "custom:vacuum-card",
-    entity,
-    image: "default",
-    compact_view: false,
-    ...(map ? { map } : {}),
-  };
-}
-
 export const EMBED_TAGS: Record<string, string> = {
   "my-slider-v2": "my-slider-v2",
   "light-entity-card": "light-entity-card",
   "mini-media-player": "mini-media-player",
   "weather-radar-card": "weather-radar-card",
   "mini-graph-card": "mini-graph-card",
-  "vacuum-card": "vacuum-card",
 };
