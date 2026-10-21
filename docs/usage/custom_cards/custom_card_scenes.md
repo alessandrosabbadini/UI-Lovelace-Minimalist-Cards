@@ -6,7 +6,7 @@ hide:
 
 # Custom-card "Scenes Card"
 
-Editable Home Assistant card port of the Minimalist custom card `custom_card_scenes`.
+Lit port of Minimalist `custom_card_scenes` — a row of up to 5 scene / script / automation pills.
 
 ## Credits
 
@@ -28,6 +28,12 @@ entity_2:
   icon: mdi:candle
   icon_color: pink
   bg_color: pink
+entity_3:
+  entity_id: automation.ulm_set_minimalist_desktop_theme_on_start
+  name: Theme
+  icon: mdi:palette
+  icon_color: purple
+  bg_color: purple
 ```
 
 ## UI editor
@@ -36,45 +42,25 @@ Add the card from the Lovelace picker: **ULM Custom scenes**.
 
 ## Variables
 
-Each of `entity_1` … `entity_5`:
+Each of `entity_1` … `entity_5` is an object:
 
 | Field | Required | Notes |
 | --- | --- | --- |
 | entity_id | no | scene / script / automation / switch / … |
-| name | no | Label under the icon |
+| name | no | Label under the icon (default friendly name or `n/a`) |
 | icon | no | Default `mdi:help-circle-outline` |
-| icon_color | no | `gray` = theme tint; else ULM theme color |
-| bg_color | no | Icon circle background |
+| icon_color | no | `gray` (theme tint) or yellow/blue/green/red/pink/purple/grey |
+| bg_color | no | Background of the 42px icon circle (same palette) |
 
-Tap: `automation.trigger` for automations, otherwise `homeassistant.turn_on`.
+### Tap action
+
+- `automation.*` → `automation.trigger`
+- everything else → `homeassistant.turn_on`
+
+### Flat keys (optional)
+
+`entity_1: script.movie_time` plus `name_1` / `icon_1` / `icon_color_1` / `bg_color_1` are also accepted.
 
 ## Legacy YAML
 
-Original button-card YAML was removed; Lit source and README live in `editable-cards/src/cards/custom/scenes/`:
-- `card_scenes.yaml`
-
-## Migration
-
-Old:
-```yaml
-type: custom:button-card
-template: card_scenes
-variables:
-  entity_1:
-    entity_id: script.movie_time
-    name: Movie
-    icon: mdi:movie-open
-    icon_color: blue
-    bg_color: blue
-```
-
-New:
-```yaml
-type: custom:ulm-custom-card-scenes-card
-entity_1:
-  entity_id: script.movie_time
-  name: Movie
-  icon: mdi:movie-open
-  icon_color: blue
-  bg_color: blue
-```
+- `card_scenes.yaml` (`card_scenes` + `card_scenes_pill`)

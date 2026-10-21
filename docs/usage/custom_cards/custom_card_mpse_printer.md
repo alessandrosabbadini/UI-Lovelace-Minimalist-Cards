@@ -6,7 +6,7 @@ hide:
 
 # Custom-card "Printer"
 
-Editable Home Assistant card port of the Minimalist custom card `custom_card_mpse_printer`.
+Lit port of Minimalist `custom_card_mpse_printer` — printer status + CMYK toner levels.
 
 ## Credits
 
@@ -19,6 +19,7 @@ Version: 0.3.0
 type: custom:ulm-custom-card-mpse-printer-card
 entity: sensor.hp_color_laser_mfp_178nw
 name: HP Color Laser MFP 178nw
+icon: mdi:printer
 black_entity: sensor.hp_color_laser_mfp_178nw_black_toner
 yellow_entity: sensor.hp_color_laser_mfp_178nw_yellow_toner
 magenta_entity: sensor.hp_color_laser_mfp_178nw_magenta_toner
@@ -33,42 +34,29 @@ Add the card from the Lovelace picker: **ULM Custom Printer**.
 
 | Variable | Maps from | Required |
 | --- | --- | --- |
-| entity | printer status | yes |
+| entity | printer status sensor | yes |
 | name | `ulm_card_printer_name` | no |
-| icon | — | no |
+| icon | — | no (default `mdi:printer`) |
 | black_entity | `ulm_card_printer_black_name` | yes |
 | yellow_entity | `ulm_card_printer_yellow_name` | yes |
 | magenta_entity | `ulm_card_printer_magenta_name` | yes |
 | cyan_entity | `ulm_card_printer_cyan_name` | yes |
 
-Header turns blue when status ≠ `idle` (header only). Toner bars use the docs-screenshot colors: black / `rgb(250, 179, 0)` / `rgb(248, 75, 122)` / `rgb(66, 126, 222)`.
+### Active state
+
+When status ≠ `idle`, the header uses the blue theme (icon chip, name/state text, card background) — same as `custom_card_mpse_printer_blue`.
+
+### Toner bars
+
+Native bars (original nested HACS `bar-card`). Colors match the published docs screenshot:
+
+| Toner | Color |
+| --- | --- |
+| Black | `#000000` |
+| Yellow | `rgb(250, 179, 0)` |
+| Magenta | `rgb(248, 75, 122)` |
+| Cyan | `rgb(66, 126, 222)` |
 
 ## Legacy YAML
 
 - `custom_card_mpse_printer.yaml`
-
-## Migration
-
-Old:
-```yaml
-type: custom:button-card
-template: custom_card_mpse_printer
-entity: sensor.hp_color_laser_mfp_178nw
-variables:
-  ulm_card_printer_name: HP Color Laser MFP 178nw
-  ulm_card_printer_black_name: sensor.hp_color_laser_mfp_178nw_black_toner
-  ulm_card_printer_yellow_name: sensor.hp_color_laser_mfp_178nw_yellow_toner
-  ulm_card_printer_cyan_name: sensor.hp_color_laser_mfp_178nw_cyan_toner
-  ulm_card_printer_magenta_name: sensor.hp_color_laser_mfp_178nw_magenta_toner
-```
-
-New:
-```yaml
-type: custom:ulm-custom-card-mpse-printer-card
-entity: sensor.hp_color_laser_mfp_178nw
-name: HP Color Laser MFP 178nw
-black_entity: sensor.hp_color_laser_mfp_178nw_black_toner
-yellow_entity: sensor.hp_color_laser_mfp_178nw_yellow_toner
-cyan_entity: sensor.hp_color_laser_mfp_178nw_cyan_toner
-magenta_entity: sensor.hp_color_laser_mfp_178nw_magenta_toner
-```
