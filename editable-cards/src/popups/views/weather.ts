@@ -78,35 +78,62 @@ export async function fetchWeatherForecast(
   ).callWS;
   if (!callWS) return [];
 
+  const pick = (raw: unknown): WeatherForecastDay[] => {
+    if (!raw || typeof raw !== "object") return [];
+    const obj = raw as Record<string, unknown>;
+    // weather/get_forecasts → { [entity_id]: { forecast: [] } }
+    const byId = obj[entityId] as { forecast?: WeatherForecastDay[] } | undefined;
+    if (Array.isArray(byId?.forecast) && byId.forecast.length) return byId.forecast;
+    // call_service return_response → { response: { [entity_id]: { forecast } } }
+    const resp = obj.response as
+      | Record<string, { forecast?: WeatherForecastDay[] }>
+      | undefined;
+    const nested = resp?.[entityId]?.forecast;
+    if (Array.isArray(nested) && nested.length) return nested;
+    return [];
+  };
+
+  // Preferred modern HA WS API
   try {
-    const result = (await callWS({
-      type: "call_service",
-      domain: "weather",
-      service: "get_forecasts",
-      target: { entity_id: entityId },
-      service_data: { type: "daily" },
-      return_response: true,
-    })) as {
-      response?: Record<string, { forecast?: WeatherForecastDay[] }>;
-    };
-    const list = result?.response?.[entityId]?.forecast;
-    if (Array.isArray(list) && list.length) return list;
+    const list = pick(
+      await callWS({
+        type: "weather/get_forecasts",
+        entity_id: entityId,
+        forecast_type: "daily",
+      }),
+    );
+    if (list.length) return list;
   } catch {
-    /* try alternate payload shape */
+    /* fall through */
   }
 
   try {
-    const result = (await callWS({
-      type: "call_service",
-      domain: "weather",
-      service: "get_forecasts",
-      service_data: { entity_id: entityId, type: "daily" },
-      return_response: true,
-    })) as {
-      response?: Record<string, { forecast?: WeatherForecastDay[] }>;
-    };
-    const list = result?.response?.[entityId]?.forecast;
-    if (Array.isArray(list) && list.length) return list;
+    const list = pick(
+      await callWS({
+        type: "call_service",
+        domain: "weather",
+        service: "get_forecasts",
+        target: { entity_id: entityId },
+        service_data: { type: "daily" },
+        return_response: true,
+      }),
+    );
+    if (list.length) return list;
+  } catch {
+    /* fall through */
+  }
+
+  try {
+    const list = pick(
+      await callWS({
+        type: "call_service",
+        domain: "weather",
+        service: "get_forecasts",
+        service_data: { entity_id: entityId, type: "daily" },
+        return_response: true,
+      }),
+    );
+    if (list.length) return list;
   } catch {
     /* ignore */
   }
@@ -153,9 +180,9 @@ function renderForecast(
   const low0 = forecast[0]?.templow;
   const high0 = forecast[0]?.temperature;
 
-  return html`<div class="ulm-grid cols-2 weather-popup">
+  return html`<div class="ulm-grid weather-popup weather-forecast-view">
     <div class="area-header">${weatherHeader(ctx)}</div>
-    <div class="area-body">
+    <div class="area-body weather-forecast-body">
       <div class="weather-forecast-panel">
         <div class="forecast-hero">
           <span class="forecast-temp"
@@ -174,7 +201,7 @@ function renderForecast(
         </div>
       </div>
     </div>
-    <div class="area-side">
+    <div class="area-side weather-radar-side">
       <div
         class="ulm-embed-host wide"
         data-ulm-embed="weather-radar"
