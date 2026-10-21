@@ -1,62 +1,132 @@
-# Contribution guidelines
+# Contributing
 
-Contributing to this project should be as easy and transparent as possible, whether it's:
+Thanks for helping with **UI Lovelace Minimalist Cards**.
 
-- Reporting a bug
-- Discussing the current state of the code
-- Submitting a fix
-- Proposing new features
+This repository is a **Lit / Lovelace custom-card** package (`editable-cards/` →
+`dist/ulm-editable-cards.js`), plus optional Minimalist **themes**. Classic
+`custom:button-card` YAML templates are gone.
 
-## Github is used for everything
+## Ways to contribute
 
-Github is used to host code, to track issues and feature requests, as well as accept pull requests.
+- Report bugs and request features (GitHub Issues)
+- Fix cards, chips, or popups
+- Improve docs (card READMEs under `editable-cards/src/cards/`, or `docs/setup/`)
+- Improve themes under `themes/`
 
-Pull requests are the best way to propose changes to the codebase.
+## Pull requests
 
-1. Fork the repo and create your branch from `main`.
-2. Run `scripts/bootstrap` to install dependencies and pre-commit hooks.
-3. If you've changed something, update the documentation.
-4. Make sure your code lints (using `scripts/lint`).
-5. Test your contribution.
-6. Issue that pull request!
+1. Fork the repo and create a branch from `main`.
+2. Make your changes (see below).
+3. Build and smoke-test in Home Assistant.
+4. Open a pull request against `main`.
 
-## Any contributions you make will be under the MIT Software License
+All contributions are under the [MIT License](./LICENSE).
 
-In short, when you submit code changes, your submissions are understood to be under the same [MIT License](http://choosealicense.com/licenses/mit/) that covers the project. Feel free to contact the maintainers if that's a concern.
+## Development setup
 
-## Report bugs using Github's [issues](../../issues)
+### Lit cards (main work)
 
-GitHub issues are used to track public bugs.
-Report a bug by [opening a new issue](../../issues/new/choose); it's that easy!
+```bash
+cd editable-cards
+npm install
+npm run build          # or: npm run watch
+```
 
-## Write bug reports with detail, background, and sample code
+From the repo root, the HACS artifact helper also works:
 
-**Great Bug Reports** tend to have:
+```bash
+bash scripts/build-hacs.sh
+```
 
-- A quick summary and/or background
-- Steps to reproduce
-    - Be specific!
-    - Give sample code if you can.
-- What you expected would happen
-- What actually happens
-- Notes (possibly including why you think this might be happening, or stuff you tried that didn't work)
+This writes `dist/ulm-editable-cards.js` (and `.gz`). Copy it to HA
+`/config/www/` (or your local test instance) and load it as a **JavaScript
+Module** resource, or bump the `?v=` query on an existing resource.
 
-People *love* thorough bug reports. I'm not even kidding.
+Optional local HA stacks live under `ha-local-test/` / `ha-hacs-test/` (gitignored
+config data — see those folders’ compose files if present).
 
-## Use a Consistent Coding Style
+### Python / themes (optional)
 
-Use [Ruff](https://github.com/astral-sh/ruff) for linting and formatting. Run `scripts/lint` to format your code before submitting.
+`custom_components/ui_lovelace_minimalist/` is a **themes helper**, not the card
+runtime. For Python linting:
 
-## Test your code modification
+```bash
+scripts/bootstrap   # if you need the Python toolchain
+scripts/lint        # Ruff format + check
+```
 
-This custom component is based on [integration_blueprint template](https://github.com/ludeeus/integration_blueprint).
+## Project layout
 
-It comes with development environment in a container, easy to launch
-if you use Visual Studio Code. With this container you will have a stand alone
-Home Assistant instance running and already configured with the included
-[`configuration.yaml`](./config/configuration.yaml)
-file.
+| Path | Role |
+| --- | --- |
+| `editable-cards/src/cards/` | Official Lit cards |
+| `editable-cards/src/cards/custom/` | Community Lit cards |
+| `editable-cards/src/cards/chips/` | Official + community chips |
+| `editable-cards/src/popups/` | Native Lit popups (`openUlmPopup`) |
+| `dist/ulm-editable-cards.js` | HACS Dashboard artifact |
+| `themes/` | Minimalist themes (mirrored in the integration themefiles) |
+| `docs/` | MkDocs site (usage pages sync from card READMEs) |
+
+## Adding or changing a card
+
+### Official card
+
+1. Edit or add sources under `editable-cards/src/cards/<name>/`.
+2. Register the custom element / picker type in `editable-cards/src/index.ts`
+   (follow existing cards).
+3. Keep or add `README.md` (and `README-*.md` for variants) next to the card.
+4. Rebuild with `npm run build` / `bash scripts/build-hacs.sh`.
+5. CI syncs READMEs into `docs/usage/` on push to `main` (or update docs
+   manually to match).
+
+### Community / custom card
+
+1. Create `editable-cards/src/cards/custom/<kebab-name>/` with the Lit card +
+   `README.md`.
+2. Register it (registry / inventory / bundle entry — mirror a similar custom
+   card).
+3. Rebuild and test in the HA card picker (`ULM Custom …`).
+
+### Chip
+
+- Official: `editable-cards/src/cards/chips/official/<name>/` +
+  `official-chips.ts`
+- Community: `editable-cards/src/cards/chips/community/<name>/` + community
+  chip registration
+
+### Popup
+
+Popup kinds live under `editable-cards/src/popups/` (`ulm-popup.ts`,
+`views/*.ts`, `shared.ts`, embeds). Wire new options through
+`UlmPopupOpts` / card `enable_popup` fields.
+
+## Docs
+
+- **Source of truth for card docs:** README next to the Lit card.
+- **Setup / install:** `docs/setup/` (Lit + HACS Dashboard model).
+- **Site:** MkDocs (`mkdocs.yml`) → GitHub Pages.
+
+When you change card behaviour or options, update that card’s README in the
+same PR.
+
+## Bug reports
+
+Open an [issue](../../issues/new/choose) with:
+
+- Short summary
+- Steps to reproduce (card type + config YAML if possible)
+- Expected vs actual behaviour
+- HA version, browser, and whether you use HACS or a manual resource
+
+## Coding style
+
+- **TypeScript / Lit:** match existing cards (Lit 3, shared helpers under
+  `editable-cards/src/shared/`). Prefer clear editors via `getConfigForm`.
+- **Python (themes / integration):** Ruff via `scripts/lint`.
+- Do not reintroduce `custom:button-card` YAML templates or `browser_mod`
+  popup templates as the primary path.
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under its MIT License.
+By contributing, you agree that your contributions are licensed under the MIT
+License.
