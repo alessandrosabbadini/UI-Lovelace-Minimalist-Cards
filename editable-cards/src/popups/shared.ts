@@ -1209,36 +1209,74 @@ export const popupStyles = css`
     width: 100%;
   }
 
+  .weather-popup .area-body {
+    align-content: center;
+    justify-items: stretch;
+  }
+  .weather-forecast-panel {
+    width: min(420px, 100%);
+    margin: 0 auto;
+    display: grid;
+    gap: 12px;
+  }
   .forecast-hero {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    font-size: 42px;
-    font-weight: 700;
+    gap: 4px;
+    text-align: center;
+  }
+  .forecast-temp {
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 1.1;
+  }
+  .forecast-minmax {
+    font-size: 14px;
+    font-weight: 400;
   }
   .forecast-list {
-    width: min(420px, 100%);
+    width: 100%;
     display: grid;
-    gap: 6px;
+    gap: 4px;
   }
   .forecast-row {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto;
     align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
-    border-radius: 12px;
-    background: var(--card-background-color);
-    box-shadow: var(--box-shadow);
+    gap: 8px;
+    padding: 2px 0;
+    background: transparent;
+    box-shadow: none;
     font-size: 13px;
   }
   .forecast-row .left {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     min-width: 0;
-    flex: 1;
+  }
+  .weather-cond-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    background: rgba(var(--cond-rgb), 0.2);
+    color: rgba(var(--cond-rgb), 1);
+  }
+  .weather-cond-icon ha-icon {
+    --mdc-icon-size: 20px;
+  }
+  .weather-day-label {
+    text-align: left;
+    text-transform: capitalize;
+    font-weight: 500;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .forecast-row .temp-pills {
     display: flex;
@@ -1249,12 +1287,14 @@ export const popupStyles = css`
     display: inline-grid;
     place-items: center;
     min-width: 48px;
+    width: 90%;
     height: 30px;
     padding: 0 8px;
     border-radius: 15px;
     font-size: 12px;
     font-weight: 700;
     color: #fff;
+    line-height: 30px;
   }
   .forecast-row .pill.low {
     background: rgba(var(--ulm-color-blue), 1);
@@ -1262,10 +1302,26 @@ export const popupStyles = css`
   .forecast-row .pill.high {
     background: rgba(var(--ulm-color-red), 1);
   }
+  .weather-radar-body {
+    width: 100%;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+  .weather-mode-row {
+    width: 100%;
+    justify-content: space-evenly;
+  }
+  .ulm-embed-host[data-ulm-embed="weather-radar"].has-card {
+    min-height: 350px;
+  }
+  .ulm-embed-host[data-ulm-embed="weather-radar"].has-card + .ulm-embed-fallback {
+    display: none;
+  }
 
   .radar-frame {
     width: 100%;
-    height: 48vh;
+    height: 350px;
+    max-height: 56vh;
     border: 0;
     border-radius: var(--border-radius, 20px);
     background: rgba(var(--ulm-color-theme), 0.06);

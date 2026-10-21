@@ -22,7 +22,12 @@ import {
 } from "./views/power-outlet";
 import { defaultThermostatView, renderThermostat } from "./views/thermostat";
 import { defaultVacuumView, renderVacuum } from "./views/vacuum";
-import { defaultWeatherView, renderWeather } from "./views/weather";
+import {
+  defaultWeatherView,
+  fetchWeatherForecast,
+  renderWeather,
+  type WeatherForecastDay,
+} from "./views/weather";
 import "./ulm-vacuum-embed";
 
 export type { UlmPopupKind, UlmPopupOpts } from "./types";
@@ -74,6 +79,8 @@ export class UlmPopupDialog extends LitElement {
   @state() private _view: PopupView = "main";
   @state() private _history: HistoryPoint[] = [];
   @state() private _historyLoading = false;
+  @state() private _forecast: WeatherForecastDay[] = [];
+  @state() private _forecastLoading = false;
 
   private _host?: HostEl;
   private _syncTimer?: number;
@@ -97,11 +104,13 @@ export class UlmPopupDialog extends LitElement {
     this._view = this._defaultView(kind);
     this._viewStack = [];
     this._history = [];
+    this._forecast = [];
     this._graphEl = null;
     this._slotEls.clear();
     this._open = true;
     this._startSync();
     this._maybeLoadHistory();
+    void this._maybeLoadForecast();
     window.addEventListener("keydown", this._onKey);
     document.body.style.overflow = "hidden";
   }
@@ -191,7 +200,18 @@ export class UlmPopupDialog extends LitElement {
         slot.tag,
       );
       this._slotEls.set(slot.key, el);
-      // has-card is set/cleared inside mountLovelaceCard
+      if (slot.key === "weather-radar" && el) {
+        el.style.setProperty("height", "350px");
+        el.style.setProperty("border-radius", "20px");
+        el.style.setProperty("overflow", "hidden");
+        const card = el.shadowRoot?.querySelector(
+          "ha-card",
+        ) as HTMLElement | null;
+        if (card) {
+          card.style.height = "350px";
+          card.style.borderRadius = "20px";
+        }
+      }
     }
   }
 
@@ -321,6 +341,16 @@ export class UlmPopupDialog extends LitElement {
     }
   }
 
+  private async _maybeLoadForecast() {
+    if (this._kind !== "weather" || !this.hass || !this._entity) return;
+    this._forecastLoading = true;
+    try {
+      this._forecast = await fetchWeatherForecast(this.hass, this._entity);
+    } finally {
+      this._forecastLoading = false;
+    }
+  }
+
   private _ctx(stateObj: HassEntity): PopupContext {
     return {
       hass: this.hass!,
@@ -381,7 +411,7 @@ export class UlmPopupDialog extends LitElement {
       case "vacuum":
         return renderVacuum(ctx);
       case "weather":
-        return renderWeather(ctx);
+        return renderWeather(ctx, this._forecast, this._forecastLoading);
       case "power_outlet":
         return renderPowerOutlet(
           ctx,

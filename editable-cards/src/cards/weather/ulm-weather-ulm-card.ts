@@ -209,7 +209,9 @@ export class UlmWeatherUlmCard extends LitElement implements LovelaceCard {
     ev.stopPropagation();
     if (!this._config) return;
     if (this._config.enable_popup) {
-      openUlmPopup(this, "weather", this._config.entity);
+      openUlmPopup(this, "weather", this._config.entity, {
+        suppress_first_forecast: this._config.surpress_first_forecast,
+      });
       return;
     }
     this.dispatchEvent(
