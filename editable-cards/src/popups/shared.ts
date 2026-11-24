@@ -1,5 +1,6 @@
 import { css, html, nothing, type TemplateResult } from "lit";
 import { ulmTokens } from "../shared/styles";
+import "./ulm-color-wheel";
 
 export function capitalize(s: string): string {
   return s ? s.charAt(0).toUpperCase() + s.slice(1) : s;
@@ -121,7 +122,7 @@ export function renderVerticalSlider(opts: {
   );
   const pct = rawPct;
   const trackStyle = opts.temperature
-    ? "background: linear-gradient(180deg, #f3db6d, #fff, #c9f2fc)"
+    ? "background: linear-gradient(0deg, #f3db6d, #fff, #c9f2fc)"
     : opts.track
       ? `background:${opts.track}`
       : "";
@@ -136,16 +137,44 @@ export function renderVerticalSlider(opts: {
   ]
     .filter(Boolean)
     .join(";");
+  // Covers: high value at top. Temperature (like HA's own slider): warm yellow
+  // (min K) at the bottom, cool at the top — min maps to the bottom, so the
+  // normal bottom→top range already matches the gradient.
+  const fromTop = !!opts.flipped;
+  const thumbPos = (p: number) =>
+    fromTop
+      ? `top:calc(${p}% - 2px);bottom:auto`
+      : `bottom:calc(${p}% - 2px);top:auto`;
   const thumbStyle = [
-    opts.flipped ? `top:calc(${pct}% - 2px);bottom:auto` : `bottom:calc(${pct}% - 2px);top:auto`,
-    `width:${opts.temperature ? 0 : thumbW}px`,
-    opts.temperature ? "height:0" : "",
+    thumbPos(pct),
+    `width:${thumbW}px`,
+    // Temperature: white bar with a dark outline so it shows on the light gradient
+    opts.temperature
+      ? "border-radius:3px;box-shadow:0 0 0 1.5px rgba(0,0,0,0.55)"
+      : "",
   ]
     .filter(Boolean)
     .join(";");
-  // Range input is bottom→top visually after rotate; flip value mapping for covers
-  const inputValue = opts.flipped ? max + min - opts.value : opts.value;
-  const decode = (v: number) => (opts.flipped ? max + min - v : v);
+  // Range input is bottom→top visually after rotate; invert for top-anchored modes
+  const inputValue = fromTop ? max + min - opts.value : opts.value;
+  const decode = (v: number) => (fromTop ? max + min - v : v);
+  /** Move fill/thumb immediately while dragging (HA state arrives later). */
+  const paint = (input: HTMLInputElement, v: number) => {
+    const p = Math.max(0, Math.min(100, ((v - min) / (max - min || 1)) * 100));
+    const track = input.parentElement;
+    const fill = track?.querySelector<HTMLElement>(".ulm-vslider-fill");
+    const thumb = track?.querySelector<HTMLElement>(".ulm-vslider-thumb");
+    if (fill) fill.style.height = `${p}%`;
+    if (thumb) {
+      if (fromTop) {
+        thumb.style.top = `calc(${p}% - 2px)`;
+        thumb.style.bottom = "auto";
+      } else {
+        thumb.style.bottom = `calc(${p}% - 2px)`;
+        thumb.style.top = "auto";
+      }
+    }
+  };
   return html`<div class="ulm-vslider" style="height:${h};width:${w}">
     <div class="ulm-vslider-track" style="height:${h};width:${w};${trackStyle}">
       ${opts.temperature
@@ -158,7 +187,9 @@ export function renderVerticalSlider(opts: {
         max=${max}
         .value=${String(inputValue)}
         @input=${(ev: Event) => {
-          const v = decode(Number((ev.target as HTMLInputElement).value));
+          const input = ev.target as HTMLInputElement;
+          const v = decode(Number(input.value));
+          paint(input, v);
           opts.onInput?.(v);
         }}
         @change=${(ev: Event) =>
@@ -183,52 +214,17 @@ export function renderListRow(opts: {
   </button>`;
 }
 
-/** HS color wheel (approximation of light-entity-card wheel). */
+/** HS color wheel — see ulm-color-wheel.ts (smooth local drag + throttled calls). */
 export function renderColorWheel(opts: {
   hue: number;
   sat: number;
   onPick: (hue: number, sat: number) => void;
 }): TemplateResult {
-  const size = 220;
-  const r = size / 2;
-  // marker position from hs
-  const rad = ((opts.hue - 90) * Math.PI) / 180;
-  const dist = (opts.sat / 100) * (r - 12);
-  const mx = r + Math.cos(rad) * dist;
-  const my = r + Math.sin(rad) * dist;
-
-  const onPointer = (ev: PointerEvent) => {
-    const el = ev.currentTarget as HTMLElement;
-    const rect = el.getBoundingClientRect();
-    const x = ev.clientX - rect.left - r;
-    const y = ev.clientY - rect.top - r;
-    const distRaw = Math.sqrt(x * x + y * y);
-    const max = r - 12;
-    const clamped = Math.min(distRaw, max);
-    let hue = (Math.atan2(y, x) * 180) / Math.PI + 90;
-    if (hue < 0) hue += 360;
-    const sat = Math.round((clamped / max) * 100);
-    opts.onPick(Math.round(hue) % 360, sat);
-  };
-
-  return html`<div
-    class="ulm-wheel"
-    style="width:${size}px;height:${size}px"
-    @pointerdown=${(ev: PointerEvent) => {
-      (ev.currentTarget as HTMLElement).setPointerCapture(ev.pointerId);
-      onPointer(ev);
-    }}
-    @pointermove=${(ev: PointerEvent) => {
-      if ((ev.buttons & 1) === 0) return;
-      onPointer(ev);
-    }}
-  >
-    <div class="ulm-wheel-disc"></div>
-    <div
-      class="ulm-wheel-marker"
-      style="left:${mx}px;top:${my}px;background:hsl(${opts.hue},${opts.sat}%,50%)"
-    ></div>
-  </div>`;
+  return html`<ulm-color-wheel
+    .hue=${opts.hue}
+    .sat=${opts.sat}
+    .onPick=${opts.onPick}
+  ></ulm-color-wheel>`;
 }
 
 export const popupStyles = css`
@@ -1099,45 +1095,17 @@ export const popupStyles = css`
   .ulm-embed-host.has-card:not(:empty) + .ulm-embed-fallback {
     display: none !important;
   }
+  /* Hosts with a Lit fallback sibling: collapse while empty (optional HACS
+     card not installed), otherwise the empty host keeps its min-height and
+     pushes the fallback (color wheel, radar) out of its grid cell. */
+  .ulm-embed-host[data-ulm-embed="light-color"]:not(.has-card),
+  .ulm-embed-host[data-ulm-embed="weather-radar"]:not(.has-card) {
+    display: none !important;
+  }
   /* Keep fallback visible while host is empty (Lit cleared children mid-update) */
   .ulm-embed-fallback {
     display: grid;
     place-items: center;
-  }
-
-  /* Color wheel */
-  .ulm-wheel {
-    position: relative;
-    border-radius: 50%;
-    touch-action: none;
-    cursor: crosshair;
-  }
-  .ulm-wheel-disc {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: conic-gradient(
-      from 90deg,
-      hsl(0, 100%, 50%),
-      hsl(60, 100%, 50%),
-      hsl(120, 100%, 50%),
-      hsl(180, 100%, 50%),
-      hsl(240, 100%, 50%),
-      hsl(300, 100%, 50%),
-      hsl(360, 100%, 50%)
-    );
-    mask: radial-gradient(circle, transparent 18%, #000 19%);
-    -webkit-mask: radial-gradient(circle, transparent 18%, #000 19%);
-  }
-  .ulm-wheel-marker {
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
   }
 
   /* Media layout */
