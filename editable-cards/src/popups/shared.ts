@@ -103,7 +103,7 @@ export function renderVerticalSlider(opts: {
   max?: number;
   fill?: string;
   track?: string;
-  /** temperature mode: gradient track, no fill */
+  /** temperature mode: same shape as brightness, warm→cool gradient colours */
   temperature?: boolean;
   /** my-slider-v2 flipped: high value at top (covers) */
   flipped?: boolean;
@@ -121,18 +121,28 @@ export function renderVerticalSlider(opts: {
     Math.min(100, ((opts.value - min) / (max - min || 1)) * 100),
   );
   const pct = rawPct;
+  const h = opts.height || "280px";
+  // Temperature: warm yellow at the bottom → white → cool blue at the top.
+  // Track = dimmed gradient, fill = full gradient pinned to the track so each
+  // height shows the colour of that temperature (same shape as brightness).
+  const tempGradient = (a: number) =>
+    `linear-gradient(0deg, rgba(243,219,109,${a}), rgba(255,255,255,${a}), rgba(201,242,252,${a}))`;
   const trackStyle = opts.temperature
-    ? "background: linear-gradient(0deg, #f3db6d, #fff, #c9f2fc)"
+    ? `background:${tempGradient(0.2)}`
     : opts.track
       ? `background:${opts.track}`
       : "";
-  const h = opts.height || "280px";
+  const fillBg = opts.temperature
+    ? `background:${tempGradient(1)};background-size:100% calc(${h} - 4px);background-position:bottom`
+    : opts.fill
+      ? `background:${opts.fill}`
+      : "";
   const w = opts.width || "100px";
   const thumbW = opts.thumbWidth ?? 50;
   // Flipped (covers): high value at top — fill grows downward from top
   const fillStyle = [
     `height:${pct}%`,
-    opts.fill ? `background:${opts.fill}` : "",
+    fillBg,
     opts.flipped ? "top:0;bottom:auto" : "bottom:0;top:auto",
   ]
     .filter(Boolean)
@@ -148,10 +158,6 @@ export function renderVerticalSlider(opts: {
   const thumbStyle = [
     thumbPos(pct),
     `width:${thumbW}px`,
-    // Temperature: white bar with a dark outline so it shows on the light gradient
-    opts.temperature
-      ? "border-radius:3px;box-shadow:0 0 0 1.5px rgba(0,0,0,0.55)"
-      : "",
   ]
     .filter(Boolean)
     .join(";");
@@ -177,9 +183,7 @@ export function renderVerticalSlider(opts: {
   };
   return html`<div class="ulm-vslider" style="height:${h};width:${w}">
     <div class="ulm-vslider-track" style="height:${h};width:${w};${trackStyle}">
-      ${opts.temperature
-        ? nothing
-        : html`<div class="ulm-vslider-fill" style=${fillStyle}></div>`}
+      <div class="ulm-vslider-fill" style=${fillStyle}></div>
       <div class="ulm-vslider-thumb" style=${thumbStyle}></div>
       <input
         type="range"

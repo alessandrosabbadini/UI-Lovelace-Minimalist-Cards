@@ -1,4 +1,4 @@
-const Bc = "0.21.63", Hc = Bc;
+const Bc = "0.21.64", Hc = Bc;
 /**
  * @license
  * Copyright 2019 Google LLC
@@ -46,7 +46,7 @@ const Rc = (t) => new hc(typeof t == "string" ? t : t + "", void 0, _n), $ = (t,
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const { is: Wc, defineProperty: Kc, getOwnPropertyDescriptor: Vc, getOwnPropertyNames: qc, getOwnPropertySymbols: Yc, getPrototypeOf: Jc } = Object, Ht = globalThis, Ta = Ht.trustedTypes, Zc = Ta ? Ta.emptyScript : "", Xc = Ht.reactiveElementPolyfillSupport, li = (t, e) => t, nr = { toAttribute(t, e) {
+const { is: Wc, defineProperty: Kc, getOwnPropertyDescriptor: Vc, getOwnPropertyNames: qc, getOwnPropertySymbols: Yc, getPrototypeOf: Jc } = Object, Gt = globalThis, Ta = Gt.trustedTypes, Zc = Ta ? Ta.emptyScript : "", Xc = Gt.reactiveElementPolyfillSupport, li = (t, e) => t, nr = { toAttribute(t, e) {
   switch (e) {
     case Boolean:
       t = t ? Zc : null;
@@ -75,8 +75,8 @@ const { is: Wc, defineProperty: Kc, getOwnPropertyDescriptor: Vc, getOwnProperty
   }
   return i;
 } }, hn = (t, e) => !Wc(t, e), Da = { attribute: !0, type: String, converter: nr, reflect: !1, useDefault: !1, hasChanged: hn };
-Symbol.metadata ?? (Symbol.metadata = Symbol("metadata")), Ht.litPropertyMetadata ?? (Ht.litPropertyMetadata = /* @__PURE__ */ new WeakMap());
-let ke = class extends HTMLElement {
+Symbol.metadata ?? (Symbol.metadata = Symbol("metadata")), Gt.litPropertyMetadata ?? (Gt.litPropertyMetadata = /* @__PURE__ */ new WeakMap());
+let Ce = class extends HTMLElement {
   static addInitializer(e) {
     this._$Ei(), (this.l ?? (this.l = [])).push(e);
   }
@@ -257,15 +257,15 @@ let ke = class extends HTMLElement {
   firstUpdated(e) {
   }
 };
-ke.elementStyles = [], ke.shadowRootOptions = { mode: "open" }, ke[li("elementProperties")] = /* @__PURE__ */ new Map(), ke[li("finalized")] = /* @__PURE__ */ new Map(), Xc?.({ ReactiveElement: ke }), (Ht.reactiveElementVersions ?? (Ht.reactiveElementVersions = [])).push("2.1.2");
+Ce.elementStyles = [], Ce.shadowRootOptions = { mode: "open" }, Ce[li("elementProperties")] = /* @__PURE__ */ new Map(), Ce[li("finalized")] = /* @__PURE__ */ new Map(), Xc?.({ ReactiveElement: Ce }), (Gt.reactiveElementVersions ?? (Gt.reactiveElementVersions = [])).push("2.1.2");
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const di = globalThis, Ua = (t) => t, ar = di.trustedTypes, Fa = ar ? ar.createPolicy("lit-html", { createHTML: (t) => t }) : void 0, pc = "$lit$", Bt = `lit$${Math.random().toFixed(9).slice(2)}$`, gc = "?" + Bt, Qc = `<${gc}>`, te = document, mi = () => te.createComment(""), _i = (t) => t === null || typeof t != "object" && typeof t != "function", pn = Array.isArray, tl = (t) => pn(t) || typeof t?.[Symbol.iterator] == "function", zr = `[ 	
-\f\r]`, Re = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Ba = /-->/g, Ha = />/g, Wt = RegExp(`>|${zr}(?:([^\\s"'>=/]+)(${zr}*=${zr}*(?:[^ 	
-\f\r"'\`<>=]|("|')|))|$)`, "g"), Ra = /'/g, Ga = /"/g, fc = /^(?:script|style|textarea|title)$/i, bc = (t) => (e, ...i) => ({ _$litType$: t, strings: e, values: i }), c = bc(1), lr = bc(2), Rt = Symbol.for("lit-noChange"), u = Symbol.for("lit-nothing"), Wa = /* @__PURE__ */ new WeakMap(), Qt = te.createTreeWalker(te, 129);
+const di = globalThis, Ua = (t) => t, ar = di.trustedTypes, Fa = ar ? ar.createPolicy("lit-html", { createHTML: (t) => t }) : void 0, pc = "$lit$", Rt = `lit$${Math.random().toFixed(9).slice(2)}$`, gc = "?" + Rt, Qc = `<${gc}>`, ie = document, mi = () => ie.createComment(""), _i = (t) => t === null || typeof t != "object" && typeof t != "function", pn = Array.isArray, tl = (t) => pn(t) || typeof t?.[Symbol.iterator] == "function", zr = `[ 	
+\f\r]`, Re = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, Ba = /-->/g, Ha = />/g, Vt = RegExp(`>|${zr}(?:([^\\s"'>=/]+)(${zr}*=${zr}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`, "g"), Ra = /'/g, Ga = /"/g, fc = /^(?:script|style|textarea|title)$/i, bc = (t) => (e, ...i) => ({ _$litType$: t, strings: e, values: i }), c = bc(1), lr = bc(2), Wt = Symbol.for("lit-noChange"), u = Symbol.for("lit-nothing"), Wa = /* @__PURE__ */ new WeakMap(), ee = ie.createTreeWalker(ie, 129);
 function yc(t, e) {
   if (!pn(t) || !t.hasOwnProperty("raw")) throw Error("invalid template strings array");
   return Fa !== void 0 ? Fa.createHTML(e) : e;
@@ -275,10 +275,10 @@ const el = (t, e) => {
   let r, n = e === 2 ? "<svg>" : e === 3 ? "<math>" : "", a = Re;
   for (let s = 0; s < i; s++) {
     const l = t[s];
-    let h, m, g = -1, v = 0;
-    for (; v < l.length && (a.lastIndex = v, m = a.exec(l), m !== null); ) v = a.lastIndex, a === Re ? m[1] === "!--" ? a = Ba : m[1] !== void 0 ? a = Ha : m[2] !== void 0 ? (fc.test(m[2]) && (r = RegExp("</" + m[2], "g")), a = Wt) : m[3] !== void 0 && (a = Wt) : a === Wt ? m[0] === ">" ? (a = r ?? Re, g = -1) : m[1] === void 0 ? g = -2 : (g = a.lastIndex - m[2].length, h = m[1], a = m[3] === void 0 ? Wt : m[3] === '"' ? Ga : Ra) : a === Ga || a === Ra ? a = Wt : a === Ba || a === Ha ? a = Re : (a = Wt, r = void 0);
-    const C = a === Wt && t[s + 1].startsWith("/>") ? " " : "";
-    n += a === Re ? l + Qc : g >= 0 ? (o.push(h), l.slice(0, g) + pc + l.slice(g) + Bt + C) : l + Bt + (g === -2 ? s : C);
+    let h, _, g = -1, v = 0;
+    for (; v < l.length && (a.lastIndex = v, _ = a.exec(l), _ !== null); ) v = a.lastIndex, a === Re ? _[1] === "!--" ? a = Ba : _[1] !== void 0 ? a = Ha : _[2] !== void 0 ? (fc.test(_[2]) && (r = RegExp("</" + _[2], "g")), a = Vt) : _[3] !== void 0 && (a = Vt) : a === Vt ? _[0] === ">" ? (a = r ?? Re, g = -1) : _[1] === void 0 ? g = -2 : (g = a.lastIndex - _[2].length, h = _[1], a = _[3] === void 0 ? Vt : _[3] === '"' ? Ga : Ra) : a === Ga || a === Ra ? a = Vt : a === Ba || a === Ha ? a = Re : (a = Vt, r = void 0);
+    const C = a === Vt && t[s + 1].startsWith("/>") ? " " : "";
+    n += a === Re ? l + Qc : g >= 0 ? (o.push(h), l.slice(0, g) + pc + l.slice(g) + Rt + C) : l + Rt + (g === -2 ? s : C);
   }
   return [yc(t, n + (t[i] || "<?>") + (e === 2 ? "</svg>" : e === 3 ? "</math>" : "")), o];
 };
@@ -287,43 +287,43 @@ class hi {
     let r;
     this.parts = [];
     let n = 0, a = 0;
-    const s = e.length - 1, l = this.parts, [h, m] = el(e, i);
-    if (this.el = hi.createElement(h, o), Qt.currentNode = this.el.content, i === 2 || i === 3) {
+    const s = e.length - 1, l = this.parts, [h, _] = el(e, i);
+    if (this.el = hi.createElement(h, o), ee.currentNode = this.el.content, i === 2 || i === 3) {
       const g = this.el.content.firstChild;
       g.replaceWith(...g.childNodes);
     }
-    for (; (r = Qt.nextNode()) !== null && l.length < s; ) {
+    for (; (r = ee.nextNode()) !== null && l.length < s; ) {
       if (r.nodeType === 1) {
         if (r.hasAttributes()) for (const g of r.getAttributeNames()) if (g.endsWith(pc)) {
-          const v = m[a++], C = r.getAttribute(g).split(Bt), M = /([.?@])?(.*)/.exec(v);
+          const v = _[a++], C = r.getAttribute(g).split(Rt), M = /([.?@])?(.*)/.exec(v);
           l.push({ type: 1, index: n, name: M[2], strings: C, ctor: M[1] === "." ? ol : M[1] === "?" ? rl : M[1] === "@" ? nl : dr }), r.removeAttribute(g);
-        } else g.startsWith(Bt) && (l.push({ type: 6, index: n }), r.removeAttribute(g));
+        } else g.startsWith(Rt) && (l.push({ type: 6, index: n }), r.removeAttribute(g));
         if (fc.test(r.tagName)) {
-          const g = r.textContent.split(Bt), v = g.length - 1;
+          const g = r.textContent.split(Rt), v = g.length - 1;
           if (v > 0) {
             r.textContent = ar ? ar.emptyScript : "";
-            for (let C = 0; C < v; C++) r.append(g[C], mi()), Qt.nextNode(), l.push({ type: 2, index: ++n });
+            for (let C = 0; C < v; C++) r.append(g[C], mi()), ee.nextNode(), l.push({ type: 2, index: ++n });
             r.append(g[v], mi());
           }
         }
       } else if (r.nodeType === 8) if (r.data === gc) l.push({ type: 2, index: n });
       else {
         let g = -1;
-        for (; (g = r.data.indexOf(Bt, g + 1)) !== -1; ) l.push({ type: 7, index: n }), g += Bt.length - 1;
+        for (; (g = r.data.indexOf(Rt, g + 1)) !== -1; ) l.push({ type: 7, index: n }), g += Rt.length - 1;
       }
       n++;
     }
   }
   static createElement(e, i) {
-    const o = te.createElement("template");
+    const o = ie.createElement("template");
     return o.innerHTML = e, o;
   }
 }
-function Se(t, e, i = t, o) {
-  if (e === Rt) return e;
+function ze(t, e, i = t, o) {
+  if (e === Wt) return e;
   let r = o !== void 0 ? i._$Co?.[o] : i._$Cl;
   const n = _i(e) ? void 0 : e._$litDirective$;
-  return r?.constructor !== n && (r?._$AO?.(!1), n === void 0 ? r = void 0 : (r = new n(t), r._$AT(t, i, o)), o !== void 0 ? (i._$Co ?? (i._$Co = []))[o] = r : i._$Cl = r), r !== void 0 && (e = Se(t, r._$AS(t, e.values), r, o)), e;
+  return r?.constructor !== n && (r?._$AO?.(!1), n === void 0 ? r = void 0 : (r = new n(t), r._$AT(t, i, o)), o !== void 0 ? (i._$Co ?? (i._$Co = []))[o] = r : i._$Cl = r), r !== void 0 && (e = ze(t, r._$AS(t, e.values), r, o)), e;
 }
 class il {
   constructor(e, i) {
@@ -336,17 +336,17 @@ class il {
     return this._$AM._$AU;
   }
   u(e) {
-    const { el: { content: i }, parts: o } = this._$AD, r = (e?.creationScope ?? te).importNode(i, !0);
-    Qt.currentNode = r;
-    let n = Qt.nextNode(), a = 0, s = 0, l = o[0];
+    const { el: { content: i }, parts: o } = this._$AD, r = (e?.creationScope ?? ie).importNode(i, !0);
+    ee.currentNode = r;
+    let n = ee.nextNode(), a = 0, s = 0, l = o[0];
     for (; l !== void 0; ) {
       if (a === l.index) {
         let h;
         l.type === 2 ? h = new Eo(n, n.nextSibling, this, e) : l.type === 1 ? h = new l.ctor(n, l.name, l.strings, this, e) : l.type === 6 && (h = new al(n, this, e)), this._$AV.push(h), l = o[++s];
       }
-      a !== l?.index && (n = Qt.nextNode(), a++);
+      a !== l?.index && (n = ee.nextNode(), a++);
     }
-    return Qt.currentNode = te, r;
+    return ee.currentNode = ie, r;
   }
   p(e) {
     let i = 0;
@@ -372,7 +372,7 @@ class Eo {
     return this._$AB;
   }
   _$AI(e, i = this) {
-    e = Se(this, e, i), _i(e) ? e === u || e == null || e === "" ? (this._$AH !== u && this._$AR(), this._$AH = u) : e !== this._$AH && e !== Rt && this._(e) : e._$litType$ !== void 0 ? this.$(e) : e.nodeType !== void 0 ? this.T(e) : tl(e) ? this.k(e) : this._(e);
+    e = ze(this, e, i), _i(e) ? e === u || e == null || e === "" ? (this._$AH !== u && this._$AR(), this._$AH = u) : e !== this._$AH && e !== Wt && this._(e) : e._$litType$ !== void 0 ? this.$(e) : e.nodeType !== void 0 ? this.T(e) : tl(e) ? this.k(e) : this._(e);
   }
   O(e) {
     return this._$AA.parentNode.insertBefore(e, this._$AB);
@@ -381,7 +381,7 @@ class Eo {
     this._$AH !== e && (this._$AR(), this._$AH = this.O(e));
   }
   _(e) {
-    this._$AH !== u && _i(this._$AH) ? this._$AA.nextSibling.data = e : this.T(te.createTextNode(e)), this._$AH = e;
+    this._$AH !== u && _i(this._$AH) ? this._$AA.nextSibling.data = e : this.T(ie.createTextNode(e)), this._$AH = e;
   }
   $(e) {
     const { values: i, _$litType$: o } = e, r = typeof o == "number" ? this._$AC(e) : (o.el === void 0 && (o.el = hi.createElement(yc(o.h, o.h[0]), this.options)), o);
@@ -425,11 +425,11 @@ class dr {
   _$AI(e, i = this, o, r) {
     const n = this.strings;
     let a = !1;
-    if (n === void 0) e = Se(this, e, i, 0), a = !_i(e) || e !== this._$AH && e !== Rt, a && (this._$AH = e);
+    if (n === void 0) e = ze(this, e, i, 0), a = !_i(e) || e !== this._$AH && e !== Wt, a && (this._$AH = e);
     else {
       const s = e;
       let l, h;
-      for (e = n[0], l = 0; l < n.length - 1; l++) h = Se(this, s[o + l], i, l), h === Rt && (h = this._$AH[l]), a || (a = !_i(h) || h !== this._$AH[l]), h === u ? e = u : e !== u && (e += (h ?? "") + n[l + 1]), this._$AH[l] = h;
+      for (e = n[0], l = 0; l < n.length - 1; l++) h = ze(this, s[o + l], i, l), h === Wt && (h = this._$AH[l]), a || (a = !_i(h) || h !== this._$AH[l]), h === u ? e = u : e !== u && (e += (h ?? "") + n[l + 1]), this._$AH[l] = h;
     }
     a && !r && this.j(e);
   }
@@ -458,7 +458,7 @@ class nl extends dr {
     super(e, i, o, r, n), this.type = 5;
   }
   _$AI(e, i = this) {
-    if ((e = Se(this, e, i, 0) ?? u) === Rt) return;
+    if ((e = ze(this, e, i, 0) ?? u) === Wt) return;
     const o = this._$AH, r = e === u && o !== u || e.capture !== o.capture || e.once !== o.once || e.passive !== o.passive, n = e !== u && (o === u || r);
     r && this.element.removeEventListener(this.name, this, o), n && this.element.addEventListener(this.name, this, e), this._$AH = e;
   }
@@ -474,7 +474,7 @@ class al {
     return this._$AM._$AU;
   }
   _$AI(e) {
-    Se(this, e);
+    ze(this, e);
   }
 }
 const sl = di.litHtmlPolyfillSupport;
@@ -494,7 +494,7 @@ const cl = (t, e, i) => {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 const ui = globalThis;
-let w = class extends ke {
+let w = class extends Ce {
   constructor() {
     super(...arguments), this.renderOptions = { host: this }, this._$Do = void 0;
   }
@@ -514,7 +514,7 @@ let w = class extends ke {
     super.disconnectedCallback(), this._$Do?.setConnected(!1);
   }
   render() {
-    return Rt;
+    return Wt;
   }
 };
 w._$litElement$ = !0, w.finalized = !0, ui.litElementHydrateSupport?.({ LitElement: w });
@@ -572,7 +572,7 @@ const ml = (t, e, i) => (i.configurable = !0, i.enumerable = !0, Reflect.decorat
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-function se(t, e) {
+function le(t, e) {
   return (i, o, r) => {
     const n = (a) => a.renderRoot?.querySelector(t) ?? null;
     return ml(i, o, { get() {
@@ -632,7 +632,7 @@ const $c = "important", _l = " !" + $c, d = wc(class extends xc {
         o.includes("-") || n ? i.setProperty(o, n ? r.slice(0, -11) : r, n ? $c : "") : i[o] = r;
       }
     }
-    return Rt;
+    return Wt;
   }
 }), Ka = {
   yellow: "255, 145, 1",
@@ -642,7 +642,7 @@ const $c = "important", _l = " !" + $c, d = wc(class extends xc {
   pink: "233, 30, 99",
   purple: "102, 31, 255",
   grey: "187, 187, 187"
-}, Lt = [
+}, Ot = [
   "yellow",
   "blue",
   "green",
@@ -674,10 +674,10 @@ function q(t, e, i, o, r = !1, n = !1) {
 const hl = {
   select: {
     mode: "dropdown",
-    options: Lt.map((t) => ({ value: t, label: t }))
+    options: Ot.map((t) => ({ value: t, label: t }))
   }
 };
-function _(t = "entity", e, i = !0) {
+function m(t = "entity", e, i = !0) {
   return {
     name: t,
     required: i,
@@ -695,10 +695,10 @@ function E(t = "icon") {
 function b(t) {
   return { name: t, selector: { boolean: {} } };
 }
-function N(t) {
+function I(t) {
   return { name: t, selector: { number: { mode: "box", step: 1 } } };
 }
-function F(t = "color") {
+function B(t = "color") {
   return { name: t, selector: hl };
 }
 function V(t, e, i = "dropdown") {
@@ -721,7 +721,7 @@ function pl(t, e, i, o = !0) {
     schema: i
   };
 }
-function U(t) {
+function F(t) {
   return {
     type: "grid",
     name: "",
@@ -732,9 +732,9 @@ function U(t) {
 function gl(t) {
   return {
     schema: [
-      _("entity", t?.domain),
-      U([p("name"), E("icon")]),
-      F("color"),
+      m("entity", t?.domain),
+      F([p("name"), E("icon")]),
+      B("color"),
       b("force_background_color"),
       ...t?.extra || []
     ],
@@ -1088,8 +1088,8 @@ async function Va(t, e, i, o, r) {
   const s = r || (typeof i.type == "string" && i.type.startsWith("custom:") ? i.type.replace(/^custom:/, "") : void 0);
   let l = null;
   try {
-    const h = window, m = !r && typeof i.type == "string" && !i.type.startsWith("custom:");
-    if (!m && s && (customElements.get(s) || await Promise.race([
+    const h = window, _ = !r && typeof i.type == "string" && !i.type.startsWith("custom:");
+    if (!_ && s && (customElements.get(s) || await Promise.race([
       customElements.whenDefined(s),
       new Promise(
         (g, v) => setTimeout(() => v(new Error("timeout")), 2500)
@@ -1101,7 +1101,7 @@ async function Va(t, e, i, o, r) {
     }
     if (!l && typeof h.loadCardHelpers == "function") {
       const v = (await h.loadCardHelpers()).createCardElement(i);
-      (!s || m || v.localName === s || v.localName === `hui-${s}-card`) && (l = v);
+      (!s || _ || v.localName === s || v.localName === `hui-${s}-card`) && (l = v);
     }
   } catch {
     l = null;
@@ -1171,15 +1171,15 @@ function Do(t, e = rn, i = sr) {
   const a = o.querySelector("svg");
   a && (a.style.height = `${i}px`, a.style.maxHeight = `${i}px`, a.style.width = "100%", a.style.overflow = "visible");
 }
-var xl = Object.defineProperty, $l = Object.getOwnPropertyDescriptor, Be = (t, e, i, o) => {
+var xl = Object.defineProperty, $l = Object.getOwnPropertyDescriptor, He = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? $l(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && xl(e, i, r), r;
 };
 const kl = 150, Cl = 2e3;
-let Gt = class extends w {
+let Kt = class extends w {
   constructor() {
-    super(...arguments), this.hue = 30, this.sat = 80, this.size = 220, this._dragging = !1, this._holdUntil = 0, this._lastSent = 0, this._onDown = (t) => {
+    super(), this.hue = 30, this.sat = 80, this.size = 220, this._dragging = !1, this._holdUntil = 0, this._lastSent = 0, this._onDown = (t) => {
       if (t.button === 0) {
         t.preventDefault(), this._dragging = !0;
         try {
@@ -1189,11 +1189,17 @@ let Gt = class extends w {
         this._pick(t.clientX, t.clientY);
       }
     }, this._onMove = (t) => {
-      this._dragging && (this._pendingEv = { x: t.clientX, y: t.clientY }, !this._frame && (this._frame = requestAnimationFrame(() => {
-        this._frame = void 0;
-        const e = this._pendingEv;
-        e && this._pick(e.x, e.y);
-      })));
+      if (this._dragging) {
+        if (t.pointerType === "mouse" && (t.buttons & 1) === 0) {
+          this._onUp(t);
+          return;
+        }
+        this._pendingEv = { x: t.clientX, y: t.clientY }, !this._frame && (this._frame = requestAnimationFrame(() => {
+          this._frame = void 0;
+          const e = this._pendingEv;
+          e && this._pick(e.x, e.y);
+        }));
+      }
     }, this._onUp = (t) => {
       if (this._dragging) {
         this._dragging = !1;
@@ -1201,9 +1207,9 @@ let Gt = class extends w {
           this.hasPointerCapture(t.pointerId) && this.releasePointerCapture(t.pointerId);
         } catch {
         }
-        this._frame && (cancelAnimationFrame(this._frame), this._frame = void 0), this._pendingEv && (this._pick(this._pendingEv.x, this._pendingEv.y), this._pendingEv = void 0), this._holdUntil = Date.now() + Cl, this._scheduleSend(!0);
+        this._frame && (cancelAnimationFrame(this._frame), this._frame = void 0), this._pendingEv && (this._pick(this._pendingEv.x, this._pendingEv.y, !1), this._pendingEv = void 0), this._holdUntil = Date.now() + Cl, this._scheduleSend(!0);
       }
-    };
+    }, this.addEventListener("pointerdown", this._onDown), this.addEventListener("pointermove", this._onMove), this.addEventListener("pointerup", this._onUp), this.addEventListener("pointercancel", this._onUp), this.addEventListener("lostpointercapture", this._onUp);
   }
   willUpdate(t) {
     if (!this._local || this._dragging || !t.has("hue") && !t.has("sat")) return;
@@ -1213,12 +1219,12 @@ let Gt = class extends w {
   disconnectedCallback() {
     super.disconnectedCallback(), window.clearTimeout(this._sendTimer), this._frame && cancelAnimationFrame(this._frame);
   }
-  _pick(t, e) {
-    const i = this.getBoundingClientRect(), o = i.width / 2, r = t - i.left - o, n = e - i.top - o;
-    let a = Math.atan2(n, r) * 180 / Math.PI;
-    a < 0 && (a += 360);
-    const s = Math.min(Math.hypot(r, n) / o, 1) * 100;
-    this._local = { h: Math.round(a) % 360, s: Math.round(s) }, this._scheduleSend();
+  _pick(t, e, i = !0) {
+    const o = this.getBoundingClientRect(), r = o.width / 2, n = t - o.left - r, a = e - o.top - r;
+    let s = Math.atan2(a, n) * 180 / Math.PI;
+    s < 0 && (s += 360);
+    const l = Math.min(Math.hypot(n, a) / r, 1) * 100;
+    this._local = { h: Math.round(s) % 360, s: Math.round(l) }, i && this._scheduleSend();
   }
   _scheduleSend(t = !1) {
     const e = Date.now(), i = kl - (e - this._lastSent);
@@ -1232,11 +1238,6 @@ let Gt = class extends w {
     return c`<div
       class="wheel"
       style="width:${this.size}px;height:${this.size}px"
-      @pointerdown=${this._onDown}
-      @pointermove=${this._onMove}
-      @pointerup=${this._onUp}
-      @pointercancel=${this._onUp}
-      @lostpointercapture=${this._onUp}
     >
       <div class="disc"></div>
       <div
@@ -1246,9 +1247,14 @@ let Gt = class extends w {
     </div>`;
   }
 };
-Gt.styles = $`
+Kt.styles = $`
     :host {
+      /* Host receives the pointer events: size it to the disc exactly */
       display: block;
+      width: fit-content;
+      height: fit-content;
+      border-radius: 50%;
+      cursor: crosshair;
       touch-action: none;
       user-select: none;
       -webkit-user-select: none;
@@ -1308,31 +1314,31 @@ Gt.styles = $`
       margin: -2px 0 0 -2px;
     }
   `;
-Be([
+He([
   x({ type: Number })
-], Gt.prototype, "hue", 2);
-Be([
+], Kt.prototype, "hue", 2);
+He([
   x({ type: Number })
-], Gt.prototype, "sat", 2);
-Be([
+], Kt.prototype, "sat", 2);
+He([
   x({ type: Number })
-], Gt.prototype, "size", 2);
-Be([
+], Kt.prototype, "size", 2);
+He([
   x({ attribute: !1 })
-], Gt.prototype, "onPick", 2);
-Be([
+], Kt.prototype, "onPick", 2);
+He([
   f()
-], Gt.prototype, "_local", 2);
-Gt = Be([
+], Kt.prototype, "_local", 2);
+Kt = He([
   k("ulm-color-wheel")
-], Gt);
+], Kt);
 function K(t) {
   return t && t.charAt(0).toUpperCase() + t.slice(1);
 }
 function kc(t) {
   return typeof t == "number" ? Math.round(t / 255 * 100) : void 0;
 }
-function ce(t) {
+function de(t) {
   return c`<div class="ulm-ph">
     <div
       class="ulm-ph-icon"
@@ -1347,7 +1353,7 @@ function ce(t) {
     <div class="ulm-ph-label">${t.label}</div>
   </div>`;
 }
-function G(t) {
+function R(t) {
   const e = t.variant || "default";
   return c`<button
     class="ulm-pb ulm-pb--${e}"
@@ -1368,13 +1374,13 @@ function G(t) {
 }
 function ht(t) {
   return c`<div class="ulm-pf">
-    ${G({
+    ${R({
     icon: "mdi:arrow-left",
     name: t.backLabel || "Back",
     onClick: t.onBack,
     variant: "back"
   })}
-    ${t.onPower ? G({
+    ${t.onPower ? R({
     icon: "mdi:power",
     name: t.powerLabel || "Power",
     onClick: t.onPower,
@@ -1387,33 +1393,31 @@ function Po(t) {
   const e = t.min ?? 0, i = t.max ?? 100, r = Math.max(
     0,
     Math.min(100, (t.value - e) / (i - e || 1) * 100)
-  ), n = t.temperature ? "background: linear-gradient(0deg, #f3db6d, #fff, #c9f2fc)" : t.track ? `background:${t.track}` : "", a = t.height || "280px", s = t.width || "100px", l = t.thumbWidth ?? 50, h = [
+  ), n = t.height || "280px", a = (L) => `linear-gradient(0deg, rgba(243,219,109,${L}), rgba(255,255,255,${L}), rgba(201,242,252,${L}))`, s = t.temperature ? `background:${a(0.2)}` : t.track ? `background:${t.track}` : "", l = t.temperature ? `background:${a(1)};background-size:100% calc(${n} - 4px);background-position:bottom` : t.fill ? `background:${t.fill}` : "", h = t.width || "100px", _ = t.thumbWidth ?? 50, g = [
     `height:${r}%`,
-    t.fill ? `background:${t.fill}` : "",
+    l,
     t.flipped ? "top:0;bottom:auto" : "bottom:0;top:auto"
-  ].filter(Boolean).join(";"), m = !!t.flipped, v = [
-    ((L) => m ? `top:calc(${L}% - 2px);bottom:auto` : `bottom:calc(${L}% - 2px);top:auto`)(r),
-    `width:${l}px`,
-    // Temperature: white bar with a dark outline so it shows on the light gradient
-    t.temperature ? "border-radius:3px;box-shadow:0 0 0 1.5px rgba(0,0,0,0.55)" : ""
-  ].filter(Boolean).join(";"), C = m ? i + e - t.value : t.value, M = (L) => m ? i + e - L : L, A = (L, j) => {
-    const I = Math.max(0, Math.min(100, (j - e) / (i - e || 1) * 100)), H = L.parentElement, B = H?.querySelector(".ulm-vslider-fill"), R = H?.querySelector(".ulm-vslider-thumb");
-    B && (B.style.height = `${I}%`), R && (m ? (R.style.top = `calc(${I}% - 2px)`, R.style.bottom = "auto") : (R.style.bottom = `calc(${I}% - 2px)`, R.style.top = "auto"));
+  ].filter(Boolean).join(";"), v = !!t.flipped, M = [
+    ((L) => v ? `top:calc(${L}% - 2px);bottom:auto` : `bottom:calc(${L}% - 2px);top:auto`)(r),
+    `width:${_}px`
+  ].filter(Boolean).join(";"), A = v ? i + e - t.value : t.value, N = (L) => v ? i + e - L : L, j = (L, H) => {
+    const D = Math.max(0, Math.min(100, (H - e) / (i - e || 1) * 100)), W = L.parentElement, kt = W?.querySelector(".ulm-vslider-fill"), pt = W?.querySelector(".ulm-vslider-thumb");
+    kt && (kt.style.height = `${D}%`), pt && (v ? (pt.style.top = `calc(${D}% - 2px)`, pt.style.bottom = "auto") : (pt.style.bottom = `calc(${D}% - 2px)`, pt.style.top = "auto"));
   };
-  return c`<div class="ulm-vslider" style="height:${a};width:${s}">
-    <div class="ulm-vslider-track" style="height:${a};width:${s};${n}">
-      ${t.temperature ? u : c`<div class="ulm-vslider-fill" style=${h}></div>`}
-      <div class="ulm-vslider-thumb" style=${v}></div>
+  return c`<div class="ulm-vslider" style="height:${n};width:${h}">
+    <div class="ulm-vslider-track" style="height:${n};width:${h};${s}">
+      <div class="ulm-vslider-fill" style=${g}></div>
+      <div class="ulm-vslider-thumb" style=${M}></div>
       <input
         type="range"
         min=${e}
         max=${i}
-        .value=${String(C)}
+        .value=${String(A)}
         @input=${(L) => {
-    const j = L.target, I = M(Number(j.value));
-    A(j, I), t.onInput?.(I);
+    const H = L.target, D = N(Number(H.value));
+    j(H, D), t.onInput?.(D);
   }}
-        @change=${(L) => t.onChange(M(Number(L.target.value)))}
+        @change=${(L) => t.onChange(N(Number(L.target.value)))}
       />
     </div>
   </div>`;
@@ -2674,7 +2678,7 @@ function Pl(t) {
   const e = t.stateObj, i = Number(e.attributes.current_position), o = Number.isFinite(i) ? Math.round(i) : e.state === "open" ? 100 : 0, r = e.state, n = r === "closed" || o === 0, a = n ? "rgba(var(--ulm-color-theme),0.2)" : "rgba(var(--ulm-color-blue),1)", s = n ? "rgba(var(--ulm-color-theme),0.05)" : "rgba(var(--ulm-color-blue),0.2)", l = e.state === "unavailable" || !Number.isFinite(i) || o === 0 ? K(r) : `${K(r)} • ${o}%`;
   return c`<div class="ulm-grid">
     <div class="area-header">
-      ${ce({
+      ${de({
     name: e.attributes.friendly_name || t.entity,
     label: l,
     icon: e.attributes.icon || "mdi:window-shutter",
@@ -2694,18 +2698,18 @@ function Pl(t) {
     </div>
     <div class="area-buttons">
       <div class="ulm-mode-row">
-        ${G({
+        ${R({
     icon: "mdi:arrow-down",
     name: "Close",
     variant: r === "closing" || r === "closed" ? "selected" : "default",
     onClick: () => t.call("cover", "close_cover")
   })}
-        ${G({
+        ${R({
     icon: "mdi:stop",
     name: "Stop",
     onClick: () => t.call("cover", "stop_cover")
   })}
-        ${G({
+        ${R({
     icon: "mdi:arrow-up",
     name: "Open",
     variant: r === "opening" || r === "open" ? "selected" : "default",
@@ -2752,7 +2756,7 @@ function Ml(t) {
 }
 function Lo(t) {
   const e = t.stateObj, i = e.state === "on", o = kc(e.attributes.brightness), r = e.attributes.rgb_color, n = i ? r ? `rgba(${r.join(",")},1)` : "rgba(var(--ulm-color-yellow),1)" : "var(--color-theme)", a = i ? r ? `rgba(${r.join(",")},0.2)` : "rgba(var(--ulm-color-yellow),0.2)" : "var(--card-background-color)", s = i && o != null ? `${K(e.state)} • ${o}%` : K(e.state);
-  return ce({
+  return de({
     name: e.attributes.friendly_name || t.entity,
     label: s,
     icon: e.attributes.icon || "mdi:lightbulb",
@@ -2765,7 +2769,7 @@ function bn(t, e) {
     onBack: t.goBack,
     onPower: () => t.call("light", "toggle"),
     powerLabel: K(t.stateObj.state),
-    extra: e ? G({
+    extra: e ? R({
       icon: "mdi:dots-horizontal",
       name: "More",
       onClick: () => t.setView(mr(t.stateObj).length ? "effects" : "palette")
@@ -2775,21 +2779,21 @@ function bn(t, e) {
 function yn(t, e) {
   const i = t.stateObj, o = [];
   return nn(i) && o.push(
-    G({
+    R({
       icon: "mdi:lightbulb-on",
       name: "Bright",
       variant: e === "brightness" ? "selected" : "default",
       onClick: () => t.setView("brightness")
     })
   ), an(i) && o.push(
-    G({
+    R({
       icon: "mdi:sun-thermometer-outline",
       name: "Temp",
       variant: e === "color_temp" ? "selected" : "default",
       onClick: () => t.setView("color_temp")
     })
   ), sn(i) && o.push(
-    G({
+    R({
       icon: "mdi:palette",
       name: "Color",
       variant: e === "color" ? "selected" : "default",
@@ -2884,13 +2888,13 @@ function Al(t) {
     </div>
     <div class="area-buttons">
       <div class="ulm-mode-row">
-        ${G({
+        ${R({
     icon: "mdi:creation",
     name: "Effects",
     variant: "selected",
     onClick: () => t.setView("effects")
   })}
-        ${o ? G({
+        ${o ? R({
     icon: "mdi:palette-swatch",
     name: "Palette",
     onClick: () => t.setView("palette")
@@ -2929,12 +2933,12 @@ function Tl(t) {
     </div>
     <div class="area-buttons">
       <div class="ulm-mode-row">
-        ${mr(t.stateObj).length ? G({
+        ${mr(t.stateObj).length ? R({
     icon: "mdi:creation",
     name: "Effects",
     onClick: () => t.setView("effects")
   }) : u}
-        ${G({
+        ${R({
     icon: "mdi:palette-swatch",
     name: "Palette",
     variant: "selected",
@@ -2980,7 +2984,7 @@ function Fl(t) {
 }
 function vn(t) {
   const e = t.stateObj;
-  return ce({
+  return de({
     name: e.attributes.friendly_name || t.entity,
     label: K(e.state),
     icon: e.attributes.icon || "mdi:speaker"
@@ -2993,7 +2997,7 @@ function Bl(t) {
     onPower: () => t.call("media_player", "toggle"),
     powerLabel: K(t.stateObj.state),
     // Always show Source like popup_button_source (more-info if no list)
-    extra: G({
+    extra: R({
       icon: "mdi:playlist-music",
       name: "Source",
       onClick: () => {
@@ -3013,11 +3017,11 @@ function qa(t) {
   return i > 0 ? `${i}:${o.toString().padStart(2, "0")}:${r.toString().padStart(2, "0")}` : `${o}:${r.toString().padStart(2, "0")}`;
 }
 function Rl(t) {
-  const e = t.stateObj.attributes, i = e.media_title || e.media_artist || K(t.stateObj.state), o = e.media_artist || "", r = e.media_album_name || "", n = [o, r].filter(Boolean).join(" · "), a = Hl(t), s = t.stateObj.state === "playing", l = Number(e.media_position), h = Number(e.media_duration), m = Number.isFinite(l) && Number.isFinite(h) && h > 0, g = m ? Math.min(100, l / h * 100) : 0, v = Number(e.volume_level), C = Number.isFinite(v) ? Math.round(v * 100) : 0, M = Fl(t), A = s ? "rgba(51, 51, 51, 1)" : "rgba(51, 51, 51, 0.5)", L = (j) => {
-    if (!m) return;
-    const H = j.currentTarget.getBoundingClientRect(), B = Math.min(1, Math.max(0, (j.clientX - H.left) / H.width));
+  const e = t.stateObj.attributes, i = e.media_title || e.media_artist || K(t.stateObj.state), o = e.media_artist || "", r = e.media_album_name || "", n = [o, r].filter(Boolean).join(" · "), a = Hl(t), s = t.stateObj.state === "playing", l = Number(e.media_position), h = Number(e.media_duration), _ = Number.isFinite(l) && Number.isFinite(h) && h > 0, g = _ ? Math.min(100, l / h * 100) : 0, v = Number(e.volume_level), C = Number.isFinite(v) ? Math.round(v * 100) : 0, M = Fl(t), A = s ? "rgba(51, 51, 51, 1)" : "rgba(51, 51, 51, 0.5)", N = (j) => {
+    if (!_) return;
+    const H = j.currentTarget.getBoundingClientRect(), D = Math.min(1, Math.max(0, (j.clientX - H.left) / H.width));
     t.call("media_player", "media_seek", {
-      seek_position: B * h
+      seek_position: D * h
     });
   };
   return c`<div class="ulm-grid cols-2 media-infos">
@@ -3044,10 +3048,10 @@ function Rl(t) {
         <div class="media-meta">
           <div class="media-title">${i}</div>
           ${n ? c`<div class="media-artist">${n}</div>` : u}
-          ${m ? c`<button
+          ${_ ? c`<button
                 type="button"
                 class="media-progress"
-                @click=${L}
+                @click=${N}
               >
                 <div style="width:${g}%"></div>
               </button>
@@ -3148,7 +3152,7 @@ function Wl(t) {
     onBack: () => t.setView("infos"),
     onPower: () => t.call("media_player", "toggle"),
     powerLabel: K(t.stateObj.state),
-    extra: G({
+    extra: R({
       icon: "mdi:volume-high",
       name: "Volume",
       onClick: () => t.setView("volume")
@@ -3165,7 +3169,7 @@ function Vl(t) {
 }
 function zc(t) {
   const e = t.stateObj;
-  return ce({
+  return de({
     name: e.attributes.friendly_name || t.entity,
     label: K(e.state),
     icon: e.attributes.icon || "mdi:power-socket-eu"
@@ -3173,13 +3177,13 @@ function zc(t) {
 }
 function Ec(t, e) {
   return c`<div class="ulm-mode-row outlet-mode-row">
-    ${G({
+    ${R({
     icon: "mdi:chart-line",
     name: "Stats",
     variant: e === "stats" ? "selected" : void 0,
     onClick: () => t.setView("stats")
   })}
-    ${G({
+    ${R({
     icon: "mdi:history",
     name: "History",
     variant: e === "history" ? "selected" : void 0,
@@ -3486,8 +3490,8 @@ class Xl extends HTMLElement {
     this._fitSize();
     const e = this._stateObj();
     if (!e) return;
-    const i = e.attributes, o = Number(i.min_temp) || 7, r = Number(i.max_temp) || 35, n = Number(i.target_temp_step) || 0.5, a = typeof i.current_temperature == "number" ? i.current_temperature : void 0, s = this._localValue ?? (typeof i.temperature == "number" ? i.temperature : a ?? Math.round((o + r) / 2)), l = this._hvacMode(), h = l !== "off", m = Jl(l), g = this._slider;
-    g.min = o, g.max = r, g.step = n, g.value = s, g.current = a, g.mode = Er, g.inactive = !h, this._slider.setAttribute("mode", Er), this.style.setProperty("--mode-color", m), this.style.setProperty("--action-color", m), this._applyAccent(this._slider, m), this._updateInfo(s);
+    const i = e.attributes, o = Number(i.min_temp) || 7, r = Number(i.max_temp) || 35, n = Number(i.target_temp_step) || 0.5, a = typeof i.current_temperature == "number" ? i.current_temperature : void 0, s = this._localValue ?? (typeof i.temperature == "number" ? i.temperature : a ?? Math.round((o + r) / 2)), l = this._hvacMode(), h = l !== "off", _ = Jl(l), g = this._slider;
+    g.min = o, g.max = r, g.step = n, g.value = s, g.current = a, g.mode = Er, g.inactive = !h, this._slider.setAttribute("mode", Er), this.style.setProperty("--mode-color", _), this.style.setProperty("--action-color", _), this._applyAccent(this._slider, _), this._updateInfo(s);
   }
   _applyAccent(e, i) {
     e.style.setProperty("--control-circular-slider-color", i), e.style.setProperty("--primary-color", i);
@@ -3530,17 +3534,17 @@ class Xl extends HTMLElement {
     if (!this.shadowRoot) return;
     const i = this._stateObj();
     if (!i) return;
-    const o = i.attributes, r = this._hass?.config?.unit_system?.temperature || "°C", n = r.startsWith("°") ? r : `°${r}`, a = this._hvacMode(), s = (I) => I.toLocaleString(void 0, {
+    const o = i.attributes, r = this._hass?.config?.unit_system?.temperature || "°C", n = r.startsWith("°") ? r : `°${r}`, a = this._hvacMode(), s = (L) => L.toLocaleString(void 0, {
       maximumFractionDigits: 1,
-      minimumFractionDigits: Number.isInteger(I) ? 0 : 1
-    }), l = this.shadowRoot.querySelector(".num"), h = this.shadowRoot.querySelector(".unit"), m = this.shadowRoot.querySelector(
+      minimumFractionDigits: Number.isInteger(L) ? 0 : 1
+    }), l = this.shadowRoot.querySelector(".num"), h = this.shadowRoot.querySelector(".unit"), _ = this.shadowRoot.querySelector(
       ".current"
     ), g = this.shadowRoot.querySelector(
       ".action"
     );
     l.textContent = s(e), h.textContent = n;
     const v = typeof o.current_temperature == "number" ? o.current_temperature : void 0;
-    v != null ? (m.hidden = !1, m.textContent = s(v)) : m.hidden = !0;
+    v != null ? (_.hidden = !1, _.textContent = s(v)) : _.hidden = !0;
     const C = String(o.hvac_action || "").toLowerCase(), M = {
       heating: "Heating",
       cooling: "Cooling",
@@ -3556,24 +3560,24 @@ class Xl extends HTMLElement {
       auto: "Auto",
       heat_cool: "Heat/Cool",
       off: "Off"
-    }, L = this._hass?.localize;
+    }, N = this._hass?.localize;
     let j = A[a] || Zl(a);
-    if (typeof L == "function" && a) {
-      const I = `component.climate.entity_component._.state.${a}`, H = L(I);
-      if (H && H !== I) j = H;
+    if (typeof N == "function" && a) {
+      const L = `component.climate.entity_component._.state.${a}`, H = N(L);
+      if (H && H !== L) j = H;
       else {
-        const B = `state.climate.${a}`, R = L(B);
-        R && R !== B && (j = R);
+        const D = `state.climate.${a}`, W = N(D);
+        W && W !== D && (j = W);
       }
     }
     if (a === "heat" && C === "heating" || a === "cool" && C === "cooling" || a === "dry" && C === "drying") {
-      const I = M[C];
-      if (I)
-        if (typeof L == "function") {
-          const H = `state_attributes.climate.hvac_action.${C}`, B = L(H);
-          j = B && B !== H ? B : I;
+      const L = M[C];
+      if (L)
+        if (typeof N == "function") {
+          const H = `state_attributes.climate.hvac_action.${C}`, D = N(H);
+          j = D && D !== H ? D : L;
         } else
-          j = I;
+          j = L;
     }
     g.textContent = j;
   }
@@ -3621,21 +3625,21 @@ function Ya(t, e, i) {
 }
 function rd(t) {
   const e = t.stateObj, i = e.attributes, o = !!t.opts.preset_mode, r = Array.isArray(i.preset_modes) ? i.preset_modes : [], n = Array.isArray(i.hvac_modes) ? i.hvac_modes : [], a = String(i.preset_mode || ""), s = e.state, l = K(e.state), h = o ? ed.filter(
-    (m) => r.some((g) => g.toLowerCase() === m)
-  ).map((m) => ({
-    id: r.find((v) => v.toLowerCase() === m) || m,
-    icon: id[m],
-    active: a.toLowerCase() === m
+    (_) => r.some((g) => g.toLowerCase() === _)
+  ).map((_) => ({
+    id: r.find((v) => v.toLowerCase() === _) || _,
+    icon: id[_],
+    active: a.toLowerCase() === _
   })) : Ql.filter(
-    (m) => n.some((g) => g.toLowerCase() === m)
-  ).map((m) => ({
-    id: n.find((v) => v.toLowerCase() === m) || m,
-    icon: td[m],
-    active: s.toLowerCase() === m
+    (_) => n.some((g) => g.toLowerCase() === _)
+  ).map((_) => ({
+    id: n.find((v) => v.toLowerCase() === _) || _,
+    icon: td[_],
+    active: s.toLowerCase() === _
   }));
   return c`<div class="ulm-grid with-buttons thermo-popup">
     <div class="area-header">
-      ${ce({
+      ${de({
     name: e.attributes.friendly_name || t.entity,
     label: l,
     icon: e.attributes.icon || "mdi:thermostat"
@@ -3650,20 +3654,20 @@ function rd(t) {
     <div class="area-buttons">
       <div class="ulm-mode-bar">
         ${h.map(
-    (m) => c`<button
+    (_) => c`<button
             type="button"
-            class="ulm-mode-chip ${m.active ? "active" : ""}"
-            title=${m.id}
+            class="ulm-mode-chip ${_.active ? "active" : ""}"
+            title=${_.id}
             @click=${(g) => {
       const C = g.currentTarget.closest(
         ".thermo-popup"
       )?.querySelector(
         "ulm-thermo-embed"
       );
-      o || C?.setHvacMode?.(m.id), o ? t.call("climate", "set_preset_mode", { preset_mode: m.id }) : t.call("climate", "set_hvac_mode", { hvac_mode: m.id });
+      o || C?.setHvacMode?.(_.id), o ? t.call("climate", "set_preset_mode", { preset_mode: _.id }) : t.call("climate", "set_hvac_mode", { hvac_mode: _.id });
     }}
           >
-            <ha-icon .icon=${m.icon}></ha-icon>
+            <ha-icon .icon=${_.icon}></ha-icon>
           </button>`
   )}
       </div>
@@ -4375,7 +4379,7 @@ function md(t) {
   const e = t.stateObj, i = e.attributes.friendly_name || t.entity, o = t.hass.formatEntityState?.(e) || K(String(e.state));
   return c`<div class="ulm-grid vacuum-popup">
     <div class="area-header">
-      ${ce({
+      ${de({
     name: i,
     label: o,
     icon: e.attributes.icon || "mdi:robot-vacuum"
@@ -4529,7 +4533,7 @@ function gd(t, e = [], i = !1) {
 }
 function Mc(t) {
   const e = t.stateObj;
-  return ce({
+  return de({
     name: e.attributes.friendly_name || t.entity,
     label: K(e.state),
     icon: Lc[e.state] || e.attributes.icon || "mdi:weather-partly-cloudy"
@@ -4563,13 +4567,13 @@ function fd(t, e, i) {
     </div>
     <div class="area-buttons">
       <div class="ulm-mode-row weather-mode-row">
-        ${G({
+        ${R({
     icon: "mdi:calendar-month",
     name: "Forecast",
     variant: "selected",
     onClick: () => t.setView("forecast")
   })}
-        ${G({
+        ${R({
     icon: "mdi:radar",
     name: "Radar",
     onClick: () => t.setView("radar")
@@ -4616,12 +4620,12 @@ function vd(t) {
     </div>
     <div class="area-buttons">
       <div class="ulm-mode-row weather-mode-row">
-        ${G({
+        ${R({
     icon: "mdi:calendar-month",
     name: "Forecast",
     onClick: () => t.setView("forecast")
   })}
-        ${G({
+        ${R({
     icon: "mdi:radar",
     name: "Radar",
     variant: "selected",
@@ -4652,7 +4656,7 @@ function wd(t) {
   }
   return String(t.condition || "—");
 }
-var xd = Object.defineProperty, $d = Object.getOwnPropertyDescriptor, Mt = (t, e, i, o) => {
+var xd = Object.defineProperty, $d = Object.getOwnPropertyDescriptor, Nt = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? $d(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && xd(e, i, r), r;
@@ -4667,7 +4671,7 @@ function _t(t, e, i, o = {}) {
   );
   r ? r.parentNode === document.body && Pr().appendChild(r) : (r = document.createElement("ulm-popup-dialog"), Pr().appendChild(r)), r.attachHost(t), t.hass && (r.hass = t.hass), r.open(e, i, o);
 }
-let gt = class extends w {
+let ft = class extends w {
   constructor() {
     super(...arguments), this._open = !1, this._kind = "light", this._entity = "", this._opts = {}, this._view = "main", this._forecast = [], this._forecastLoading = !1, this._viewStack = [], this._slotEls = /* @__PURE__ */ new Map(), this._outletGraphFitKey = "", this._onKey = (t) => {
       t.key === "Escape" && this._open && this.close();
@@ -4924,34 +4928,34 @@ let gt = class extends w {
     }
   }
 };
-gt.styles = zl;
-Mt([
+ft.styles = zl;
+Nt([
   x({ attribute: !1 })
-], gt.prototype, "hass", 2);
-Mt([
+], ft.prototype, "hass", 2);
+Nt([
   f()
-], gt.prototype, "_open", 2);
-Mt([
+], ft.prototype, "_open", 2);
+Nt([
   f()
-], gt.prototype, "_kind", 2);
-Mt([
+], ft.prototype, "_kind", 2);
+Nt([
   f()
-], gt.prototype, "_entity", 2);
-Mt([
+], ft.prototype, "_entity", 2);
+Nt([
   f()
-], gt.prototype, "_opts", 2);
-Mt([
+], ft.prototype, "_opts", 2);
+Nt([
   f()
-], gt.prototype, "_view", 2);
-Mt([
+], ft.prototype, "_view", 2);
+Nt([
   f()
-], gt.prototype, "_forecast", 2);
-Mt([
+], ft.prototype, "_forecast", 2);
+Nt([
   f()
-], gt.prototype, "_forecastLoading", 2);
-gt = Mt([
+], ft.prototype, "_forecastLoading", 2);
+ft = Nt([
   k("ulm-popup-dialog")
-], gt);
+], ft);
 var kd = Object.defineProperty, Cd = Object.getOwnPropertyDescriptor, wn = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? Cd(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
@@ -4997,13 +5001,13 @@ let pi = class extends w {
     return {
       schema: [
         // Top-level fields so HA always persists them (expandables can drop values)
-        _("entity", "light"),
-        U([p("name"), E("icon")]),
-        F("color"),
+        m("entity", "light"),
+        F([p("name"), E("icon")]),
+        B("color"),
         b("enable_slider"),
-        U([
-          N("enable_slider_min"),
-          N("enable_slider_max")
+        F([
+          I("enable_slider_min"),
+          I("enable_slider_max")
         ]),
         b("enable_collapse"),
         b("enable_horizontal"),
@@ -5014,10 +5018,10 @@ let pi = class extends w {
         b("enable_popup_tap"),
         p("color_palette"),
         b("enable_buttons"),
-        U([
-          N("brightness_low"),
-          N("brightness_medium"),
-          N("brightness_high")
+        F([
+          I("brightness_low"),
+          I("brightness_medium"),
+          I("brightness_high")
         ])
       ],
       computeLabel: S({
@@ -5136,14 +5140,14 @@ let pi = class extends w {
       return c`<ha-card class="ulm-card"
         ><div class="warning">Entity not found: ${this._config.entity}</div></ha-card
       >`;
-    const e = t.state === "on", i = t.state === "unavailable", o = t.attributes.brightness, r = typeof o == "number" ? Math.round(o / 255 * 100) : void 0, n = this._config.name || t.attributes.friendly_name || t.entity_id, a = this._config.icon || t.attributes.icon || "mdi:lightbulb", s = this._config.color || "yellow", l = y(this, s), h = t.attributes.rgb_color, m = q(
+    const e = t.state === "on", i = t.state === "unavailable", o = t.attributes.brightness, r = typeof o == "number" ? Math.round(o / 255 * 100) : void 0, n = this._config.name || t.attributes.friendly_name || t.entity_id, a = this._config.icon || t.attributes.icon || "mdi:lightbulb", s = this._config.color || "yellow", l = y(this, s), h = t.attributes.rgb_color, _ = q(
       this,
       e,
       s,
       h,
       this._config.enable_color,
       !!(e && this._config.force_background_color)
-    ), g = !!this._config.enable_slider && !(this._config.enable_collapse && !e), v = !!this._config.enable_buttons && !(this._config.enable_collapse && !e) && !(this._config.enable_horizontal && this._config.enable_slider), C = e && this._config.force_background_color ? this._config.enable_color && h ? `rgba(${h.join(", ")}, var(--opacity-bg, 1))` : `rgba(${l}, var(--opacity-bg, 1))` : void 0, M = this._config.enable_color && h ? `rgba(${h.join(", ")}, 1)` : `rgba(${l}, 1)`, A = this._config.enable_color && h ? `rgba(${h.join(", ")}, 0.2)` : `rgba(${l}, 0.2)`, L = this._config.enable_slider_min ?? 0, j = this._config.enable_slider_max ?? 100, I = Math.min(j, Math.max(L, r ?? (L || 1))), H = [
+    ), g = !!this._config.enable_slider && !(this._config.enable_collapse && !e), v = !!this._config.enable_buttons && !(this._config.enable_collapse && !e) && !(this._config.enable_horizontal && this._config.enable_slider), C = e && this._config.force_background_color ? this._config.enable_color && h ? `rgba(${h.join(", ")}, var(--opacity-bg, 1))` : `rgba(${l}, var(--opacity-bg, 1))` : void 0, M = this._config.enable_color && h ? `rgba(${h.join(", ")}, 1)` : `rgba(${l}, 1)`, A = this._config.enable_color && h ? `rgba(${h.join(", ")}, 0.2)` : `rgba(${l}, 0.2)`, N = this._config.enable_slider_min ?? 0, j = this._config.enable_slider_max ?? 100, L = Math.min(j, Math.max(N, r ?? (N || 1))), H = [
       "stack",
       this._config.enable_horizontal ? "horizontal" : "",
       this._config.enable_horizontal_wide ? "wide" : "",
@@ -5161,7 +5165,7 @@ let pi = class extends w {
           <div class="row">
             <button
               class="icon-btn"
-              style=${d(m)}
+              style=${d(_)}
               @click=${this._iconTap}
             >
               <ha-icon .icon=${a}></ha-icon>
@@ -5186,15 +5190,15 @@ let pi = class extends w {
                 <div
                   class="slider-fill"
                   style=${d({
-      width: `${e ? I : 0}%`,
+      width: `${e ? L : 0}%`,
       background: e ? M : "transparent"
     })}
                 ></div>
                 <input
                   type="range"
-                  min=${L || 1}
+                  min=${N || 1}
                   max=${j}
-                  .value=${String(I || 1)}
+                  .value=${String(L || 1)}
                   ?disabled=${!e && !this._config.enable_collapse}
                   @change=${this._setBrightness}
                   @input=${this._liveFill}
@@ -5298,9 +5302,9 @@ let gi = class extends w {
     return {
       schema: [
         // Top-level fields so HA always persists them (expandables can drop values)
-        _("entity", "cover"),
-        U([p("name"), E("icon")]),
-        F("color"),
+        m("entity", "cover"),
+        F([p("name"), E("icon")]),
+        B("color"),
         b("enable_controls"),
         b("enable_slider"),
         b("enable_popup"),
@@ -5311,8 +5315,8 @@ let gi = class extends w {
         b("enable_tilt"),
         b("garage_large"),
         b("show_last_changed"),
-        N("favorite_percentage"),
-        U([N("slider_min"), N("slider_max")])
+        I("favorite_percentage"),
+        F([I("slider_min"), I("slider_max")])
       ],
       computeLabel: S({
         entity: "Entity",
@@ -5401,25 +5405,25 @@ let gi = class extends w {
       return c`<ha-card class="ulm-card"
         ><div class="warning">Entity not found: ${this._config.entity}</div></ha-card
       >`;
-    const e = !!this._config.invert_percent, i = Number(t.attributes.current_position), o = !Number.isNaN(i), r = o ? e ? 100 - i : i : void 0, n = e ? !(o && i === 100) : t.state !== "closed", a = this._config.color || "blue", s = y(this, a), l = this._config.name || t.attributes.friendly_name || t.entity_id, h = String(t.attributes.device_class || ""), m = this._coverIcon(t.state, h, t), g = !!this._config.force_background_color && n, v = q(
+    const e = !!this._config.invert_percent, i = Number(t.attributes.current_position), o = !Number.isNaN(i), r = o ? e ? 100 - i : i : void 0, n = e ? !(o && i === 100) : t.state !== "closed", a = this._config.color || "blue", s = y(this, a), l = this._config.name || t.attributes.friendly_name || t.entity_id, h = String(t.attributes.device_class || ""), _ = this._coverIcon(t.state, h, t), g = !!this._config.force_background_color && n, v = q(
       this,
       n,
       a,
       null,
       !1,
       g
-    ), C = !!this._config.enable_controls, M = !!this._config.enable_slider, A = !!this._config.enable_tilt, L = this._config.favorite_percentage != null && !Number.isNaN(Number(this._config.favorite_percentage)), j = [
+    ), C = !!this._config.enable_controls, M = !!this._config.enable_slider, A = !!this._config.enable_tilt, N = this._config.favorite_percentage != null && !Number.isNaN(Number(this._config.favorite_percentage)), j = [
       "stack",
       this._config.enable_horizontal ? "horizontal" : ""
-    ].filter(Boolean).join(" "), I = this._closeControlIcon(h), H = this._openControlIcon(h), B = this._label(t, r, o, e), R = g ? `rgba(${s}, var(--opacity-bg, 1))` : void 0;
+    ].filter(Boolean).join(" "), L = this._closeControlIcon(h), H = this._openControlIcon(h), D = this._label(t, r, o, e), W = g ? `rgba(${s}, var(--opacity-bg, 1))` : void 0;
     return c`
       <ha-card
         class="ulm-card cover"
         style=${d(
-      R ? {
-        "--ha-card-background": R,
-        background: R,
-        backgroundColor: R,
+      W ? {
+        "--ha-card-background": W,
+        background: W,
+        backgroundColor: W,
         color: "rgb(250,250,250)"
       } : {}
     )}
@@ -5431,23 +5435,23 @@ let gi = class extends w {
               style=${d(v)}
               @click=${() => this._call("toggle")}
             >
-              <ha-icon .icon=${m}></ha-icon>
+              <ha-icon .icon=${_}></ha-icon>
             </button>
             <button class="info-btn" @click=${this._nameTap}>
               <div class="name">${l}</div>
-              <div class="label">${B}</div>
+              <div class="label">${D}</div>
             </button>
           </div>
 
           ${C ? c`<div
-                class="controls ${L ? "four" : ""}"
+                class="controls ${N ? "four" : ""}"
               >
                 <button
                   class="widget-btn"
                   style=${d(this._widgetStyle(g, a, s))}
                   @click=${() => this._call("close_cover")}
                 >
-                  <ha-icon icon=${I}></ha-icon>
+                  <ha-icon icon=${L}></ha-icon>
                 </button>
                 <button
                   class="widget-btn"
@@ -5463,7 +5467,7 @@ let gi = class extends w {
                 >
                   <ha-icon icon=${H}></ha-icon>
                 </button>
-                ${L ? c`<button
+                ${N ? c`<button
                       class="widget-btn"
                       style=${d(this._widgetStyle(g, a, s))}
                       @click=${() => this._setPosition(
@@ -5631,12 +5635,12 @@ let fi = class extends w {
     return {
       schema: [
         // Top-level fields so HA always persists them (expandables can drop values)
-        _("entity", "person"),
-        U([p("name"), E("icon")]),
+        m("entity", "person"),
+        F([p("name"), E("icon")]),
         b("use_entity_picture"),
-        _("battery_entity", "sensor", !1),
-        _("eta_entity", "sensor", !1),
-        _("address_entity", void 0, !1)
+        m("battery_entity", "sensor", !1),
+        m("eta_entity", "sensor", !1),
+        m("address_entity", void 0, !1)
       ],
       computeLabel: S({
         entity: "Person entity (ulm_card_person_entity)",
@@ -6005,7 +6009,7 @@ const O = wc(class extends xc {
       const r = !!e[o];
       r === this.st.has(o) || this.nt?.has(o) || (r ? (i.add(o), this.st.add(o)) : (i.remove(o), this.st.delete(o)));
     }
-    return Rt;
+    return Wt;
   }
 });
 var Nd = Object.defineProperty, Id = Object.getOwnPropertyDescriptor, kn = (t, e, i, o) => {
@@ -6054,9 +6058,9 @@ let bi = class extends w {
     return {
       schema: [
         // All original card_media_player variables (top-level for HA persistence)
-        _("entity", "media_player"),
-        U([p("name"), E("icon")]),
-        F("color"),
+        m("entity", "media_player"),
+        F([p("name"), E("icon")]),
+        B("color"),
         b("enable_art"),
         b("enable_controls"),
         b("enable_volume_slider"),
@@ -6066,7 +6070,7 @@ let bi = class extends w {
           selector: { number: { mode: "box", min: 0, max: 100, step: 1 } }
         },
         b("collapsible"),
-        _("player_controls_entity", "media_player", !1),
+        m("player_controls_entity", "media_player", !1),
         b("enable_popup"),
         b("more_info"),
         b("power_button"),
@@ -6211,12 +6215,12 @@ let bi = class extends w {
       return c`<ha-card class="ulm-card"
         ><div class="warning">Entity not found: ${this._config.entity}</div></ha-card
       >`;
-    const e = this._isActive(t), i = this._isCollapsed(t), o = this._artUrl(t), r = this._config.color || "blue", n = y(this, r), a = !!this._config.force_background_color && e && !o, s = a ? `rgba(${n}, var(--opacity-bg, 1))` : void 0, l = !!this._config.enable_controls && !i, h = !!this._config.enable_volume_slider && !i, m = !!this._config.enable_volume_buttons && !i, g = Number(t.attributes.volume_level), C = !Number.isNaN(g) ? Math.round(Math.min(1, Math.max(0, g)) * 100) : 0, M = this._iconStyle(e, !!o, a, n), A = this._textStyle(!!o, a), L = this._widgetStyle(e, !!o, a, n), j = {};
+    const e = this._isActive(t), i = this._isCollapsed(t), o = this._artUrl(t), r = this._config.color || "blue", n = y(this, r), a = !!this._config.force_background_color && e && !o, s = a ? `rgba(${n}, var(--opacity-bg, 1))` : void 0, l = !!this._config.enable_controls && !i, h = !!this._config.enable_volume_slider && !i, _ = !!this._config.enable_volume_buttons && !i, g = Number(t.attributes.volume_level), C = !Number.isNaN(g) ? Math.round(Math.min(1, Math.max(0, g)) * 100) : 0, M = this._iconStyle(e, !!o, a, n), A = this._textStyle(!!o, a), N = this._widgetStyle(e, !!o, a, n), j = {};
     if (o) {
-      const I = o.replace(/"/g, "%22");
+      const L = o.replace(/"/g, "%22");
       j["--ha-card-background"] = "transparent", j.background = [
         "linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35))",
-        `center / cover no-repeat url("${I}")`
+        `center / cover no-repeat url("${L}")`
       ].join(", ");
     } else s && (j["--ha-card-background"] = s, j.background = s, j.backgroundColor = s, j.color = "rgb(250,250,250)");
     return c`
@@ -6230,7 +6234,7 @@ let bi = class extends w {
       >
         ${this._config.power_button ? c`<button
               class="power-btn widget-btn"
-              style=${d(L)}
+              style=${d(N)}
               @click=${() => this._call("toggle")}
               title="power"
             >
@@ -6266,28 +6270,28 @@ let bi = class extends w {
           ${l ? c`<div class="controls four">
                 <button
                   class="widget-btn"
-                  style=${d(L)}
+                  style=${d(N)}
                   @click=${() => this._call("media_previous_track", this._controlEntity())}
                 >
                   <ha-icon icon="mdi:skip-previous"></ha-icon>
                 </button>
                 <button
                   class="widget-btn"
-                  style=${d(L)}
+                  style=${d(N)}
                   @click=${() => this._call(this._playService(t), this._controlEntity())}
                 >
                   <ha-icon icon=${this._playIcon(t)}></ha-icon>
                 </button>
                 <button
                   class="widget-btn"
-                  style=${d(L)}
+                  style=${d(N)}
                   @click=${() => this._call("media_next_track", this._controlEntity())}
                 >
                   <ha-icon icon="mdi:skip-next"></ha-icon>
                 </button>
                 <button
                   class="widget-btn"
-                  style=${d(L)}
+                  style=${d(N)}
                   @click=${this._nameTap}
                   title="source / more info"
                 >
@@ -6315,24 +6319,24 @@ let bi = class extends w {
                 />
               </div>` : u}
 
-          ${m ? c`<div class="controls">
+          ${_ ? c`<div class="controls">
                 <button
                   class="widget-btn"
-                  style=${d(L)}
+                  style=${d(N)}
                   @click=${() => this._toggleMute(t)}
                 >
                   <ha-icon icon="mdi:volume-mute"></ha-icon>
                 </button>
                 <button
                   class="widget-btn"
-                  style=${d(L)}
+                  style=${d(N)}
                   @click=${() => this._nudgeVolume(t, -1)}
                 >
                   <ha-icon icon="mdi:volume-minus"></ha-icon>
                 </button>
                 <button
                   class="widget-btn"
-                  style=${d(L)}
+                  style=${d(N)}
                   @click=${() => this._nudgeVolume(t, 1)}
                 >
                   <ha-icon icon="mdi:volume-plus"></ha-icon>
@@ -6501,8 +6505,8 @@ let yi = class extends w {
     return {
       schema: [
         // Top-level fields so HA always persists them (expandables can drop values)
-        _("entity", "climate"),
-        U([p("name"), E("icon")]),
+        m("entity", "climate"),
+        F([p("name"), E("icon")]),
         b("enable_controls"),
         b("enable_hvac_modes"),
         b("enable_background_color"),
@@ -6511,9 +6515,9 @@ let yi = class extends w {
         b("preset_mode"),
         b("enable_horizontal"),
         b("enable_display_temperature"),
-        _("fan_entity", "fan", !1),
-        N("temp_step"),
-        N("minimum_temp_spread")
+        m("fan_entity", "fan", !1),
+        I("temp_step"),
+        I("minimum_temp_spread")
       ],
       computeLabel: S({
         entity: "Climate entity",
@@ -6601,21 +6605,21 @@ let yi = class extends w {
         ><div class="warning">Entity not found: ${this._config.entity}</div></ha-card
       >`;
     const e = t.state === "off", i = !!this._config.enable_collapse && e, o = String(t.attributes.hvac_action || ""), r = String(t.state), n = !!this._config.enable_background_color, a = n && (r === "heat" || r === "heat_cool" && o === "heating"), s = n && (r === "cool" || r === "heat_cool" && o === "cooling"), l = o === "heating" || n && r === "heat", h = o === "cooling" || n && r === "cool";
-    let m;
-    a ? m = "rgba(255, 165, 0, 0.75)" : s ? m = "rgba(0, 191, 255, 0.75)" : e || (m = "rgba(var(--color-background-yellow, 250, 250, 250), var(--opacity-bg, 1))");
-    const g = this._config.name || t.attributes.friendly_name || t.entity_id, v = this._config.icon || "mdi:thermometer", C = this._iconStyle(l, h), M = this._tempUnit(), A = !!this._config.enable_controls && !i, L = A && t.attributes.target_temp_high != null, j = (!!this._config.enable_hvac_modes || !!this._config.fan_entity) && !i && !this._config.enable_horizontal, I = !!this._config.enable_display_temperature && !this._config.enable_horizontal, H = O({
+    let _;
+    a ? _ = "rgba(255, 165, 0, 0.75)" : s ? _ = "rgba(0, 191, 255, 0.75)" : e || (_ = "rgba(var(--color-background-yellow, 250, 250, 250), var(--opacity-bg, 1))");
+    const g = this._config.name || t.attributes.friendly_name || t.entity_id, v = this._config.icon || "mdi:thermometer", C = this._iconStyle(l, h), M = this._tempUnit(), A = !!this._config.enable_controls && !i, N = A && t.attributes.target_temp_high != null, j = (!!this._config.enable_hvac_modes || !!this._config.fan_entity) && !i && !this._config.enable_horizontal, L = !!this._config.enable_display_temperature && !this._config.enable_horizontal, H = O({
       stack: !0,
       horizontal: !!this._config.enable_horizontal
-    }), B = t.attributes.target_temp_high ?? t.attributes.temperature, R = t.attributes.target_temp_low, le = t.attributes.current_temperature;
+    }), D = t.attributes.target_temp_high ?? t.attributes.temperature, W = t.attributes.target_temp_low, kt = t.attributes.current_temperature;
     return c`
       <ha-card
         class="ulm-card thermostat"
         style=${d(
-      m ? {
+      _ ? {
         // ha-card paints via --ha-card-background; override that + shorthand
-        "--ha-card-background": m,
-        background: m,
-        backgroundColor: m
+        "--ha-card-background": _,
+        background: _,
+        backgroundColor: _
       } : {}
     )}
       >
@@ -6634,8 +6638,8 @@ let yi = class extends w {
                 <div class="label">${this._label(t)}</div>
               </button>
             </div>
-            ${I ? c`<div class="display-temp">
-                  ${le != null ? `${le}${M}` : `-${M}`}
+            ${L ? c`<div class="display-temp">
+                  ${kt != null ? `${kt}${M}` : `-${M}`}
                 </div>` : u}
           </div>
 
@@ -6650,7 +6654,7 @@ let yi = class extends w {
                   <ha-icon icon="mdi:minus"></ha-icon>
                 </button>
                 <div class="temp-readout">
-                  ${B != null ? `${B}${M}` : `-${M}`}
+                  ${D != null ? `${D}${M}` : `-${M}`}
                 </div>
                 <button
                   class="widget-btn"
@@ -6663,7 +6667,7 @@ let yi = class extends w {
                 </button>
               </div>` : u}
 
-          ${L ? c`<div class="controls">
+          ${N ? c`<div class="controls">
                 <button
                   class="widget-btn"
                   style=${d(
@@ -6674,7 +6678,7 @@ let yi = class extends w {
                   <ha-icon icon="mdi:minus"></ha-icon>
                 </button>
                 <div class="temp-readout">
-                  ${R != null ? `${R}${M}` : `-${M}`}
+                  ${W != null ? `${W}${M}` : `-${M}`}
                 </div>
                 <button
                   class="widget-btn"
@@ -6704,7 +6708,7 @@ let yi = class extends w {
     })}
       >
         ${l.map((h) => {
-      const m = t.state === h.mode, g = m ? this._hvacActiveStyle(h.activeColor, h.activeIconColor) : this._widgetActiveBg(e, i, o), v = m ? this._hvacActiveIconColor(h.activeColor, h.activeIconColor) : {};
+      const _ = t.state === h.mode, g = _ ? this._hvacActiveStyle(h.activeColor, h.activeIconColor) : this._widgetActiveBg(e, i, o), v = _ ? this._hvacActiveIconColor(h.activeColor, h.activeIconColor) : {};
       return c`
             <button
               class="widget-btn hvac"
@@ -6974,7 +6978,7 @@ var Dd = Object.defineProperty, Ud = Object.getOwnPropertyDescriptor, _r = (t, e
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && Dd(e, i, r), r;
 };
-let ze = class extends w {
+let Ee = class extends w {
   constructor() {
     super(...arguments), this._onSliderInput = (t) => {
       const e = Number(t.target.value);
@@ -6999,19 +7003,19 @@ let ze = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "fan"),
-        U([p("name"), E("icon")]),
-        F("color"),
+        m("entity", "fan"),
+        F([p("name"), E("icon")]),
+        B("color"),
         b("enable_horizontal"),
         b("enable_collapse"),
         b("force_background_color"),
         b("enable_slider"),
         b("enable_button"),
-        U([N("slider_min"), N("slider_max")]),
+        F([I("slider_min"), I("slider_max")]),
         E("button_icon"),
         p("button_service"),
         p("oscillate_attribute"),
-        U([p("temp_attribute"), p("hum_attribute")]),
+        F([p("temp_attribute"), p("hum_attribute")]),
         b("always_show_attributes")
       ],
       computeLabel: S({
@@ -7147,36 +7151,36 @@ let ze = class extends w {
       return c`<ha-card class="ulm-card"
         ><div class="warning">Entity not found: ${this._config.entity}</div></ha-card
       >`;
-    const e = t.state === "on", i = this._config.color || "blue", o = y(this, i), r = !!this._config.force_background_color && e, n = !!this._config.enable_collapse && !e, a = !!this._config.enable_slider && !n, s = !!this._config.enable_button && !!this._config.enable_slider && !n, l = this._config.name || t.attributes.friendly_name || t.entity_id, h = this._config.icon || t.attributes.icon || "mdi:fan", m = this._config.slider_min ?? 0, g = this._config.slider_max ?? 100, v = this._sliderStep(t), C = Number(t.attributes.percentage), A = !Number.isNaN(C) ? Math.min(g, Math.max(m, C)) : e ? g : m, L = this._dragPct != null ? Math.min(g, Math.max(m, this._dragPct)) : A, j = e || this._dragPct != null ? (L - m) / (g - m || 1) * 100 : 0, I = r ? `rgba(${o}, var(--opacity-bg, 1))` : void 0, H = e ? {
+    const e = t.state === "on", i = this._config.color || "blue", o = y(this, i), r = !!this._config.force_background_color && e, n = !!this._config.enable_collapse && !e, a = !!this._config.enable_slider && !n, s = !!this._config.enable_button && !!this._config.enable_slider && !n, l = this._config.name || t.attributes.friendly_name || t.entity_id, h = this._config.icon || t.attributes.icon || "mdi:fan", _ = this._config.slider_min ?? 0, g = this._config.slider_max ?? 100, v = this._sliderStep(t), C = Number(t.attributes.percentage), A = !Number.isNaN(C) ? Math.min(g, Math.max(_, C)) : e ? g : _, N = this._dragPct != null ? Math.min(g, Math.max(_, this._dragPct)) : A, j = e || this._dragPct != null ? (N - _) / (g - _ || 1) * 100 : 0, L = r ? `rgba(${o}, var(--opacity-bg, 1))` : void 0, H = e ? {
       color: r ? "rgb(250,250,250)" : `rgba(${o}, 1)`,
       backgroundColor: r ? "rgba(250,250,250,0.2)" : `rgba(${o}, 0.2)`
     } : {
       color: "rgba(var(--color-theme, 51, 51, 51), 0.2)",
       backgroundColor: "rgba(var(--color-theme, 51, 51, 51), 0.05)"
-    }, B = r ? {
+    }, D = r ? {
       name: { color: "rgb(250,250,250)" },
       label: { color: "rgba(250,250,250,0.85)" }
-    } : { name: {}, label: {} }, R = this._oscillating(t), le = this._oscButtonStyle(e, R, r, o), He = !!this._config.enable_horizontal;
+    } : { name: {}, label: {} }, W = this._oscillating(t), kt = this._oscButtonStyle(e, W, r, o), pt = !!this._config.enable_horizontal;
     return c`
       <ha-card
         class=${O({
       "ulm-card": !0,
       fan: !0,
-      horizontal: He,
+      horizontal: pt,
       "force-bg": r
     })}
         style=${d(
-      I ? {
-        "--ha-card-background": I,
-        background: I,
-        backgroundColor: I
+      L ? {
+        "--ha-card-background": L,
+        background: L,
+        backgroundColor: L
       } : {}
     )}
       >
         <div
           class=${O({
       stack: !0,
-      horizontal: He
+      horizontal: pt
     })}
         >
           <div class="header">
@@ -7189,10 +7193,10 @@ let ze = class extends w {
                 <ha-icon .icon=${h}></ha-icon>
               </button>
               <button class="info-btn" @click=${this._moreInfo}>
-                <div class="name" style=${d(B.name)}>
+                <div class="name" style=${d(D.name)}>
                   ${l}
                 </div>
-                <div class="label" style=${d(B.label)}>
+                <div class="label" style=${d(D.label)}>
                   ${this._label(t)}
                 </div>
               </button>
@@ -7224,17 +7228,17 @@ let ze = class extends w {
                       ></div>
                       <input
                         type="range"
-                        min=${m}
+                        min=${_}
                         max=${g}
                         step=${v}
-                        .value=${String(L)}
+                        .value=${String(N)}
                         @input=${this._onSliderInput}
                         @change=${this._onSliderChange}
                       />
                     </div>` : u}
                 ${s ? c`<button
                       class="widget-btn osc-btn"
-                      style=${d(le)}
+                      style=${d(kt)}
                       @click=${() => this._toggleOscillate(t)}
                       title="oscillate"
                     >
@@ -7270,7 +7274,7 @@ let ze = class extends w {
     });
   }
 };
-ze.styles = [
+Ee.styles = [
   P,
   $`
       :host {
@@ -7337,16 +7341,16 @@ ze.styles = [
 ];
 _r([
   x({ attribute: !1 })
-], ze.prototype, "hass", 2);
+], Ee.prototype, "hass", 2);
 _r([
   f()
-], ze.prototype, "_config", 2);
+], Ee.prototype, "_config", 2);
 _r([
   f()
-], ze.prototype, "_dragPct", 2);
-ze = _r([
+], Ee.prototype, "_dragPct", 2);
+Ee = _r([
   k("ulm-fan-card")
-], ze);
+], Ee);
 var Fd = Object.defineProperty, Bd = Object.getOwnPropertyDescriptor, Sn = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? Bd(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
@@ -7397,7 +7401,7 @@ let vi = class extends w {
     return {
       schema: [
         // Exact docs order — all top-level so HA persists them
-        _("entity", "vacuum"),
+        m("entity", "vacuum"),
         p("name"),
         E("icon"),
         p("label"),
@@ -7408,7 +7412,7 @@ let vi = class extends w {
           selector: { entity: { domain: ["script", "automation"] } }
         },
         E("room_icon"),
-        _("camera", "camera", !1),
+        m("camera", "camera", !1),
         b("camera_toggle"),
         {
           name: "color",
@@ -7518,7 +7522,7 @@ let vi = class extends w {
       return c`<ha-card class="ulm-card"
         ><div class="warning">Entity not found: ${this._config.entity}</div></ha-card
       >`;
-    const e = this._isActive(t), i = this._stateColor(t), o = i === "theme" ? "var(--color-theme, 51, 51, 51)" : y(this, i), r = !!this._config.force_background_color && e && i !== "theme", n = r ? `rgba(${o}, var(--opacity-bg, 1))` : void 0, a = this._config.name || t.attributes.friendly_name || t.entity_id, s = this._config.icon || t.attributes.icon || "mdi:robot-vacuum", l = this._config.label || this.hass.formatEntityState?.(t) || this._capitalize(t.state), m = e && i !== "theme" ? {
+    const e = this._isActive(t), i = this._stateColor(t), o = i === "theme" ? "var(--color-theme, 51, 51, 51)" : y(this, i), r = !!this._config.force_background_color && e && i !== "theme", n = r ? `rgba(${o}, var(--opacity-bg, 1))` : void 0, a = this._config.name || t.attributes.friendly_name || t.entity_id, s = this._config.icon || t.attributes.icon || "mdi:robot-vacuum", l = this._config.label || this.hass.formatEntityState?.(t) || this._capitalize(t.state), _ = e && i !== "theme" ? {
       color: r ? "rgb(250,250,250)" : `rgba(${o}, 1)`,
       backgroundColor: r ? "rgba(250,250,250,0.2)" : `rgba(${o}, 0.2)`
     } : {
@@ -7527,7 +7531,7 @@ let vi = class extends w {
     }, g = r ? {
       name: { color: "rgb(250,250,250)" },
       label: { color: "rgba(250,250,250,0.85)" }
-    } : { name: {}, label: {} }, v = this._widgetStyle(e, r, o, i), C = Xa.has(t.state.toLowerCase()), M = this._showMap(t), A = M && this._config.camera ? this._mapUrl(this._config.camera) : void 0, L = !!this._config.room;
+    } : { name: {}, label: {} }, v = this._widgetStyle(e, r, o, i), C = Xa.has(t.state.toLowerCase()), M = this._showMap(t), A = M && this._config.camera ? this._mapUrl(this._config.camera) : void 0, N = !!this._config.room;
     return c`
       <ha-card
         class=${O({
@@ -7550,7 +7554,7 @@ let vi = class extends w {
             <div class="row">
               <button
                 class="icon-btn"
-                style=${d(m)}
+                style=${d(_)}
                 @click=${this._iconTap}
               >
                 <ha-icon .icon=${s}></ha-icon>
@@ -7573,7 +7577,7 @@ let vi = class extends w {
           <div
             class=${O({
       controls: !0,
-      four: L
+      four: N
     })}
           >
             <button
@@ -7600,7 +7604,7 @@ let vi = class extends w {
             >
               <ha-icon icon="mdi:map-marker"></ha-icon>
             </button>
-            ${L ? c`<button
+            ${N ? c`<button
                   class="widget-btn"
                   style=${d(v)}
                   @click=${this._runRoom}
@@ -7761,7 +7765,7 @@ let wi = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "weather"),
+        m("entity", "weather"),
         p("name"),
         p("primary_info"),
         p("secondary_info"),
@@ -7829,7 +7833,7 @@ let wi = class extends w {
       >`;
     const e = this._customMap(), i = this._config.name ?? t.attributes.friendly_name ?? t.entity_id, o = e["icon-state"]?.state || t.state, r = Kd[o] || "mdi:weather-partly-cloudy", n = this._attr(t, "temp", e), a = this._localizeState(t), s = Qa(this._config.primary_info, ["extrema"]), l = Qa(this._config.secondary_info, [
       "precipitation"
-    ]), h = this._isNight(), m = this._backdropStyle(), g = !!this._config.backdrop, v = typeof this._config.backdrop == "object" && !!this._config.backdrop.fade;
+    ]), h = this._isNight(), _ = this._backdropStyle(), g = !!this._config.backdrop, v = typeof this._config.backdrop == "object" && !!this._config.backdrop.fade;
     return c`
       <ha-card
         class=${O({
@@ -7838,7 +7842,7 @@ let wi = class extends w {
       fade: v,
       night: g && h
     })}
-        style=${d(m)}
+        style=${d(_)}
         @click=${this._moreInfo}
       >
         <ha-icon class="weather-icon" .icon=${r}></ha-icon>
@@ -8191,7 +8195,7 @@ let xi = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "weather"),
+        m("entity", "weather"),
         p("name"),
         b("enable_popup"),
         b("surpress_first_forecast")
@@ -8397,14 +8401,14 @@ let $i = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity"),
+        m("entity"),
         p("name"),
         p("attribute"),
-        _("battery_state_entity", void 0, !1),
-        _("charger_type_entity", void 0, !1),
+        m("battery_state_entity", void 0, !1),
+        m("charger_type_entity", void 0, !1),
         b("charging_animation"),
-        N("battery_level_danger"),
-        N("battery_level_warning"),
+        I("battery_level_danger"),
+        I("battery_level_warning"),
         p("color_danger"),
         p("color_warning"),
         p("color_ok")
@@ -8735,10 +8739,10 @@ let ki = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "binary_sensor"),
+        m("entity", "binary_sensor"),
         p("name"),
         E("icon"),
-        F("color"),
+        B("color"),
         b("show_last_changed"),
         b("force_background_color")
       ],
@@ -8804,7 +8808,7 @@ let ki = class extends w {
       r
     ), a = this._config.name || t.attributes.friendly_name || t.entity_id, s = this._config.icon || t.attributes.icon || "mdi:checkbox-blank-circle", l = this._label(t), h = r ? {
       backgroundColor: `rgba(${o}, var(--opacity-bg, 1))`
-    } : {}, m = r ? { color: "rgb(250, 250, 250)" } : {};
+    } : {}, _ = r ? { color: "rgb(250, 250, 250)" } : {};
     return c`
       <ha-card
         class=${O({
@@ -8824,8 +8828,8 @@ let ki = class extends w {
             <ha-icon .icon=${s}></ha-icon>
           </button>
           <button class="info-btn" @click=${this._moreInfo}>
-            <div class="name" style=${d(m)}>${a}</div>
-            <div class="label" style=${d(m)}>${l}</div>
+            <div class="name" style=${d(_)}>${a}</div>
+            <div class="label" style=${d(_)}>${l}</div>
           </button>
         </div>
       </ha-card>
@@ -8901,10 +8905,10 @@ let Ci = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "binary_sensor"),
+        m("entity", "binary_sensor"),
         p("name"),
         E("icon"),
-        F("color"),
+        B("color"),
         b("show_last_changed"),
         b("force_background_color"),
         b("invert_state")
@@ -8973,7 +8977,7 @@ let Ci = class extends w {
       null,
       !1,
       r
-    ), a = this._config.name || t.attributes.friendly_name || t.entity_id, s = this._config.icon || t.attributes.icon || "mdi:alert", l = this._label(t), h = this._showAlert(t), m = r ? {
+    ), a = this._config.name || t.attributes.friendly_name || t.entity_id, s = this._config.icon || t.attributes.icon || "mdi:alert", l = this._label(t), h = this._showAlert(t), _ = r ? {
       backgroundColor: `rgba(${o}, var(--opacity-bg, 1))`
     } : {}, g = r ? { color: "rgb(250, 250, 250)" } : {}, v = y(this, "red");
     return c`
@@ -8984,7 +8988,7 @@ let Ci = class extends w {
       active: e,
       "force-bg": r
     })}
-        style=${d(m)}
+        style=${d(_)}
       >
         <div class="row">
           <button
@@ -9125,7 +9129,7 @@ let Si = class extends w {
         p("navigation_path"),
         p("name"),
         E("icon"),
-        F("color")
+        B("color")
       ],
       computeLabel: S({
         navigation_path: "Path (ulm_card_navigate_path)",
@@ -9307,12 +9311,12 @@ let zi = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", ["switch", "input_boolean", "light"]),
+        m("entity", ["switch", "input_boolean", "light"]),
         p("name"),
         E("icon"),
-        F("color"),
-        _("consumption_sensor", "sensor", !1),
-        _("sensor2", "sensor", !1),
+        B("color"),
+        m("consumption_sensor", "sensor", !1),
+        m("sensor2", "sensor", !1),
         b("force_background_color"),
         b("enable_popup")
       ],
@@ -9384,7 +9388,7 @@ let zi = class extends w {
       r
     ), a = this._config.name || t.attributes.friendly_name || t.entity_id, s = this._config.icon || t.attributes.icon || "mdi:power-socket-eu", l = this._label(t, e), h = r ? {
       backgroundColor: `rgba(${o}, var(--opacity-bg, 1))`
-    } : {}, m = r ? { color: "rgb(250, 250, 250)" } : {};
+    } : {}, _ = r ? { color: "rgb(250, 250, 250)" } : {};
     return c`
       <ha-card
         class=${O({
@@ -9404,8 +9408,8 @@ let zi = class extends w {
             <ha-icon .icon=${s}></ha-icon>
           </button>
           <button class="info-btn" @click=${this._nameTap}>
-            <div class="name" style=${d(m)}>${a}</div>
-            <div class="label" style=${d(m)}>${l}</div>
+            <div class="name" style=${d(_)}>${a}</div>
+            <div class="label" style=${d(_)}>${l}</div>
           </button>
         </div>
       </ha-card>
@@ -9476,10 +9480,10 @@ let Ei = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity"),
+        m("entity"),
         p("name"),
         E("icon"),
-        F("color"),
+        B("color"),
         b("force_background_color")
       ],
       computeLabel: S({
@@ -9541,7 +9545,7 @@ let Ei = class extends w {
       r
     ), a = this._stateLabel(t), s = this._config.name || t.attributes.friendly_name || t.entity_id, l = this._config.icon || t.attributes.icon || "mdi:flash", h = r ? {
       backgroundColor: `rgba(${o}, var(--opacity-bg, 1))`
-    } : {}, m = r ? { color: "rgb(250, 250, 250)" } : {};
+    } : {}, _ = r ? { color: "rgb(250, 250, 250)" } : {};
     return c`
       <ha-card
         class=${O({
@@ -9561,8 +9565,8 @@ let Ei = class extends w {
             <ha-icon .icon=${l}></ha-icon>
           </button>
           <button class="info-btn" @click=${this._moreInfo}>
-            <div class="name" style=${d(m)}>${a}</div>
-            <div class="label" style=${d(m)}>${s}</div>
+            <div class="name" style=${d(_)}>${a}</div>
+            <div class="label" style=${d(_)}>${s}</div>
           </button>
         </div>
       </ha-card>
@@ -9640,10 +9644,10 @@ let Pi = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity"),
+        m("entity"),
         p("name"),
         E("icon"),
-        F("color"),
+        B("color"),
         b("force_background_color")
       ],
       computeLabel: S({
@@ -9705,7 +9709,7 @@ let Pi = class extends w {
       r
     ), a = this._config.name || t.attributes.friendly_name || t.entity_id, s = this._stateLabel(t), l = this._config.icon || t.attributes.icon || "mdi:swap-horizontal", h = r ? {
       backgroundColor: `rgba(${o}, var(--opacity-bg, 1))`
-    } : {}, m = r ? { color: "rgb(250, 250, 250)" } : {};
+    } : {}, _ = r ? { color: "rgb(250, 250, 250)" } : {};
     return c`
       <ha-card
         class=${O({
@@ -9725,8 +9729,8 @@ let Pi = class extends w {
             <ha-icon .icon=${l}></ha-icon>
           </button>
           <button class="info-btn" @click=${this._moreInfo}>
-            <div class="name" style=${d(m)}>${a}</div>
-            <div class="label" style=${d(m)}>${s}</div>
+            <div class="name" style=${d(_)}>${a}</div>
+            <div class="label" style=${d(_)}>${s}</div>
           </button>
         </div>
       </ha-card>
@@ -9809,10 +9813,10 @@ let Li = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", ["input_boolean", "switch"]),
+        m("entity", ["input_boolean", "switch"]),
         p("name"),
         E("icon"),
-        F("color"),
+        B("color"),
         b("force_background_color")
       ],
       computeLabel: S({
@@ -9873,7 +9877,7 @@ let Li = class extends w {
       r
     ), a = this._config.name || t.attributes.friendly_name || t.entity_id, s = this._config.icon || t.attributes.icon || "mdi:toggle-switch", l = this._label(t), h = r ? {
       backgroundColor: `rgba(${o}, var(--opacity-bg, 1))`
-    } : {}, m = r ? { color: "rgb(250, 250, 250)" } : {};
+    } : {}, _ = r ? { color: "rgb(250, 250, 250)" } : {};
     return c`
       <ha-card
         class=${O({
@@ -9893,8 +9897,8 @@ let Li = class extends w {
             <ha-icon .icon=${s}></ha-icon>
           </button>
           <button class="info-btn" @click=${this._moreInfo}>
-            <div class="name" style=${d(m)}>${a}</div>
-            <div class="label" style=${d(m)}>${l}</div>
+            <div class="name" style=${d(_)}>${a}</div>
+            <div class="label" style=${d(_)}>${l}</div>
           </button>
         </div>
       </ha-card>
@@ -9959,7 +9963,7 @@ let Mi = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "script"),
+        m("entity", "script"),
         p("name"),
         E("icon"),
         p("service_data")
@@ -10137,10 +10141,10 @@ let Oi = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity"),
+        m("entity"),
         p("name"),
         E("icon"),
-        F("color"),
+        B("color"),
         p("state"),
         b("show_last_changed")
       ],
@@ -10380,10 +10384,10 @@ function Tu(t, e = {}) {
 }
 function Bo(t) {
   return [
-    _(`entity_${t}`, void 0, !1),
-    U([E(`entity_${t}_icon`), F(`entity_${t}_color`)]),
+    m(`entity_${t}`, void 0, !1),
+    F([E(`entity_${t}_icon`), B(`entity_${t}_color`)]),
     p(`entity_${t}_templates`),
-    U([
+    F([
       V(`entity_${t}_tap_action`, os),
       V(`entity_${t}_hold_action`, os)
     ]),
@@ -10407,9 +10411,9 @@ let Ni = class extends w {
     return {
       schema: [
         // Top-level fields so HA always persists them (expandables can drop values)
-        U([p("name"), E("icon")]),
-        _("entity", void 0, !1),
-        F("color"),
+        F([p("name"), E("icon")]),
+        m("entity", void 0, !1),
+        B("color"),
         p("navigation_path"),
         b("label_use_temperature"),
         b("label_use_brightness"),
@@ -10500,18 +10504,18 @@ let Ni = class extends w {
     this._slots = {};
     const a = {};
     for (const h of n) {
-      const m = h.slice(-1), g = r[h] || {}, v = t[h] ?? g[h] ?? g[`entity_${m}`], C = Tu(v, {
-        flatColor: t[`entity_${m}_color`] || g[`entity_${m}_color`],
-        flatIcon: t[`entity_${m}_icon`] || g[`entity_${m}_icon`],
-        flatTemplates: t[`entity_${m}_templates`] || g[`entity_${m}_templates`],
-        flatTap: t[`entity_${m}_tap_action`] || g[`entity_${m}_tap_action`],
-        flatHold: t[`entity_${m}_hold_action`] || g[`entity_${m}_hold_action`],
-        flatNavPath: t[`entity_${m}_navigation_path`] || g[`entity_${m}_navigation_path`]
+      const _ = h.slice(-1), g = r[h] || {}, v = t[h] ?? g[h] ?? g[`entity_${_}`], C = Tu(v, {
+        flatColor: t[`entity_${_}_color`] || g[`entity_${_}_color`],
+        flatIcon: t[`entity_${_}_icon`] || g[`entity_${_}_icon`],
+        flatTemplates: t[`entity_${_}_templates`] || g[`entity_${_}_templates`],
+        flatTap: t[`entity_${_}_tap_action`] || g[`entity_${_}_tap_action`],
+        flatHold: t[`entity_${_}_hold_action`] || g[`entity_${_}_hold_action`],
+        flatNavPath: t[`entity_${_}_navigation_path`] || g[`entity_${_}_navigation_path`]
       });
       if (C) {
-        this._slots[h] = C, a[h] = C.entity_id, a[`entity_${m}_color`] = C.color, a[`entity_${m}_icon`] = C.icon, C.templates?.length && (a[`entity_${m}_templates`] = C.templates.join(", ")), C.tap_action?.action && (a[`entity_${m}_tap_action`] = C.tap_action.action), C.hold_action?.action && (a[`entity_${m}_hold_action`] = C.hold_action.action);
+        this._slots[h] = C, a[h] = C.entity_id, a[`entity_${_}_color`] = C.color, a[`entity_${_}_icon`] = C.icon, C.templates?.length && (a[`entity_${_}_templates`] = C.templates.join(", ")), C.tap_action?.action && (a[`entity_${_}_tap_action`] = C.tap_action.action), C.hold_action?.action && (a[`entity_${_}_hold_action`] = C.hold_action.action);
         const M = C.tap_action?.navigation_path || C.hold_action?.navigation_path;
-        M && (a[`entity_${m}_navigation_path`] = M);
+        M && (a[`entity_${_}_navigation_path`] = M);
       }
     }
     const s = t.label_use_temperature ?? o.label_use_temperature, l = t.label_use_brightness ?? o.label_use_brightness;
@@ -10541,7 +10545,7 @@ let Ni = class extends w {
   }
   render() {
     if (!this._config || !this.hass) return u;
-    const t = !!this._slots.entity_1, e = !!this._slots.entity_2, i = t ? "full" : e ? "three" : "minimal", o = this._config.entity ? this.hass.states[this._config.entity] : void 0, r = o?.state === "unavailable", n = this._config.color, a = n ? y(this, n) : void 0, s = a ? `rgba(${a}, 1)` : "rgba(var(--color-theme, 51, 51, 51), 0.2)", l = a ? `rgba(${a}, 0.2)` : "rgba(var(--color-theme, 51, 51, 51), 0.05)", h = a ? `rgba(${a}, 1)` : void 0, m = t ? "10%" : e ? "24%" : "15.8%", g = t ? "-10%" : "-24%", v = `calc(100% - (12px + ${e ? 0 : 5}px))`, C = `calc(100% - (12px + ${!t && !e ? 5 : 0}px))`;
+    const t = !!this._slots.entity_1, e = !!this._slots.entity_2, i = t ? "full" : e ? "three" : "minimal", o = this._config.entity ? this.hass.states[this._config.entity] : void 0, r = o?.state === "unavailable", n = this._config.color, a = n ? y(this, n) : void 0, s = a ? `rgba(${a}, 1)` : "rgba(var(--color-theme, 51, 51, 51), 0.2)", l = a ? `rgba(${a}, 0.2)` : "rgba(var(--color-theme, 51, 51, 51), 0.05)", h = a ? `rgba(${a}, 1)` : void 0, _ = t ? "10%" : e ? "24%" : "15.8%", g = t ? "-10%" : "-24%", v = `calc(100% - (12px + ${e ? 0 : 5}px))`, C = `calc(100% - (12px + ${!t && !e ? 5 : 0}px))`;
     return c`
       <ha-card
         class=${O({
@@ -10554,7 +10558,7 @@ let Ni = class extends w {
           class="name"
           style=${d({
       color: h,
-      marginBottom: m,
+      marginBottom: _,
       maxWidth: v
     })}
         >
@@ -10621,7 +10625,7 @@ let Ni = class extends w {
     } : {
       color: "rgba(var(--color-theme, 51, 51, 51), 0.2)",
       backgroundColor: "rgba(var(--color-theme, 51, 51, 51), 0.05)"
-    }, m = i.icon || o?.attributes.icon || this._domainIcon(i.entity_id);
+    }, _ = i.icon || o?.attributes.icon || this._domainIcon(i.entity_id);
     return c`
       <button
         class="chip ${e}"
@@ -10630,7 +10634,7 @@ let Ni = class extends w {
         @click=${(g) => this._runAction(g, i.tap_action, i.entity_id)}
         @contextmenu=${(g) => this._runAction(g, i.hold_action, i.entity_id)}
       >
-        <ha-icon .icon=${m}></ha-icon>
+        <ha-icon .icon=${_}></ha-icon>
       </button>
     `;
   }
@@ -10950,10 +10954,10 @@ let Ii = class extends w {
       schema: [
         b("show_back"),
         pl("chips", "Chips", [
-          _("chip_1_entity", void 0, !1),
-          _("chip_2_entity", void 0, !1),
-          _("chip_3_entity", void 0, !1),
-          _("chip_4_entity", void 0, !1)
+          m("chip_1_entity", void 0, !1),
+          m("chip_2_entity", void 0, !1),
+          m("chip_3_entity", void 0, !1),
+          m("chip_4_entity", void 0, !1)
         ])
       ],
       computeLabel: S({
@@ -11244,7 +11248,7 @@ const Lr = [
   windy: "🌪️",
   default: "🌡️"
 };
-function Kt(t) {
+function qt(t) {
   return {
     type: "expandable",
     name: `entity_${t}`,
@@ -11294,7 +11298,7 @@ function Ku(t) {
       }
   }
 }
-let ee = class extends w {
+let oe = class extends w {
   constructor() {
     super(...arguments), this._randomColors = {}, this._localCollapsed = !1, this._toggleCollapse = (t) => {
       t.preventDefault(), t.stopPropagation();
@@ -11336,13 +11340,13 @@ let ee = class extends w {
             { name: "ulm_hello", selector: { text: {} } }
           ]
         },
-        Kt(1),
-        Kt(2),
-        Kt(3),
-        Kt(4),
-        Kt(5),
-        Kt(6),
-        Kt(7)
+        qt(1),
+        qt(2),
+        qt(3),
+        qt(4),
+        qt(5),
+        qt(6),
+        qt(7)
       ],
       computeLabel: (t) => ({
         ulm_weather: "Weather (ulm_weather)",
@@ -11638,7 +11642,7 @@ let ee = class extends w {
     );
   }
 };
-ee.styles = $`
+oe.styles = $`
     :host {
       display: block;
       width: 100%;
@@ -11842,26 +11846,26 @@ ee.styles = $`
   `;
 Mo([
   x({ attribute: !1 })
-], ee.prototype, "hass", 2);
+], oe.prototype, "hass", 2);
 Mo([
   f()
-], ee.prototype, "_config", 2);
+], oe.prototype, "_config", 2);
 Mo([
   f()
-], ee.prototype, "_randomColors", 2);
+], oe.prototype, "_randomColors", 2);
 Mo([
   f()
-], ee.prototype, "_localCollapsed", 2);
-ee = Mo([
+], oe.prototype, "_localCollapsed", 2);
+oe = Mo([
   k("ulm-welcome-card")
-], ee);
+], oe);
 var Vu = Object.defineProperty, qu = Object.getOwnPropertyDescriptor, Hn = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? qu(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && Vu(e, i, r), r;
 };
 const Yu = /* @__PURE__ */ new Set(["geen", "none", ""]);
-function $t(t, ...e) {
+function Ct(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (typeof o == "string" && o) return o;
@@ -11896,13 +11900,13 @@ let Ai = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("ulm_card_ophaling_vandaag", void 0, !1),
-        _("ulm_card_ophaling_morgen", void 0, !1),
-        _("ulm_card_datum_rest", void 0, !1),
-        _("ulm_card_datum_papier", void 0, !1),
-        _("ulm_card_datum_pmd", void 0, !1),
-        _("ulm_card_datum_gft", void 0, !1),
-        _("ulm_card_datum_glas", void 0, !1),
+        m("ulm_card_ophaling_vandaag", void 0, !1),
+        m("ulm_card_ophaling_morgen", void 0, !1),
+        m("ulm_card_datum_rest", void 0, !1),
+        m("ulm_card_datum_papier", void 0, !1),
+        m("ulm_card_datum_pmd", void 0, !1),
+        m("ulm_card_datum_gft", void 0, !1),
+        m("ulm_card_datum_glas", void 0, !1),
         p("ulm_ophaling"),
         p("ulm_volgende_ophaling"),
         p("name"),
@@ -11946,16 +11950,16 @@ let Ai = class extends w {
     const e = t;
     this._config = {
       ...t,
-      ulm_card_ophaling_vandaag: $t(e, "ulm_card_ophaling_vandaag"),
-      ulm_card_ophaling_morgen: $t(e, "ulm_card_ophaling_morgen"),
-      ulm_card_datum_rest: $t(e, "ulm_card_datum_rest"),
-      ulm_card_datum_papier: $t(e, "ulm_card_datum_papier"),
-      ulm_card_datum_pmd: $t(e, "ulm_card_datum_pmd"),
-      ulm_card_datum_gft: $t(e, "ulm_card_datum_gft"),
-      ulm_card_datum_glas: $t(e, "ulm_card_datum_glas"),
+      ulm_card_ophaling_vandaag: Ct(e, "ulm_card_ophaling_vandaag"),
+      ulm_card_ophaling_morgen: Ct(e, "ulm_card_ophaling_morgen"),
+      ulm_card_datum_rest: Ct(e, "ulm_card_datum_rest"),
+      ulm_card_datum_papier: Ct(e, "ulm_card_datum_papier"),
+      ulm_card_datum_pmd: Ct(e, "ulm_card_datum_pmd"),
+      ulm_card_datum_gft: Ct(e, "ulm_card_datum_gft"),
+      ulm_card_datum_glas: Ct(e, "ulm_card_datum_glas"),
       name: t.name,
-      ulm_ophaling: $t(e, "ulm_ophaling"),
-      ulm_volgende_ophaling: $t(e, "ulm_volgende_ophaling"),
+      ulm_ophaling: Ct(e, "ulm_ophaling"),
+      ulm_volgende_ophaling: Ct(e, "ulm_volgende_ophaling"),
       icon: t.icon || "mdi:delete",
       type: "custom:ulm-custom-card-afvalophaling-card"
     };
@@ -11975,7 +11979,7 @@ let Ai = class extends w {
     const t = Or(this.hass, this._config.ulm_card_ophaling_vandaag), e = Or(this.hass, this._config.ulm_card_ophaling_morgen), i = !Ho(t) || !Ho(e), o = ss(t) || ss(e), r = t === "unavailable" || e === "unavailable";
     let n = "theme", a = this._config.icon || "mdi:delete";
     i && (n = "green", a = "mdi:recycle"), o && (n = "blue", a = "mdi:bottle-wine-outline"), r && (n = "red");
-    const s = this._config.ulm_ophaling || this._config.name || "Garbage collection!", l = this._config.ulm_volgende_ophaling || "Next collections", h = this._config.name || (i ? s : l), m = this._labelLines(t, e), g = n === "theme" ? null : y(this, n === "red" ? "red" : n), v = n === "theme" ? {
+    const s = this._config.ulm_ophaling || this._config.name || "Garbage collection!", l = this._config.ulm_volgende_ophaling || "Next collections", h = this._config.name || (i ? s : l), _ = this._labelLines(t, e), g = n === "theme" ? null : y(this, n === "red" ? "red" : n), v = n === "theme" ? {
       color: "rgba(var(--color-theme, 51, 51, 51), 0.2)",
       backgroundColor: "rgba(var(--color-theme, 51, 51, 51), 0.05)"
     } : {
@@ -12001,7 +12005,7 @@ let Ai = class extends w {
           <div class="info-btn">
             <div class="name">${h}</div>
             <div class="label">
-              ${m.length <= 1 ? m[0] || u : m.map(
+              ${_.length <= 1 ? _[0] || u : _.map(
       (C) => c`<div class="line">${C}</div>`
     )}
             </div>
@@ -12107,7 +12111,7 @@ var Ju = Object.defineProperty, Zu = Object.getOwnPropertyDescriptor, Rn = (t, e
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && Ju(e, i, r), r;
 };
-function kt(t, ...e) {
+function St(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
@@ -12130,15 +12134,15 @@ let Ti = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", ["input_boolean", "switch"]),
-        _("datetime", "input_datetime"),
+        m("entity", ["input_boolean", "switch"]),
+        m("datetime", "input_datetime"),
         p("name"),
         E("icon"),
-        F("color"),
+        B("color"),
         b("force_background_color"),
         b("horizontal"),
         b("collapse"),
-        N("step")
+        I("step")
       ],
       computeLabel: S({
         entity: "Alarm toggle (ulm_card_alarm_time entity)",
@@ -12172,23 +12176,23 @@ let Ti = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = t.entity || kt(e, "ulm_card_alarm_time_entity");
+    const e = t, i = t.entity || St(e, "ulm_card_alarm_time_entity");
     if (!i) throw new Error("Please define an entity");
-    const o = kt(e, "step", "ulm_card_alarm_time_step"), r = typeof o == "number" ? o : Number.parseInt(String(o ?? "15"), 10) || 15;
+    const o = St(e, "step", "ulm_card_alarm_time_step"), r = typeof o == "number" ? o : Number.parseInt(String(o ?? "15"), 10) || 15;
     this._config = {
       ...t,
       entity: i,
-      datetime: kt(e, "datetime", "ulm_card_alarm_time_datetime"),
-      name: kt(e, "name", "ulm_card_alarm_time_name") ?? t.name,
-      icon: kt(e, "icon", "ulm_card_alarm_time_icon") ?? t.icon,
-      color: kt(e, "color", "ulm_card_alarm_time_color") || "blue",
-      force_background_color: !!(kt(
+      datetime: St(e, "datetime", "ulm_card_alarm_time_datetime"),
+      name: St(e, "name", "ulm_card_alarm_time_name") ?? t.name,
+      icon: St(e, "icon", "ulm_card_alarm_time_icon") ?? t.icon,
+      color: St(e, "color", "ulm_card_alarm_time_color") || "blue",
+      force_background_color: !!(St(
         e,
         "force_background_color",
         "ulm_card_alarm_time_force_background_color"
       ) ?? !1),
-      horizontal: !!(kt(e, "horizontal", "ulm_card_alarm_time_horizontal") ?? !1),
-      collapse: !!(kt(e, "collapse", "ulm_card_alarm_time_collapse") ?? !1),
+      horizontal: !!(St(e, "horizontal", "ulm_card_alarm_time_horizontal") ?? !1),
+      collapse: !!(St(e, "collapse", "ulm_card_alarm_time_collapse") ?? !1),
       step: r,
       type: "custom:ulm-custom-card-alarm-time-card"
     };
@@ -12220,8 +12224,8 @@ let Ti = class extends w {
       null,
       !1,
       r
-    ), a = this._config.name || t.attributes.friendly_name || t.entity_id, s = this._config.icon || t.attributes.icon || "mdi:alarm", l = e ? "On" : t.state === "off" ? "Off" : t.state, h = e, m = !!this._config.collapse && !e, g = !!this._config.horizontal, v = r ? { backgroundColor: `rgba(${o}, var(--opacity-bg, 1))` } : {}, C = r ? { color: "rgb(250, 250, 250)" } : {}, A = (this._config.datetime ? this.hass.states[this._config.datetime] : void 0)?.state ?? "—", L = r && !this.hass.themes?.darkMode ? "rgba(250,250,250,0.8)" : "rgba(var(--color-theme, 51, 51, 51), 0.05)", j = r && !this.hass.themes?.darkMode && e ? `rgba(${o}, 1)` : "rgba(var(--color-theme, 51, 51, 51), 0.9)", I = {
-      backgroundColor: L,
+    ), a = this._config.name || t.attributes.friendly_name || t.entity_id, s = this._config.icon || t.attributes.icon || "mdi:alarm", l = e ? "On" : t.state === "off" ? "Off" : t.state, h = e, _ = !!this._config.collapse && !e, g = !!this._config.horizontal, v = r ? { backgroundColor: `rgba(${o}, var(--opacity-bg, 1))` } : {}, C = r ? { color: "rgb(250, 250, 250)" } : {}, A = (this._config.datetime ? this.hass.states[this._config.datetime] : void 0)?.state ?? "—", N = r && !this.hass.themes?.darkMode ? "rgba(250,250,250,0.8)" : "rgba(var(--color-theme, 51, 51, 51), 0.05)", j = r && !this.hass.themes?.darkMode && e ? `rgba(${o}, 1)` : "rgba(var(--color-theme, 51, 51, 51), 0.9)", L = {
+      backgroundColor: N,
       color: j
     };
     return c`
@@ -12232,7 +12236,7 @@ let Ti = class extends w {
       active: e,
       "force-bg": r,
       horizontal: g,
-      collapsed: m
+      collapsed: _
     })}
         style=${d(v)}
       >
@@ -12251,7 +12255,7 @@ let Ti = class extends w {
             </button>
           </div>
 
-          ${h && !m && this._config.datetime ? c`
+          ${h && !_ && this._config.datetime ? c`
                 <div
                   class=${O({
       widgets: !0,
@@ -12261,7 +12265,7 @@ let Ti = class extends w {
                   ${g ? u : c`
                         <button
                           class="widget-btn"
-                          style=${d(I)}
+                          style=${d(L)}
                           @click=${() => this._adjust(-1)}
                           aria-label="Decrease alarm time"
                         >
@@ -12270,7 +12274,7 @@ let Ti = class extends w {
                       `}
                   <button
                     class="widget-btn time"
-                    style=${d(I)}
+                    style=${d(L)}
                     @click=${this._moreInfoDatetime}
                   >
                     <span class="time-label">${A}</span>
@@ -12278,7 +12282,7 @@ let Ti = class extends w {
                   ${g ? u : c`
                         <button
                           class="widget-btn"
-                          style=${d(I)}
+                          style=${d(L)}
                           @click=${() => this._adjust(1)}
                           aria-label="Increase alarm time"
                         >
@@ -12394,7 +12398,7 @@ function Q(t, ...e) {
   }
 }
 function Nr(t, e) {
-  return typeof t == "string" && Lt.includes(t) ? t : e;
+  return typeof t == "string" && Ot.includes(t) ? t : e;
 }
 function Ir(t, e) {
   if (typeof t == "number" && Number.isFinite(t)) return t;
@@ -12405,7 +12409,7 @@ function em(t) {
   const e = t.split(",").map((i) => Number.parseInt(i.trim(), 10));
   return e.length < 3 || e.some((i) => !Number.isFinite(i)) ? "#3D5AFE" : `#${e.slice(0, 3).map((i) => Math.max(0, Math.min(255, i)).toString(16).padStart(2, "0")).join("")}`;
 }
-let ie = class extends w {
+let re = class extends w {
   constructor() {
     super(...arguments), this._apexMissing = !1, this._chartKey = "", this._chartLoading = !1, this._chartDirty = !1;
   }
@@ -12414,21 +12418,21 @@ let ie = class extends w {
       schema: [
         V("chart_type", [...tm]),
         p("graph_span"),
-        _("entity_1"),
-        _("entity_2", void 0, !1),
-        _("entity_3", void 0, !1),
+        m("entity_1"),
+        m("entity_2", void 0, !1),
+        m("entity_3", void 0, !1),
         p("name_1"),
         p("name_2"),
         p("name_3"),
         E("icon_1"),
         E("icon_2"),
         E("icon_3"),
-        F("color_1"),
-        F("color_2"),
-        F("color_3"),
-        N("max_1"),
-        N("max_2"),
-        N("max_3")
+        B("color_1"),
+        B("color_2"),
+        B("color_3"),
+        I("max_1"),
+        I("max_2"),
+        I("max_3")
       ],
       computeLabel: S({
         chart_type: "Chart type",
@@ -12709,7 +12713,7 @@ let ie = class extends w {
     );
   }
 };
-ie.styles = $`
+re.styles = $`
     ${P}
 
     :host {
@@ -12918,26 +12922,26 @@ ie.styles = $`
   `;
 Oo([
   x({ attribute: !1 })
-], ie.prototype, "hass", 2);
+], re.prototype, "hass", 2);
 Oo([
   f()
-], ie.prototype, "_config", 2);
+], re.prototype, "_config", 2);
 Oo([
   f()
-], ie.prototype, "_apexMissing", 2);
+], re.prototype, "_apexMissing", 2);
 Oo([
-  se(".chart-host")
-], ie.prototype, "_chartHost", 2);
-ie = Oo([
+  le(".chart-host")
+], re.prototype, "_chartHost", 2);
+re = Oo([
   k("ulm-custom-card-apexcharts-card")
-], ie);
+], re);
 var im = Object.defineProperty, om = Object.getOwnPropertyDescriptor, No = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? om(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && im(e, i, r), r;
 };
 const We = "bar-card";
-function ft(t, ...e) {
+function bt(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
@@ -12953,25 +12957,25 @@ function cs(t, e) {
 }
 function rm(t) {
   const e = (t || "var(--google-blue)").trim();
-  return Lt.includes(e) ? `var(--google-${e})` : e;
+  return Ot.includes(e) ? `var(--google-${e})` : e;
 }
-let oe = class extends w {
+let ne = class extends w {
   constructor() {
     super(...arguments), this._barMissing = !1, this._barKey = "", this._barLoading = !1, this._barDirty = !1;
   }
   static getConfigForm() {
     return {
       schema: [
-        _("entity"),
+        m("entity"),
         p("name"),
         E("icon"),
-        F("icon_color"),
+        B("icon_color"),
         p("bar_color"),
         b("show_icon"),
         b("indicator"),
         b("show_value"),
-        N("min"),
-        N("max")
+        I("min"),
+        I("max")
       ],
       computeLabel: S({
         entity: "Entity",
@@ -13007,37 +13011,37 @@ let oe = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = t.entity || ft(e, "ulm_custom_card_bar_card_entity");
+    const e = t, i = t.entity || bt(e, "ulm_custom_card_bar_card_entity");
     if (!i) throw new Error("Please define an entity");
-    const o = ft(
+    const o = bt(
       e,
       "icon_color",
       "ulm_custom_card_bar_card_icon_color"
     );
     let r = "";
-    typeof o == "string" && Lt.includes(o) && (r = o), this._config = {
+    typeof o == "string" && Ot.includes(o) && (r = o), this._config = {
       ...t,
       entity: i,
-      name: ft(e, "name", "ulm_custom_card_bar_card_name") || void 0,
-      icon: ft(e, "icon", "ulm_custom_card_bar_card_icon") || void 0,
+      name: bt(e, "name", "ulm_custom_card_bar_card_name") || void 0,
+      icon: bt(e, "icon", "ulm_custom_card_bar_card_icon") || void 0,
       icon_color: r,
       bar_color: String(
-        ft(e, "bar_color", "ulm_custom_card_bar_card_color") || "var(--google-blue)"
+        bt(e, "bar_color", "ulm_custom_card_bar_card_color") || "var(--google-blue)"
       ),
       show_icon: jr(
-        ft(e, "show_icon", "ulm_custom_card_bar_card_show_icon"),
+        bt(e, "show_icon", "ulm_custom_card_bar_card_show_icon"),
         !0
       ),
       indicator: jr(
-        ft(e, "indicator", "ulm_custom_card_bar_card_indicator"),
+        bt(e, "indicator", "ulm_custom_card_bar_card_indicator"),
         !1
       ),
       show_value: jr(
-        ft(e, "show_value", "ulm_custom_card_bar_card_value", "value"),
+        bt(e, "show_value", "ulm_custom_card_bar_card_value", "value"),
         !1
       ),
-      min: cs(ft(e, "min", "ulm_custom_card_bar_card_min"), 0),
-      max: cs(ft(e, "max", "ulm_custom_card_bar_card_max"), 100),
+      min: cs(bt(e, "min", "ulm_custom_card_bar_card_min"), 0),
+      max: cs(bt(e, "max", "ulm_custom_card_bar_card_max"), 100),
       type: "custom:ulm-custom-card-bar-card-card"
     }, this._barKey = "";
   }
@@ -13230,7 +13234,7 @@ let oe = class extends w {
     );
   }
 };
-oe.styles = $`
+ne.styles = $`
     ${P}
 
     :host {
@@ -13312,25 +13316,25 @@ oe.styles = $`
   `;
 No([
   x({ attribute: !1 })
-], oe.prototype, "hass", 2);
+], ne.prototype, "hass", 2);
 No([
   f()
-], oe.prototype, "_config", 2);
+], ne.prototype, "_config", 2);
 No([
   f()
-], oe.prototype, "_barMissing", 2);
+], ne.prototype, "_barMissing", 2);
 No([
-  se(".bar-host")
-], oe.prototype, "_barHost", 2);
-oe = No([
+  le(".bar-host")
+], ne.prototype, "_barHost", 2);
+ne = No([
   k("ulm-custom-card-bar-card-card")
-], oe);
+], ne);
 var nm = Object.defineProperty, am = Object.getOwnPropertyDescriptor, hr = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? am(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && nm(e, i, r), r;
 };
-function de(t, ...e) {
+function ue(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
@@ -13339,14 +13343,14 @@ function de(t, ...e) {
 function sm(t, e) {
   return typeof t == "boolean" ? t : t === "true" || t === "on" || t === 1 ? !0 : t === "false" || t === "off" || t === 0 ? !1 : typeof t == "string" ? t.length > 0 : e;
 }
-let Ee = class extends w {
+let Pe = class extends w {
   constructor() {
     super(...arguments), this._pictureKey = "", this._pictureLoading = !1, this._pictureDirty = !1;
   }
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "camera"),
+        m("entity", "camera"),
         b("show_title"),
         p("name"),
         p("label"),
@@ -13380,9 +13384,9 @@ let Ee = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = t.entity || de(e, "ulm_custom_card_camera_entity");
+    const e = t, i = t.entity || ue(e, "ulm_custom_card_camera_entity");
     if (!i) throw new Error("Please define an entity");
-    const o = de(
+    const o = ue(
       e,
       "show_title",
       "ulm_custom_card_camera_title",
@@ -13392,11 +13396,11 @@ let Ee = class extends w {
       ...t,
       entity: i,
       show_title: sm(o, !1),
-      name: de(e, "name", "ulm_custom_card_camera_name") || void 0,
-      label: de(e, "label", "ulm_custom_card_camera_label") || void 0,
-      icon: de(e, "icon") || void 0,
+      name: ue(e, "name", "ulm_custom_card_camera_name") || void 0,
+      label: ue(e, "label", "ulm_custom_card_camera_label") || void 0,
+      icon: ue(e, "icon") || void 0,
       aspect_ratio: String(
-        de(e, "aspect_ratio", "ulm_custom_card_camera_aspect_ratio") || "16:9"
+        ue(e, "aspect_ratio", "ulm_custom_card_camera_aspect_ratio") || "16:9"
       ),
       type: "custom:ulm-custom-card-camera-card"
     }, this._pictureKey = "";
@@ -13513,7 +13517,7 @@ let Ee = class extends w {
     );
   }
 };
-Ee.styles = $`
+Pe.styles = $`
     ${P}
 
     :host {
@@ -13615,22 +13619,22 @@ Ee.styles = $`
   `;
 hr([
   x({ attribute: !1 })
-], Ee.prototype, "hass", 2);
+], Pe.prototype, "hass", 2);
 hr([
   f()
-], Ee.prototype, "_config", 2);
+], Pe.prototype, "_config", 2);
 hr([
-  se(".picture-host")
-], Ee.prototype, "_pictureHost", 2);
-Ee = hr([
+  le(".picture-host")
+], Pe.prototype, "_pictureHost", 2);
+Pe = hr([
   k("ulm-custom-card-camera-card")
-], Ee);
+], Pe);
 var cm = Object.defineProperty, lm = Object.getOwnPropertyDescriptor, Gn = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? lm(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && cm(e, i, r), r;
 };
-function W(t, ...e) {
+function G(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
@@ -13670,15 +13674,15 @@ let Di = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", void 0, !1),
+        m("entity", void 0, !1),
         p("name"),
         E("icon"),
         p("label"),
-        _("temperature_entity", "sensor", !1),
-        _("humidity_entity", "sensor", !1),
-        _("light_entity", "light", !1),
-        _("climate_entity", "climate", !1),
-        _("cover_entity", "cover", !1),
+        m("temperature_entity", "sensor", !1),
+        m("humidity_entity", "sensor", !1),
+        m("light_entity", "light", !1),
+        m("climate_entity", "climate", !1),
+        m("cover_entity", "cover", !1),
         E("light_icon_on"),
         E("light_icon_off"),
         E("cover_icon_open"),
@@ -13745,7 +13749,7 @@ let Di = class extends w {
   }
   setConfig(t) {
     const e = t, i = e.tap_action;
-    let o = "more-info", r = W(e, "navigation_path") || void 0;
+    let o = "more-info", r = G(e, "navigation_path") || void 0;
     if (typeof i == "string")
       o = i;
     else if (i && typeof i == "object") {
@@ -13754,59 +13758,59 @@ let Di = class extends w {
     }
     this._config = {
       ...t,
-      entity: W(e, "entity") || void 0,
-      name: W(e, "name") || void 0,
-      icon: W(e, "icon") || void 0,
-      label: W(e, "label") || void 0,
-      temperature_entity: W(e, "temperature_entity") || void 0,
-      humidity_entity: W(e, "humidity_entity") || void 0,
-      light_entity: W(
+      entity: G(e, "entity") || void 0,
+      name: G(e, "name") || void 0,
+      icon: G(e, "icon") || void 0,
+      label: G(e, "label") || void 0,
+      temperature_entity: G(e, "temperature_entity") || void 0,
+      humidity_entity: G(e, "humidity_entity") || void 0,
+      light_entity: G(
         e,
         "light_entity",
         "ulm_custom_card_esh_room_light_entity"
       ) || void 0,
-      climate_entity: W(
+      climate_entity: G(
         e,
         "climate_entity",
         "ulm_custom_card_esh_room_climate_entity"
       ) || void 0,
-      cover_entity: W(
+      cover_entity: G(
         e,
         "cover_entity",
         "ulm_custom_card_esh_room_cover_entity"
       ) || void 0,
       light_icon_on: String(
-        W(e, "light_icon_on", "ulm_card_esh_room_light_icon_on") || "mdi:lightbulb"
+        G(e, "light_icon_on", "ulm_card_esh_room_light_icon_on") || "mdi:lightbulb"
       ),
       light_icon_off: String(
-        W(e, "light_icon_off", "ulm_card_esh_room_light_icon_off") || "mdi:lightbulb-off"
+        G(e, "light_icon_off", "ulm_card_esh_room_light_icon_off") || "mdi:lightbulb-off"
       ),
       cover_icon_open: String(
-        W(e, "cover_icon_open", "ulm_card_esh_room_cover_icon_open") || "mdi:blinds-open"
+        G(e, "cover_icon_open", "ulm_card_esh_room_cover_icon_open") || "mdi:blinds-open"
       ),
       cover_icon_closed: String(
-        W(e, "cover_icon_closed", "ulm_card_esh_room_cover_icon_closed") || "mdi:roller-shade-closed"
+        G(e, "cover_icon_closed", "ulm_card_esh_room_cover_icon_closed") || "mdi:roller-shade-closed"
       ),
       cover_icon_closing: String(
-        W(e, "cover_icon_closing", "ulm_card_esh_room_cover_icon_closing") || "mdi:blinds"
+        G(e, "cover_icon_closing", "ulm_card_esh_room_cover_icon_closing") || "mdi:blinds"
       ),
       cover_icon_opening: String(
-        W(e, "cover_icon_opening", "ulm_card_esh_room_cover_icon_opening") || "mdi:blinds"
+        G(e, "cover_icon_opening", "ulm_card_esh_room_cover_icon_opening") || "mdi:blinds"
       ),
       enable_light_popup: Ro(
-        W(e, "enable_light_popup", "ulm_card_light_enable_popup"),
+        G(e, "enable_light_popup", "ulm_card_light_enable_popup"),
         !1
       ),
       enable_thermostat_popup: Ro(
-        W(e, "enable_thermostat_popup", "ulm_card_thermostat_enable_popup"),
+        G(e, "enable_thermostat_popup", "ulm_card_thermostat_enable_popup"),
         !1
       ),
       enable_cover_popup: Ro(
-        W(e, "enable_cover_popup", "ulm_card_cover_popup"),
+        G(e, "enable_cover_popup", "ulm_card_cover_popup"),
         !1
       ),
       dynamic_color: Ro(
-        W(e, "dynamic_color", "ulm_card_dynamic_color"),
+        G(e, "dynamic_color", "ulm_card_dynamic_color"),
         !1
       ),
       tap_action: o,
@@ -13828,7 +13832,7 @@ let Di = class extends w {
   }
   render() {
     if (!this._config || !this.hass) return u;
-    const t = this._config, e = t.light_entity, i = t.climate_entity, o = t.cover_entity, r = o ? "cover" : i ? "climate" : null, n = e ? this.hass.states[e] : void 0, a = t.entity ? this.hass.states[t.entity] : void 0, s = n || a, l = n?.state === "on", h = this._lightRgb(n), m = !!t.dynamic_color && l && !!h, g = this._cardStyle(l, m, h), v = this._roomIconCellStyle(l, m, h), C = this._roomIconFgStyle(l, m), M = this._nameStyle(l, m, h), A = t.name || a?.attributes.friendly_name || n?.attributes.friendly_name || t.entity || "Room", L = t.icon || a?.attributes.icon || n?.attributes.icon || "mdi:floor-plan", j = this._resolveLabel(s), I = O({
+    const t = this._config, e = t.light_entity, i = t.climate_entity, o = t.cover_entity, r = o ? "cover" : i ? "climate" : null, n = e ? this.hass.states[e] : void 0, a = t.entity ? this.hass.states[t.entity] : void 0, s = n || a, l = n?.state === "on", h = this._lightRgb(n), _ = !!t.dynamic_color && l && !!h, g = this._cardStyle(l, _, h), v = this._roomIconCellStyle(l, _, h), C = this._roomIconFgStyle(l, _), M = this._nameStyle(l, _, h), A = t.name || a?.attributes.friendly_name || n?.attributes.friendly_name || t.entity || "Room", N = t.icon || a?.attributes.icon || n?.attributes.icon || "mdi:floor-plan", j = this._resolveLabel(s), L = O({
       layout: !0,
       "has-light": !!e,
       "has-climate": r === "climate",
@@ -13842,9 +13846,9 @@ let Di = class extends w {
         style=${d(g)}
         @click=${this._cardTap}
       >
-        <div class=${I}>
+        <div class=${L}>
           <div class="room-icon" style=${d(v)}>
-            <ha-icon style=${d(C)} .icon=${L}></ha-icon>
+            <ha-icon style=${d(C)} .icon=${N}></ha-icon>
           </div>
           <div class="name" style=${d(M)}>${A}</div>
           <div class="label">${j}</div>
@@ -14248,7 +14252,7 @@ const Ke = "sun-card", mm = [
   { value: "true", label: "Dark" },
   { value: "false", label: "Light" }
 ];
-function ue(t, ...e) {
+function me(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
@@ -14260,7 +14264,7 @@ function ds(t, e) {
 function pm(t) {
   return t === !0 || t === "true" || t === "on" ? "true" : t === !1 || t === "false" || t === "off" ? "false" : "auto";
 }
-let re = class extends w {
+let ae = class extends w {
   constructor() {
     super(...arguments), this._sunMissing = !1, this._sunKey = "", this._sunLoading = !1, this._sunDirty = !1;
   }
@@ -14304,18 +14308,18 @@ let re = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = ue(e, "time_format", "timeFormat");
+    const e = t, i = me(e, "time_format", "timeFormat");
     let o = "24h";
     (i === "12h" || i === "24h") && (o = i);
-    const r = ue(e, "language"), n = typeof r == "string" && r.trim() ? r.trim() : void 0, a = ue(e, "title");
+    const r = me(e, "language"), n = typeof r == "string" && r.trim() ? r.trim() : void 0, a = me(e, "title");
     this._config = {
       ...t,
       title: typeof a == "string" ? a : void 0,
       language: n,
-      dark_mode: pm(ue(e, "dark_mode", "darkMode")),
-      show_azimuth: ds(ue(e, "show_azimuth", "showAzimuth"), !1),
+      dark_mode: pm(me(e, "dark_mode", "darkMode")),
+      show_azimuth: ds(me(e, "show_azimuth", "showAzimuth"), !1),
       show_elevation: ds(
-        ue(e, "show_elevation", "showElevation"),
+        me(e, "show_elevation", "showElevation"),
         !1
       ),
       time_format: o,
@@ -14426,7 +14430,7 @@ let re = class extends w {
     return !!customElements.get(Ke);
   }
 };
-re.styles = $`
+ae.styles = $`
     ${P}
 
     :host {
@@ -14478,19 +14482,19 @@ re.styles = $`
   `;
 Io([
   x({ attribute: !1 })
-], re.prototype, "hass", 2);
+], ae.prototype, "hass", 2);
 Io([
   f()
-], re.prototype, "_config", 2);
+], ae.prototype, "_config", 2);
 Io([
   f()
-], re.prototype, "_sunMissing", 2);
+], ae.prototype, "_sunMissing", 2);
 Io([
-  se(".sun-host")
-], re.prototype, "_sunHost", 2);
-re = Io([
+  le(".sun-host")
+], ae.prototype, "_sunHost", 2);
+ae = Io([
   k("ulm-custom-card-httpedo13-sun-card")
-], re);
+], ae);
 var gm = Object.defineProperty, fm = Object.getOwnPropertyDescriptor, jo = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? fm(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
@@ -14548,7 +14552,7 @@ const Ve = "mini-graph-card", Ar = {
 }, bm = [
   { value: 0, color: "var(--info-color)" }
 ];
-function Ct(t, ...e) {
+function zt(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
@@ -14563,7 +14567,7 @@ function us(t, e) {
   return Number.isFinite(i) && i > 0 ? i : e;
 }
 function vm(t) {
-  return t === "" || t === "none" || t === null || t === void 0 ? "" : typeof t == "string" && Lt.includes(t) ? t : "";
+  return t === "" || t === "none" || t === null || t === void 0 ? "" : typeof t == "string" && Ot.includes(t) ? t : "";
 }
 function cn(t) {
   if (Array.isArray(t)) {
@@ -14582,24 +14586,24 @@ function cn(t) {
       return;
     }
 }
-let ne = class extends w {
+let se = class extends w {
   constructor() {
     super(...arguments), this._graphMissing = !1, this._graphKey = "", this._graphLoading = !1, this._graphDirty = !1;
   }
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "sensor"),
-        _("power_entity", "sensor", !1),
+        m("entity", "sensor"),
+        m("power_entity", "sensor", !1),
         p("name"),
         E("icon"),
         V("color", [
           { value: "", label: "None (grey)" },
-          ...Lt.map((t) => ({ value: t, label: t }))
+          ...Ot.map((t) => ({ value: t, label: t }))
         ]),
-        N("hours"),
+        I("hours"),
         b("hour24"),
-        N("height"),
+        I("height"),
         p("thresholds_json")
       ],
       computeLabel: S({
@@ -14644,30 +14648,30 @@ let ne = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = t.entity || Ct(e, "ulm_card_power_details_entity");
+    const e = t, i = t.entity || zt(e, "ulm_card_power_details_entity");
     if (!i) throw new Error("Please define an entity");
-    const o = Ct(
+    const o = zt(
       e,
       "power_entity",
       "ulm_card_power_details_entity"
     ) || i, r = e.thresholds_json, n = typeof r == "string" && r.trim() ? cn(r) : void 0, a = cn(
-      Ct(e, "thresholds", "ulm_card_power_details_thresholds")
+      zt(e, "thresholds", "ulm_card_power_details_thresholds")
     ), s = n || a || void 0, l = s ? JSON.stringify(s) : void 0;
     this._config = {
       ...t,
       entity: i,
       power_entity: o,
-      name: Ct(e, "name", "ulm_card_power_details_name") || void 0,
-      icon: Ct(e, "icon") || void 0,
+      name: zt(e, "name", "ulm_card_power_details_name") || void 0,
+      icon: zt(e, "icon") || void 0,
       color: vm(
-        e.color !== void 0 ? e.color : Ct(e, "color")
+        e.color !== void 0 ? e.color : zt(e, "color")
       ),
-      hours: us(Ct(e, "hours", "ulm_card_power_details_hours"), 2),
+      hours: us(zt(e, "hours", "ulm_card_power_details_hours"), 2),
       hour24: ym(
-        Ct(e, "hour24", "ulm_card_power_details_24hour"),
+        zt(e, "hour24", "ulm_card_power_details_24hour"),
         !1
       ),
-      height: us(Ct(e, "height", "ulm_card_power_details_height"), 180),
+      height: us(zt(e, "height", "ulm_card_power_details_height"), 180),
       thresholds: s,
       thresholds_json: l,
       type: "custom:ulm-custom-card-damix48-power-details-card"
@@ -14849,7 +14853,7 @@ let ne = class extends w {
     );
   }
 };
-ne.styles = $`
+se.styles = $`
     ${P}
 
     :host {
@@ -14930,19 +14934,19 @@ ne.styles = $`
   `;
 jo([
   x({ attribute: !1 })
-], ne.prototype, "hass", 2);
+], se.prototype, "hass", 2);
 jo([
   f()
-], ne.prototype, "_config", 2);
+], se.prototype, "_config", 2);
 jo([
   f()
-], ne.prototype, "_graphMissing", 2);
+], se.prototype, "_graphMissing", 2);
 jo([
-  se(".graph-host")
-], ne.prototype, "_graphHost", 2);
-ne = jo([
+  le(".graph-host")
+], se.prototype, "_graphHost", 2);
+se = jo([
   k("ulm-custom-card-damix48-power-details-card")
-], ne);
+], se);
 var wm = Object.defineProperty, xm = Object.getOwnPropertyDescriptor, Wn = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? xm(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
@@ -15016,7 +15020,7 @@ const Tr = {
     battery_is_low: "pil zayıf"
   }
 };
-function pt(t, ...e) {
+function gt(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
@@ -15060,17 +15064,17 @@ let Ui = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "lock"),
+        m("entity", "lock"),
         p("name"),
         E("icon"),
         b("tap_control"),
         b("only_open"),
-        _("battery_level", ["sensor", "binary_sensor"], !1),
-        N("battery_warning"),
-        N("battery_warning_low"),
+        m("battery_level", ["sensor", "binary_sensor"], !1),
+        I("battery_warning"),
+        I("battery_warning_low"),
         b("battery_sensor_binary"),
         p("battery_sensor_binary_low_state"),
-        _("door_open", "binary_sensor", !1)
+        m("door_open", "binary_sensor", !1)
       ],
       computeLabel: S({
         entity: "Lock entity",
@@ -15108,28 +15112,28 @@ let Ui = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = t.entity || pt(e, "ulm_custom_card_eraycetinay_lock_entity");
+    const e = t, i = t.entity || gt(e, "ulm_custom_card_eraycetinay_lock_entity");
     if (!i) throw new Error("Please define an entity");
     this._config = {
       ...t,
       entity: i,
-      name: pt(e, "name") || void 0,
-      icon: pt(e, "icon") || void 0,
+      name: gt(e, "name") || void 0,
+      icon: gt(e, "icon") || void 0,
       tap_control: Dr(
-        pt(e, "tap_control", "ulm_custom_card_eraycetinay_lock_tap_control"),
+        gt(e, "tap_control", "ulm_custom_card_eraycetinay_lock_tap_control"),
         !1
       ),
       only_open: Dr(
-        pt(e, "only_open", "ulm_custom_card_eraycetinay_lock_only_open"),
+        gt(e, "only_open", "ulm_custom_card_eraycetinay_lock_only_open"),
         !1
       ),
-      battery_level: pt(
+      battery_level: gt(
         e,
         "battery_level",
         "ulm_custom_card_eraycetinay_lock_battery_level"
       ) || void 0,
       battery_warning: ms(
-        pt(
+        gt(
           e,
           "battery_warning",
           "ulm_custom_card_eraycetinay_lock_battery_warning"
@@ -15137,7 +15141,7 @@ let Ui = class extends w {
         20
       ),
       battery_warning_low: ms(
-        pt(
+        gt(
           e,
           "battery_warning_low",
           "ulm_custom_card_eraycetinay_lock_battery_warning_low"
@@ -15145,7 +15149,7 @@ let Ui = class extends w {
         5
       ),
       battery_sensor_binary: Dr(
-        pt(
+        gt(
           e,
           "battery_sensor_binary",
           "ulm_custom_card_eraycetinay_lock_battery_sensor_binary"
@@ -15153,13 +15157,13 @@ let Ui = class extends w {
         !1
       ),
       battery_sensor_binary_low_state: String(
-        pt(
+        gt(
           e,
           "battery_sensor_binary_low_state",
           "ulm_custom_card_eraycetinay_lock_battery_sensor_binary_low_state"
         ) || "on"
       ),
-      door_open: pt(
+      door_open: gt(
         e,
         "door_open",
         "ulm_custom_card_eraycetinay_lock_door_open"
@@ -15452,7 +15456,7 @@ function Pm(t, e) {
 function Lm(t) {
   return t >= 100 ? "mdi:battery" : t >= 80 ? "mdi:battery-70" : t >= 60 ? "mdi:battery-60" : t >= 50 ? "mdi:battery-50" : "mdi:battery-20";
 }
-let Pe = class extends w {
+let Le = class extends w {
   constructor() {
     super(...arguments), this._controlsUnlocked = !1, this._onDoubleTap = (t) => {
       t.preventDefault(), this._config?.require_double_tap_unlock !== !1 && (this._controlsUnlocked = !0, this._clearRelock(), this._relockTimer = window.setTimeout(() => {
@@ -15463,10 +15467,10 @@ let Pe = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", void 0, !1),
+        m("entity", void 0, !1),
         p("name"),
-        _("lock_entity", "lock", !1),
-        _("battery_entity", "sensor", !1),
+        m("lock_entity", "lock", !1),
+        m("battery_entity", "sensor", !1),
         b("require_double_tap_unlock")
       ],
       computeLabel: S({
@@ -15533,8 +15537,8 @@ let Pe = class extends w {
   }
   render() {
     if (!this._config || !this.hass) return u;
-    const t = this._config.entity, e = t ? this.hass.states[t] : void 0, i = this._config.battery_entity, o = i ? this.hass.states[i] : void 0, r = this._config.lock_entity, n = !!(r && this.hass.states[r]), a = this._config.require_double_tap_unlock !== !1, s = !a || this._controlsUnlocked, l = this._config.name || e?.attributes.friendly_name || t || "Door", h = e?.state || "unknown", m = o ? Number.parseFloat(o.state) : NaN, g = Number.isFinite(m), C = g && m <= 40 ? "red" : "green", M = y(this, C), A = y(this, "blue"), L = [];
-    return t ? e || L.push(t) : L.push("door state entity"), r ? n || L.push(r) : L.push("lock entity"), i && !o && L.push(i), c`
+    const t = this._config.entity, e = t ? this.hass.states[t] : void 0, i = this._config.battery_entity, o = i ? this.hass.states[i] : void 0, r = this._config.lock_entity, n = !!(r && this.hass.states[r]), a = this._config.require_double_tap_unlock !== !1, s = !a || this._controlsUnlocked, l = this._config.name || e?.attributes.friendly_name || t || "Door", h = e?.state || "unknown", _ = o ? Number.parseFloat(o.state) : NaN, g = Number.isFinite(_), C = g && _ <= 40 ? "red" : "green", M = y(this, C), A = y(this, "blue"), N = [];
+    return t ? e || N.push(t) : N.push("door state entity"), r ? n || N.push(r) : N.push("lock entity"), i && !o && N.push(i), c`
       <ha-card
         class=${O({
       "ulm-card": !0,
@@ -15543,8 +15547,8 @@ let Pe = class extends w {
     })}
         @dblclick=${this._onDoubleTap}
       >
-        ${L.length ? c`<div class="warning">
-              Missing entity: ${L.join(", ")}
+        ${N.length ? c`<div class="warning">
+              Missing entity: ${N.join(", ")}
             </div>` : u}
         ${a && !s ? c`<div class="lock-hint" title="Double-tap to unlock controls">
               <ha-icon icon="mdi:lock"></ha-icon>
@@ -15563,12 +15567,12 @@ let Pe = class extends w {
             </div>
             ${g ? c`<span
                   class="bat-badge"
-                  title="Battery ${m}%"
+                  title="Battery ${_}%"
                   style=${d({
       backgroundColor: `rgba(${M}, 1)`
     })}
                 >
-                  <ha-icon .icon=${Lm(m)}></ha-icon>
+                  <ha-icon .icon=${Lm(_)}></ha-icon>
                 </span>` : u}
           </div>
           <!-- Avoid global ulmCardStyles .name/.label (wrong align-self in this layout) -->
@@ -15646,7 +15650,7 @@ let Pe = class extends w {
     }));
   }
 };
-Pe.styles = $`
+Le.styles = $`
     ${P}
 
     :host {
@@ -15822,22 +15826,22 @@ Pe.styles = $`
   `;
 pr([
   x({ attribute: !1 })
-], Pe.prototype, "hass", 2);
+], Le.prototype, "hass", 2);
 pr([
   f()
-], Pe.prototype, "_config", 2);
+], Le.prototype, "_config", 2);
 pr([
   f()
-], Pe.prototype, "_controlsUnlocked", 2);
-Pe = pr([
+], Le.prototype, "_controlsUnlocked", 2);
+Le = pr([
   k("ulm-custom-card-nik-door-card")
-], Pe);
+], Le);
 var Mm = Object.defineProperty, Om = Object.getOwnPropertyDescriptor, gr = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? Om(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && Mm(e, i, r), r;
 };
-const _s = ["gray", ...Lt], Ye = {
+const _s = ["gray", ...Ot], Ye = {
   icon: "mdi:help-circle-outline",
   icon_color: "gray",
   name: "n/a",
@@ -15871,7 +15875,7 @@ function Je(t) {
     name: `entity_${t}`,
     title: `Scene ${t}`,
     schema: [
-      _("entity_id", void 0, !1),
+      m("entity_id", void 0, !1),
       {
         type: "grid",
         name: "",
@@ -15893,10 +15897,10 @@ function hs(t, e, i) {
   const o = (e || "gray").toLowerCase();
   if (o === "gray" || o === "grey")
     return i === "icon" ? "rgba(var(--color-theme, 51, 51, 51), 0.20)" : "rgba(var(--color-theme, 51, 51, 51), 0.05)";
-  const r = Lt.includes(o) ? o : "blue", n = y(t, r);
+  const r = Ot.includes(o) ? o : "blue", n = y(t, r);
   return i === "icon" ? `rgba(${n}, 1)` : `rgba(${n}, 0.20)`;
 }
-let Le = class extends w {
+let Me = class extends w {
   constructor() {
     super(...arguments), this._pills = [];
   }
@@ -16023,7 +16027,7 @@ let Le = class extends w {
     this.hass.callService("homeassistant", "turn_on", { entity_id: t });
   }
 };
-Le.styles = $`
+Me.styles = $`
     :host {
       display: block;
     }
@@ -16122,16 +16126,16 @@ Le.styles = $`
   `;
 gr([
   x({ attribute: !1 })
-], Le.prototype, "hass", 2);
+], Me.prototype, "hass", 2);
 gr([
   f()
-], Le.prototype, "_config", 2);
+], Me.prototype, "_config", 2);
 gr([
   f()
-], Le.prototype, "_pills", 2);
-Le = gr([
+], Me.prototype, "_pills", 2);
+Me = gr([
   k("ulm-custom-card-scenes-card")
-], Le);
+], Me);
 var jm = Object.defineProperty, Am = Object.getOwnPropertyDescriptor, Kn = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? Am(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
@@ -16143,26 +16147,26 @@ const Go = {
   magenta: "rgb(248, 75, 122)",
   cyan: "rgb(66, 126, 222)"
 };
-function me(t, ...e) {
+function _e(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
   }
 }
-function Vt(t) {
+function Yt(t) {
   return typeof t == "string" && t ? t : void 0;
 }
 let Fi = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity"),
+        m("entity"),
         p("name"),
         E("icon"),
-        _("black_entity", "sensor", !1),
-        _("yellow_entity", "sensor", !1),
-        _("magenta_entity", "sensor", !1),
-        _("cyan_entity", "sensor", !1)
+        m("black_entity", "sensor", !1),
+        m("yellow_entity", "sensor", !1),
+        m("magenta_entity", "sensor", !1),
+        m("cyan_entity", "sensor", !1)
       ],
       computeLabel: S({
         entity: "Printer status entity",
@@ -16195,22 +16199,22 @@ let Fi = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = Vt(t.entity);
+    const e = t, i = Yt(t.entity);
     if (!i) throw new Error("Please define an entity");
-    const o = Vt(
-      me(e, "black_entity", "ulm_card_printer_black_name")
-    ) || "", r = Vt(
-      me(e, "yellow_entity", "ulm_card_printer_yellow_name")
-    ) || "", n = Vt(
-      me(e, "magenta_entity", "ulm_card_printer_magenta_name")
-    ) || "", a = Vt(
-      me(e, "cyan_entity", "ulm_card_printer_cyan_name")
+    const o = Yt(
+      _e(e, "black_entity", "ulm_card_printer_black_name")
+    ) || "", r = Yt(
+      _e(e, "yellow_entity", "ulm_card_printer_yellow_name")
+    ) || "", n = Yt(
+      _e(e, "magenta_entity", "ulm_card_printer_magenta_name")
+    ) || "", a = Yt(
+      _e(e, "cyan_entity", "ulm_card_printer_cyan_name")
     ) || "";
     this._config = {
       ...t,
       entity: i,
-      name: Vt(me(e, "name", "ulm_card_printer_name")),
-      icon: Vt(me(e, "icon")),
+      name: Yt(_e(e, "name", "ulm_card_printer_name")),
+      icon: Yt(_e(e, "icon")),
       black_entity: o,
       yellow_entity: r,
       magenta_entity: n,
@@ -16565,9 +16569,9 @@ let Bi = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "climate"),
+        m("entity", "climate"),
         p("name"),
-        N("temp_step")
+        I("temp_step")
       ],
       computeLabel: S({
         entity: "Climate entity",
@@ -16852,7 +16856,7 @@ let Hi = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", [
+        m("entity", [
           "input_number",
           "counter",
           "select",
@@ -17053,10 +17057,10 @@ let Ri = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "input_datetime"),
+        m("entity", "input_datetime"),
         p("name"),
         E("icon"),
-        N("step")
+        I("step")
       ],
       computeLabel: S({
         entity: "input_datetime entity",
@@ -17160,8 +17164,8 @@ let Ri = class extends w {
       const s = new Date(r * 1e3);
       o = s.getHours() * 60 + s.getMinutes() + e;
     } else {
-      const l = String(t.state || "00:00:00").split(":"), h = Number.parseInt(l[0] || "0", 10) || 0, m = Number.parseInt(l[1] || "0", 10) || 0;
-      o = h * 60 + m + e;
+      const l = String(t.state || "00:00:00").split(":"), h = Number.parseInt(l[0] || "0", 10) || 0, _ = Number.parseInt(l[1] || "0", 10) || 0;
+      o = h * 60 + _ + e;
     }
     o = (o % 1440 + 1440) % 1440;
     const n = Math.floor(o / 60), a = o % 60;
@@ -17241,13 +17245,13 @@ var Km = Object.defineProperty, Vm = Object.getOwnPropertyDescriptor, Jn = (t, e
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && Km(e, i, r), r;
 };
-function _e(t, ...e) {
+function he(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
   }
 }
-function he(t) {
+function pe(t) {
   return typeof t == "string" && t ? t : void 0;
 }
 function Ko(t) {
@@ -17259,10 +17263,10 @@ let Gi = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "update", !1),
-        _("core_entity", "update", !1),
-        _("supervisor_entity", "update", !1),
-        _("os_entity", "update", !1),
+        m("entity", "update", !1),
+        m("core_entity", "update", !1),
+        m("supervisor_entity", "update", !1),
+        m("os_entity", "update", !1),
         p("updates_available"),
         p("no_updates_available")
       ],
@@ -17291,19 +17295,19 @@ let Gi = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = he(
-      _e(e, "core_entity", "ulm_card_homeassistant_core")
-    ), o = he(_e(e, "entity", "ulm_card_homeassistant_entity")) || i || "";
+    const e = t, i = pe(
+      he(e, "core_entity", "ulm_card_homeassistant_core")
+    ), o = pe(he(e, "entity", "ulm_card_homeassistant_entity")) || i || "";
     this._config = {
       ...t,
       entity: o,
       core_entity: i,
-      supervisor_entity: he(
-        _e(e, "supervisor_entity", "ulm_card_homeassistant_supervisor")
+      supervisor_entity: pe(
+        he(e, "supervisor_entity", "ulm_card_homeassistant_supervisor")
       ),
-      os_entity: he(_e(e, "os_entity", "ulm_card_homeassistant_os")),
-      updates_available: he(_e(e, "updates_available", "ulm_updates_available")) || "Updates available",
-      no_updates_available: he(_e(e, "no_updates_available", "ulm_no_updates_available")) || "Up to date",
+      os_entity: pe(he(e, "os_entity", "ulm_card_homeassistant_os")),
+      updates_available: pe(he(e, "updates_available", "ulm_updates_available")) || "Updates available",
+      no_updates_available: pe(he(e, "no_updates_available", "ulm_no_updates_available")) || "Up to date",
       type: "custom:ulm-custom-card-homeassistant-updates-card"
     };
   }
@@ -17326,7 +17330,7 @@ let Gi = class extends w {
     } : {
       color: "rgba(var(--color-theme, 51, 51, 51), 0.9)",
       backgroundColor: "rgba(var(--color-theme, 51, 51, 51), 0.05)"
-    }, h = n ? this._config.updates_available : this._config.no_updates_available, m = this._labelLines(i, o, r);
+    }, h = n ? this._config.updates_available : this._config.no_updates_available, _ = this._labelLines(i, o, r);
     return c`
       <ha-card class="ulm-ha-updates">
         <div class="stack">
@@ -17346,7 +17350,7 @@ let Gi = class extends w {
                   </span>` : u}
             </div>
             <div class="title">${h}</div>
-            <div class="subtitle">${m}</div>
+            <div class="subtitle">${_}</div>
           </div>
 
           <!-- list_3_items: column-gap 7px -->
@@ -17578,7 +17582,7 @@ var qm = Object.defineProperty, Ym = Object.getOwnPropertyDescriptor, Zn = (t, e
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && qm(e, i, r), r;
 };
-function qt(t, ...e) {
+function Jt(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
@@ -17588,10 +17592,10 @@ let Wi = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", ["water_heater", "switch", "climate"]),
+        m("entity", ["water_heater", "switch", "climate"]),
         p("name"),
         E("icon"),
-        _("consumption_sensor", "sensor", !1),
+        m("consumption_sensor", "sensor", !1),
         p("label_off"),
         p("label_idle"),
         p("label_heating")
@@ -17619,17 +17623,17 @@ let Wi = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = t.entity || qt(e, "entity");
+    const e = t, i = t.entity || Jt(e, "entity");
     if (!i) throw new Error("Please define an entity");
     this._config = {
       ...t,
       entity: i,
-      name: qt(e, "name") || void 0,
-      icon: qt(e, "icon") || void 0,
-      consumption_sensor: qt(e, "consumption_sensor", "ulm_card_water_heater_consumption") || void 0,
-      label_off: qt(e, "label_off") || void 0,
-      label_idle: qt(e, "label_idle") || void 0,
-      label_heating: qt(e, "label_heating") || void 0,
+      name: Jt(e, "name") || void 0,
+      icon: Jt(e, "icon") || void 0,
+      consumption_sensor: Jt(e, "consumption_sensor", "ulm_card_water_heater_consumption") || void 0,
+      label_off: Jt(e, "label_off") || void 0,
+      label_idle: Jt(e, "label_idle") || void 0,
+      label_heating: Jt(e, "label_heating") || void 0,
       type: "custom:ulm-custom-card-water-heater-card"
     };
   }
@@ -17659,7 +17663,7 @@ let Wi = class extends w {
       backgroundColor: "rgba(var(--color-theme, 51, 51, 51), 0.05)"
     }, a = i ? { color: "rgb(250, 250, 250)" } : {}, s = i ? {
       backgroundColor: `rgba(${r}, var(--opacity-bg, 1))`
-    } : {}, l = this._config.name || t.attributes.friendly_name || t.entity_id, h = this._config.icon || "mdi:waves", m = this._label(o, i, e);
+    } : {}, l = this._config.name || t.attributes.friendly_name || t.entity_id, h = this._config.icon || "mdi:waves", _ = this._label(o, i, e);
     return c`
       <ha-card
         class=${O({
@@ -17676,7 +17680,7 @@ let Wi = class extends w {
           </div>
           <div class="info-btn">
             <div class="name" style=${d(a)}>${l}</div>
-            <div class="label" style=${d(a)}>${m}</div>
+            <div class="label" style=${d(a)}>${_}</div>
           </div>
         </div>
       </ha-card>
@@ -17739,7 +17743,7 @@ var Jm = Object.defineProperty, Zm = Object.getOwnPropertyDescriptor, Xn = (t, e
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && Jm(e, i, r), r;
 };
-function pe(t, ...e) {
+function ge(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
@@ -17752,12 +17756,12 @@ let Ki = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", ["switch", "input_boolean", "light"]),
+        m("entity", ["switch", "input_boolean", "light"]),
         p("name"),
         E("icon"),
-        _("power_sensor", "sensor", !1),
-        _("energy_sensor", "sensor", !1),
-        _("time_sensor", "sensor", !1)
+        m("power_sensor", "sensor", !1),
+        m("energy_sensor", "sensor", !1),
+        m("time_sensor", "sensor", !1)
       ],
       computeLabel: S({
         entity: "Outlet / switch",
@@ -17780,25 +17784,25 @@ let Ki = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = t.entity || pe(e, "entity");
+    const e = t, i = t.entity || ge(e, "entity");
     if (!i) throw new Error("Please define an entity");
     this._config = {
       ...t,
       entity: i,
-      name: Ze(pe(e, "name")),
-      icon: Ze(pe(e, "icon")),
+      name: Ze(ge(e, "name")),
+      icon: Ze(ge(e, "icon")),
       power_sensor: Ze(
-        pe(e, "power_sensor", "custom_card_more_power_outlet_power_sensor")
+        ge(e, "power_sensor", "custom_card_more_power_outlet_power_sensor")
       ),
       energy_sensor: Ze(
-        pe(
+        ge(
           e,
           "energy_sensor",
           "custom_card_more_power_outlet_energy_sensor"
         )
       ),
       time_sensor: Ze(
-        pe(e, "time_sensor", "custom_card_more_power_outlet_time_sensor")
+        ge(e, "time_sensor", "custom_card_more_power_outlet_time_sensor")
       ),
       type: "custom:ulm-custom-card-more-power-outlet-card"
     };
@@ -17895,13 +17899,13 @@ var Xm = Object.defineProperty, Qm = Object.getOwnPropertyDescriptor, fr = (t, e
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && Xm(e, i, r), r;
 };
-function Yt(t, e) {
+function Zt(t, e) {
   return typeof t == "boolean" ? t : t === "true" || t === "on" || t === 1 ? !0 : t === "false" || t === "off" || t === 0 ? !1 : t == null || t === "" ? e : !!t;
 }
 function rt(t) {
   return typeof t == "string" && t.length && t !== "false" ? t : void 0;
 }
-let Me = class extends w {
+let Oe = class extends w {
   constructor() {
     super(...arguments), this._onSliderInput = (t) => {
       const e = Number(t.target.value);
@@ -17926,20 +17930,20 @@ let Me = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "fan"),
-        U([p("name"), E("icon")]),
-        F("color"),
+        m("entity", "fan"),
+        F([p("name"), E("icon")]),
+        B("color"),
         b("enable_horizontal"),
         b("enable_collapse"),
         b("variant_blue"),
         b("force_background_color"),
         b("enable_slider"),
         b("enable_button"),
-        U([N("slider_min"), N("slider_max")]),
+        F([I("slider_min"), I("slider_max")]),
         E("button_icon"),
         p("button_service"),
         p("oscillate_attribute"),
-        U([p("temp_attribute"), p("hum_attribute")]),
+        F([p("temp_attribute"), p("hum_attribute")]),
         b("always_show_attributes")
       ],
       computeLabel: S({
@@ -17982,7 +17986,7 @@ let Me = class extends w {
   setConfig(t) {
     const e = t, i = t.entity || e.ulm_card_fan_entity;
     if (!i) throw new Error("Please define an entity");
-    const o = Yt(
+    const o = Zt(
       t.variant_blue ?? e.variant_blue ?? e.ulm_card_saxel_fan_blue,
       !1
     );
@@ -17992,20 +17996,20 @@ let Me = class extends w {
       name: t.name ?? e.ulm_card_fan_name,
       icon: rt(t.icon) || rt(e.ulm_card_fan_icon) || void 0,
       color: t.color || e.ulm_card_fan_color || "blue",
-      enable_horizontal: Yt(
+      enable_horizontal: Zt(
         t.enable_horizontal ?? e.ulm_card_fan_enable_horizontal ?? e.ulm_card_fan_horizontal,
         !1
       ),
-      enable_collapse: Yt(
+      enable_collapse: Zt(
         t.enable_collapse ?? e.ulm_card_fan_enable_collapse ?? e.collapsable,
         !0
       ),
-      force_background_color: Yt(
+      force_background_color: Zt(
         t.force_background_color ?? e.ulm_card_fan_force_background_color,
         !1
       ),
       variant_blue: o,
-      enable_slider: Yt(
+      enable_slider: Zt(
         t.enable_slider ?? e.ulm_card_fan_enable_slider,
         !0
       ),
@@ -18015,7 +18019,7 @@ let Me = class extends w {
       slider_max: Number(
         t.slider_max ?? e.ulm_card_fan_slider_max ?? 100
       ),
-      enable_button: Yt(
+      enable_button: Zt(
         t.enable_button ?? e.ulm_card_fan_enable_button ?? e.ulm_show_button,
         !0
       ),
@@ -18024,7 +18028,7 @@ let Me = class extends w {
       oscillate_attribute: rt(t.oscillate_attribute) || rt(e.ulm_card_fan_oscillate_attribute) || rt(e.oscillate_attribute) || "oscillate",
       temp_attribute: rt(t.temp_attribute ?? e.ulm_card_fan_temp_attribute) || "temp",
       hum_attribute: rt(t.hum_attribute ?? e.ulm_card_fan_hum_attribute) || "hum",
-      always_show_attributes: Yt(
+      always_show_attributes: Zt(
         t.always_show_attributes ?? e.always_show_attributes,
         !1
       ),
@@ -18091,34 +18095,34 @@ let Me = class extends w {
       return c`<ha-card class="ulm-card"
         ><div class="warning">Entity not found: ${this._config.entity}</div></ha-card
       >`;
-    const e = t.state === "on", i = this._config.color || "blue", o = y(this, i), r = (!!this._config.force_background_color || !!this._config.variant_blue) && e, n = !!this._config.enable_collapse && !e, a = !!this._config.enable_slider && !n, s = !!this._config.enable_button && !!this._config.enable_slider && !n, l = this._config.name || t.attributes.friendly_name || t.entity_id, h = this._config.icon || t.attributes.icon || "mdi:fan", m = this._config.slider_min ?? 0, g = this._config.slider_max ?? 100, v = this._sliderStep(t), C = Number(t.attributes.percentage), A = !Number.isNaN(C) ? Math.min(g, Math.max(m, C)) : e ? g : m, L = this._dragPct != null ? Math.min(g, Math.max(m, this._dragPct)) : A, j = e || this._dragPct != null ? (L - m) / (g - m || 1) * 100 : 0, I = r ? `rgba(${o}, var(--opacity-bg, 1))` : void 0, H = e ? {
+    const e = t.state === "on", i = this._config.color || "blue", o = y(this, i), r = (!!this._config.force_background_color || !!this._config.variant_blue) && e, n = !!this._config.enable_collapse && !e, a = !!this._config.enable_slider && !n, s = !!this._config.enable_button && !!this._config.enable_slider && !n, l = this._config.name || t.attributes.friendly_name || t.entity_id, h = this._config.icon || t.attributes.icon || "mdi:fan", _ = this._config.slider_min ?? 0, g = this._config.slider_max ?? 100, v = this._sliderStep(t), C = Number(t.attributes.percentage), A = !Number.isNaN(C) ? Math.min(g, Math.max(_, C)) : e ? g : _, N = this._dragPct != null ? Math.min(g, Math.max(_, this._dragPct)) : A, j = e || this._dragPct != null ? (N - _) / (g - _ || 1) * 100 : 0, L = r ? `rgba(${o}, var(--opacity-bg, 1))` : void 0, H = e ? {
       color: r ? "rgb(250,250,250)" : `rgba(${o}, 1)`,
       backgroundColor: r ? "rgba(250,250,250,0.2)" : `rgba(${o}, 0.2)`
     } : {
       color: "rgba(var(--color-theme, 51, 51, 51), 0.2)",
       backgroundColor: "rgba(var(--color-theme, 51, 51, 51), 0.05)"
-    }, B = r ? {
+    }, D = r ? {
       name: { color: "rgb(250,250,250)" },
       label: { color: "rgba(250,250,250,0.85)" }
-    } : { name: {}, label: {} }, R = this._oscillating(t), le = this._oscButtonStyle(e, R, r, o), He = !!this._config.enable_horizontal;
+    } : { name: {}, label: {} }, W = this._oscillating(t), kt = this._oscButtonStyle(e, W, r, o), pt = !!this._config.enable_horizontal;
     return c`
       <ha-card
         class=${O({
       "ulm-card": !0,
       fan: !0,
       "saxel-fan": !0,
-      horizontal: He,
+      horizontal: pt,
       "force-bg": r
     })}
         style=${d(
-      I ? {
-        "--ha-card-background": I,
-        background: I,
-        backgroundColor: I
+      L ? {
+        "--ha-card-background": L,
+        background: L,
+        backgroundColor: L
       } : {}
     )}
       >
-        <div class=${O({ stack: !0, horizontal: He })}>
+        <div class=${O({ stack: !0, horizontal: pt })}>
           <div class="header">
             <div class="row">
               <button
@@ -18129,10 +18133,10 @@ let Me = class extends w {
                 <ha-icon .icon=${h}></ha-icon>
               </button>
               <button class="info-btn" @click=${this._moreInfo}>
-                <div class="name" style=${d(B.name)}>
+                <div class="name" style=${d(D.name)}>
                   ${l}
                 </div>
-                <div class="label" style=${d(B.label)}>
+                <div class="label" style=${d(D.label)}>
                   ${this._label(t)}
                 </div>
               </button>
@@ -18164,17 +18168,17 @@ let Me = class extends w {
                       ></div>
                       <input
                         type="range"
-                        min=${m}
+                        min=${_}
                         max=${g}
                         step=${v}
-                        .value=${String(L)}
+                        .value=${String(N)}
                         @input=${this._onSliderInput}
                         @change=${this._onSliderChange}
                       />
                     </div>` : u}
                 ${s ? c`<button
                       class="widget-btn osc-btn"
-                      style=${d(le)}
+                      style=${d(kt)}
                       @click=${() => this._toggleOscillate(t)}
                       title="oscillate"
                     >
@@ -18210,7 +18214,7 @@ let Me = class extends w {
     });
   }
 };
-Me.styles = [
+Oe.styles = [
   P,
   $`
       :host {
@@ -18300,16 +18304,16 @@ Me.styles = [
 ];
 fr([
   x({ attribute: !1 })
-], Me.prototype, "hass", 2);
+], Oe.prototype, "hass", 2);
 fr([
   f()
-], Me.prototype, "_config", 2);
+], Oe.prototype, "_config", 2);
 fr([
   f()
-], Me.prototype, "_dragPct", 2);
-Me = fr([
+], Oe.prototype, "_dragPct", 2);
+Oe = fr([
   k("ulm-custom-card-saxel-fan-card")
-], Me);
+], Oe);
 var t_ = Object.defineProperty, e_ = Object.getOwnPropertyDescriptor, Qn = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? e_(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
@@ -18333,11 +18337,11 @@ let Vi = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", ["device_tracker", "person"]),
+        m("entity", ["device_tracker", "person"]),
         p("name"),
-        _("lock_entity", "lock", !1),
-        _("energy_entity", "sensor", !1),
-        _("range_entity", "sensor", !1)
+        m("lock_entity", "lock", !1),
+        m("energy_entity", "sensor", !1),
+        m("range_entity", "sensor", !1)
       ],
       computeLabel: S({
         entity: "Tracker (ulm_card_schumijo_car_tracker)",
@@ -18398,7 +18402,7 @@ let Vi = class extends w {
       return c`<ha-card class="ulm-card ulm-schumijo-car"
         ><div class="warning">Entity not found: ${this._config.entity}</div></ha-card
       >`;
-    const e = this._config.name || t.attributes.friendly_name || t.entity_id, i = t.last_changed ? this._relativeTime(t.last_changed) : "", o = t.state === "home", r = y(this, o ? "blue" : "green"), n = o ? "mdi:home-variant" : "mdi:road-variant", a = this._config.lock_entity, s = a ? this.hass.states[a] : void 0, l = s?.state === "locked", h = y(this, l ? "blue" : "red"), m = l ? "mdi:lock" : "mdi:lock-open";
+    const e = this._config.name || t.attributes.friendly_name || t.entity_id, i = t.last_changed ? this._relativeTime(t.last_changed) : "", o = t.state === "home", r = y(this, o ? "blue" : "green"), n = o ? "mdi:home-variant" : "mdi:road-variant", a = this._config.lock_entity, s = a ? this.hass.states[a] : void 0, l = s?.state === "locked", h = y(this, l ? "blue" : "red"), _ = l ? "mdi:lock" : "mdi:lock-open";
     return c`
       <ha-card class="ulm-card ulm-schumijo-car">
         <button class="header" @click=${this._moreInfo}>
@@ -18420,7 +18424,7 @@ let Vi = class extends w {
     })}
                   title=${s?.state || "lock"}
                 >
-                  <ha-icon .icon=${m}></ha-icon>
+                  <ha-icon .icon=${_}></ha-icon>
                 </span>` : u}
           </div>
           <div class="info">
@@ -18644,11 +18648,11 @@ function at(t, ...e) {
     if (o != null && o !== "") return o;
   }
 }
-function Pt(t) {
+function Mt(t) {
   return typeof t == "string" && t ? t : void 0;
 }
 function ps(t, e) {
-  return typeof t == "string" && Lt.includes(t) ? t : e;
+  return typeof t == "string" && Ot.includes(t) ? t : e;
 }
 function gs(t) {
   if (typeof t == "number" && Number.isFinite(t)) return t;
@@ -18660,35 +18664,35 @@ function Vo(t, e, i) {
   if (o && typeof o == "object" && !Array.isArray(o)) {
     const r = o;
     return {
-      entity: Pt(at(r, "entity_id", "entity")),
-      name: Pt(at(r, "name")),
-      icon: Pt(at(r, "icon")),
+      entity: Mt(at(r, "entity_id", "entity")),
+      name: Mt(at(r, "name")),
+      icon: Mt(at(r, "icon")),
       color: ps(at(r, "color"), i),
       max: gs(at(r, "max", "max_value", "max_1"))
     };
   }
   return {
-    entity: Pt(at(t, `entity_${e}`)),
-    name: Pt(at(t, `name_${e}`)),
-    icon: Pt(at(t, `icon_${e}`)),
+    entity: Mt(at(t, `entity_${e}`)),
+    name: Mt(at(t, `name_${e}`)),
+    icon: Mt(at(t, `icon_${e}`)),
     color: ps(at(t, `color_${e}`), i),
     max: gs(at(t, `max_${e}`))
   };
 }
-let Oe = class extends w {
+let Ne = class extends w {
   constructor() {
     super(...arguments), this._metrics = [];
   }
   static getConfigForm() {
     return {
       schema: [
-        _("entity", ["switch", "input_boolean"]),
+        m("entity", ["switch", "input_boolean"]),
         p("name"),
         E("icon"),
-        _("entity_1", void 0, !1),
-        _("entity_2", void 0, !1),
-        _("entity_3", void 0, !1),
-        _("entity_4", void 0, !1),
+        m("entity_1", void 0, !1),
+        m("entity_2", void 0, !1),
+        m("entity_3", void 0, !1),
+        m("entity_4", void 0, !1),
         p("name_1"),
         p("name_2"),
         p("name_3"),
@@ -18697,14 +18701,14 @@ let Oe = class extends w {
         E("icon_2"),
         E("icon_3"),
         E("icon_4"),
-        F("color_1"),
-        F("color_2"),
-        F("color_3"),
-        F("color_4"),
-        N("max_1"),
-        N("max_2"),
-        N("max_3"),
-        N("max_4")
+        B("color_1"),
+        B("color_2"),
+        B("color_3"),
+        B("color_4"),
+        I("max_1"),
+        I("max_2"),
+        I("max_3"),
+        I("max_4")
       ],
       computeLabel: S({
         entity: "NAS power switch",
@@ -18761,14 +18765,14 @@ let Oe = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = Pt(at(e, "entity"));
+    const e = t, i = Mt(at(e, "entity"));
     if (!i) throw new Error("Please define a power entity");
     const o = ["yellow", "blue", "red", "green"], r = Vo(e, 1, o[0]), n = Vo(e, 2, o[1]), a = Vo(e, 3, o[2]), s = Vo(e, 4, o[3]);
     this._metrics = [r, n, a, s], this._config = {
       ...t,
       entity: i,
-      name: Pt(at(e, "name")),
-      icon: Pt(at(e, "icon")) || "mdi:nas",
+      name: Mt(at(e, "name")),
+      icon: Mt(at(e, "icon")) || "mdi:nas",
       entity_1: r.entity,
       entity_2: n.entity,
       entity_3: a.entity,
@@ -18882,7 +18886,7 @@ let Oe = class extends w {
     );
   }
 };
-Oe.styles = [
+Ne.styles = [
   P,
   $`
       :host {
@@ -18994,16 +18998,16 @@ Oe.styles = [
 ];
 br([
   x({ attribute: !1 })
-], Oe.prototype, "hass", 2);
+], Ne.prototype, "hass", 2);
 br([
   f()
-], Oe.prototype, "_config", 2);
+], Ne.prototype, "_config", 2);
 br([
   f()
-], Oe.prototype, "_metrics", 2);
-Oe = br([
+], Ne.prototype, "_metrics", 2);
+Ne = br([
   k("ulm-custom-card-nik-nas-card")
-], Oe);
+], Ne);
 var r_ = Object.defineProperty, n_ = Object.getOwnPropertyDescriptor, yr = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? n_(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
@@ -19033,19 +19037,19 @@ function a_(t) {
     if (typeof t == "object") return t;
   }
 }
-let Ne = class extends w {
+let Ie = class extends w {
   constructor() {
     super(...arguments), this._phases = [];
   }
   static getConfigForm() {
     return {
       schema: [
-        _("power_entity", ["switch", "input_boolean"]),
+        m("power_entity", ["switch", "input_boolean"]),
         p("name"),
         E("icon"),
-        _("machine_state", void 0, !1),
-        _("job_state", void 0, !1),
-        _("job_progress", ["sensor", "number"], !1),
+        m("machine_state", void 0, !1),
+        m("job_state", void 0, !1),
+        m("job_progress", ["sensor", "number"], !1),
         p("job_states"),
         p("label_idle"),
         p("label_running"),
@@ -19185,14 +19189,14 @@ let Ne = class extends w {
         </button>
 
         ${e && this._phases.length ? c`<div class="phases">
-              ${this._phases.map((m) => {
-      const g = s != null && m.name != null && String(s).toLowerCase() === String(m.name).toLowerCase();
+              ${this._phases.map((_) => {
+      const g = s != null && _.name != null && String(s).toLowerCase() === String(_.name).toLowerCase();
       return c`
                   <div
                     class=${O({ phase: !0, active: g })}
-                    title=${m.name || ""}
+                    title=${_.name || ""}
                   >
-                    <ha-icon .icon=${m.icon || "mdi:circle"}></ha-icon>
+                    <ha-icon .icon=${_.icon || "mdi:circle"}></ha-icon>
                   </div>
                 `;
     })}
@@ -19272,7 +19276,7 @@ let Ne = class extends w {
     );
   }
 };
-Ne.styles = [
+Ie.styles = [
   P,
   $`
       :host {
@@ -19407,16 +19411,16 @@ Ne.styles = [
 ];
 yr([
   x({ attribute: !1 })
-], Ne.prototype, "hass", 2);
+], Ie.prototype, "hass", 2);
 yr([
   f()
-], Ne.prototype, "_config", 2);
+], Ie.prototype, "_config", 2);
 yr([
   f()
-], Ne.prototype, "_phases", 2);
-Ne = yr([
+], Ie.prototype, "_phases", 2);
+Ie = yr([
   k("ulm-custom-card-haven-washer-card")
-], Ne);
+], Ie);
 var s_ = Object.defineProperty, c_ = Object.getOwnPropertyDescriptor, vr = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? c_(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
@@ -19436,14 +19440,14 @@ function qo(t, ...e) {
     if (o != null && o !== "") return o;
   }
 }
-let Ie = class extends w {
+let je = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "light"),
+        m("entity", "light"),
         p("name"),
         E("icon"),
-        N("transition")
+        I("transition")
       ],
       computeLabel: S({
         entity: "Light",
@@ -19499,7 +19503,7 @@ let Ie = class extends w {
       return c`<ha-card class="ulm-card ulm-light-colorpick"
         ><div class="warning">Entity not found: ${this._config.entity}</div></ha-card
       >`;
-    const e = t.state === "on", i = y(this, "yellow"), o = t.attributes.brightness, r = e && typeof o == "number" ? Math.round(o / 2.55) : void 0, n = this._dragPct ?? r ?? 0, a = this._config.name || t.attributes.friendly_name || t.entity_id, s = this._config.icon || t.attributes.icon || "mdi:lightbulb", l = q(this, e, "yellow", null, !1, !1), h = r !== void 0 ? `${r}%` : this.hass.formatEntityState?.(t) || t.state, m = e ? {
+    const e = t.state === "on", i = y(this, "yellow"), o = t.attributes.brightness, r = e && typeof o == "number" ? Math.round(o / 2.55) : void 0, n = this._dragPct ?? r ?? 0, a = this._config.name || t.attributes.friendly_name || t.entity_id, s = this._config.icon || t.attributes.icon || "mdi:lightbulb", l = q(this, e, "yellow", null, !1, !1), h = r !== void 0 ? `${r}%` : this.hass.formatEntityState?.(t) || t.state, _ = e ? {
       backgroundColor: `rgba(${i}, var(--opacity-bg, 1))`
     } : {};
     return c`
@@ -19509,7 +19513,7 @@ let Ie = class extends w {
       "ulm-light-colorpick": !0,
       on: e
     })}
-        style=${d(m)}
+        style=${d(_)}
       >
         <div class="grid">
           <div class="row header">
@@ -19599,7 +19603,7 @@ let Ie = class extends w {
     );
   }
 };
-Ie.styles = $`
+je.styles = $`
     ${P}
 
     :host {
@@ -19682,16 +19686,16 @@ Ie.styles = $`
   `;
 vr([
   x({ attribute: !1 })
-], Ie.prototype, "hass", 2);
+], je.prototype, "hass", 2);
 vr([
   f()
-], Ie.prototype, "_config", 2);
+], je.prototype, "_config", 2);
 vr([
   f()
-], Ie.prototype, "_dragPct", 2);
-Ie = vr([
+], je.prototype, "_dragPct", 2);
+je = vr([
   k("ulm-custom-card-light-colorpick-card")
-], Ie);
+], je);
 var d_ = Object.defineProperty, u_ = Object.getOwnPropertyDescriptor, ta = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? u_(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
@@ -19710,7 +19714,7 @@ let qi = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "media_player"),
+        m("entity", "media_player"),
         p("name")
       ],
       computeLabel: S({
@@ -19916,18 +19920,18 @@ let Yi = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "person"),
-        U([p("name"), E("icon")]),
+        m("entity", "person"),
+        F([p("name"), E("icon")]),
         b("use_entity_picture"),
         b("multiline"),
-        _("zone1", "zone", !1),
-        _("zone2", "zone", !1),
-        _("address", void 0, !1),
-        _("address_locality", void 0, !1),
-        _("driving_entity", void 0, !1),
-        _("battery_entity", "sensor", !1),
-        _("battery_state_entity", void 0, !1),
-        _("commute_entity", "sensor", !1),
+        m("zone1", "zone", !1),
+        m("zone2", "zone", !1),
+        m("address", void 0, !1),
+        m("address_locality", void 0, !1),
+        m("driving_entity", void 0, !1),
+        m("battery_entity", "sensor", !1),
+        m("battery_state_entity", void 0, !1),
+        m("commute_entity", "sensor", !1),
         E("commute_icon")
       ],
       computeLabel: S({
@@ -20354,13 +20358,13 @@ var h_ = Object.defineProperty, p_ = Object.getOwnPropertyDescriptor, ia = (t, e
   return o && r && h_(e, i, r), r;
 };
 const Ic = -108, jc = 108, g_ = jc - Ic, Ac = 38, f_ = 50, b_ = 48;
-function bt(t, ...e) {
+function yt(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
   }
 }
-function ge(t) {
+function fe(t) {
   return typeof t == "string" && t ? t : void 0;
 }
 function Br(t, e) {
@@ -20399,15 +20403,15 @@ let Ji = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("download_entity", ["sensor", "number"]),
-        _("upload_entity", ["sensor", "number"]),
-        _("ping_entity", ["sensor", "number"]),
+        m("download_entity", ["sensor", "number"]),
+        m("upload_entity", ["sensor", "number"]),
+        m("ping_entity", ["sensor", "number"]),
         p("download_color"),
         p("upload_color"),
         p("ping_color"),
-        N("download_max"),
-        N("upload_max"),
-        N("ping_max"),
+        I("download_max"),
+        I("upload_max"),
+        I("ping_max"),
         b("round")
       ],
       computeLabel: S({
@@ -20449,20 +20453,20 @@ let Ji = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = ge(
-      bt(
+    const e = t, i = fe(
+      yt(
         e,
         "download_entity",
         "ulm_custom_card_speedtest_download_speed_entity"
       )
-    ), o = ge(
-      bt(
+    ), o = fe(
+      yt(
         e,
         "upload_entity",
         "ulm_custom_card_speedtest_upload_speed_entity"
       )
-    ), r = ge(
-      bt(e, "ping_entity", "ulm_custom_card_speedtest_ping_entity")
+    ), r = fe(
+      yt(e, "ping_entity", "ulm_custom_card_speedtest_ping_entity")
     );
     if (!i || !o || !r)
       throw new Error(
@@ -20473,25 +20477,25 @@ let Ji = class extends w {
       download_entity: i,
       upload_entity: o,
       ping_entity: r,
-      download_color: ge(
-        bt(
+      download_color: fe(
+        yt(
           e,
           "download_color",
           "ulm_custom_card_speedtest_download_speed_color"
         )
       ) || "var(--google-yellow)",
-      upload_color: ge(
-        bt(
+      upload_color: fe(
+        yt(
           e,
           "upload_color",
           "ulm_custom_card_speedtest_upload_speed_color"
         )
       ) || "var(--google-blue)",
-      ping_color: ge(
-        bt(e, "ping_color", "ulm_custom_card_speedtest_ping_color")
+      ping_color: fe(
+        yt(e, "ping_color", "ulm_custom_card_speedtest_ping_color")
       ) || "var(--google-green)",
       download_max: Br(
-        bt(
+        yt(
           e,
           "download_max",
           "ulm_custom_card_speedtest_download_speed_max"
@@ -20499,14 +20503,14 @@ let Ji = class extends w {
         100
       ),
       upload_max: Br(
-        bt(e, "upload_max", "ulm_custom_card_speedtest_upload_speed_max"),
+        yt(e, "upload_max", "ulm_custom_card_speedtest_upload_speed_max"),
         40
       ),
       ping_max: Br(
-        bt(e, "ping_max", "ulm_custom_card_speedtest_ping_max"),
+        yt(e, "ping_max", "ulm_custom_card_speedtest_ping_max"),
         85
       ),
-      round: y_(bt(e, "round", "ulm_custom_card_speedtest_round"), !1),
+      round: y_(yt(e, "round", "ulm_custom_card_speedtest_round"), !1),
       type: "custom:ulm-custom-card-speedtest-shogun160-card"
     };
   }
@@ -20821,7 +20825,7 @@ function ti(t) {
     name: `entity_${t}`,
     title: `Nav ${t}`,
     schema: [
-      _("entity", void 0, !1),
+      m("entity", void 0, !1),
       {
         type: "grid",
         name: "",
@@ -20829,7 +20833,7 @@ function ti(t) {
         schema: [p("name"), E("icon")]
       },
       p("path"),
-      F("color")
+      B("color")
     ]
   };
 }
@@ -20839,7 +20843,7 @@ function z_(t) {
     o === "" || o == null || (e[i] = o);
   return Object.keys(e).length ? e : void 0;
 }
-let ae = class extends w {
+let ce = class extends w {
   constructor() {
     super(...arguments), this._navs = [], this._localCollapsed = !1, this._toggleCollapse = (t) => {
       t.preventDefault(), t.stopPropagation();
@@ -20856,8 +20860,8 @@ let ae = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("weather", "weather", !1),
-        _("collapse", "input_boolean", !1),
+        m("weather", "weather", !1),
+        m("collapse", "input_boolean", !1),
         ti(1),
         ti(2),
         ti(3),
@@ -21048,7 +21052,7 @@ let ae = class extends w {
     `;
   }
   _renderNav(t, e, i) {
-    const o = Hr(t), r = o ? this.hass.states[o] : void 0, n = this._pillColor(t, e), a = y(this, n), s = t.name || r?.attributes.friendly_name || o?.split(".").pop() || "", l = t.icon || r?.attributes.icon || "mdi:circle-medium", h = Yo(t), m = 52 * i, g = 84 * i, v = 42 * i, C = 20 * i, M = 9.5 * i, A = 33 * i;
+    const o = Hr(t), r = o ? this.hass.states[o] : void 0, n = this._pillColor(t, e), a = y(this, n), s = t.name || r?.attributes.friendly_name || o?.split(".").pop() || "", l = t.icon || r?.attributes.icon || "mdi:circle-medium", h = Yo(t), _ = 52 * i, g = 84 * i, v = 42 * i, C = 20 * i, M = 9.5 * i, A = 33 * i;
     return c`
       <button
         type="button"
@@ -21056,8 +21060,8 @@ let ae = class extends w {
         style=${d({
       "--pill-color": `rgb(${a})`,
       "--pill-bg": `rgba(${a}, 0.2)`,
-      width: `${m}px`,
-      minWidth: `${m}px`,
+      width: `${_}px`,
+      minWidth: `${_}px`,
       height: `${g}px`,
       "--icon-box": `${v}px`,
       "--icon-size": `${C}px`,
@@ -21115,7 +21119,7 @@ let ae = class extends w {
     );
   }
 };
-ae.styles = $`
+ce.styles = $`
     :host {
       display: block;
       width: 100%;
@@ -21304,19 +21308,19 @@ ae.styles = $`
   `;
 Ao([
   x({ attribute: !1 })
-], ae.prototype, "hass", 2);
+], ce.prototype, "hass", 2);
 Ao([
   f()
-], ae.prototype, "_config", 2);
+], ce.prototype, "_config", 2);
 Ao([
   f()
-], ae.prototype, "_navs", 2);
+], ce.prototype, "_navs", 2);
 Ao([
   f()
-], ae.prototype, "_localCollapsed", 2);
-ae = Ao([
+], ce.prototype, "_localCollapsed", 2);
+ce = Ao([
   k("ulm-custom-card-esh-welcome-card")
-], ae);
+], ce);
 var E_ = Object.defineProperty, P_ = Object.getOwnPropertyDescriptor, oa = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? P_(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
@@ -21335,7 +21339,7 @@ let Zi = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "sensor"),
+        m("entity", "sensor"),
         p("name"),
         p("text"),
         p("unit"),
@@ -21550,7 +21554,7 @@ let Xi = class extends w {
   }
   static getConfigForm() {
     return {
-      schema: [_("entity", "person")],
+      schema: [m("entity", "person")],
       computeLabel: S({
         entity: "Person entity"
       }),
@@ -21721,10 +21725,10 @@ const Ia = class Ia extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "sensor"),
+        m("entity", "sensor"),
         E("icon"),
-        N("warning"),
-        N("danger")
+        I("warning"),
+        I("danger")
       ],
       computeLabel: S({
         entity: "Battery entity",
@@ -21830,16 +21834,16 @@ Ia.styles = [
       }
     `
 ];
-let je = Ia;
+let Ae = Ia;
 Tc([
   x({ attribute: !1 })
-], je.prototype, "hass");
+], Ae.prototype, "hass");
 Tc([
   f()
-], je.prototype, "_config");
-class j_ extends je {
+], Ae.prototype, "_config");
+class j_ extends Ae {
 }
-customElements.get(Cs) || customElements.define(Cs, je);
+customElements.get(Cs) || customElements.define(Cs, Ae);
 customElements.get(Ss) || customElements.define(Ss, j_);
 var A_ = Object.defineProperty, T_ = Object.getOwnPropertyDescriptor, na = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? T_(e, i) : e, n = t.length - 1, a; n >= 0; n--)
@@ -21861,7 +21865,7 @@ function D_(t) {
 let Qi = class extends w {
   static getConfigForm() {
     return {
-      schema: [_("entity", "sensor"), p("name")],
+      schema: [m("entity", "sensor"), p("name")],
       computeLabel: S({
         entity: "WiFi signal entity (dBm)",
         name: "Name"
@@ -21963,7 +21967,7 @@ var U_ = Object.defineProperty, F_ = Object.getOwnPropertyDescriptor, aa = (t, e
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && U_(e, i, r), r;
 };
-function fe(t, ...e) {
+function be(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
@@ -21995,11 +21999,11 @@ let to = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", ["device_tracker", "person"]),
+        m("entity", ["device_tracker", "person"]),
         E("icon"),
-        _("tracker_1", ["device_tracker", "person", "binary_sensor"], !1),
+        m("tracker_1", ["device_tracker", "person", "binary_sensor"], !1),
         V("tracker_1_type", Os),
-        _("tracker_2", ["device_tracker", "person", "binary_sensor"], !1),
+        m("tracker_2", ["device_tracker", "person", "binary_sensor"], !1),
         V("tracker_2_type", Os)
       ],
       computeLabel: S({
@@ -22027,25 +22031,25 @@ let to = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = Zo(fe(e, "entity"));
+    const e = t, i = Zo(be(e, "entity"));
     if (!i) throw new Error("Please define an entity");
     this._config = {
       ...t,
       entity: i,
       icon: Zo(
-        fe(e, "icon", "ulm_custom_card_device_tracker_icon")
+        be(e, "icon", "ulm_custom_card_device_tracker_icon")
       ),
       tracker_1: Zo(
-        fe(e, "tracker_1", "ulm_custom_card_device_tracker_tracker_1_entity")
+        be(e, "tracker_1", "ulm_custom_card_device_tracker_tracker_1_entity")
       ),
       tracker_1_type: Ms(
-        fe(e, "tracker_1_type", "ulm_custom_card_device_tracker_tracker_1_type")
+        be(e, "tracker_1_type", "ulm_custom_card_device_tracker_tracker_1_type")
       ) || "home",
       tracker_2: Zo(
-        fe(e, "tracker_2", "ulm_custom_card_device_tracker_tracker_2_entity")
+        be(e, "tracker_2", "ulm_custom_card_device_tracker_tracker_2_entity")
       ),
       tracker_2_type: Ms(
-        fe(e, "tracker_2_type", "ulm_custom_card_device_tracker_tracker_2_type")
+        be(e, "tracker_2_type", "ulm_custom_card_device_tracker_tracker_2_type")
       ) || "home",
       type: "custom:ulm-custom-card-device-tracker-card"
     };
@@ -22201,7 +22205,7 @@ let eo = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "media_player"),
+        m("entity", "media_player"),
         p("name")
       ],
       computeLabel: S({
@@ -22397,7 +22401,7 @@ let io = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "media_player"),
+        m("entity", "media_player"),
         p("name")
       ],
       computeLabel: S({
@@ -22447,7 +22451,7 @@ let io = class extends w {
     const e = this._picture(t), i = !!e && t.state === "playing", o = t.state === "idle", r = i ? {
       color: "white",
       backgroundColor: "transparent"
-    } : q(this, o, "blue"), n = t.attributes.friendly_name || t.entity_id, a = t.attributes.media_title, s = i ? a || this._config.name || n : this._config.name || n, l = i ? n : this.hass.formatEntityState?.(t) || t.state, h = t.attributes.icon || "mdi:sony-playstation", m = i ? {
+    } : q(this, o, "blue"), n = t.attributes.friendly_name || t.entity_id, a = t.attributes.media_title, s = i ? a || this._config.name || n : this._config.name || n, l = i ? n : this.hass.formatEntityState?.(t) || t.state, h = t.attributes.icon || "mdi:sony-playstation", _ = i ? {
       background: `center / cover url("${e}") rgba(0, 0, 0, 0.15)`,
       backgroundBlendMode: "multiply"
     } : {};
@@ -22459,7 +22463,7 @@ let io = class extends w {
       cover: i,
       idle: o
     })}
-        style=${d(m)}
+        style=${d(_)}
         @click=${this._moreInfo}
       >
         <div class="row">
@@ -22545,7 +22549,7 @@ function V_(t, e = !1) {
 function q_(t) {
   return t < 10 ? `0${t}` : String(t);
 }
-let Ae = class extends w {
+let Te = class extends w {
   constructor() {
     super(...arguments), this._now = /* @__PURE__ */ new Date(), this._toggle = (t) => {
       if (t.stopPropagation(), !this.hass || !this._config?.switch || !this._config.switch_enable)
@@ -22558,7 +22562,7 @@ let Ae = class extends w {
     return {
       schema: [
         b("switch_enable"),
-        _("switch", ["input_boolean", "switch"], !1),
+        m("switch", ["input_boolean", "switch"], !1),
         p("language")
       ],
       computeLabel: S({
@@ -22629,7 +22633,7 @@ let Ae = class extends w {
     `;
   }
 };
-Ae.styles = $`
+Te.styles = $`
     ${P}
 
     :host {
@@ -22670,16 +22674,16 @@ Ae.styles = $`
   `;
 $r([
   x({ attribute: !1 })
-], Ae.prototype, "hass", 2);
+], Te.prototype, "hass", 2);
 $r([
   f()
-], Ae.prototype, "_config", 2);
+], Te.prototype, "_config", 2);
 $r([
   f()
-], Ae.prototype, "_now", 2);
-Ae = $r([
+], Te.prototype, "_now", 2);
+Te = $r([
   k("ulm-custom-card-nik-clock-card")
-], Ae);
+], Te);
 var Y_ = Object.defineProperty, J_ = Object.getOwnPropertyDescriptor, la = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? J_(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
@@ -22997,7 +23001,7 @@ var eh = Object.defineProperty, ih = Object.getOwnPropertyDescriptor, ua = (t, e
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && eh(e, i, r), r;
 };
-const be = {
+const ye = {
   light_0: "No lights on",
   light_1: "1 light on",
   light_many: "lights on",
@@ -23011,7 +23015,7 @@ function dt(t, ...e) {
     if (o != null && o !== "") return o;
   }
 }
-function yt(t) {
+function vt(t) {
   return typeof t == "string" && t ? t : void 0;
 }
 function oh(t, e = !1) {
@@ -23038,14 +23042,14 @@ let no = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", ["sensor", "counter"]),
+        m("entity", ["sensor", "counter"]),
         V("count_type", [
           { value: "light", label: "Lights" },
           { value: "cover", label: "Covers" }
         ]),
         E("icon_on"),
         E("icon_off"),
-        F("color"),
+        B("color"),
         b("force_background_color"),
         p("light_0"),
         p("light_1"),
@@ -23088,9 +23092,9 @@ let no = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = yt(dt(e, "entity"));
+    const e = t, i = vt(dt(e, "entity"));
     if (!i) throw new Error("Please define an entity");
-    const r = yt(
+    const r = vt(
       dt(
         e,
         "count_type",
@@ -23101,10 +23105,10 @@ let no = class extends w {
       ...t,
       entity: i,
       count_type: r,
-      icon_on: yt(
+      icon_on: vt(
         dt(e, "icon_on", "ulm_custom_card_yagrasdemonde_lights_count_icon_on")
       ),
-      icon_off: yt(
+      icon_off: vt(
         dt(
           e,
           "icon_off",
@@ -23123,32 +23127,32 @@ let no = class extends w {
         ),
         !1
       ),
-      light_0: yt(
+      light_0: vt(
         dt(e, "light_0", "ulm_custom_card_yagrasdemonde_lights_count_light_0")
-      ) || be.light_0,
-      light_1: yt(
+      ) || ye.light_0,
+      light_1: vt(
         dt(e, "light_1", "ulm_custom_card_yagrasdemonde_lights_count_light_1")
-      ) || be.light_1,
-      light_many: yt(
+      ) || ye.light_1,
+      light_many: vt(
         dt(
           e,
           "light_many",
           "ulm_custom_card_yagrasdemonde_lights_count_light_many"
         )
-      ) || be.light_many,
-      cover_0: yt(
+      ) || ye.light_many,
+      cover_0: vt(
         dt(e, "cover_0", "ulm_custom_card_yagrasdemonde_lights_count_cover_0")
-      ) || be.cover_0,
-      cover_1: yt(
+      ) || ye.cover_0,
+      cover_1: vt(
         dt(e, "cover_1", "ulm_custom_card_yagrasdemonde_lights_count_cover_1")
-      ) || be.cover_1,
-      cover_many: yt(
+      ) || ye.cover_1,
+      cover_many: vt(
         dt(
           e,
           "cover_many",
           "ulm_custom_card_yagrasdemonde_lights_count_cover_many"
         )
-      ) || be.cover_many,
+      ) || ye.cover_many,
       type: "custom:ulm-custom-card-yagrasdemonde-lights-count-card"
     };
   }
@@ -23170,7 +23174,7 @@ let no = class extends w {
       return c`<ha-card class="ulm-card ulm-lights-count"
         ><div class="warning">Entity not found: ${this._config.entity}</div></ha-card
       >`;
-    const e = t.state === "unavailable" ? NaN : Number.parseFloat(t.state), i = Number.isFinite(e) && e >= 1, o = this._config.color || "yellow", r = y(this, o), n = ah(this, o), a = nh(this, o), s = !!this.hass.themes?.darkMode, l = i && (!!this._config.force_background_color || s), h = this._config.icon_off || "mdi:lightbulb-outline", m = this._config.icon_on || t.attributes.icon || "mdi:lightbulb", g = i ? m : h, v = i ? {
+    const e = t.state === "unavailable" ? NaN : Number.parseFloat(t.state), i = Number.isFinite(e) && e >= 1, o = this._config.color || "yellow", r = y(this, o), n = ah(this, o), a = nh(this, o), s = !!this.hass.themes?.darkMode, l = i && (!!this._config.force_background_color || s), h = this._config.icon_off || "mdi:lightbulb-outline", _ = this._config.icon_on || t.attributes.icon || "mdi:lightbulb", g = i ? _ : h, v = i ? {
       color: `rgba(${r}, 1)`,
       backgroundColor: `rgba(${r}, 0.2)`
     } : {
@@ -23287,7 +23291,7 @@ function oi(t, ...e) {
 function ri(t) {
   return typeof t == "string" && t ? t : void 0;
 }
-function Ot(t, e) {
+function It(t, e) {
   if (!e) return [];
   const i = t.states[e];
   if (!i) return [];
@@ -23318,16 +23322,16 @@ let ao = class extends w {
     return {
       schema: [
         E("icon"),
-        _("temperature", ["sensor"], !1),
-        _("humidity", ["sensor"], !1),
-        _("group_lights", ["group", "light"], !1),
-        _("group_motions", ["group", "binary_sensor"], !1),
-        _("group_doors", ["group", "binary_sensor"], !1),
-        _("group_windows", ["group", "binary_sensor"], !1),
-        _("group_outlets", ["group", "switch"], !1),
-        _("group_tv", ["group", "media_player", "switch"], !1),
-        _("group_water", ["group", "binary_sensor"], !1),
-        _("group_windows_shutters", ["group", "cover"], !1),
+        m("temperature", ["sensor"], !1),
+        m("humidity", ["sensor"], !1),
+        m("group_lights", ["group", "light"], !1),
+        m("group_motions", ["group", "binary_sensor"], !1),
+        m("group_doors", ["group", "binary_sensor"], !1),
+        m("group_windows", ["group", "binary_sensor"], !1),
+        m("group_outlets", ["group", "switch"], !1),
+        m("group_tv", ["group", "media_player", "switch"], !1),
+        m("group_water", ["group", "binary_sensor"], !1),
+        m("group_windows_shutters", ["group", "cover"], !1),
         V("tap_action", [
           { value: "more-info", label: "more-info" },
           { value: "navigate", label: "navigate" },
@@ -23449,7 +23453,7 @@ let ao = class extends w {
     if (!this.hass) return 0;
     let t = 0;
     for (const e of this._sensorGroupIds()) {
-      const i = Ot(this.hass, e);
+      const i = It(this.hass, e);
       if (i.length)
         for (const o of i)
           this.hass.states[o]?.state === "unavailable" && (t += 1);
@@ -23461,7 +23465,7 @@ let ao = class extends w {
     if (!this.hass) return 0;
     let t = 0;
     for (const e of this._sensorGroupIds())
-      for (const i of Ot(this.hass, e)) {
+      for (const i of It(this.hass, e)) {
         const o = this.hass.states[i]?.attributes.battery;
         typeof o == "number" && o <= 20 && (t += 1);
       }
@@ -23477,11 +23481,11 @@ let ao = class extends w {
   _countOnMembers(t) {
     if (!t || !this.hass) return 0;
     let e = 0;
-    for (const i of Ot(this.hass, t)) {
+    for (const i of It(this.hass, t)) {
       const o = this.hass.states[i]?.state;
       (o === "on" || o === "open") && (e += 1);
     }
-    return e === 0 && Ot(this.hass, t).length === 0 && this._groupIsOn(t) ? 1 : e;
+    return e === 0 && It(this.hass, t).length === 0 && this._groupIsOn(t) ? 1 : e;
   }
   _tempLine() {
     const t = this._config.temperature;
@@ -23582,7 +23586,7 @@ let ao = class extends w {
     if (!t || !this.hass) return "mdi:lightbulb-group-off";
     const e = this.hass.states[t];
     if (!e) return "mdi:lightbulb-group-off";
-    const i = Ot(this.hass, t);
+    const i = It(this.hass, t);
     if (i.length) {
       let o = 0;
       for (const r of i)
@@ -23596,7 +23600,7 @@ let ao = class extends w {
     if (!t || !this.hass) return "mdi:window-shutter";
     const e = this.hass.states[t];
     if (!e) return "mdi:window-shutter";
-    const i = Ot(this.hass, t);
+    const i = It(this.hass, t);
     if (i.length) {
       let o = 0;
       for (const r of i)
@@ -23610,7 +23614,7 @@ let ao = class extends w {
     if (!t || !this.hass) return "mdi:power-plug-off";
     const e = this.hass.states[t];
     if (!e) return "mdi:power-plug-off";
-    const i = Ot(this.hass, t);
+    const i = It(this.hass, t);
     if (i.length) {
       let o = 0;
       for (const r of i)
@@ -23623,7 +23627,7 @@ let ao = class extends w {
     if (!t || !this.hass) return "mdi:television-off";
     const e = this.hass.states[t];
     if (!e) return "mdi:television-off";
-    const i = Ot(this.hass, t);
+    const i = It(this.hass, t);
     if (i.length) {
       let o = 0;
       for (const r of i)
@@ -23926,14 +23930,14 @@ function mh(t, e) {
     ), o = g.getTime();
   }
   const a = i.getTime() - o, s = Math.trunc(a / (1e3 * 60 * 60 * 24)), l = Math.trunc(Math.abs(a) / (1e3 * 60 * 60)) % 24, h = Math.trunc(Math.abs(a) / (1e3 * 60)) % 60;
-  let m = "";
-  return r && s > 0 && (m += `${s} ${s > 1 ? e.days : e.day} `), n && l > 0 && (m += `${l} ${l > 1 ? e.hours : e.hour} `), n && !r && h > 0 && (m += `${h} ${h > 1 ? e.minutes : e.minute} `), m = m.trim(), m.length ? `${m} ${e.ago}` : e.justnow;
+  let _ = "";
+  return r && s > 0 && (_ += `${s} ${s > 1 ? e.days : e.day} `), n && l > 0 && (_ += `${l} ${l > 1 ? e.hours : e.hour} `), n && !r && h > 0 && (_ += `${h} ${h > 1 ? e.minutes : e.minute} `), _ = _.trim(), _.length ? `${_} ${e.ago}` : e.justnow;
 }
 let so = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "input_datetime"),
+        m("entity", "input_datetime"),
         p("name")
       ],
       computeLabel: S({
@@ -24174,9 +24178,9 @@ let co = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "climate"),
+        m("entity", "climate"),
         p("name"),
-        N("temp_step")
+        I("temp_step")
       ],
       computeLabel: S({
         entity: "Climate entity",
@@ -24414,13 +24418,13 @@ var vh = Object.defineProperty, wh = Object.getOwnPropertyDescriptor, pa = (t, e
   return o && r && vh(e, i, r), r;
 };
 const Rs = "#ff8100";
-function Te(t, ...e) {
+function De(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
   }
 }
-function Ce(t) {
+function Se(t) {
   return typeof t == "string" && t ? t : void 0;
 }
 function xh(t) {
@@ -24430,19 +24434,19 @@ function xh(t) {
 }
 function $h(t) {
   const e = t.variables;
-  return Ce(Te(t, "entity")) || Ce(e?.entity) || Ce(Te(t, "ulm_custom_card_httpedo13_thermostat_entity"));
+  return Se(De(t, "entity")) || Se(e?.entity) || Se(De(t, "ulm_custom_card_httpedo13_thermostat_entity"));
 }
 function kh(t) {
   const e = t.variables;
-  return Ce(Te(t, "name")) || Ce(e?.name) || Ce(Te(t, "ulm_custom_card_httpedo13_thermostat_name"));
+  return Se(De(t, "name")) || Se(e?.name) || Se(De(t, "ulm_custom_card_httpedo13_thermostat_name"));
 }
 let lo = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "climate"),
+        m("entity", "climate"),
         p("name"),
-        N("temp_step"),
+        I("temp_step"),
         b("collapse")
       ],
       computeLabel: S({
@@ -24474,8 +24478,8 @@ let lo = class extends w {
       ...t,
       entity: i,
       name: kh(e),
-      temp_step: xh(Te(e, "temp_step")),
-      collapse: !!Te(e, "collapse"),
+      temp_step: xh(De(e, "temp_step")),
+      collapse: !!De(e, "collapse"),
       type: "custom:ulm-custom-card-httpedo13-thermostat-card"
     };
   }
@@ -24502,7 +24506,7 @@ let lo = class extends w {
           <div class="warning">Entity not found: ${this._config.entity}</div>
         </ha-card>
       `;
-    const e = t.attributes.hvac_action === "heating", i = t.state !== "off", o = !this._config.collapse || t.state === "heat", r = this._config.name || t.attributes.friendly_name || this._config.entity, n = this.hass.formatEntityState?.(t) || t.state, a = e ? "mdi:radiator" : "mdi:radiator-off", s = y(this, "red"), l = e ? Rs : void 0, h = l ? { backgroundColor: l } : {}, m = e ? { color: "var(--card-background-color, #fafafa)" } : {}, g = e ? {
+    const e = t.attributes.hvac_action === "heating", i = t.state !== "off", o = !this._config.collapse || t.state === "heat", r = this._config.name || t.attributes.friendly_name || this._config.entity, n = this.hass.formatEntityState?.(t) || t.state, a = e ? "mdi:radiator" : "mdi:radiator-off", s = y(this, "red"), l = e ? Rs : void 0, h = l ? { backgroundColor: l } : {}, _ = e ? { color: "var(--card-background-color, #fafafa)" } : {}, g = e ? {
       color: `rgba(${s}, 1)`,
       backgroundColor: "var(--card-background-color, #fafafa)"
     } : i ? {
@@ -24511,7 +24515,7 @@ let lo = class extends w {
     } : {
       color: "rgba(var(--color-theme, 51, 51, 51), 0.9)",
       backgroundColor: "rgba(var(--color-theme, 51, 51, 51), 0.05)"
-    }, v = t.attributes.current_temperature, C = v == null ? "-°C" : `${v}°C`, M = t.attributes.temperature, A = M == null ? "-°C" : `${M}°C`, I = {
+    }, v = t.attributes.current_temperature, C = v == null ? "-°C" : `${v}°C`, M = t.attributes.temperature, A = M == null ? "-°C" : `${M}°C`, L = {
       backgroundColor: e ? "var(--card-background-color, #fafafa)" : "rgba(var(--color-theme, 51, 51, 51), 0.05)",
       color: "rgba(var(--color-theme, 51, 51, 51), 0.9)"
     }, H = e ? {
@@ -24535,8 +24539,8 @@ let lo = class extends w {
               role="button"
               tabindex="0"
               @click=${() => this._toggleHeat()}
-              @keydown=${(B) => {
-      (B.key === "Enter" || B.key === " ") && (B.preventDefault(), this._toggleHeat());
+              @keydown=${(D) => {
+      (D.key === "Enter" || D.key === " ") && (D.preventDefault(), this._toggleHeat());
     }}
             >
               <button
@@ -24544,15 +24548,15 @@ let lo = class extends w {
                 type="button"
                 style=${d(g)}
                 tabindex="-1"
-                @click=${(B) => {
-      B.stopPropagation(), this._toggleHeat();
+                @click=${(D) => {
+      D.stopPropagation(), this._toggleHeat();
     }}
               >
                 <ha-icon .icon=${a}></ha-icon>
               </button>
               <div class="info-btn">
-                <div class="name" style=${d(m)}>${r}</div>
-                <div class="label" style=${d(m)}>
+                <div class="name" style=${d(_)}>${r}</div>
+                <div class="label" style=${d(_)}>
                   ${n}
                 </div>
               </div>
@@ -24567,7 +24571,7 @@ let lo = class extends w {
                   <button
                     class="widget-btn"
                     type="button"
-                    style=${d(I)}
+                    style=${d(L)}
                     aria-label="Decrease temperature"
                     @click=${() => this._adjustTemp(-1)}
                   >
@@ -24579,7 +24583,7 @@ let lo = class extends w {
                   <button
                     class="widget-btn"
                     type="button"
-                    style=${d(I)}
+                    style=${d(L)}
                     aria-label="Increase temperature"
                     @click=${() => this._adjustTemp(1)}
                   >
@@ -24821,12 +24825,12 @@ let uo = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "sensor"),
+        m("entity", "sensor"),
         V("mode", [
           { value: "library", label: "Library (fanart)" },
           { value: "upcoming", label: "Upcoming (poster)" }
         ]),
-        N("index"),
+        I("index"),
         V("platform", [
           { value: "radarr", label: "Radarr" },
           { value: "sonarr", label: "Sonarr" },
@@ -24930,8 +24934,8 @@ let uo = class extends w {
     let s = this._unavailableLabel();
     if (n) {
       const h = String(n.title ?? "");
-      let m = "";
-      n.number != null && n.number !== "" ? m = String(n.number) : typeof n.aired == "string" && (m = `(${n.aired.split("-")[0]})`), s = `${h} ${m}`.trim();
+      let _ = "";
+      n.number != null && n.number !== "" ? _ = String(n.number) : typeof n.aired == "string" && (_ = `(${n.aired.split("-")[0]})`), s = `${h} ${_}`.trim();
     }
     const l = a ? {
       backgroundImage: `url("${a}")`,
@@ -24975,7 +24979,7 @@ let uo = class extends w {
         v && !Number.isNaN(v.getTime()) && (h = this._formatDate(v, e));
       }
     }
-    const m = s ? {
+    const _ = s ? {
       backgroundImage: `url("${s}")`,
       backgroundSize: "cover",
       backgroundPosition: "center center"
@@ -24987,7 +24991,7 @@ let uo = class extends w {
       "ulm-imswel-medias": !0,
       upcoming: !0
     })}
-        style=${d(m)}
+        style=${d(_)}
         @click=${this._moreInfo}
       >
         <div class="poster-overlay" aria-hidden="true"></div>
@@ -25175,13 +25179,13 @@ var jh = Object.defineProperty, Ah = Object.getOwnPropertyDescriptor, fa = (t, e
   return o && r && jh(e, i, r), r;
 };
 const Th = "Here", Dh = "Absent";
-function Nt(t, ...e) {
+function jt(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
   }
 }
-function Jt(t) {
+function Xt(t) {
   return typeof t == "string" && t ? t : void 0;
 }
 function Uh(t, e) {
@@ -25202,12 +25206,12 @@ let mo = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "person"),
-        U([E("icon"), b("use_entity_picture")]),
-        _("wifi_tracker", void 0, !1),
-        _("gps_tracker", void 0, !1),
-        _("findmy_script", "script", !1),
-        U([p("home_label"), p("not_home_label")])
+        m("entity", "person"),
+        F([E("icon"), b("use_entity_picture")]),
+        m("wifi_tracker", void 0, !1),
+        m("gps_tracker", void 0, !1),
+        m("findmy_script", "script", !1),
+        F([p("home_label"), p("not_home_label")])
       ],
       computeLabel: S({
         entity: "Person entity",
@@ -25238,32 +25242,32 @@ let mo = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = Jt(
-      Nt(e, "entity", "ulm_card_imswel_person_entity")
+    const e = t, i = Xt(
+      jt(e, "entity", "ulm_card_imswel_person_entity")
     );
     if (!i) throw new Error("Please define an entity");
     this._config = {
       ...t,
       entity: i,
-      icon: Jt(Nt(e, "icon")) || "mdi:face-man",
+      icon: Xt(jt(e, "icon")) || "mdi:face-man",
       use_entity_picture: Uh(
-        Nt(e, "use_entity_picture", "ulm_card_imswel_person_use_entity_picture"),
+        jt(e, "use_entity_picture", "ulm_card_imswel_person_use_entity_picture"),
         !1
       ),
-      wifi_tracker: Jt(
-        Nt(e, "wifi_tracker", "ulm_card_imswel_person_wifi_tracker")
+      wifi_tracker: Xt(
+        jt(e, "wifi_tracker", "ulm_card_imswel_person_wifi_tracker")
       ),
-      gps_tracker: Jt(
-        Nt(e, "gps_tracker", "ulm_card_imswel_person_gps_tracker")
+      gps_tracker: Xt(
+        jt(e, "gps_tracker", "ulm_card_imswel_person_gps_tracker")
       ),
-      findmy_script: Jt(
-        Nt(e, "findmy_script", "ulm_card_imswel_person_findmy_script")
+      findmy_script: Xt(
+        jt(e, "findmy_script", "ulm_card_imswel_person_findmy_script")
       ),
-      home_label: Jt(
-        Nt(e, "home_label", "ulm_custom_card_imswel_person_home")
+      home_label: Xt(
+        jt(e, "home_label", "ulm_custom_card_imswel_person_home")
       ),
-      not_home_label: Jt(
-        Nt(e, "not_home_label", "ulm_custom_card_imswel_person_not_home")
+      not_home_label: Xt(
+        jt(e, "not_home_label", "ulm_custom_card_imswel_person_not_home")
       ),
       type: "custom:ulm-custom-card-imswel-person-card"
     };
@@ -25419,26 +25423,26 @@ var Fh = Object.defineProperty, Bh = Object.getOwnPropertyDescriptor, ba = (t, e
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && Fh(e, i, r), r;
 };
-function It(t, ...e) {
+function At(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
   }
 }
-function jt(t) {
+function Tt(t) {
   return typeof t == "string" && t ? t : void 0;
 }
 let _o = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity"),
+        m("entity"),
         p("name"),
         p("icon"),
-        _("entity_1", void 0, !1),
-        _("entity_2", void 0, !1),
-        _("entity_3", void 0, !1),
-        _("entity_4", void 0, !1),
+        m("entity_1", void 0, !1),
+        m("entity_2", void 0, !1),
+        m("entity_3", void 0, !1),
+        m("entity_4", void 0, !1),
         p("name_1"),
         p("name_2"),
         p("name_3"),
@@ -25476,12 +25480,12 @@ let _o = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = jt(
-      It(e, "entity", "ulm_custom_card_irmajavi_entities")
+    const e = t, i = Tt(
+      At(e, "entity", "ulm_custom_card_irmajavi_entities")
     );
     if (!i) throw new Error("Please define an entity");
-    const o = (r) => jt(
-      It(
+    const o = (r) => Tt(
+      At(
         e,
         `entity_${r}`,
         `ulm_custom_card_irmajavi_entities_entity_${r}`
@@ -25490,23 +25494,23 @@ let _o = class extends w {
     this._config = {
       ...t,
       entity: i,
-      name: jt(It(e, "name", "ulm_custom_card_irmajavi_entities_name")) || void 0,
-      icon: jt(It(e, "icon", "ulm_custom_card_irmajavi_entities_icon")) || "👽",
+      name: Tt(At(e, "name", "ulm_custom_card_irmajavi_entities_name")) || void 0,
+      icon: Tt(At(e, "icon", "ulm_custom_card_irmajavi_entities_icon")) || "👽",
       entity_1: o(1),
       entity_2: o(2),
       entity_3: o(3),
       entity_4: o(4),
-      name_1: jt(
-        It(e, "name_1", "ulm_custom_card_irmajavi_entities_name_1")
+      name_1: Tt(
+        At(e, "name_1", "ulm_custom_card_irmajavi_entities_name_1")
       ),
-      name_2: jt(
-        It(e, "name_2", "ulm_custom_card_irmajavi_entities_name_2")
+      name_2: Tt(
+        At(e, "name_2", "ulm_custom_card_irmajavi_entities_name_2")
       ),
-      name_3: jt(
-        It(e, "name_3", "ulm_custom_card_irmajavi_entities_name_3")
+      name_3: Tt(
+        At(e, "name_3", "ulm_custom_card_irmajavi_entities_name_3")
       ),
-      name_4: jt(
-        It(e, "name_4", "ulm_custom_card_irmajavi_entities_name_4")
+      name_4: Tt(
+        At(e, "name_4", "ulm_custom_card_irmajavi_entities_name_4")
       ),
       type: "custom:ulm-custom-card-irmajavi-entities-card"
     };
@@ -25695,13 +25699,13 @@ const Kr = {
   download: "Download Speed",
   upload: "Upload Speed"
 };
-function St(t, ...e) {
+function Et(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
   }
 }
-function At(t) {
+function Dt(t) {
   return typeof t == "string" && t ? t : void 0;
 }
 function Gh(t, e) {
@@ -25728,10 +25732,10 @@ let ho = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("download_entity", ["sensor"], !1),
-        _("upload_entity", ["sensor"], !1),
-        _("ping_entity", ["sensor"], !1),
-        F("color"),
+        m("download_entity", ["sensor"], !1),
+        m("upload_entity", ["sensor"], !1),
+        m("ping_entity", ["sensor"], !1),
+        B("color"),
         p("router_name"),
         p("router_model"),
         p("label_speedtest"),
@@ -25768,21 +25772,21 @@ let ho = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = At(
-      St(
+    const e = t, i = Dt(
+      Et(
         e,
         "download_entity",
         "entity",
         "ulm_custom_card_irmajavi_speedtest_download_speed_entity"
       )
-    ), o = At(
-      St(
+    ), o = Dt(
+      Et(
         e,
         "upload_entity",
         "ulm_custom_card_irmajavi_speedtest_upload_speed_entity"
       )
-    ), r = At(
-      St(e, "ping_entity", "ulm_custom_card_irmajavi_speedtest_ping_entity")
+    ), r = Dt(
+      Et(e, "ping_entity", "ulm_custom_card_irmajavi_speedtest_ping_entity")
     );
     if (!i && !o && !r)
       throw new Error(
@@ -25792,18 +25796,18 @@ let ho = class extends w {
       ...t,
       entity: i || o || r,
       color: Gh(
-        St(e, "color", "ulm_custom_card_irmajavi_speedtest_color"),
+        Et(e, "color", "ulm_custom_card_irmajavi_speedtest_color"),
         "blue"
       ),
-      router_name: At(
-        St(
+      router_name: Dt(
+        Et(
           e,
           "router_name",
           "ulm_custom_card_irmajavi_speedtest_router_name"
         )
       ) || "router_name",
-      router_model: At(
-        St(
+      router_model: Dt(
+        Et(
           e,
           "router_model",
           "ulm_custom_card_irmajavi_speedtest_router_model"
@@ -25812,22 +25816,22 @@ let ho = class extends w {
       download_entity: i,
       upload_entity: o,
       ping_entity: r,
-      label_speedtest: At(
-        St(
+      label_speedtest: Dt(
+        Et(
           e,
           "label_speedtest",
           "ulm_custom_card_irmajavi_speedtest_speedtest"
         )
       ) || Kr.speedtest,
-      label_download: At(
-        St(
+      label_download: Dt(
+        Et(
           e,
           "label_download",
           "ulm_custom_card_irmajavi_speedtest_download"
         )
       ) || Kr.download,
-      label_upload: At(
-        St(
+      label_upload: Dt(
+        Et(
           e,
           "label_upload",
           "ulm_custom_card_irmajavi_speedtest_upload"
@@ -26089,13 +26093,13 @@ const Vh = {
   sunny: "☀️",
   windy: "🌪️"
 };
-function Tt(t, ...e) {
+function Ut(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
   }
 }
-function Dt(t) {
+function Ft(t) {
   return typeof t == "string" && t ? t : void 0;
 }
 function qh(t) {
@@ -26105,13 +26109,13 @@ let po = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "weather"),
-        _("date_entity", ["sensor", "input_text"], !1),
-        _("temperature_entity", ["sensor"], !1),
-        _("entity_1", void 0, !1),
-        _("entity_2", void 0, !1),
-        _("entity_3", void 0, !1),
-        _("entity_4", void 0, !1),
+        m("entity", "weather"),
+        m("date_entity", ["sensor", "input_text"], !1),
+        m("temperature_entity", ["sensor"], !1),
+        m("entity_1", void 0, !1),
+        m("entity_2", void 0, !1),
+        m("entity_3", void 0, !1),
+        m("entity_4", void 0, !1),
         p("name_1"),
         p("name_2"),
         p("name_3"),
@@ -26147,12 +26151,12 @@ let po = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = Dt(
-      Tt(e, "entity", "ulm_custom_card_irmajavi_weather")
+    const e = t, i = Ft(
+      Ut(e, "entity", "ulm_custom_card_irmajavi_weather")
     );
     if (!i) throw new Error("Please define an entity");
-    const o = (r) => Dt(
-      Tt(
+    const o = (r) => Ft(
+      Ut(
         e,
         `entity_${r}`,
         `ulm_custom_card_irmajavi_weather_entity_${r}`
@@ -26161,11 +26165,11 @@ let po = class extends w {
     this._config = {
       ...t,
       entity: i,
-      date_entity: Dt(
-        Tt(e, "date_entity", "ulm_custom_card_irmajavi_weather_date")
+      date_entity: Ft(
+        Ut(e, "date_entity", "ulm_custom_card_irmajavi_weather_date")
       ),
-      temperature_entity: Dt(
-        Tt(
+      temperature_entity: Ft(
+        Ut(
           e,
           "temperature_entity",
           "ulm_custom_card_irmajavi_weather_temperature_outside"
@@ -26175,17 +26179,17 @@ let po = class extends w {
       entity_2: o(2),
       entity_3: o(3),
       entity_4: o(4),
-      name_1: Dt(
-        Tt(e, "name_1", "ulm_custom_card_irmajavi_weather_name_1")
+      name_1: Ft(
+        Ut(e, "name_1", "ulm_custom_card_irmajavi_weather_name_1")
       ),
-      name_2: Dt(
-        Tt(e, "name_2", "ulm_custom_card_irmajavi_weather_name_2")
+      name_2: Ft(
+        Ut(e, "name_2", "ulm_custom_card_irmajavi_weather_name_2")
       ),
-      name_3: Dt(
-        Tt(e, "name_3", "ulm_custom_card_irmajavi_weather_name_3")
+      name_3: Ft(
+        Ut(e, "name_3", "ulm_custom_card_irmajavi_weather_name_3")
       ),
-      name_4: Dt(
-        Tt(e, "name_4", "ulm_custom_card_irmajavi_weather_name_4")
+      name_4: Ft(
+        Ut(e, "name_4", "ulm_custom_card_irmajavi_weather_name_4")
       ),
       type: "custom:ulm-custom-card-irmajavi-weather-card"
     };
@@ -26204,7 +26208,7 @@ let po = class extends w {
   }
   render() {
     if (!this._config || !this.hass) return u;
-    const t = this._config, e = this.hass.states[t.entity], i = qh(e?.state), o = t.date_entity, r = o && this.hass.states[o]?.state || "", n = `${i} ${r}`.trim(), a = t.temperature_entity, s = a ? this.hass.states[a] : void 0, l = s?.attributes.unit_of_measurement || "", h = s ? `${s.state}${l ? ` ${l}` : ""}` : "—", m = [1, 2, 3, 4].map((g) => ({
+    const t = this._config, e = this.hass.states[t.entity], i = qh(e?.state), o = t.date_entity, r = o && this.hass.states[o]?.state || "", n = `${i} ${r}`.trim(), a = t.temperature_entity, s = a ? this.hass.states[a] : void 0, l = s?.attributes.unit_of_measurement || "", h = s ? `${s.state}${l ? ` ${l}` : ""}` : "—", _ = [1, 2, 3, 4].map((g) => ({
       entity: t[`entity_${g}`],
       name: t[`name_${g}`]
     }));
@@ -26216,7 +26220,7 @@ let po = class extends w {
             <div class="temp-chip">${h}</div>
           </div>
           <div class="metrics">
-            ${m.map((g) => this._metricCell(g.entity, g.name))}
+            ${_.map((g) => this._metricCell(g.entity, g.name))}
           </div>
         </div>
       </ha-card>
@@ -26422,11 +26426,11 @@ let go = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity"),
+        m("entity"),
         p("name"),
         p("icon"),
-        N("min"),
-        N("max")
+        I("min"),
+        I("max")
       ],
       computeLabel: S({
         entity: "Gauge entity",
@@ -26482,7 +26486,7 @@ let go = class extends w {
       return c`<ha-card class="ulm-card ulm-mpse-gauge"
         ><div class="warning">Entity not found: ${this._config.entity}</div></ha-card
       >`;
-    const e = this._config.min ?? 0, i = this._config.max ?? 100, o = Number.parseFloat(t.state), r = Xh(o, e, i), n = this._config.name || t.attributes.friendly_name || t.entity_id, a = t.state, s = this._config.icon || t.attributes.icon || "mdi:gauge", l = t.state === "unavailable", h = e === 0 && i === 100 ? "" : `${e} - ${i}`, m = {
+    const e = this._config.min ?? 0, i = this._config.max ?? 100, o = Number.parseFloat(t.state), r = Xh(o, e, i), n = this._config.name || t.attributes.friendly_name || t.entity_id, a = t.state, s = this._config.icon || t.attributes.icon || "mdi:gauge", l = t.state === "unavailable", h = e === 0 && i === 100 ? "" : `${e} - ${i}`, _ = {
       color: "rgba(var(--color-theme, 51, 51, 51), 0.2)",
       backgroundColor: "rgba(var(--color-theme, 51, 51, 51), 0.05)"
     }, g = {
@@ -26496,7 +26500,7 @@ let go = class extends w {
       <ha-card class="ulm-card ulm-mpse-gauge" @click=${this._moreInfo}>
         <div class="header">
           <div class="row ${l ? "unavailable" : ""}">
-            <div class="icon-btn" style=${d(m)}>
+            <div class="icon-btn" style=${d(_)}>
               <ha-icon .icon=${s}></ha-icon>
               ${l ? c`<div class="badge">
                     <ha-icon icon="mdi:exclamation"></ha-icon>
@@ -26732,7 +26736,7 @@ function op(t, e) {
 let fo = class extends w {
   static getConfigForm() {
     return {
-      schema: [_("entity", "climate"), p("name")],
+      schema: [m("entity", "climate"), p("name")],
       computeLabel: S({
         entity: "Climate entity",
         name: "Name"
@@ -26776,7 +26780,7 @@ let fo = class extends w {
           <div class="warning">Entity not found: ${this._config.entity}</div>
         </ha-card>
       `;
-    const e = t.state, { row: i, icon: o } = op(this, e), r = ip(this, e), n = this._config.name || t.attributes.friendly_name || t.entity_id, a = this.hass.formatEntityState?.(t) || t.state, s = t.attributes.hvac_action, l = t.attributes.temperature != null ? `${t.attributes.current_temperature ?? "—"}° • ${a}${s ? ` (${s})` : ""}` : a, h = t.attributes.temperature, m = h == null || String(h) === "" ? "-°C" : `${h}°C`;
+    const e = t.state, { row: i, icon: o } = op(this, e), r = ip(this, e), n = this._config.name || t.attributes.friendly_name || t.entity_id, a = this.hass.formatEntityState?.(t) || t.state, s = t.attributes.hvac_action, l = t.attributes.temperature != null ? `${t.attributes.current_temperature ?? "—"}° • ${a}${s ? ` (${s})` : ""}` : a, h = t.attributes.temperature, _ = h == null || String(h) === "" ? "-°C" : `${h}°C`;
     return c`
       <ha-card class="ulm-card ulm-mpse-thermostat">
         <div class="stack">
@@ -26816,7 +26820,7 @@ let fo = class extends w {
             >
               <ha-icon icon="mdi:arrow-down"></ha-icon>
             </button>
-            <div class="temp-readout">${m}</div>
+            <div class="temp-readout">${_}</div>
             <button
               class="widget-btn"
               type="button"
@@ -26929,7 +26933,7 @@ var rp = Object.defineProperty, np = Object.getOwnPropertyDescriptor, kr = (t, e
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && rp(e, i, r), r;
 };
-function ye(t, ...e) {
+function ve(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
@@ -26941,7 +26945,7 @@ function Ys(t) {
 function Qo(t, e) {
   return typeof t == "boolean" ? t : t === "true" || t === 1 ? !0 : t === "false" || t === 0 ? !1 : e;
 }
-let De = class extends w {
+let Ue = class extends w {
   constructor() {
     super(...arguments), this._holdFired = !1, this._moreInfo = (t) => {
       t.stopPropagation(), this._config && this.dispatchEvent(
@@ -26956,7 +26960,7 @@ let De = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "update"),
+        m("entity", "update"),
         p("name"),
         b("enable_controls"),
         b("collapsible"),
@@ -26989,26 +26993,26 @@ let De = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = Ys(ye(e, "entity"));
+    const e = t, i = Ys(ve(e, "entity"));
     if (!i) throw new Error("Please define an entity");
     this._config = {
       ...t,
       entity: i,
-      name: Ys(ye(e, "name")),
+      name: Ys(ve(e, "name")),
       enable_controls: Qo(
-        ye(e, "enable_controls", "ulm_card_neekster_update_enable_controls"),
+        ve(e, "enable_controls", "ulm_card_neekster_update_enable_controls"),
         !1
       ),
       collapsible: Qo(
-        ye(e, "collapsible", "ulm_card_neekster_update_collapsible"),
+        ve(e, "collapsible", "ulm_card_neekster_update_collapsible"),
         !1
       ),
       horizontal: Qo(
-        ye(e, "horizontal", "ulm_card_neekster_update_horizontal"),
+        ve(e, "horizontal", "ulm_card_neekster_update_horizontal"),
         !1
       ),
       narrow_buttons: Qo(
-        ye(
+        ve(
           e,
           "narrow_buttons",
           "ulm_card_neekster_update_narrow_buttons"
@@ -27049,11 +27053,11 @@ let De = class extends w {
       stack: !0,
       horizontal: !!(this._config.horizontal && i),
       narrow: !!this._config.narrow_buttons
-    }), m = this._config.collapsible && e ? "0px" : "12px";
+    }), _ = this._config.collapsible && e ? "0px" : "12px";
     return c`
       <ha-card
         class="ulm-card ulm-neekster-update"
-        style=${d({ "--stack-gap": m })}
+        style=${d({ "--stack-gap": _ })}
         @click=${this._moreInfo}
       >
         <div class=${h}>
@@ -27125,7 +27129,7 @@ let De = class extends w {
     super.disconnectedCallback(), this._cancelHold();
   }
 };
-De.styles = $`
+Ue.styles = $`
     ${P}
 
     :host {
@@ -27187,16 +27191,16 @@ De.styles = $`
   `;
 kr([
   x({ attribute: !1 })
-], De.prototype, "hass", 2);
+], Ue.prototype, "hass", 2);
 kr([
   f()
-], De.prototype, "_config", 2);
+], Ue.prototype, "_config", 2);
 kr([
   f()
-], De.prototype, "_holdTimer", 2);
-De = kr([
+], Ue.prototype, "_holdTimer", 2);
+Ue = kr([
   k("ulm-custom-card-neekster-update-card")
-], De);
+], Ue);
 var ap = Object.defineProperty, sp = Object.getOwnPropertyDescriptor, $a = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? sp(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
@@ -27218,21 +27222,21 @@ let bo = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", ["input_boolean", "switch"]),
+        m("entity", ["input_boolean", "switch"]),
         p("name"),
-        _("button1_entity", void 0, !1),
-        _("button2_entity", void 0, !1),
-        _("button3_entity", void 0, !1),
-        _("restart_entity", "button", !1),
-        _("reload_entity", "button", !1),
-        _("maintenance_entity", void 0, !1),
-        _("par1_entity", "sensor", !1),
-        _("par2_entity", "sensor", !1),
-        _("par3_entity", "sensor", !1),
+        m("button1_entity", void 0, !1),
+        m("button2_entity", void 0, !1),
+        m("button3_entity", void 0, !1),
+        m("restart_entity", "button", !1),
+        m("reload_entity", "button", !1),
+        m("maintenance_entity", void 0, !1),
+        m("par1_entity", "sensor", !1),
+        m("par2_entity", "sensor", !1),
+        m("par3_entity", "sensor", !1),
         p("par1_name"),
         p("par2_name"),
         p("par3_name"),
-        _("battery_entity", "sensor", !1),
+        m("battery_entity", "sensor", !1),
         p("battery_name")
       ],
       computeLabel: S({
@@ -27452,8 +27456,8 @@ let bo = class extends w {
         class="widget"
         style=${d(h)}
         title=${n?.state || t}
-        @click=${(m) => {
-      m.stopPropagation(), this._widgetAction(t, r);
+        @click=${(_) => {
+      _.stopPropagation(), this._widgetAction(t, r);
     }}
       >
         <ha-icon .icon=${e}></ha-icon>
@@ -27752,13 +27756,13 @@ const up = {
   1: "none to low",
   0: "none"
 };
-function vt(t, ...e) {
+function wt(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
   }
 }
-function wt(t) {
+function xt(t) {
   return typeof t == "string" && t ? t : void 0;
 }
 let yo = class extends w {
@@ -27776,7 +27780,7 @@ let yo = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity"),
+        m("entity"),
         p("name"),
         E("icon"),
         p("label_6"),
@@ -27816,47 +27820,47 @@ let yo = class extends w {
     return { entity: "sensor.pollen_index" };
   }
   setConfig(t) {
-    const e = t, i = wt(vt(e, "entity"));
+    const e = t, i = xt(wt(e, "entity"));
     if (!i) throw new Error("Please define an entity");
     this._config = {
       ...t,
       entity: i,
-      name: wt(
-        vt(
+      name: xt(
+        wt(
           e,
           "name",
           "ulm_custom_card_paddy_dwd_pollen_name",
           "ulm_card_generic_swap_name"
         )
       ),
-      icon: wt(
-        vt(
+      icon: xt(
+        wt(
           e,
           "icon",
           "ulm_custom_card_paddy_dwd_pollen_icon",
           "ulm_card_generic_swap_icon"
         )
       ),
-      label_6: wt(
-        vt(e, "label_6", "ulm_custom_card_paddy_dwd_pollen_6")
+      label_6: xt(
+        wt(e, "label_6", "ulm_custom_card_paddy_dwd_pollen_6")
       ),
-      label_5: wt(
-        vt(e, "label_5", "ulm_custom_card_paddy_dwd_pollen_5")
+      label_5: xt(
+        wt(e, "label_5", "ulm_custom_card_paddy_dwd_pollen_5")
       ),
-      label_4: wt(
-        vt(e, "label_4", "ulm_custom_card_paddy_dwd_pollen_4")
+      label_4: xt(
+        wt(e, "label_4", "ulm_custom_card_paddy_dwd_pollen_4")
       ),
-      label_3: wt(
-        vt(e, "label_3", "ulm_custom_card_paddy_dwd_pollen_3")
+      label_3: xt(
+        wt(e, "label_3", "ulm_custom_card_paddy_dwd_pollen_3")
       ),
-      label_2: wt(
-        vt(e, "label_2", "ulm_custom_card_paddy_dwd_pollen_2")
+      label_2: xt(
+        wt(e, "label_2", "ulm_custom_card_paddy_dwd_pollen_2")
       ),
-      label_1: wt(
-        vt(e, "label_1", "ulm_custom_card_paddy_dwd_pollen_1")
+      label_1: xt(
+        wt(e, "label_1", "ulm_custom_card_paddy_dwd_pollen_1")
       ),
-      label_none: wt(
-        vt(e, "label_none", "ulm_custom_card_paddy_dwd_pollen_none")
+      label_none: xt(
+        wt(e, "label_none", "ulm_custom_card_paddy_dwd_pollen_none")
       ),
       type: "custom:ulm-custom-card-paddy-dwd-pollen-card"
     };
@@ -27986,7 +27990,7 @@ let vo = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity"),
+        m("entity"),
         p("name"),
         E("icon")
       ],
@@ -28040,7 +28044,7 @@ let vo = class extends w {
     const e = hp(t), o = t.state === "unavailable" || t.state === "unknown" || e === 0 || e === 1, r = e === 0, n = e === 1, a = y(this, "red"), s = {
       color: o ? `rgba(${a}, 1)` : "rgba(var(--color-theme, 51, 51, 51), 0.9)",
       backgroundColor: r ? `rgba(${a}, 0.5)` : n ? `rgba(${a}, 0.05)` : "rgba(var(--color-theme, 51, 51, 51), 0.05)"
-    }, l = this._config.name || t.attributes.friendly_name || t.entity_id, h = this._stateLabel(t), m = this._config.icon || t.attributes.icon || "mdi:trash-can-outline";
+    }, l = this._config.name || t.attributes.friendly_name || t.entity_id, h = this._stateLabel(t), _ = this._config.icon || t.attributes.icon || "mdi:trash-can-outline";
     return c`
       <ha-card
         class="ulm-card ulm-paddy-waste"
@@ -28048,7 +28052,7 @@ let vo = class extends w {
       >
         <div class="row">
           <div class="icon-btn" style=${d(s)}>
-            <ha-icon .icon=${m}></ha-icon>
+            <ha-icon .icon=${_}></ha-icon>
           </div>
           <div class="info-btn">
             <div class="name">${l}</div>
@@ -28135,23 +28139,23 @@ const ut = {
   evening: "Good evening",
   hello: "Hello"
 };
-function Ft(t, ...e) {
+function Ht(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
   }
 }
-function Xt(t) {
+function te(t) {
   return typeof t == "string" && t ? t : void 0;
 }
 function fp(t) {
   return Array.isArray(t) ? t.filter((e) => typeof e == "string" && !!e) : typeof t == "string" && t.trim() ? t.split(/[\n,]/).map((e) => e.trim()).filter(Boolean) : [];
 }
 function bp(t, e, i) {
-  const o = Xt(Ft(t, "variant"));
+  const o = te(Ht(t, "variant"));
   return o === "basic" || o === "weather" || o === "news" ? o : e.length ? "news" : i ? "weather" : "basic";
 }
-let Ue = class extends w {
+let Fe = class extends w {
   constructor() {
     super(...arguments), this._secondaryKey = "", this._secondaryLoading = !1, this._secondaryDirty = !1;
   }
@@ -28163,10 +28167,10 @@ let Ue = class extends w {
           { value: "weather", label: "Greeting + weather" },
           { value: "news", label: "Greeting + home feed" }
         ]),
-        _("time", "sensor", !1),
-        _("weather", "weather", !1),
+        m("time", "sensor", !1),
+        m("weather", "weather", !1),
         p("news_entities"),
-        U([
+        F([
           p("ulm_morning"),
           p("ulm_afternoon"),
           p("ulm_evening"),
@@ -28203,12 +28207,12 @@ let Ue = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = Xt(
-      Ft(e, "time", "ulm_custom_card_paddy_welcome_time")
-    ), o = Xt(
-      Ft(e, "weather", "ulm_custom_card_paddy_welcome_weather_provider")
+    const e = t, i = te(
+      Ht(e, "time", "ulm_custom_card_paddy_welcome_time")
+    ), o = te(
+      Ht(e, "weather", "ulm_custom_card_paddy_welcome_weather_provider")
     ), r = fp(
-      Ft(e, "news_entities", "ulm_custom_card_paddy_welcome_news_entities")
+      Ht(e, "news_entities", "ulm_custom_card_paddy_welcome_news_entities")
     ), n = bp(e, r, o);
     this._config = {
       ...t,
@@ -28216,10 +28220,10 @@ let Ue = class extends w {
       time: i,
       weather: o,
       news_entities: r,
-      ulm_morning: Xt(Ft(e, "ulm_morning")) || ut.morning,
-      ulm_afternoon: Xt(Ft(e, "ulm_afternoon")) || ut.afternoon,
-      ulm_evening: Xt(Ft(e, "ulm_evening")) || ut.evening,
-      ulm_hello: Xt(Ft(e, "ulm_hello")) || ut.hello,
+      ulm_morning: te(Ht(e, "ulm_morning")) || ut.morning,
+      ulm_afternoon: te(Ht(e, "ulm_afternoon")) || ut.afternoon,
+      ulm_evening: te(Ht(e, "ulm_evening")) || ut.evening,
+      ulm_hello: te(Ht(e, "ulm_hello")) || ut.hello,
       type: "custom:ulm-custom-card-paddy-welcome-card"
     }, this._secondaryKey = "";
   }
@@ -28337,7 +28341,7 @@ let Ue = class extends w {
     }
   }
 };
-Ue.styles = [
+Fe.styles = [
   P,
   $`
       :host {
@@ -28415,16 +28419,16 @@ Ue.styles = [
 ];
 Cr([
   x({ attribute: !1 })
-], Ue.prototype, "hass", 2);
+], Fe.prototype, "hass", 2);
 Cr([
   f()
-], Ue.prototype, "_config", 2);
+], Fe.prototype, "_config", 2);
 Cr([
-  se(".secondary-host")
-], Ue.prototype, "_secondaryHost", 2);
-Ue = Cr([
+  le(".secondary-host")
+], Fe.prototype, "_secondaryHost", 2);
+Fe = Cr([
   k("ulm-custom-card-paddy-welcome-card")
-], Ue);
+], Fe);
 var yp = Object.defineProperty, vp = Object.getOwnPropertyDescriptor, Sa = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? vp(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
@@ -28437,7 +28441,7 @@ function mt(t, ...e) {
     if (o != null && o !== "") return o;
   }
 }
-function zt(t) {
+function Pt(t) {
   return typeof t == "string" && t ? t : void 0;
 }
 function wp(t, e) {
@@ -28472,18 +28476,18 @@ let wo = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "person"),
-        U([E("icon"), b("use_entity_picture")]),
-        _("zone1", "zone", !1),
-        _("zone2", "zone", !1),
-        _("address", void 0, !1),
-        _("address_locality", void 0, !1),
-        _("driving_entity", void 0, !1),
-        _("battery_entity", "sensor", !1),
-        _("battery_state_entity", void 0, !1),
-        U([
-          N("battery_level_danger"),
-          N("battery_level_warning")
+        m("entity", "person"),
+        F([E("icon"), b("use_entity_picture")]),
+        m("zone1", "zone", !1),
+        m("zone2", "zone", !1),
+        m("address", void 0, !1),
+        m("address_locality", void 0, !1),
+        m("driving_entity", void 0, !1),
+        m("battery_entity", "sensor", !1),
+        m("battery_state_entity", void 0, !1),
+        F([
+          I("battery_level_danger"),
+          I("battery_level_warning")
         ])
       ],
       computeLabel: S({
@@ -28515,29 +28519,29 @@ let wo = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = zt(mt(e, "entity", "ulm_card_person_entity"));
+    const e = t, i = Pt(mt(e, "entity", "ulm_card_person_entity"));
     if (!i) throw new Error("Please define an entity");
     this._config = {
       ...t,
       entity: i,
-      icon: zt(mt(e, "icon", "ulm_card_person_icon")) || "mdi:face-man",
+      icon: Pt(mt(e, "icon", "ulm_card_person_icon")) || "mdi:face-man",
       use_entity_picture: wp(
         mt(e, "use_entity_picture", "ulm_card_person_use_entity_picture"),
         !0
       ),
-      zone1: zt(mt(e, "zone1", "ulm_card_person_zone1")),
-      zone2: zt(mt(e, "zone2", "ulm_card_person_zone2")),
-      address: zt(mt(e, "address", "ulm_address")),
-      address_locality: zt(
+      zone1: Pt(mt(e, "zone1", "ulm_card_person_zone1")),
+      zone2: Pt(mt(e, "zone2", "ulm_card_person_zone2")),
+      address: Pt(mt(e, "address", "ulm_address")),
+      address_locality: Pt(
         mt(e, "address_locality", "ulm_address_locality")
       ),
-      driving_entity: zt(
+      driving_entity: Pt(
         mt(e, "driving_entity", "ulm_card_person_driving_entity")
       ),
-      battery_entity: zt(
+      battery_entity: Pt(
         mt(e, "battery_entity", "ulm_card_person_battery_entity")
       ),
-      battery_state_entity: zt(
+      battery_state_entity: Pt(
         mt(e, "battery_state_entity", "ulm_card_person_battery_state_entity")
       ),
       battery_level_danger: Qs(
@@ -28853,10 +28857,10 @@ let xo = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "light"),
+        m("entity", "light"),
         p("name"),
         E("icon"),
-        _("tap_entity", ["input_select", "select"], !1)
+        m("tap_entity", ["input_select", "select"], !1)
       ],
       computeLabel: S({
         entity: "Fil pilote light",
@@ -28962,7 +28966,7 @@ function et(t, ...e) {
     if (o != null && o !== "") return o;
   }
 }
-function Ut(t) {
+function Bt(t) {
   return typeof t == "string" && t ? t : void 0;
 }
 function Zr(t, e) {
@@ -28993,7 +28997,7 @@ function Ep(t, e, i, o) {
   }
   return r === "not_home" ? { icon: "mdi:home-minus", color: "blue" } : { icon: "mdi:help-circle", color: "yellow" };
 }
-let Fe = class extends w {
+let Be = class extends w {
   constructor() {
     super(...arguments), this._footerKey = "", this._footerLoading = !1, this._footerDirty = !1, this._moreInfoPerson = (t) => {
       t.stopPropagation(), this._config && this.dispatchEvent(
@@ -29012,23 +29016,23 @@ let Fe = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "person"),
-        U([p("name"), E("icon")]),
-        U([
+        m("entity", "person"),
+        F([p("name"), E("icon")]),
+        F([
           b("use_entity_picture"),
           b("use_badge")
         ]),
         b("map_enable"),
-        _("find_device_script", "script", !1),
-        _("driving_entity", void 0, !1),
+        m("find_device_script", "script", !1),
+        m("driving_entity", void 0, !1),
         p("driving_label"),
         p("zones"),
-        _("camera_entity_light", "camera", !1),
-        _("camera_entity_dark", "camera", !1),
-        U([
+        m("camera_entity_light", "camera", !1),
+        m("camera_entity_dark", "camera", !1),
+        F([
           p("map_aspect_ratio"),
-          N("map_default_zoom"),
-          N("map_hours_to_show")
+          I("map_default_zoom"),
+          I("map_hours_to_show")
         ])
       ],
       computeLabel: S({
@@ -29075,8 +29079,8 @@ let Fe = class extends w {
     !r.length && typeof o == "string" && o.trim() && (r = o.split(/[\n,]/).map((n) => n.trim()).filter(Boolean)), this._config = {
       ...t,
       entity: i,
-      name: Ut(et(e, "name", "ulm_custom_card_ristou_name")),
-      icon: Ut(et(e, "icon", "ulm_custom_card_ristou_icon")),
+      name: Bt(et(e, "name", "ulm_custom_card_ristou_name")),
+      icon: Bt(et(e, "icon", "ulm_custom_card_ristou_icon")),
       use_entity_picture: Zr(
         et(e, "use_entity_picture", "ulm_custom_card_ristou_use_entity_picture"),
         !1
@@ -29089,25 +29093,25 @@ let Fe = class extends w {
         et(e, "map_enable", "ulm_custom_card_ristou_map_enable"),
         !1
       ),
-      find_device_script: Ut(
+      find_device_script: Bt(
         et(e, "find_device_script", "ulm_custom_card_ristou_find_device_script")
       ),
       zones: r,
-      driving_entity: Ut(
+      driving_entity: Bt(
         et(
           e,
           "driving_entity",
           "ulm_custom_card_ristou_person_driving_entity"
         )
       ),
-      driving_label: Ut(
+      driving_label: Bt(
         et(
           e,
           "driving_label",
           "ulm_custom_card_ristou_person_driving"
         )
       ) || Jr,
-      map_aspect_ratio: Ut(
+      map_aspect_ratio: Bt(
         et(e, "map_aspect_ratio", "ulm_custom_card_ristou_map_aspect_ratio")
       ) || "466:200",
       map_default_zoom: tc(
@@ -29118,14 +29122,14 @@ let Fe = class extends w {
         et(e, "map_hours_to_show", "ulm_custom_card_ristou_map_hours_to_show"),
         0
       ),
-      camera_entity_light: Ut(
+      camera_entity_light: Bt(
         et(
           e,
           "camera_entity_light",
           "ulm_custom_card_ristou_camera_entity_light"
         )
       ),
-      camera_entity_dark: Ut(
+      camera_entity_dark: Bt(
         et(
           e,
           "camera_entity_dark",
@@ -29180,7 +29184,7 @@ let Fe = class extends w {
       t,
       e.zones || [],
       e.driving_entity
-    ), o = e.use_badge !== !1, r = o ? "mdi:face-man" : i.icon, n = o ? "theme" : i.color, a = e.name || t.attributes.friendly_name || t.entity_id, s = this._label(t), l = e.use_entity_picture && t.attributes.entity_picture ? String(t.attributes.entity_picture) : void 0, h = this._rgb(n), m = {
+    ), o = e.use_badge !== !1, r = o ? "mdi:face-man" : i.icon, n = o ? "theme" : i.color, a = e.name || t.attributes.friendly_name || t.entity_id, s = this._label(t), l = e.use_entity_picture && t.attributes.entity_picture ? String(t.attributes.entity_picture) : void 0, h = this._rgb(n), _ = {
       color: n === "theme" ? "rgba(var(--color-theme, 51, 51, 51), 0.9)" : `rgba(${h}, 0.9)`,
       backgroundColor: l ? "transparent" : n === "theme" ? "rgba(var(--color-theme, 51, 51, 51), 0.05)" : `rgba(${h}, 0.2)`
     }, g = this._rgb(i.color), v = e.find_device_script, C = e.icon || (v && this.hass.states[v]?.attributes.icon ? String(this.hass.states[v].attributes.icon) : "mdi:cellphone-wireless");
@@ -29192,7 +29196,7 @@ let Fe = class extends w {
       "avatar-btn": !0,
       picture: !!l
     })}
-          style=${d(m)}
+          style=${d(_)}
           @click=${this._moreInfoPerson}
         >
           ${l ? c`<img src=${l} alt=${a} />` : c`<ha-icon .icon=${r}></ha-icon>`}
@@ -29313,7 +29317,7 @@ let Fe = class extends w {
     }
   }
 };
-Fe.styles = [
+Be.styles = [
   P,
   $`
       :host {
@@ -29435,16 +29439,16 @@ Fe.styles = [
 ];
 Sr([
   x({ attribute: !1 })
-], Fe.prototype, "hass", 2);
+], Be.prototype, "hass", 2);
 Sr([
   f()
-], Fe.prototype, "_config", 2);
+], Be.prototype, "_config", 2);
 Sr([
-  se(".footer-host")
-], Fe.prototype, "_footerHost", 2);
-Fe = Sr([
+  le(".footer-host")
+], Be.prototype, "_footerHost", 2);
+Be = Sr([
   k("ulm-custom-card-ristou-person-card")
-], Fe);
+], Be);
 var Pp = Object.defineProperty, Lp = Object.getOwnPropertyDescriptor, Ea = (t, e, i, o) => {
   for (var r = o > 1 ? void 0 : o ? Lp(e, i) : e, n = t.length - 1, a; n >= 0; n--)
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
@@ -29499,7 +29503,7 @@ function Xr(t, e) {
   const o = Number.parseFloat(String(i));
   return Number.isFinite(o) ? o : void 0;
 }
-function ve(t, ...e) {
+function we(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
@@ -29515,7 +29519,7 @@ let $o = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", ["plant", "binary_sensor"]),
+        m("entity", ["plant", "binary_sensor"]),
         p("name"),
         p("species"),
         b("show_bars"),
@@ -29548,19 +29552,19 @@ let $o = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = ai(ve(e, "entity", "ulm_card_flower_entity"));
+    const e = t, i = ai(we(e, "entity", "ulm_card_flower_entity"));
     if (!i) throw new Error("Please define a plant entity");
     this._config = {
       ...t,
       entity: i,
-      name: ai(ve(e, "name", "ulm_card_flower_name")),
-      species: ai(ve(e, "species", "ulm_card_flower_species")),
-      show_bars: Op(ve(e, "show_bars", "ulm_card_flower_show_bars"), !0),
+      name: ai(we(e, "name", "ulm_card_flower_name")),
+      species: ai(we(e, "species", "ulm_card_flower_species")),
+      show_bars: Op(we(e, "show_bars", "ulm_card_flower_show_bars"), !0),
       label_problem: ai(
-        ve(e, "label_problem", "ulm_custom_card_schumijo_flower_problem")
+        we(e, "label_problem", "ulm_custom_card_schumijo_flower_problem")
       ) || "Problem",
       label_correct: ai(
-        ve(e, "label_correct", "ulm_custom_card_schumijo_flower_correct")
+        we(e, "label_correct", "ulm_custom_card_schumijo_flower_correct")
       ) || "Correct",
       type: "custom:ulm-custom-card-schumijo-flower-card"
     };
@@ -29612,14 +29616,14 @@ let $o = class extends w {
     );
     return o.length ? o.map((r) => {
       const n = Xr(i, r.key), a = n !== void 0, s = Xr(i, r.minKey) ?? r.defaultMin, l = Xr(i, r.maxKey) ?? r.defaultMax, h = l - s;
-      let m = 0;
-      a && h > 0 && (r.logScale && n > 0 && s > 0 ? m = 100 * Math.max(
+      let _ = 0;
+      a && h > 0 && (r.logScale && n > 0 && s > 0 ? _ = 100 * Math.max(
         0,
         Math.min(
           1,
           (Math.log(n) - Math.log(s)) / (Math.log(l) - Math.log(s))
         )
-      ) : m = 100 * Math.max(0, Math.min(1, (n - s) / h)));
+      ) : _ = 100 * Math.max(0, Math.min(1, (n - s) / h)));
       const g = a && (n < s || n > l), v = a ? g ? "bad" : "good" : "unavailable", C = a ? a && n > l ? "bad" : "good" : "unavailable", M = a && n > l ? 100 : 0, A = a ? `${r.key}: ${n} (${s} ~ ${l})` : `${r.key}: unavailable`;
       return c`
         <div class="attr" title=${A}>
@@ -29635,7 +29639,7 @@ let $o = class extends w {
                   <span
                     class=${C}
                     style=${d({
-        width: a ? `${m}%` : "0%"
+        width: a ? `${_}%` : "0%"
       })}
                   ></span>
                 </div>
@@ -29830,7 +29834,7 @@ const Qr = {
     unknown: "Unbekannt"
   }
 };
-function xt(t, ...e) {
+function $t(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
@@ -29862,16 +29866,16 @@ let ko = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", "binary_sensor"),
-        _("handle", ["sensor", "binary_sensor"]),
-        U([p("name"), E("icon")]),
-        F("color"),
+        m("entity", "binary_sensor"),
+        m("handle", ["sensor", "binary_sensor"]),
+        F([p("name"), E("icon")]),
+        B("color"),
         b("force_background_color"),
         b("show_last_changed"),
-        _("battery_level", "sensor", !1),
-        U([
-          N("battery_warning"),
-          N("battery_warning_low")
+        m("battery_level", "sensor", !1),
+        F([
+          I("battery_warning"),
+          I("battery_warning_low")
         ])
       ],
       computeLabel: S({
@@ -29905,18 +29909,18 @@ let ko = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = si(xt(e, "entity", "ulm_custom_card_senoro_win_entity")) || "", o = si(xt(e, "handle", "ulm_custom_card_senoro_win_handle")) || "";
+    const e = t, i = si($t(e, "entity", "ulm_custom_card_senoro_win_entity")) || "", o = si($t(e, "handle", "ulm_custom_card_senoro_win_handle")) || "";
     if (!i) throw new Error("Please define an entity");
     if (!o) throw new Error("Please define a handle entity");
     this._config = {
       ...t,
       entity: i,
       handle: o,
-      name: si(xt(e, "name", "ulm_custom_card_senoro_win_name")),
-      icon: si(xt(e, "icon", "ulm_custom_card_senoro_win_icon")),
-      color: xt(e, "color", "ulm_custom_card_senoro_win_color") || "blue",
+      name: si($t(e, "name", "ulm_custom_card_senoro_win_name")),
+      icon: si($t(e, "icon", "ulm_custom_card_senoro_win_icon")),
+      color: $t(e, "color", "ulm_custom_card_senoro_win_color") || "blue",
       force_background_color: ec(
-        xt(
+        $t(
           e,
           "force_background_color",
           "ulm_custom_card_senoro_win_force_background_color"
@@ -29924,10 +29928,10 @@ let ko = class extends w {
         !1
       ),
       battery_level: si(
-        xt(e, "battery_level", "ulm_custom_card_senoro_win_battery_level")
+        $t(e, "battery_level", "ulm_custom_card_senoro_win_battery_level")
       ),
       battery_warning: ic(
-        xt(
+        $t(
           e,
           "battery_warning",
           "ulm_custom_card_senoro_win_battery_warning"
@@ -29935,7 +29939,7 @@ let ko = class extends w {
         20
       ),
       battery_warning_low: ic(
-        xt(
+        $t(
           e,
           "battery_warning_low",
           "ulm_custom_card_senoro_win_battery_warning_low"
@@ -29943,7 +29947,7 @@ let ko = class extends w {
         5
       ),
       show_last_changed: ec(
-        xt(e, "show_last_changed", "ulm_show_last_changed"),
+        $t(e, "show_last_changed", "ulm_show_last_changed"),
         !1
       ),
       type: "custom:ulm-custom-card-senoro-win-card"
@@ -29969,7 +29973,7 @@ let ko = class extends w {
           Entity not found: ${this._config.entity}
         </div></ha-card
       >`;
-    const i = t.state, o = e?.state ?? "unavailable", r = i === "on", n = this._config.color || "blue", a = this._iconStyle(r, o, n), s = this._cardBackground(r, o, n), l = this._config.name || t.attributes.friendly_name || t.entity_id, h = this._config.icon || t.attributes.icon || "mdi:window-closed-variant", m = this._label(t, i, o), g = this._notification(i, o), v = this._batteryBadge();
+    const i = t.state, o = e?.state ?? "unavailable", r = i === "on", n = this._config.color || "blue", a = this._iconStyle(r, o, n), s = this._cardBackground(r, o, n), l = this._config.name || t.attributes.friendly_name || t.entity_id, h = this._config.icon || t.attributes.icon || "mdi:window-closed-variant", _ = this._label(t, i, o), g = this._notification(i, o), v = this._batteryBadge();
     return c`
       <ha-card
         class=${O({ "ulm-card": !0, "ulm-senoro-win": !0 })}
@@ -29996,7 +30000,7 @@ let ko = class extends w {
           </div>
           <div class="info-btn">
             <div class="name">${l}</div>
-            <div class="label">${m}</div>
+            <div class="label">${_}</div>
           </div>
         </div>
       </ha-card>
@@ -30152,7 +30156,7 @@ let Co = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity"),
+        m("entity"),
         p("name"),
         p("ulm_idle"),
         p("ulm_translation_unavailable")
@@ -30273,9 +30277,9 @@ let Co = class extends w {
         `cartridges.[${s}].type: You must provide a valid cartridge type`
       ), a.color !== void 0 ? l === "unicolor" ? (typeof a.color != "string" || !oc(a.color)) && o.push(
         `cartridges.[${s}].color: You must provide a single valid CSS color value.`
-      ) : Array.isArray(a.color) && a.color.length === 3 ? a.color.forEach((h, m) => {
+      ) : Array.isArray(a.color) && a.color.length === 3 ? a.color.forEach((h, _) => {
         oc(String(h)) || o.push(
-          `cartridges.[${s}].color.[${m}]: You must provide a single valid CSS color value.`
+          `cartridges.[${s}].color.[${_}]: You must provide a single valid CSS color value.`
         );
       }) : o.push(
         `cartridges.[${s}].color: Invalid combination of colour and type.`
@@ -30292,23 +30296,23 @@ let Co = class extends w {
         else if (String(h.state).toLowerCase() === e)
           r = !1;
         else {
-          const m = Number(h.state);
-          (Number.isNaN(m) || typeof h.state == "boolean" || m < 0 || m > 100) && o.push(
+          const _ = Number(h.state);
+          (Number.isNaN(_) || typeof h.state == "boolean" || _ < 0 || _ > 100) && o.push(
             `cartridges.[${s}].entity_id: You must provide a entity representing an integer between 0 and 100 inclusively.`
           );
         }
       }
     }), o.length ? { kind: "errors", messages: o } : r ? { kind: "bars", rows: t.map((a) => {
       const s = a.type ?? "unicolor", l = this.hass.states[a.entity_id], h = Number(l.state);
-      let m;
+      let _;
       if (s === "unicolor")
-        m = {
+        _ = {
           width: `${h}%`,
           backgroundColor: a.color
         };
       else {
         const [g, v, C] = a.color;
-        m = {
+        _ = {
           width: `${h}%`,
           background: `linear-gradient(180deg, ${g}, ${g} 33%, ${v} 33%, ${v} 66%, ${C} 66%, ${C})`
         };
@@ -30316,7 +30320,7 @@ let Co = class extends w {
       return {
         label: a.label,
         pct: h,
-        barStyle: m
+        barStyle: _
       };
     }) } : { kind: "unavailable" };
   }
@@ -30519,7 +30523,7 @@ var Dp = Object.defineProperty, Up = Object.getOwnPropertyDescriptor, Ma = (t, e
     (a = t[n]) && (r = (o ? a(e, i, r) : a(r)) || r);
   return o && r && Dp(e, i, r), r;
 };
-function we(t, ...e) {
+function xe(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
@@ -30549,7 +30553,7 @@ let So = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("entity", ["device_tracker", "person"]),
+        m("entity", ["device_tracker", "person"]),
         p("name"),
         E("icon"),
         b("status_as_name"),
@@ -30581,17 +30585,17 @@ let So = class extends w {
     };
   }
   setConfig(t) {
-    const e = t, i = ci(we(e, "entity"));
+    const e = t, i = ci(xe(e, "entity"));
     if (!i) throw new Error("Please define an entity");
     this._config = {
       ...t,
       entity: i,
       name: ci(
-        we(e, "name", "custom_card_vncntdev_device_tracker_name")
+        xe(e, "name", "custom_card_vncntdev_device_tracker_name")
       ),
-      icon: ci(we(e, "icon", "custom_card_vncntdev_device_tracker_icon")) || "mdi:server",
+      icon: ci(xe(e, "icon", "custom_card_vncntdev_device_tracker_icon")) || "mdi:server",
       status_as_name: Fp(
-        we(
+        xe(
           e,
           "status_as_name",
           "custom_card_vncntdev_device_tracker_status_as_name"
@@ -30599,14 +30603,14 @@ let So = class extends w {
         !1
       ),
       color_online: ci(
-        we(
+        xe(
           e,
           "color_online",
           "custom_card_vncntdev_device_tracker_color_online"
         )
       ) || "var(--google-green)",
       color_offline: ci(
-        we(
+        xe(
           e,
           "color_offline",
           "custom_card_vncntdev_device_tracker_color_offline"
@@ -30688,7 +30692,7 @@ const Gp = {
   medium: "Medium",
   high: "High",
   very_high: "Very high"
-}, xe = {
+}, $e = {
   tree: "mdi:tree",
   grass: "mdi:grass",
   weed: "mdi:flower-pollen"
@@ -30756,12 +30760,12 @@ let zo = class extends w {
   static getConfigForm() {
     return {
       schema: [
-        _("tree_entity", void 0, !1),
-        _("grass_entity", void 0, !1),
-        _("weed_entity", void 0, !1),
-        U([p("tree_name"), E("tree_icon")]),
-        U([p("grass_name"), E("grass_icon")]),
-        U([p("weed_name"), E("weed_icon")]),
+        m("tree_entity", void 0, !1),
+        m("grass_entity", void 0, !1),
+        m("weed_entity", void 0, !1),
+        F([p("tree_name"), E("tree_icon")]),
+        F([p("grass_name"), E("grass_icon")]),
+        F([p("weed_name"), E("weed_icon")]),
         p("label_none"),
         p("label_very_low"),
         p("label_low"),
@@ -30805,9 +30809,9 @@ let zo = class extends w {
       tree_name: "Trees",
       grass_name: "Grass",
       weed_name: "Weeds",
-      tree_icon: xe.tree,
-      grass_icon: xe.grass,
-      weed_icon: xe.weed
+      tree_icon: $e.tree,
+      grass_icon: $e.grass,
+      weed_icon: $e.weed
     };
   }
   setConfig(t) {
@@ -30877,21 +30881,21 @@ let zo = class extends w {
         entityId: this._config.tree_entity,
         name: this._config.tree_name,
         icon: this._config.tree_icon,
-        fallbackIcon: xe.tree,
+        fallbackIcon: $e.tree,
         fallbackName: "Trees"
       },
       {
         entityId: this._config.grass_entity,
         name: this._config.grass_name,
         icon: this._config.grass_icon,
-        fallbackIcon: xe.grass,
+        fallbackIcon: $e.grass,
         fallbackName: "Grass"
       },
       {
         entityId: this._config.weed_entity,
         name: this._config.weed_name,
         icon: this._config.weed_icon,
-        fallbackIcon: xe.weed,
+        fallbackIcon: $e.weed,
         fallbackName: "Weeds"
       }
     ];
@@ -30925,7 +30929,7 @@ let zo = class extends w {
           <div class="warning small">${t}</div>
         </div>
       `;
-    const a = Kp(n.state), s = Wp(this, a), l = i || n.attributes.icon || o, h = e || n.attributes.friendly_name || r, m = a === "unknown" ? this._levelLabel("none") : this._levelLabel(a), g = y(this, "red");
+    const a = Kp(n.state), s = Wp(this, a), l = i || n.attributes.icon || o, h = e || n.attributes.friendly_name || r, _ = a === "unknown" ? this._levelLabel("none") : this._levelLabel(a), g = y(this, "red");
     return c`
       <div
         class="column"
@@ -30951,7 +30955,7 @@ let zo = class extends w {
               </div>
             ` : u}
         <div class="col-name">${h}</div>
-        <div class="col-label">${m}</div>
+        <div class="col-label">${_}</div>
       </div>
     `;
   }
@@ -31184,13 +31188,13 @@ function it(t, e) {
   if (!(!e || typeof e != "string"))
     return t.states[e];
 }
-function $e(t, e) {
+function ke(t, e) {
   if (!e) return "";
   if (t.formatEntityState) return t.formatEntityState(e);
   const i = e.attributes.unit_of_measurement;
   return i ? `${e.state} ${i}` : e.state;
 }
-function Et(t, e) {
+function Lt(t, e) {
   t.dispatchEvent(
     new CustomEvent("hass-more-info", {
       bubbles: !0,
@@ -31290,7 +31294,7 @@ const Yp = [
     description: "MDI icon chip",
     fields: [
       E("icon"),
-      _("entity", void 0, !1),
+      m("entity", void 0, !1),
       p("icon_color")
     ],
     stub: { icon: "mdi:home" },
@@ -31306,7 +31310,7 @@ const Yp = [
       color: e.icon_color ? String(e.icon_color) : void 0
     }),
     onTap: (t, e, i) => {
-      typeof e.entity == "string" && Et(i, e.entity);
+      typeof e.entity == "string" && Lt(i, e.entity);
     }
   },
   {
@@ -31314,7 +31318,7 @@ const Yp = [
     type: "custom:ulm-chip-icon-state-card",
     name: "ULM Chip Icon State",
     description: "Emoji + localized entity state",
-    fields: [_("entity"), p("icon")],
+    fields: [m("entity"), p("icon")],
     stub: { entity: "sensor.outside_temperature", icon: "🌡️" },
     normalize: (t) => ({
       ...t,
@@ -31322,11 +31326,11 @@ const Yp = [
       icon: T(t, "icon", "ulm_chip_icon_state_icon") || "❔"
     }),
     renderLabel: (t, e) => {
-      const i = it(t, e.entity), o = String(e.icon || "❔"), r = $e(t, i);
+      const i = it(t, e.entity), o = String(e.icon || "❔"), r = ke(t, i);
       return r ? `${o} ${r}` : o;
     },
     onTap: (t, e, i) => {
-      typeof e.entity == "string" && Et(i, e.entity);
+      typeof e.entity == "string" && Lt(i, e.entity);
     }
   },
   {
@@ -31335,7 +31339,7 @@ const Yp = [
     name: "ULM Chip MDI Icon State",
     description: "MDI icon + localized state",
     fields: [
-      _("entity"),
+      m("entity"),
       E("icon"),
       p("icon_color"),
       p("label_color")
@@ -31355,13 +31359,13 @@ const Yp = [
         "ulm_chip_mdi_icon_state_label_color"
       )
     }),
-    renderLabel: (t, e) => $e(t, it(t, e.entity)) || "?",
+    renderLabel: (t, e) => ke(t, it(t, e.entity)) || "?",
     renderIcon: (t, e) => ({
       icon: String(e.icon || "mdi:information"),
       color: e.icon_color ? String(e.icon_color) : void 0
     }),
     onTap: (t, e, i) => {
-      typeof e.entity == "string" && Et(i, e.entity);
+      typeof e.entity == "string" && Lt(i, e.entity);
     }
   },
   {
@@ -31372,7 +31376,7 @@ const Yp = [
     fields: [
       E("icon"),
       p("label"),
-      _("entity", void 0, !1)
+      m("entity", void 0, !1)
     ],
     stub: { icon: "mdi:tag", label: "Label" },
     normalize: (t) => ({
@@ -31385,7 +31389,7 @@ const Yp = [
     renderLabel: (t, e) => String(e.label || ""),
     renderIcon: (t, e) => ({ icon: String(e.icon || "mdi:tag") }),
     onTap: (t, e, i) => {
-      typeof e.entity == "string" && Et(i, e.entity);
+      typeof e.entity == "string" && Lt(i, e.entity);
     }
   },
   {
@@ -31394,8 +31398,8 @@ const Yp = [
     name: "ULM Chip Icon Double State",
     description: "Emoji + two localized states (•)",
     fields: [
-      _("entity_1"),
-      _("entity_2"),
+      m("entity_1"),
+      m("entity_2"),
       p("icon"),
       p("navigation_path")
     ],
@@ -31412,7 +31416,7 @@ const Yp = [
       navigation_path: T(t, "navigation_path", "ulm_chip_navigate_path")
     }),
     renderLabel: (t, e) => {
-      const i = String(e.icon || "❔"), o = $e(t, it(t, e.entity_1)) || "?", r = $e(t, it(t, e.entity_2)) || "?";
+      const i = String(e.icon || "❔"), o = ke(t, it(t, e.entity_1)) || "?", r = ke(t, it(t, e.entity_2)) || "?";
       return `${i} ${o} • ${r}`;
     },
     onTap: (t, e) => {
@@ -31425,14 +31429,14 @@ const Yp = [
     type: "custom:ulm-chip-alarm-card",
     name: "ULM Chip Alarm",
     description: "Alarm control panel chip",
-    fields: [_("entity", "alarm_control_panel")],
+    fields: [m("entity", "alarm_control_panel")],
     stub: { entity: "alarm_control_panel.security" },
     normalize: (t) => ({
       ...t,
       entity: T(t, "entity", "ulm_chip_alarm_entity")
     }),
     variant: "icon-label",
-    renderLabel: (t, e) => $e(t, it(t, e.entity)) || "unknown",
+    renderLabel: (t, e) => ke(t, it(t, e.entity)) || "unknown",
     renderIcon: (t, e) => {
       const i = (it(t, e.entity)?.state || "").toLowerCase();
       return {
@@ -31441,7 +31445,7 @@ const Yp = [
       };
     },
     onTap: (t, e, i) => {
-      typeof e.entity == "string" && Et(i, e.entity);
+      typeof e.entity == "string" && Lt(i, e.entity);
     }
   },
   {
@@ -31450,8 +31454,8 @@ const Yp = [
     name: "ULM Chip Power Consumption",
     description: "⚡ price or consumption chip",
     fields: [
-      _("electric_consumption", void 0, !1),
-      _("electric_price", void 0, !1)
+      m("electric_consumption", void 0, !1),
+      m("electric_price", void 0, !1)
     ],
     stub: { electric_consumption: "sensor.power_consumption" },
     normalize: (t) => ({
@@ -31471,11 +31475,11 @@ const Yp = [
         return `⚡ ${i.state}${r}`;
       }
       const o = it(t, e.electric_consumption);
-      return o ? `⚡ ${$e(t, o)}` : "⚡ ?";
+      return o ? `⚡ ${ke(t, o)}` : "⚡ ?";
     },
     onTap: (t, e, i) => {
       const o = String(e.electric_price || e.electric_consumption || "");
-      o && Et(i, o);
+      o && Lt(i, o);
     }
   },
   {
@@ -31484,8 +31488,8 @@ const Yp = [
     name: "ULM Chip Presence",
     description: "🏠 residents [/ guests] counters",
     fields: [
-      _("residents"),
-      _("guests", void 0, !1)
+      m("residents"),
+      m("guests", void 0, !1)
     ],
     stub: {
       residents: "input_number.residents_home",
@@ -31506,7 +31510,7 @@ const Yp = [
       return o ? `🏠 ${i} / ${o.state}` : `🏠 ${i}`;
     },
     onTap: (t, e, i) => {
-      typeof e.residents == "string" && Et(i, e.residents);
+      typeof e.residents == "string" && Lt(i, e.residents);
     }
   },
   {
@@ -31515,9 +31519,9 @@ const Yp = [
     name: "ULM Chip Temperature",
     description: "Weather emoji + outside [/ inside] °",
     fields: [
-      _("weather", "weather"),
-      _("outside"),
-      _("inside", void 0, !1)
+      m("weather", "weather"),
+      m("outside"),
+      m("inside", void 0, !1)
     ],
     stub: {
       weather: "weather.demo_weather_north",
@@ -31537,7 +31541,7 @@ const Yp = [
     },
     onTap: (t, e, i) => {
       const o = String(e.weather || e.outside || "");
-      o && Et(i, o);
+      o && Lt(i, o);
     }
   },
   {
@@ -31545,7 +31549,7 @@ const Yp = [
     type: "custom:ulm-chip-weather-date-card",
     name: "ULM Chip Weather Date",
     description: "Weather emoji + short date",
-    fields: [_("entity", "weather")],
+    fields: [m("entity", "weather")],
     stub: { entity: "weather.demo_weather_north" },
     normalize: (t) => ({
       ...t,
@@ -31559,7 +31563,7 @@ const Yp = [
       return `${o} ${r}`;
     },
     onTap: (t, e, i) => {
-      typeof e.entity == "string" && Et(i, e.entity);
+      typeof e.entity == "string" && Lt(i, e.entity);
     }
   },
   {
@@ -31674,7 +31678,7 @@ const Qp = {
   television_one: "One TV",
   television_multiple: "{count} TVs"
 };
-function D(t, ...e) {
+function U(t, ...e) {
   for (const i of e) {
     const o = t[i];
     if (o != null && o !== "") return o;
@@ -31690,7 +31694,7 @@ function st(t, e) {
   if (!(!e || typeof e != "string"))
     return t.states[e];
 }
-function Zt(t, e) {
+function Qt(t, e) {
   t.dispatchEvent(
     new CustomEvent("hass-more-info", {
       bubbles: !0,
@@ -31709,16 +31713,16 @@ function en(t) {
 }
 function on(t, e) {
   const i = ot(
-    D(e, "entities_active", "ulm_custom_chip_group_counter_entities_active")
+    U(e, "entities_active", "ulm_custom_chip_group_counter_entities_active")
   );
   if (i) {
     const l = Number.parseFloat(st(t, i)?.state ?? "");
     return Number.isFinite(l) ? Math.max(0, Math.round(l)) : 0;
   }
-  const o = ot(D(e, "entity")), r = st(t, o);
+  const o = ot(U(e, "entity")), r = st(t, o);
   if (!r) return 0;
   const a = String(
-    D(e, "count_state", "ulm_custom_chip_group_counter_count_state") || "on"
+    U(e, "count_state", "ulm_custom_chip_group_counter_count_state") || "on"
   ).split(",").map((l) => l.trim()), s = r.attributes.entity_id;
   return Array.isArray(s) && s.length ? s.filter((l) => {
     const h = t.states[String(l)];
@@ -31744,13 +31748,13 @@ function og(t, e, i) {
 }
 function rg(t, e) {
   const i = ot(
-    D(e, "battery_entity", "ulm_battery_entity")
+    U(e, "battery_entity", "ulm_battery_entity")
   );
   if (i) {
     const s = Number.parseFloat(st(t, i)?.state ?? "");
     return Number.isFinite(s) ? Math.round(s) : void 0;
   }
-  const o = ot(D(e, "entity")), r = st(t, o);
+  const o = ot(U(e, "entity")), r = st(t, o);
   if (!r) return;
   const n = r.attributes.battery ?? r.attributes.battery_level, a = Number.parseFloat(String(n ?? ""));
   return Number.isFinite(a) ? Math.round(a) : void 0;
@@ -31762,14 +31766,14 @@ const ng = [
     name: "ULM Custom Chip group counter",
     description: "Count active entities in a group (lights, media, …)",
     fields: [
-      _("entity", ["group", "light", "switch", "media_player"]),
-      _("entities_active", "sensor", !1),
+      m("entity", ["group", "light", "switch", "media_player"]),
+      m("entities_active", "sensor", !1),
       p("counter_type"),
       p("count_state"),
       E("icon_zero"),
       E("icon_one"),
       E("icon_multiple"),
-      F("color"),
+      B("color"),
       b("hide_if_zero")
     ],
     stub: {
@@ -31784,29 +31788,29 @@ const ng = [
     },
     normalize: (t) => ({
       ...t,
-      entity: D(t, "entity"),
-      entities_active: D(
+      entity: U(t, "entity"),
+      entities_active: U(
         t,
         "entities_active",
         "ulm_custom_chip_group_counter_entities_active"
       ),
-      counter_type: D(
+      counter_type: U(
         t,
         "counter_type",
         "ulm_custom_chip_group_counter_type"
         // legacy short key from YAML variables (avoid clobbering card type)
       ) || "light",
-      count_state: D(t, "count_state", "ulm_custom_chip_group_counter_count_state") || "on",
-      icon_zero: D(t, "icon_zero", "ulm_custom_chip_group_counter_icon_zero") || "mdi:lightbulb-outline",
-      icon_one: D(t, "icon_one", "ulm_custom_chip_group_counter_icon_one") || "mdi:lightbulb-on-outline",
-      icon_multiple: D(
+      count_state: U(t, "count_state", "ulm_custom_chip_group_counter_count_state") || "on",
+      icon_zero: U(t, "icon_zero", "ulm_custom_chip_group_counter_icon_zero") || "mdi:lightbulb-outline",
+      icon_one: U(t, "icon_one", "ulm_custom_chip_group_counter_icon_one") || "mdi:lightbulb-on-outline",
+      icon_multiple: U(
         t,
         "icon_multiple",
         "ulm_custom_chip_group_counter_icon_multiple"
       ) || "mdi:lightbulb-on-outline",
-      color: D(t, "color", "ulm_custom_chip_group_counter_color") || "yellow",
+      color: U(t, "color", "ulm_custom_chip_group_counter_color") || "yellow",
       hide_if_zero: mc(
-        D(t, "hide_if_zero", "ulm_custom_chip_group_counter_hide_if_zero"),
+        U(t, "hide_if_zero", "ulm_custom_chip_group_counter_hide_if_zero"),
         !1
       )
     }),
@@ -31826,7 +31830,7 @@ const ng = [
       const o = ot(e.entity);
       if (!o) return;
       const r = o.split(".")[0];
-      r === "light" || r === "switch" || r === "group" ? t.callService("homeassistant", "toggle", { entity_id: o }) : Zt(i, o);
+      r === "light" || r === "switch" || r === "group" ? t.callService("homeassistant", "toggle", { entity_id: o }) : Qt(i, o);
     }
   },
   {
@@ -31834,9 +31838,9 @@ const ng = [
     type: "custom:ulm-custom-chip-moon-card",
     name: "ULM Custom Chip moon",
     description: "Moon phase icon chip",
-    fields: [_("entity", "sensor")],
+    fields: [m("entity", "sensor")],
     stub: { entity: "sensor.moon_phase" },
-    normalize: (t) => ({ ...t, entity: D(t, "entity") }),
+    normalize: (t) => ({ ...t, entity: U(t, "entity") }),
     renderLabel: () => "",
     renderIcon: (t, e) => {
       const i = st(t, e.entity)?.state || "";
@@ -31844,7 +31848,7 @@ const ng = [
     },
     onTap: (t, e, i) => {
       const o = ot(e.entity);
-      o && Zt(i, o);
+      o && Qt(i, o);
     }
   },
   {
@@ -31853,19 +31857,19 @@ const ng = [
     name: "ULM Custom Chip myenedis",
     description: "MyEnedis daily cost / consumption chip",
     fields: [
-      _("entity", "sensor"),
+      m("entity", "sensor"),
       b("separate_hp_hc"),
       p("unit_of_measurement")
     ],
     stub: { entity: "sensor.power_consumption", separate_hp_hc: !1 },
     normalize: (t) => ({
       ...t,
-      entity: D(t, "entity"),
+      entity: U(t, "entity"),
       separate_hp_hc: mc(
-        D(t, "separate_hp_hc", "ulm_chip_separate_hp_hc"),
+        U(t, "separate_hp_hc", "ulm_chip_separate_hp_hc"),
         !1
       ),
-      unit_of_measurement: D(
+      unit_of_measurement: U(
         t,
         "unit_of_measurement",
         "ulm_chip_unit_of_measurement"
@@ -31889,7 +31893,7 @@ const ng = [
     },
     onTap: (t, e, i) => {
       const o = ot(e.entity);
-      o && Zt(i, o);
+      o && Qt(i, o);
     }
   },
   {
@@ -31897,9 +31901,9 @@ const ng = [
     type: "custom:ulm-custom-chip-simple-temp-card",
     name: "ULM Custom Chip simple temp",
     description: "Temperature value chip (e.g. 21.5°)",
-    fields: [_("entity", ["sensor", "climate"])],
+    fields: [m("entity", ["sensor", "climate"])],
     stub: { entity: "sensor.outside_temperature" },
-    normalize: (t) => ({ ...t, entity: D(t, "entity") }),
+    normalize: (t) => ({ ...t, entity: U(t, "entity") }),
     renderLabel: (t, e) => {
       const i = st(t, e.entity);
       if (!i) return "—°";
@@ -31908,7 +31912,7 @@ const ng = [
     },
     onTap: (t, e, i) => {
       const o = ot(e.entity);
-      o && Zt(i, o);
+      o && Qt(i, o);
     }
   },
   {
@@ -31916,29 +31920,29 @@ const ng = [
     type: "custom:ulm-custom-chip-tesla-temperature-card",
     name: "ULM Custom Chip tesla temperature",
     description: "HVAC set / current temperature chip",
-    fields: [_("hvac", "climate"), _("entity", "climate", !1)],
+    fields: [m("hvac", "climate"), m("entity", "climate", !1)],
     stub: { hvac: "climate.hvac" },
     variant: "icon-label",
     normalize: (t) => ({
       ...t,
-      hvac: D(t, "hvac", "ulm_chip_hvac", "entity"),
-      entity: D(t, "entity", "ulm_chip_hvac")
+      hvac: U(t, "hvac", "ulm_chip_hvac", "entity"),
+      entity: U(t, "entity", "ulm_chip_hvac")
     }),
     renderIcon: (t, e) => {
-      const i = ot(D(e, "hvac", "entity")), o = String(st(t, i)?.attributes.preset_mode || "");
+      const i = ot(U(e, "hvac", "entity")), o = String(st(t, i)?.attributes.preset_mode || "");
       return {
         icon: uc[o] || uc.default
       };
     },
     renderLabel: (t, e) => {
-      const i = ot(D(e, "hvac", "entity")), o = st(t, i);
+      const i = ot(U(e, "hvac", "entity")), o = st(t, i);
       if (!o) return "Set —° / Current —°";
       const r = en(o.attributes.temperature), n = en(o.attributes.current_temperature);
       return `Set ${r}° / Current ${n}°`;
     },
     onTap: (t, e, i) => {
-      const o = ot(D(e, "hvac", "entity"));
-      o && Zt(i, o);
+      const o = ot(U(e, "hvac", "entity"));
+      o && Qt(i, o);
     }
   },
   {
@@ -31947,7 +31951,7 @@ const ng = [
     name: "ULM Custom Chip update",
     description: "Updates available / up to date navigate chip",
     fields: [
-      _("entity", ["binary_sensor", "update", "sensor"]),
+      m("entity", ["binary_sensor", "update", "sensor"]),
       p("path"),
       p("updates_available"),
       p("no_updates_available")
@@ -31960,10 +31964,10 @@ const ng = [
     },
     normalize: (t) => ({
       ...t,
-      entity: D(t, "entity"),
-      path: D(t, "path", "ulm_chip_update_path") || "/config/updates",
-      updates_available: D(t, "updates_available", "ulm_updates_available") || "Updates available",
-      no_updates_available: D(t, "no_updates_available", "ulm_no_updates_available") || "Up to date"
+      entity: U(t, "entity"),
+      path: U(t, "path", "ulm_chip_update_path") || "/config/updates",
+      updates_available: U(t, "updates_available", "ulm_updates_available") || "Updates available",
+      no_updates_available: U(t, "no_updates_available", "ulm_no_updates_available") || "Up to date"
     }),
     renderIcon: (t, e) => st(t, e.entity)?.state === "off" ? { icon: "mdi:shield-check", color: "var(--google-green)" } : { icon: "mdi:shield-alert", color: "var(--google-red)" },
     renderLabel: (t, e) => st(t, e.entity)?.state === "off" ? String(e.no_updates_available || "Up to date") : String(e.updates_available || "Updates available"),
@@ -31974,10 +31978,10 @@ const ng = [
     type: "custom:ulm-custom-chip-vlape-garage-card",
     name: "ULM Custom Chip vlape garage",
     description: "Garage open/closed icon + state chip",
-    fields: [_("entity", ["cover", "binary_sensor", "lock"])],
+    fields: [m("entity", ["cover", "binary_sensor", "lock"])],
     stub: { entity: "cover.garage_door" },
     variant: "icon-label",
-    normalize: (t) => ({ ...t, entity: D(t, "entity") }),
+    normalize: (t) => ({ ...t, entity: U(t, "entity") }),
     renderIcon: (t, e) => {
       const i = (st(t, e.entity)?.state || "").toLowerCase(), o = i === "open" || i === "opening" || i === "on";
       return {
@@ -31991,7 +31995,7 @@ const ng = [
     },
     onTap: (t, e, i) => {
       const o = ot(e.entity);
-      o && Zt(i, o);
+      o && Qt(i, o);
     }
   },
   {
@@ -32000,14 +32004,14 @@ const ng = [
     name: "ULM Custom Chip battery info",
     description: "Circular battery % badge (shogun160 template as chip)",
     fields: [
-      _("battery_entity", "sensor", !1),
-      _("entity", ["sensor", "device_tracker", "person"], !1)
+      m("battery_entity", "sensor", !1),
+      m("entity", ["sensor", "device_tracker", "person"], !1)
     ],
     stub: { battery_entity: "sensor.outside_temperature_battery" },
     normalize: (t) => ({
       ...t,
-      battery_entity: D(t, "battery_entity", "ulm_battery_entity"),
-      entity: D(t, "entity")
+      battery_entity: U(t, "battery_entity", "ulm_battery_entity"),
+      entity: U(t, "entity")
     }),
     renderLabel: () => "",
     renderCustom: (t, e) => {
@@ -32053,8 +32057,8 @@ const ng = [
       `;
     },
     onTap: (t, e, i) => {
-      const o = ot(D(e, "battery_entity", "entity"));
-      o && Zt(i, o);
+      const o = ot(U(e, "battery_entity", "entity"));
+      o && Qt(i, o);
     }
   }
 ];
@@ -32214,16 +32218,16 @@ function dg(t) {
         return c`<ha-card class="ulm-card"
           ><div class="warning">Entity not found: ${this._config.entity}</div></ha-card
         >`;
-      const n = (t.isActive || lg)(r), a = this._config.color || t.defaultColor || "blue", s = this._config.name || r.attributes.friendly_name || r.entity_id, l = this._config.icon || r.attributes.icon || t.defaultIcon, h = t.stateLabel ? t.stateLabel(this.hass, r) : r.state, m = !!(n && this._config.force_background_color), g = q(
+      const n = (t.isActive || lg)(r), a = this._config.color || t.defaultColor || "blue", s = this._config.name || r.attributes.friendly_name || r.entity_id, l = this._config.icon || r.attributes.icon || t.defaultIcon, h = t.stateLabel ? t.stateLabel(this.hass, r) : r.state, _ = !!(n && this._config.force_background_color), g = q(
         this,
         n,
         a,
         null,
         !1,
-        m
-      ), v = y(this, a), C = m ? {
+        _
+      ), v = y(this, a), C = _ ? {
         backgroundColor: `rgba(${v}, var(--opacity-bg, 1))`
-      } : {}, M = m ? { color: "rgb(250, 250, 250)" } : {};
+      } : {}, M = _ ? { color: "rgb(250, 250, 250)" } : {};
       return c`
         <ha-card class="ulm-card" style=${d(C)}>
           <div class="row">

@@ -38,6 +38,17 @@ export class UlmColorWheel extends LitElement {
   private _frame?: number;
   private _pendingEv?: { x: number; y: number };
 
+  constructor() {
+    super();
+    // Pointer capture is set on the host, so captured move/up events are
+    // dispatched to the host — listen there, not on an inner element.
+    this.addEventListener("pointerdown", this._onDown);
+    this.addEventListener("pointermove", this._onMove);
+    this.addEventListener("pointerup", this._onUp);
+    this.addEventListener("pointercancel", this._onUp);
+    this.addEventListener("lostpointercapture", this._onUp);
+  }
+
   protected willUpdate(changed: Map<string, unknown>) {
     if (!this._local || this._dragging) return;
     if (!changed.has("hue") && !changed.has("sat")) return;
@@ -55,7 +66,7 @@ export class UlmColorWheel extends LitElement {
     if (this._frame) cancelAnimationFrame(this._frame);
   }
 
-  private _pick(clientX: number, clientY: number) {
+  private _pick(clientX: number, clientY: number, send = true) {
     const rect = this.getBoundingClientRect();
     const r = rect.width / 2;
     const x = clientX - rect.left - r;
@@ -64,7 +75,7 @@ export class UlmColorWheel extends LitElement {
     if (h < 0) h += 360;
     const s = Math.min(Math.hypot(x, y) / r, 1) * 100;
     this._local = { h: Math.round(h) % 360, s: Math.round(s) };
-    this._scheduleSend();
+    if (send) this._scheduleSend();
   }
 
   private _scheduleSend(force = false) {
@@ -98,6 +109,11 @@ export class UlmColorWheel extends LitElement {
 
   private _onMove = (ev: PointerEvent) => {
     if (!this._dragging) return;
+    // Button already released (e.g. pointerup outside the window): stop here
+    if (ev.pointerType === "mouse" && (ev.buttons & 1) === 0) {
+      this._onUp(ev);
+      return;
+    }
     // Coalesce to one update per animation frame
     this._pendingEv = { x: ev.clientX, y: ev.clientY };
     if (this._frame) return;
@@ -123,7 +139,7 @@ export class UlmColorWheel extends LitElement {
       this._frame = undefined;
     }
     if (this._pendingEv) {
-      this._pick(this._pendingEv.x, this._pendingEv.y);
+      this._pick(this._pendingEv.x, this._pendingEv.y, false);
       this._pendingEv = undefined;
     }
     this._holdUntil = Date.now() + HOLD_AFTER_RELEASE;
@@ -144,11 +160,6 @@ export class UlmColorWheel extends LitElement {
     return html`<div
       class="wheel"
       style="width:${this.size}px;height:${this.size}px"
-      @pointerdown=${this._onDown}
-      @pointermove=${this._onMove}
-      @pointerup=${this._onUp}
-      @pointercancel=${this._onUp}
-      @lostpointercapture=${this._onUp}
     >
       <div class="disc"></div>
       <div
@@ -160,7 +171,12 @@ export class UlmColorWheel extends LitElement {
 
   static styles = css`
     :host {
+      /* Host receives the pointer events: size it to the disc exactly */
       display: block;
+      width: fit-content;
+      height: fit-content;
+      border-radius: 50%;
+      cursor: crosshair;
       touch-action: none;
       user-select: none;
       -webkit-user-select: none;
