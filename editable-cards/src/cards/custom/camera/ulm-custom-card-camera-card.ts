@@ -3,7 +3,8 @@
  * Optional blue header (icon + name/label) + nested picture-entity (live).
  */
 import { LitElement, PropertyValues, css, html, nothing } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
+import { customElement } from "../../../shared/custom-element";
 import {
   booleanField,
   entityField,

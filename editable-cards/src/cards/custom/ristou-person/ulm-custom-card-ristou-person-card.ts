@@ -9,7 +9,8 @@ import {
   html,
   nothing,
 } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
+import { customElement } from "../../../shared/custom-element";
 import { classMap } from "lit/directives/class-map.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { resolveThemeRgb } from "../../../shared/colors";

@@ -46,9 +46,6 @@
                     "reportUnusedCoroutine": "none",
                     "reportMissingTypeStubs": "none"
                 },
-                "python.analysis.include": [
-                    "custom_components/ui_lovelace_minimalist"
-                ],
                 "python.analysis.exclude": [
                     "**/.venv/**",
                     "**/venv/**",

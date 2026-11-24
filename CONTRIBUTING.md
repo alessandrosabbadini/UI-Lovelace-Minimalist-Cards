@@ -45,14 +45,13 @@ Module** resource, or bump the `?v=` query on an existing resource.
 Optional local HA stacks live under `ha-local-test/` / `ha-hacs-test/` (gitignored
 config data — see those folders’ compose files if present).
 
-### Python / themes (optional)
+### Python tooling (optional)
 
-`custom_components/ui_lovelace_minimalist/` is a **themes helper**, not the card
-runtime. For Python linting:
+The repo ships no Python integration. The Python toolchain is only used for the
+MkDocs site and the local Home Assistant dev environment:
 
 ```bash
 scripts/bootstrap   # if you need the Python toolchain
-scripts/lint        # Ruff format + check
 ```
 
 ## Project layout
@@ -64,7 +63,7 @@ scripts/lint        # Ruff format + check
 | `editable-cards/src/cards/chips/` | Official + community chips |
 | `editable-cards/src/popups/` | Native Lit popups (`openUlmPopup`) |
 | `dist/ulm-editable-cards.js` | HACS Dashboard artifact |
-| `themes/` | Minimalist themes (mirrored in the integration themefiles) |
+| `themes/` | Minimalist themes (plain YAML, copy to `/config/themes/`) |
 | `docs/` | MkDocs site (usage pages sync from card READMEs) |
 
 ## Adding or changing a card
@@ -122,7 +121,6 @@ Open an [issue](../../issues/new/choose) with:
 
 - **TypeScript / Lit:** match existing cards (Lit 3, shared helpers under
   `editable-cards/src/shared/`). Prefer clear editors via `getConfigForm`.
-- **Python (themes / integration):** Ruff via `scripts/lint`.
 - Do not reintroduce `custom:button-card` YAML templates or `browser_mod`
   popup templates as the primary path.
 

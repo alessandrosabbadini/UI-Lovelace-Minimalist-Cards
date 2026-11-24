@@ -3,7 +3,8 @@
  * Header (name + "in the last N hours") + nested HACS mini-graph-card.
  */
 import { LitElement, PropertyValues, css, html, nothing } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
+import { customElement } from "../../../shared/custom-element";
 import { styleMap } from "lit/directives/style-map.js";
 import {
   COLOR_OPTIONS,

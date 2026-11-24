@@ -13,16 +13,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  validate-hassfest:
-    name: "Hassfest Validation"
-    runs-on: "ubuntu-latest"
-    steps:
-      - name: "⤵️ Checkout code"
-        uses: "actions/checkout@v6"
-
-      - name: "🔍 Run Hassfest"
-        uses: "home-assistant/actions/hassfest@master"
-
   validate-hacs:
     name: "HACS Validation"
     runs-on: "ubuntu-latest"
@@ -38,6 +28,6 @@ jobs:
       - name: "🔍 Run HACS Action"
         uses: "hacs/action@main"
         with:
-          category: "integration"
+          category: "plugin"
           ignore: "hacs brands"
           github_token: "${{ secrets.GITHUB_TOKEN }}"

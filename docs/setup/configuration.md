@@ -28,12 +28,10 @@ Card options are documented next to each Lit source under
 Themes are independent of the card JS module. Keep them under `/config/themes/`
 and select one in your profile. See [Installation](installation.md#themes-optional).
 
-## Integration role
+## No integration needed
 
-The Python integration (`custom_components/ui_lovelace_minimalist/`) is kept as a
-**themes helper** (and related HA packaging). It does **not** ship card or popup
-YAML templates anymore. Runtime UI is the HACS Dashboard package
-`ulm-editable-cards.js`.
+This project ships no Python integration. Everything runs from the HACS Dashboard
+package `ulm-editable-cards.js`; themes are plain YAML files in `/config/themes/`.
 
 ## Popups
 

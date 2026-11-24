@@ -8,8 +8,7 @@ hide:
 
 ## Themes
 
-Edit or override Minimalist theme YAML under `/config/themes/` (or the copies
-managed by the integration themefiles). Typical variables include card radius,
+Edit or override Minimalist theme YAML under `/config/themes/`. Typical variables include card radius,
 fonts, and color tokens used by ULM cards.
 
 Reload themes after edits (Developer Tools → YAML → Reload themes, or restart).

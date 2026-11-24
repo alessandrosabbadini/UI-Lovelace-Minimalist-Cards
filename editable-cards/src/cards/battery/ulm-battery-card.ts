@@ -2,7 +2,8 @@
  * Faithful Lit port of card_battery.yaml (icon_more_info_new + level colors/icons).
  */
 import { LitElement, css, html, nothing } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
+import { customElement } from "../../shared/custom-element";
 import { classMap } from "lit/directives/class-map.js";
 import { styleMap } from "lit/directives/style-map.js";
 import {
@@ -289,7 +290,7 @@ export class UlmBatteryCard extends LitElement implements LovelaceCard {
       }
       return theme;
     }
-    if (level === "unknown" || level === "unavailable") {
+    if (level === "unknown") {
       return cfg.color_danger || "var(--google-red)";
     }
     if (

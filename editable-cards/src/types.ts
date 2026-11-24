@@ -1,6 +1,7 @@
 export interface HomeAssistant {
   states: Record<string, HassEntity>;
   language: string;
+  locale?: { language?: string; number_format?: string; time_format?: string };
   localize: (key: string, ...args: unknown[]) => string;
   callService: (
     domain: string,

@@ -12,8 +12,6 @@ homeassistant:
 # https://www.home-assistant.io/integrations/logger/
 logger:
   default: "info"
-  logs:
-    custom_components.ui_lovelace_minimalist: "debug"
   filters:
     homeassistant.components.go2rtc:
       - "Could not find go2rtc docker binary"

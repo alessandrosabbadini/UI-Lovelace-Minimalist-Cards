@@ -3,7 +3,8 @@
  * Header icon_info + ↓ / value / ↑ (input_number, counter, select, input_select).
  */
 import { LitElement, css, html, nothing } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
+import { customElement } from "../../../shared/custom-element";
 import {
   entityField,
   helpers,

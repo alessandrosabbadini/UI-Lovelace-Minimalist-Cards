@@ -3,7 +3,8 @@
  * Simple blue icon_info: name + "{text} {state}{unit}".
  */
 import { LitElement, css, html, nothing } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
+import { customElement } from "../../../shared/custom-element";
 import { styleMap } from "lit/directives/style-map.js";
 import { resolveThemeRgb } from "../../../shared/colors";
 import {

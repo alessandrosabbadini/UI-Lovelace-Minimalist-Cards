@@ -3,7 +3,8 @@
  * Layout: extended_card → card_generic header + nested custom:bar-card (HACS).
  */
 import { LitElement, PropertyValues, css, html, nothing } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
+import { customElement } from "../../../shared/custom-element";
 import { styleMap } from "lit/directives/style-map.js";
 import {
   COLOR_OPTIONS,

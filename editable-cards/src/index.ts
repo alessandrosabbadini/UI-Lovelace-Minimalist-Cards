@@ -100,7 +100,12 @@ window.customCards = window.customCards || [];
 window.customBadges = window.customBadges || [];
 
 const DOCS_URL =
-  "https://github.com/UI-Lovelace-Minimalist/UI/tree/main/editable-cards";
+  "https://github.com/alessandrosabbadini/UI-Lovelace-Minimalist-Cards/tree/main/editable-cards";
+
+/** Skip picker entries already added (bundle loaded twice). */
+function isListed(list: Array<{ type: string }> | undefined, type: string) {
+  return !!list?.some((c) => c.type === type);
+}
 
 function register(
   card: {
@@ -110,6 +115,7 @@ function register(
   },
   preview = true,
 ) {
+  if (isListed(window.customCards, card.type)) return;
   window.customCards!.push({
     ...card,
     preview,
@@ -128,7 +134,10 @@ function registerChip(chip: {
     preview: true,
     documentationURL: DOCS_URL,
   };
-  window.customCards!.push(entry);
+  if (!isListed(window.customCards, chip.type)) {
+    window.customCards!.push(entry);
+  }
+  if (isListed(window.customBadges, chip.type)) return;
   window.customBadges!.push({
     ...entry,
     description: `${chip.description} (also usable as a view badge)`,

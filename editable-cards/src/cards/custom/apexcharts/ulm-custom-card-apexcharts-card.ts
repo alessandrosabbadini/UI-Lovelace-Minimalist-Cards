@@ -3,7 +3,8 @@
  * Layout: 3× generic-swap rows + nested custom:apexcharts-card (HACS).
  */
 import { LitElement, PropertyValues, css, html, nothing } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { property, query, state } from "lit/decorators.js";
+import { customElement } from "../../../shared/custom-element";
 import { styleMap } from "lit/directives/style-map.js";
 import { COLOR_OPTIONS, resolveThemeRgb } from "../../../shared/colors";
 import {

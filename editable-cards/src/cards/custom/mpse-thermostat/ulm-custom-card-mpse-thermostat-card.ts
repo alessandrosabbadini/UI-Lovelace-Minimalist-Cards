@@ -3,7 +3,8 @@
  * icon_info header (heat/cool tinted) + list_items temp −/target/+.
  */
 import { LitElement, css, html, nothing } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
+import { customElement } from "../../../shared/custom-element";
 import { classMap } from "lit/directives/class-map.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { resolveThemeRgb } from "../../../shared/colors";
@@ -200,7 +201,7 @@ export class UlmCustomMpseThermostatCard
         : stateLabel;
     const temp = stateObj.attributes.temperature;
     const tempLabel =
-      temp == null || temp === "" ? "-°C" : `${temp}°C`;
+      temp == null || String(temp) === "" ? "-°C" : `${temp}°C`;
 
     return html`
       <ha-card class="ulm-card ulm-mpse-thermostat">

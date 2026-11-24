@@ -1,6 +1,6 @@
 {
   "name": "ulm-editable-cards",
-  "version": "0.3.0",
+  "version": "0.21.62",
   "private": true,
   "type": "module",
   "description": "UI-editable Lovelace cards inspired by UI Lovelace Minimalist",

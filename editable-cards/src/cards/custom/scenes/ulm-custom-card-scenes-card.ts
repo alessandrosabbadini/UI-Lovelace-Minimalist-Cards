@@ -3,7 +3,8 @@
  * Row of up to 5 scene/script/automation pills (card_scenes + card_scenes_pill).
  */
 import { LitElement, css, html, nothing } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
+import { customElement } from "../../../shared/custom-element";
 import { styleMap } from "lit/directives/style-map.js";
 import { COLOR_OPTIONS, resolveThemeRgb } from "../../../shared/colors";
 import {

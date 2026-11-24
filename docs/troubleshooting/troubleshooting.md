@@ -5,65 +5,36 @@ hide:
 ---
 
 <!-- markdownlint-disable MD046 -->
-> On this page you can find answers and ways to troubleshoot the most common errors with installing and using this 'theme'.
+> On this page you can find answers to the most common problems when installing and using UI Lovelace Minimalist Cards.
 
-Most times reloading the integration and emptying the cache can resolve most problems. <br>
-This is done by:
-
-1. Hit `C` and click reload `Ui_lovelace_minimalist`
-2. Clear your cache by clicking `CTRL + F5` on Windows or `SHIFT + reload` on Mac
+Most problems after an install or update are solved by clearing the browser cache:
+`CTRL + F5` on Windows or `SHIFT + reload` on Mac. In the Companion app, use
+**Settings → Companion app → Debugging → Reset frontend cache**.
 
 ### Most common errors
 
-??? info "Not everything is loaded after installation"
+??? info "Cards don't show up when I search **ULM** in the card picker"
 
-    1. Check if you have installed all dependencies of this [list](https://ui-lovelace-minimalist.github.io/UI/setup/download/#prerequisites_1).
-    2. Clear your cache by clicking `CTRL + F5` on Windows or `SHIFT + reload` on Mac
+    1. Check that `ulm-editable-cards.js` is listed as a **JavaScript Module** in your dashboard resources. [![Open your Home Assistant instance and show your dashboard resources.](https://my.home-assistant.io/badges/lovelace_resources.svg)](https://my.home-assistant.io/redirect/lovelace_resources/)
+    2. Make sure it is listed **only once** (HACS adds `/hacsfiles/...`; remove any old `/local/ulm-editable-cards.js` entry).
+    3. Clear your cache (see above).
+
+??? info "Custom element doesn't exist: ulm-..."
+
+    The resource did not load. Follow the steps above, then open the browser console:
+    you should see a `ULM-EDITABLE-CARDS` banner with the version number.
 
 ??? info "The theme looks off/weird"
 
-    Check if you have applied the Minimalist theme. Go to User_profile --> theme
-
-??? info "Weird border lines after updating to HA `2022.11.0`"
-
-    1. Check in Minimalist version `v1.1.6` or higher is installed
-    2. Check in `config/themes/` if this line is added to the minimalist theme files:
-    ```yaml
-        # fix added border-lines in 2022.11
-        ha-card-border-width: "0px"
-    ```
-    3. Go to the affected dashboard on a PC and hit `C` on your keyboard. Then select `reload Themes`.
-    <img width="520" alt="image" src="https://user-images.githubusercontent.com/68892092/200546088-86babad3-7737-4df5-87f0-3469ad301e4a.png">
-
-??? info "Custom element doesn't exist"
-
-    1. Check if you did install all [dependencies](https://ui-lovelace-minimalist.github.io/UI/setup/download/#prerequisites_1) or checked the box to let UI-Minimalist them.
-    2. (additional) If the dependencies are installed manually check if all resources are added right. [![Open your Home Assistant instance and show your dashboard resources.](https://my.home-assistant.io/badges/lovelace_resources.svg)](https://my.home-assistant.io/redirect/lovelace_resources/)
-    3. Clear your cache by clicking `CTRL + F5` on Windows or `SHIFT + reload` on Mac.
+    1. Check that you have applied a Minimalist theme: User profile → Theme.
+    2. Themes use `card-mod-*` rules, so [card-mod](https://github.com/thomasloven/lovelace-card-mod) must be installed.
+    3. After editing theme files, reload themes: **Developer tools → YAML → Themes**.
 
 ??? info "Popups do not show up"
 
-    1.  Check if you have installed [Browser_mod V2](https://github.com/thomasloven/hass-browser_mod#installation-instructions) correctly.
-    2.  Check if you followed the card specific way to enable popups <br>
-        *This is either with adding a template or setting a variable to `true`*
-
-??? info "Custom card template does not exist/showing up"
-
-    1. Check if you placed the custom_card in the right directory
-    ```yaml
-    config
-        └── ui_lovelace_minimalist
-            ├── custom_cards
-            |   ├── custom_card_1
-            |   |   ├── custom_card_1.yaml
-            |   |   └── EN.yaml
-            |   └── custom_card_2
-            |       ├── custom_card_2.yaml
-            |       └── EN.yaml
-            └── dashboard
-    ```
-    2. Hit `C` and click reload `Ui_lovelace_minimalist`
-    3. Reload dashboard by clicking the three dots in the upper-right corner and click refresh
+    Popups are built in — `browser_mod` is **not** needed. Enable **Enable popup** in
+    the card editor of a supported card (light, cover, media, thermostat, vacuum,
+    weather, power outlet).
 
 ??? info "HACS Frontend resources are not showing up in `https://homeassistant.local/config/lovelace/resources`"
 

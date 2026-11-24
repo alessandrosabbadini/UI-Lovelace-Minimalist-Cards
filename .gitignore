@@ -49,15 +49,8 @@ editable-cards/dist/
 ha-local-test/
 ha-hacs-test/
 
-# UI Lovelace Minimalist
-custom_components/*
-/ui_lovelace-minimalist
-ui_lovelace_minimalist/
-
-!custom_components/ui_lovelace_minimalist
-!custom_components/__init__.py
-custom_components/ui_lovelace_minimalist/__pycache__
-custom_components/ui_lovelace_minimalist/.installed
+# Dev-only third-party integrations installed by scripts/setup
+custom_components/
 
 # Keep original Minimalist themes in /themes (mirrors lovelace/themefiles)
 # Do not ignore /themes/

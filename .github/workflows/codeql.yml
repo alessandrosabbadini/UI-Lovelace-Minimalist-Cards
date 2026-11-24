@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         # Combined JS/TS for better coverage; removed autobuild for interpreted languages
-        language: ["javascript-typescript", "python"]
+        language: ["javascript-typescript"]
 
     steps:
       - name: "⤵️ Checkout repository"

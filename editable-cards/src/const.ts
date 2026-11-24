@@ -1,1 +1,4 @@
-export const CARD_VERSION = "0.21.62";
+import { version } from "../package.json";
+
+/** Single source of truth: editable-cards/package.json "version". */
+export const CARD_VERSION: string = version;

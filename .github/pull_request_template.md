@@ -23,6 +23,6 @@
 
 - [ ] The code change is tested and works locally.
 - [ ] There is no commented out code in this PR.
-- [ ] I have followed the [contribution guidelines](https://github.com/UI-Lovelace-Minimalist/UI/blob/main/.github/CONTRIBUTING.md)
-    - [ ] This PR is for a custom-card or documentation change and therefore directed to the `main` branch.
-    - [ ] This PR is for a official card or any other directly to the integration related change and therefore directed to the `release` branch.
+- [ ] I have followed the [contribution guidelines](https://github.com/alessandrosabbadini/UI-Lovelace-Minimalist-Cards/blob/main/CONTRIBUTING.md).
+- [ ] `bash scripts/build-hacs.sh` succeeds and `dist/ulm-editable-cards.js` is updated.
+- [ ] Card READMEs / docs are updated if options changed.

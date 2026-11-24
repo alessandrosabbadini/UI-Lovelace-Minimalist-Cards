@@ -3,7 +3,8 @@
  * icon_info_bg: wifi strength icon from dBm + "{state} dBm" label.
  */
 import { LitElement, css, html, nothing } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
+import { customElement } from "../../../shared/custom-element";
 import { styleMap } from "lit/directives/style-map.js";
 import {
   entityField,

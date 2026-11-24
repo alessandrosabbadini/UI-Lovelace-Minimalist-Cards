@@ -3,7 +3,8 @@
  * Compact person card: icon + top-right battery, centered name/label, zone badge.
  */
 import { LitElement, css, html, nothing } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
+import { customElement } from "../../../shared/custom-element";
 import { classMap } from "lit/directives/class-map.js";
 import { styleMap } from "lit/directives/style-map.js";
 import { resolveThemeRgb } from "../../../shared/colors";

@@ -21,8 +21,9 @@ required.
 ## Themes (optional)
 
 Minimalist themes (desktop, mobile, mobile-tapbar, iOS-tapbar) live in
-`themes/` and are also mirrored under the Home Assistant integration
-`custom_components/ui_lovelace_minimalist/` **for theme install only**.
+[`themes/`](https://github.com/alessandrosabbadini/UI-Lovelace-Minimalist-Cards/tree/main/themes).
+They use `card-mod-*` rules, so [card-mod](https://github.com/thomasloven/lovelace-card-mod)
+must be installed.
 
 1. Ensure `configuration.yaml` includes themes:
 
@@ -31,8 +32,7 @@ Minimalist themes (desktop, mobile, mobile-tapbar, iOS-tapbar) live in
      themes: !include_dir_merge_named themes
    ```
 
-2. Copy or symlink the theme folders into `/config/themes/`, **or** install the
-   integration and let it manage themefiles.
+2. Copy the theme folders into `/config/themes/`.
 3. In your Home Assistant profile, select a Minimalist theme.
 
 Card visuals (colors, radius, fonts) follow the selected theme CSS variables.

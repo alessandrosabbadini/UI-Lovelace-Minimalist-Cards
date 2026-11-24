@@ -6,7 +6,7 @@ Lovelace cards with Home Assistant UI editors (Mushroom-style).
 ## What changed
 
 - **Runtime cards:** `editable-cards/` → build `dist/ulm-editable-cards.js`
-- **Themes kept:** `themes/` and `custom_components/.../lovelace/themefiles/`
+- **Themes kept:** `themes/` (plain YAML)
 - **Removed:**
   - Official card/chip/action YAML templates
   - Community YAML under `custom_cards/**/*.yaml`
@@ -14,6 +14,7 @@ Lovelace cards with Home Assistant UI editors (Mushroom-style).
   - YAML example dashboards (`ui-lovelace.yaml`, `adaptive-dash`)
   - Popup YAML / browser_mod (replaced by Lit popups in `editable-cards/src/popups/`)
   - Legacy reference tree (`legacy/`) — no longer in the repo
+  - The Python integration (`custom_components/ui_lovelace_minimalist/`) — themes are now plain YAML
 
 ## Mapping (old → new)
 
@@ -51,14 +52,11 @@ Lovelace cards with Home Assistant UI editors (Mushroom-style).
 2. Copy `dist/ulm-editable-cards.js` → `/config/www/`
 3. Lovelace resource: `/local/ulm-editable-cards.js` (JavaScript Module)
 4. UI-mode dashboard → Add card → search `ULM`
-5. (Optional) Keep the integration for **themes** only
+5. (Optional) Copy the folders in `themes/` to `/config/themes/` (requires card-mod)
 
-## Integration / themes
+## Themes
 
-`custom_components/ui_lovelace_minimalist/` remains as a **themes helper**
-(themed files + HA packaging). It does not ship card/popup YAML. Theme-only
-packaging (dropping the Python integration) is optional future work.
-
-## Remaining work
-
-- Optional: theme-only packaging without the Python integration
+The original Minimalist integration is **not** needed. If you still have it
+installed only for themes, copy the theme folders from `themes/` into
+`/config/themes/` and remove the integration (and its `ui_lovelace_minimalist`
+dashboard YAML) when you no longer use the old YAML cards.

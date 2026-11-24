@@ -3,7 +3,8 @@
  * Climate: icon_info header (mode-colored) + temp −/value/+ + HVAC mode buttons.
  */
 import { LitElement, css, html, nothing } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
+import { customElement } from "../../../shared/custom-element";
 import { styleMap } from "lit/directives/style-map.js";
 import { resolveThemeRgb } from "../../../shared/colors";
 import {
@@ -247,7 +248,7 @@ export class UlmCustomHeatPumpCard extends LitElement implements LovelaceCard {
         : stateLabel;
     const temp = stateObj.attributes.temperature;
     const tempLabel =
-      temp == null || temp === "" ? "-°C" : `${temp}°C`;
+      temp == null || String(temp) === "" ? "-°C" : `${temp}°C`;
 
     return html`
       <ha-card class="ulm-card ulm-heat-pump">

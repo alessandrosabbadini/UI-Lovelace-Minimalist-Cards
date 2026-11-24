@@ -31,6 +31,8 @@ sudo apt-get install -y nodejs
 # 4. Install Dependency Components
 # We use a temporary directory for downloading
 mkdir -p /tmp/ha_setup
+# Dev-only integrations (git-ignored); this repo ships no integration of its own
+mkdir -p "$WORKSPACE_DIR/custom_components"
 
 ## Browser mod
 echo "Installing Custom Component: Browser Mod"

@@ -2,9 +2,13 @@
 
 Lit / custom-card ports of [UI Lovelace Minimalist](https://github.com/UI-Lovelace-Minimalist/UI), with native Home Assistant UI editors (no `custom:button-card` YAML templates).
 
-> [!WARNING]
-> **Work in progress.** This repository is under active development and is **not ready for production**.
-> APIs, card types, layouts, and install steps may change without notice. Use only for testing / feedback.
+> [!IMPORTANT]
+> **Unofficial fork.** This is a personal, community port and is **not affiliated with or endorsed by**
+> the UI Lovelace Minimalist team. Please report issues
+> [here](https://github.com/alessandrosabbadini/UI-Lovelace-Minimalist-Cards/issues), not upstream.
+
+> [!NOTE]
+> Still evolving: card options and layouts may change between releases. Check the release notes before updating.
 
 <p align="center">
   <img src="docs/assets/img/example_home.png" alt="Home dashboard" width="180">
@@ -39,7 +43,7 @@ This project is a **rewrite / migration**, not a drop-in replacement of the clas
 
 **Kept from the original project**
 
-- Minimalist themes (`themes/` / integration themefiles): desktop, mobile, mobile-tapbar, iOS-tapbar
+- Minimalist themes (`themes/`, plain YAML): desktop, mobile, mobile-tapbar, iOS-tapbar
 - Design language and naming inspired by ULM
 
 **Removed**
@@ -49,6 +53,7 @@ This project is a **rewrite / migration**, not a drop-in replacement of the clas
 - Bundled HACS frontend dependency packs
 - Legacy YAML example dashboards
 - Legacy popup YAML / browser_mod templates (replaced by Lit popups)
+- The Python integration (`custom_components/`): themes are plain YAML in `themes/`
 
 See also [MIGRATION-EDITABLE-CARDS.md](./MIGRATION-EDITABLE-CARDS.md).
 
@@ -60,14 +65,10 @@ See also [MIGRATION-EDITABLE-CARDS.md](./MIGRATION-EDITABLE-CARDS.md).
 | Community custom cards & chips | Ported |
 | Themes | Original Minimalist themes kept |
 | Popups | Native Lit dialogs (light, cover, media, thermostat, vacuum, weather, power outlet) |
-| HACS / release packaging | Custom repository (Dashboard) ready; repo still **private** |
+| HACS / release packaging | Custom repository (Dashboard) |
 | Docs | Setup pages aligned to Lit + HACS; usage docs sync from card READMEs |
 
 ## Install with HACS (custom repository)
-
-> Repo is still **private**. Only accounts with GitHub access can add it.
-> In HACS, for private repos you typically need a GitHub token with `repo` scope
-> (HACS → settings / GitHub).
 
 1. HACS → **⋯** → **Custom repositories**
 2. Repository: `alessandrosabbadini/UI-Lovelace-Minimalist-Cards`
@@ -87,9 +88,16 @@ bash scripts/build-hacs.sh
 1. Copy `dist/ulm-editable-cards.js` → `/config/www/`
 2. Lovelace resource: `/local/ulm-editable-cards.js` (**JavaScript Module**)
 3. Create a **UI mode** dashboard → Add card → search **ULM**
-4. Optional: use the integration only to install **themes**
+4. Optional: install the Minimalist **themes** from [`themes/`](./themes/README.md)
 
 Details: [editable-cards/README.md](./editable-cards/README.md).
+
+## Privacy
+
+The weather popup shows a radar map. As a fallback for `weather-radar-card`, it embeds
+[RainViewer](https://www.rainviewer.com/) in an iframe, centred on the weather entity's
+`latitude` / `longitude` (usually your home location) when those attributes exist. This only
+happens when you open the weather popup.
 
 ## Credits
 

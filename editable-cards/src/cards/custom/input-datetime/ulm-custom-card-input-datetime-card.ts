@@ -3,7 +3,8 @@
  * Header + ↓ / time / ↑. Uses minute steps (default 15) instead of original TZ hacks.
  */
 import { LitElement, css, html, nothing } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
+import { customElement } from "../../../shared/custom-element";
 import {
   entityField,
   helpers,

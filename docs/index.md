@@ -92,7 +92,7 @@ Tap a card with `enable_popup` to open Minimalist-style dialogs (light, cover, m
 2. Download / install, restart Home Assistant if prompted
 3. Dashboard **UI mode** → Add card → search **ULM**
 
-Themes (desktop, mobile, tapbar) stay available via the integration themefiles.
+Themes (desktop, mobile, tapbar) are plain YAML files in the repo's `themes/` folder.
 
 See [Setup](setup/download.md) and the [root README](https://github.com/alessandrosabbadini/UI-Lovelace-Minimalist-Cards#readme) for details.
 

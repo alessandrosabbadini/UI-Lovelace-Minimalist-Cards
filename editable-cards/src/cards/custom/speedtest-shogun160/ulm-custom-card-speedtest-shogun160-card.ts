@@ -5,7 +5,8 @@
  * is replaced here with CSS/SVG semicircle gauges (no HACS apexcharts-card).
  */
 import { LitElement, css, html, nothing, svg } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
+import { customElement } from "../../../shared/custom-element";
 import { styleMap } from "lit/directives/style-map.js";
 import {
   booleanField,
